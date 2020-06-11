@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<!-- <setting name="callSettersOnNulls" value="true"/> -->	<!-- value가 null이라도 필드를 생성 해줌 -->
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="cacheEnabled" value="true" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="defaultExecutorType" value="BATCH" />
+		<setting name="defaultStatementTimeout" value="120" />
+		<setting name="safeRowBoundsEnabled" value="false" />
+		<setting name="mapUnderscoreToCamelCase" value="false" />
+		<setting name="localCacheScope" value="SESSION" />
+		<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString" />
+		<setting name="jdbcTypeForNull" value="NULL" />
+		<setting name="callSettersOnNulls" value="true"/>
+	</settings>
+ 	<typeAliases>
+		<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+		<typeAlias alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
+		<typeAlias alias="mberVO" type="egovframework.example.sample.service.MberVO"/>
+
+	</typeAliases>
+
+	<typeHandlers>
+		<typeHandler javaType="java.lang.String" jdbcType="CLOB" handler="org.apache.ibatis.type.ClobTypeHandler"></typeHandler>
+	</typeHandlers>
+
+</configuration>

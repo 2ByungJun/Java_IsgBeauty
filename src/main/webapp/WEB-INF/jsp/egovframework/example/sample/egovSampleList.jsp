@@ -33,26 +33,26 @@
            	document.listForm.action = "<c:url value='/updateSampleView.do'/>";
            	document.listForm.submit();
         }
-        
+
         /* 글 등록 화면 function */
         function fn_egov_addView() {
            	document.listForm.action = "<c:url value='/addSample.do'/>";
            	document.listForm.submit();
         }
-        
+
         /* 글 목록 화면 function */
         function fn_egov_selectList() {
         	document.listForm.action = "<c:url value='/egovSampleList.do'/>";
            	document.listForm.submit();
         }
-        
+
         /* pagination 페이지 링크 function */
         function fn_egov_link_page(pageNo){
         	document.listForm.pageIndex.value = pageNo;
         	document.listForm.action = "<c:url value='/egovSampleList.do'/>";
            	document.listForm.submit();
         }
-        
+
         //-->
     </script>
 </head>
@@ -103,19 +103,19 @@
         			<tr>
         				<th align="center">No</th>
         				<th align="center"><spring:message code="title.sample.id" /></th>
-        				<th align="center"><spring:message code="title.sample.name" /></th>
-        				<th align="center"><spring:message code="title.sample.useYn" /></th>
-        				<th align="center"><spring:message code="title.sample.description" /></th>
-        				<th align="center"><spring:message code="title.sample.regUser" /></th>
+        				<th align="center">이름</th>
+        				<th align="center">성별</th>
+        				<th align="center">번호</th>
+        				<th align="center">등록일시</th>
         			</tr>
         			<c:forEach var="result" items="${resultList}" varStatus="status">
             			<tr>
             				<td align="center" class="listtd"><c:out value="${paginationInfo.totalRecordCount+1 - ((searchVO.pageIndex-1) * searchVO.pageSize + status.count)}"/></td>
-            				<td align="center" class="listtd"><a href="javascript:fn_egov_select('<c:out value="${result.id}"/>')"><c:out value="${result.id}"/></a></td>
-            				<td align="left" class="listtd"><c:out value="${result.name}"/>&nbsp;</td>
-            				<td align="center" class="listtd"><c:out value="${result.useYn}"/>&nbsp;</td>
-            				<td align="center" class="listtd"><c:out value="${result.description}"/>&nbsp;</td>
-            				<td align="center" class="listtd"><c:out value="${result.regUser}"/>&nbsp;</td>
+            				<td align="center" class="listtd"><a href="javascript:fn_egov_select('<c:out value="${result.eEmpId}"/>')"><c:out value="${result.eEmpId}"/></a></td>
+            				<td align="center" class="listtd"><c:out value="${result.mberNm}"/>&nbsp;</td>
+            				<td align="center" class="listtd"><c:out value="${result.sexdstn}"/>&nbsp;</td>
+            				<td align="center" class="listtd"><c:out value="${result.telno}"/>&nbsp;</td>
+            				<td align="center" class="listtd"><c:out value="${result.registDt}"/>&nbsp;</td>
             			</tr>
         			</c:forEach>
         		</table>

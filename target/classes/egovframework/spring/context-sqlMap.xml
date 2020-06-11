@@ -1,11 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+	http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
-	<!-- SqlMap setup for iBATIS Database Layer -->
-	<bean id="sqlMapClient" class="egovframework.rte.psl.orm.ibatis.SqlMapClientFactoryBean">
-		<property name="configLocation" value="classpath:/egovframework/sqlmap/example/sql-map-config.xml"/>
-		<property name="dataSource" ref="dataSource"/>
+	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true" />
+
+
+	<!-- myBatis connection 설정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:/egovframework/sqlmap/example/config/mybatis-config.xml" />
+		<property name="mapperLocations" value="classpath:/egovframework/sqlmap/example/sql_mybatis/**/*.xml" />
 	</bean>
 
+	<!-- myBatis 설정 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- myBatis mapper scan -->
+ 	<mybatis:scan base-package="egovframework.example" />
+
+	<!-- <bean id="OtherSqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocations">
+			<list>
+				<value>classpath:/egovframework/sqlmap/config/*.xml</value>
+			</list>
+		</property>
+		<property name="dataSource" ref="smsDataSource"/>
+		<property name="smsDataSource" ref="smsDataSource"/>
+		<property name="lobHandler" ref="lobHandler"/>
+	</bean> -->
 </beans>

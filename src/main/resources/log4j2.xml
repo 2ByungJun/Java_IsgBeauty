@@ -1,26 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
-    <Appenders>
-        <Console name="console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d %5p [%c] %m%n" />
-        </Console>
-    </Appenders>
-    <Loggers>
-        <Logger name="java.sql" level="INFO" additivity="false">
-            <AppenderRef ref="console" />
-        </Logger>
-        <Logger name="egovframework" level="DEBUG" additivity="false">
-            <AppenderRef ref="console" />
-        </Logger>
-          <!-- log SQL with timing information, post execution -->
-        <Logger name="jdbc.sqltiming" level="INFO" additivity="false">
-            <AppenderRef ref="console" />
-        </Logger>
-        <Logger name="org.springframework" level="INFO" additivity="false">
-            <AppenderRef ref="console" />
-        </Logger>
-        <Root level="INFO">
-            <AppenderRef ref="console" />
-        </Root>
-    </Loggers>
+	<properties>
+		<property name="name">SYDW</property>
+		<property name="pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} | %-5.5p |
+			%-30.30C::%-30.30M:%-5.5L |  %msg%n</property>
+	</properties>
+	<Appenders>
+<!-- 		<JDBC name="databaseAppender" tableName="APPLICATION_LOG"> -->
+<!-- 	      <ConnectionFactory class="framework.log.ConnectionFactory" method="getDatabaseConnection" /> -->
+<!-- 	      <Column name="EVENT_ID" literal="APPLICATION_LOG_SEQUENCE.NEXTVAL" /> -->
+<!-- 	      <Column name="EVENT_DATE" isEventTimestamp="true" /> -->
+<!-- 	      <Column name="LV" pattern="%level" /> -->
+<!-- 	      <Column name="LOGGER" pattern="%logger" /> -->
+<!-- 	      <Column name="MESSAGE" pattern="%message" /> -->
+<!-- 	      <Column name="THROWABLE" pattern="%ex{full}" /> -->
+<!-- 	    </JDBC> -->
+
+		<Console name="console" target="SYSTEM_OUT">
+		<!-- 	<PatternLayout pattern="%d %5p [%c] %m%n" /> -->
+			   <PatternLayout pattern="%d{yy-MM-dd HH:mm:ss} %p [%c{1}] %m%n" />
+		</Console>
+		<RollingFile name="rolling" fileName="D:/Storage/log/${name}.log"
+			filePattern="D:/Storage/log/${name}/$${date:yyyy}/$${date:MM}/$${date:dd}/${name}_%d{yyyyMMddHH}.log">
+			<PatternLayout>
+				<pattern>${pattern}</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />Rotated everyday
+			</Policies>
+		</RollingFile>
+
+	</Appenders>
+
+	<Loggers>
+		<Logger name="jdbc.resultset" level="ERROR" additivity="false">
+			<AppenderRef ref="console" />
+		</Logger>
+		<Logger name="jdbc.audit" level="DEBUG" additivity="false">
+			<AppenderRef ref="console" />
+		</Logger>
+		<Logger name="jdbc.sqlonly" level="DEBUG" additivity="false">
+			<AppenderRef ref="console" />
+		</Logger>
+<!--
+		<Logger name="kr.sydw" level="DEBUG" additivity="false">
+			<AppenderRef ref="console" />
+		</Logger>
+		<Logger name="jdbc.sqltiming" level="INFO" additivity="false">
+ 			<AppenderRef ref="console" />
+		</Logger>
+ 		<Logger name="org.springframework" level="INFO" additivity="false">
+ 			<AppenderRef ref="console" />
+ 		</Logger> -->
+		<Root level="INFO">
+			<AppenderRef ref="console" />
+		</Root>
+
+	</Loggers>
 </Configuration>
+
