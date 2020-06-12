@@ -93,6 +93,13 @@ public class EgovSampleController {
 		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
 		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
 
+		/**
+		 * 2020.06.12 이병준
+		 * - 페이지가 새로고침 될 때마다 Controller가 실행되고, MariaDB의 데이터가 생긴다면 즉각 반영되게 된다.
+		 * - mberService모듈의 selectMberList는 해당 searchVO(MberVO)를 이용해 List를 형성한다.
+		 * - 이때, selectMberList는 MberMapper를 객체로 이용한다.
+		 * 		 - MberMapper에서는 SQL에 동일한 id로 데이터베이스인 Mber_SQL.xml에 접근하게 된다.
+		 */
 		List<?> sampleList = mberService.selectMberList(searchVO);
 		model.addAttribute("resultList", sampleList);
 
