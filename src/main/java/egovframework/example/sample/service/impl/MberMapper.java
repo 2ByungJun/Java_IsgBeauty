@@ -39,7 +39,16 @@ import egovframework.rte.psl.dataaccess.mapper.Mapper;
  */
 public interface MberMapper {
 
-
+	/*
+	 * 2020.06.12 - 이병준
+	 * Mapper
+	 *  : 매핑 파일에 기재된 SQL을 호출하기 위한 인터페이스이다.
+	 *  : 패키지 이름+"."+인터페이스이름+"."+메서드이름이 네임스페이스+"."+SQL의 ID
+	 *  : SQL ID에는 매핑하는 메서드 이름을 지정하는 것이다.
+	 *  : + 메소드 명은 네임스페이스 ID랑 맞춰야 한다.
+	 *  
+	 *  참고 링크 : https://bigstupid.tistory.com/23
+	 */
 
 	/**
 	 * 글 목록을 조회한다.

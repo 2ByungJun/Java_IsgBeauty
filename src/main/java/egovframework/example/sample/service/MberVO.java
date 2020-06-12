@@ -22,6 +22,18 @@ package egovframework.example.sample.service;
  */
 public class MberVO extends SampleDefaultVO {
 
+	/*
+	 * 2020.06.12 이병준
+	 * serialVersionUID?
+	 * - 직렬화에 사용되는 고유 아이디
+	 * - 선언하지 않아도 JVM(Java Virtual Machine)에서 디폴트로 생성된다.
+	 * - 동작에는 문제없지만 불안하기 때문에 명시적으로 선언하는 것을 권장한다.
+	 * 
+	 * 1L?
+	 * - 5.0부터 필요한 변수이며, 속도 및 보안 문제를 해결하는 것을 목적으로 둔다.
+	 * - 1L은 JVM에서 자동으로 UID를 생성하는 것으로 보인다.
+	 * 참고 : https://hyeonstorage.tistory.com/253
+	 */
 	private static final long serialVersionUID = 1L;
 
 	private String mberSn;
