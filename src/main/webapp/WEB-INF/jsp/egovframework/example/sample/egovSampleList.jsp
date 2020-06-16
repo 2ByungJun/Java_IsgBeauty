@@ -54,6 +54,9 @@
         }
 
         //-->
+        function add() {
+		location.href = "<c:url value='/testpage.do'/>";
+	}
     </script>
 </head>
 
@@ -130,6 +133,10 @@
         	      <li>
         	          <span class="btn_blue_l">
         	              <a href="javascript:fn_egov_addView();"><spring:message code="button.create" /></a>
+                          <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
+                      </span>
+                       <span class="btn_blue_l">
+        	              <a href="javascript:add();">Test</a>
                           <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                       </span>
                   </li>
