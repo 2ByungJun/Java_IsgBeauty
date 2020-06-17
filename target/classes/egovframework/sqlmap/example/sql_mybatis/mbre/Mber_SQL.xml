@@ -2,20 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="egovframework.example.sample.service.impl.MberMapper">
 
-
+    <!-- 
+		2020.06.12 이병준
+		* MberMapper에 SQL id와 같은 이름의 메서드로 형성되어있다.
+	 -->
 	<select id="selectMberList" parameterType="mberVO" resultType="egovMap">
-
-			select a.MBER_SN,
-		       a.E_EMP_ID,
-		       a.MBER_NM,
-		       a.SEXDSTN,
-		       a.TELNO,
-		       a.BRTHDY,
-		       a.REGIST_ID,
-		       a.REGIST_DT,
-		       a.UPDT_ID,
-		       a.UPDT_DT
-		  from t_mber_m a
+	    
+			select b.MBER_SN, 
+		       b.E_EMP_ID,    
+		       b.MBER_NM,
+		       b.SEXDSTN,
+		       b.TELNO,
+		       b.BRTHDY,
+		       b.REGIST_ID,
+		       b.REGIST_DT,
+		       b.UPDT_ID,
+		       b.UPDT_DT
+		  from t_mber_m b
+		  <!-- t_mber_m 테이블을 인식하고, 해당 코드에선 b라는 별칭을 부여하였다. -->
 
 	</select>
 

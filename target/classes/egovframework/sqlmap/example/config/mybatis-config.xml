@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
 	<settings>
 		<!-- <setting name="callSettersOnNulls" value="true"/> -->	<!-- value가 null이라도 필드를 생성 해줌 -->
 		<setting name="lazyLoadingEnabled" value="true" />
