@@ -55,7 +55,7 @@
 
         //-->
         function add() {
-		location.href = "<c:url value='/testpage.do'/>";
+		location.href = "<c:url value='/egovTestPage.do'/>";
 	}
     </script>
 </head>
