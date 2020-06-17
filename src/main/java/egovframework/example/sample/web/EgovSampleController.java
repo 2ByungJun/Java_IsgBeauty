@@ -17,8 +17,6 @@ package egovframework.example.sample.web;
 
 import java.util.List;
 
-import egovframework.example.jun.web.service.ByungjunVO;
-import egovframework.example.jun.web.service.Crawling.ByungjunCrawlingService;
 import egovframework.example.sample.service.MberService;
 import egovframework.example.sample.service.MberVO;
 import egovframework.example.sample.service.SampleDefaultVO;
@@ -114,11 +112,11 @@ public class EgovSampleController {
 		return "sample/egovSampleList";
 	}
 	
-	@RequestMapping(value = "/testpage.do")
+	@RequestMapping(value = "/egovTestPage.do")
 	public String list(ModelMap model) throws Exception {
 
 		System.out.println("@@@@@@@@@@@@@@@@@");
-		return "sample/testpage";
+		return "sample/egovTestPage";
 	}
 
 	/**
