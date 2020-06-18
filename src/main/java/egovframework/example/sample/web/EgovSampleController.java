@@ -113,9 +113,30 @@ public class EgovSampleController {
 	}
 	
 	@RequestMapping(value = "/egovTestPage.do")
-	public String list(ModelMap model) throws Exception {
+	public String list(@ModelAttribute("searchVO") MberVO searchVO, ModelMap model) throws Exception {
+		System.out.println("@@@@@@@@@@@@@@@@@11");
+		/** EgovPropertyService.sample */
+		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
+		searchVO.setPageSize(propertiesService.getInt("pageSize"));
 
-		System.out.println("@@@@@@@@@@@@@@@@@");
+		/** pageing setting */
+		PaginationInfo paginationInfo = new PaginationInfo();
+		paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
+		paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
+		paginationInfo.setPageSize(searchVO.getPageSize());
+
+		searchVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
+		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
+		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+
+		List<?> sampleList = mberService.selectMberList(searchVO);
+		model.addAttribute("resultList", sampleList);
+
+		int totCnt = mberService.selectMberListTotCnt(searchVO);
+		paginationInfo.setTotalRecordCount(totCnt);
+		model.addAttribute("paginationInfo", paginationInfo);
+
+		System.out.println("_----------"+totCnt);
 		return "sample/egovTestPage";
 	}
 
