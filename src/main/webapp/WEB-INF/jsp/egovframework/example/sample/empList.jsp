@@ -14,23 +14,11 @@
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
 	function home() {
-		location.href = "<c:url value='/egovTestPage.do'/>";
-	}
-	function add() {
-		location.href = "<c:url value='/junMgmt.do'/>";
-	}
-	function opening() {
-		location.href = "<c:url value='/opening.do'/>";
-	}
-	function view() {
-		location.href = "<c:url value='/junView.do'/>";
-	}
-	function excelDownload() {
-		location.href = "<c:url value='/junlistExcel.do'/>";
+		location.href = "<c:url value='/mberList.do'/>";
 	}
 	function fn_egov_link_page(pageNo) {
 		document.listForm.pageIndex.value = pageNo;
-		document.listForm.action = "<c:url value='/egovTestPage.do'/>";
+		document.listForm.action = "<c:url value='/empList.do'/>";
 		document.listForm.submit();
 	}
 </script>
@@ -45,7 +33,7 @@
 					<b>ISG Beauty</b>
 				</h2>
 				<p>
-					<b>미용실 회원 관리 사이트</b>
+					<b>직원 관리</b>
 				</p>
 			</div>
 			<div class="row">

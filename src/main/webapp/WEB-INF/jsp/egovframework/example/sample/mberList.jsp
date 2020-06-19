@@ -14,10 +14,10 @@
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
 	function home() {
-		location.href = "<c:url value='/egovTestPage.do'/>";
+		location.href = "<c:url value='/mberList.do'/>";
 	}
-	function add() {
-		location.href = "<c:url value='/junMgmt.do'/>";
+	function empManage() {
+		location.href = "<c:url value='/empList.do'/>";
 	}
 	function opening() {
 		location.href = "<c:url value='/opening.do'/>";
@@ -30,7 +30,7 @@
 	}
 	function fn_egov_link_page(pageNo) {
 		document.listForm.pageIndex.value = pageNo;
-		document.listForm.action = "<c:url value='/egovTestPage.do'/>";
+		document.listForm.action = "<c:url value='/mberList.do'/>";
 		document.listForm.submit();
 	}
 </script>
@@ -45,7 +45,7 @@
 					<b>ISG Beauty</b>
 				</h2>
 				<p>
-					<b>미용실 회원 관리 사이트</b>
+					<b>고객 관리</b>
 				</p>
 			</div>
 			<div class="row">
@@ -53,7 +53,7 @@
 
 
 					<div class="col-sm-6">
-						<button type="button" class="btn btn-info" onclick="">직원
+						<button type="button" class="btn btn-info" onclick="empManage()">직원
 							관리</button>
 						<button type="button" class="btn btn-info" onclick="">예약
 							현황</button>
@@ -97,12 +97,13 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="result" items="${resultList}" varStatus="status">
+								<c:forEach var="result" items="${mberList}" varStatus="status">
 									<tr>
 										<td align="center" class="listtd"><c:out
 												value="${result.mberSn}" /></td>
 										<td align="center" class="listtd"><a
-											href="javascript:fn_egov_select('<c:out value="${result.eEmpId}"/>')"><c:out
+											href="javascript:fn_egov_select('<c:out 
+													value="${result.eEmpId}"/>')"><c:out
 													value="${result.mberNm}" /></a></td>
 										<td align="center" class="listtd"><c:out
 												value="${result.sexdstn}" />&nbsp;</td>
@@ -127,9 +128,8 @@
 						<form:hidden path="pageIndex" />
 					</div>
 				</div>
-			</div>
 
-		</div>
+			</div>
 	</form:form>
 </body>
 </html>

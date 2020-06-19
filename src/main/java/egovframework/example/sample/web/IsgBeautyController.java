@@ -19,22 +19,15 @@ import java.util.List;
 
 import egovframework.example.sample.service.MberService;
 import egovframework.example.sample.service.MberVO;
-import egovframework.example.sample.service.SampleDefaultVO;
-
 import egovframework.rte.fdl.property.EgovPropertyService;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
 /**
@@ -55,7 +48,7 @@ import org.springmodules.validation.commons.DefaultBeanValidator;
  */
 
 @Controller
-public class EgovSampleController {
+public class IsgBeautyController {
 
 	/** mberService */
 	@Resource(name = "mberService")
@@ -69,6 +62,63 @@ public class EgovSampleController {
 	@Resource(name = "beanValidator")
 	protected DefaultBeanValidator beanValidator;
 
+	@RequestMapping(value = "/mberList.do")
+	public String mberList(@ModelAttribute("searchVO") MberVO mberVO, ModelMap model) throws Exception {
+		System.out.println("[고객 리스트]");
+
+		/** EgovPropertyService.sample */
+		mberVO.setPageUnit(propertiesService.getInt("pageUnit"));
+		mberVO.setPageSize(propertiesService.getInt("pageSize"));
+
+		/** pageing setting */
+		PaginationInfo paginationInfo = new PaginationInfo();
+		paginationInfo.setCurrentPageNo(mberVO.getPageIndex());
+		paginationInfo.setRecordCountPerPage(mberVO.getPageUnit());
+		paginationInfo.setPageSize(mberVO.getPageSize());
+
+		mberVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
+		mberVO.setLastIndex(paginationInfo.getLastRecordIndex());
+		mberVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+
+		List<?> mberList = mberService.selectMberList(mberVO);
+		model.addAttribute("mberList", mberList);
+		
+		int totCnt = mberService.selectMberListTotCnt(mberVO);
+		paginationInfo.setTotalRecordCount(totCnt);
+		model.addAttribute("paginationInfo", paginationInfo);
+
+		return "sample/mberList";
+	}
+
+	@RequestMapping(value = "/empList.do")
+	public String empList(@ModelAttribute("searchVO") MberVO searchVO, ModelMap model) throws Exception {
+		System.out.println("[직원 리스트]");
+		
+		/** EgovPropertyService.sample */
+		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
+		searchVO.setPageSize(propertiesService.getInt("pageSize"));
+
+		/** pageing setting */
+		PaginationInfo paginationInfo = new PaginationInfo();
+		paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
+		paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
+		paginationInfo.setPageSize(searchVO.getPageSize());
+
+		searchVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
+		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
+		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+
+		List<?> sampleList = mberService.selectMberList(searchVO);
+		model.addAttribute("resultList", sampleList);
+
+		int totCnt = mberService.selectMberListTotCnt(searchVO);
+		paginationInfo.setTotalRecordCount(totCnt);
+		model.addAttribute("paginationInfo", paginationInfo);
+
+		System.out.println("_----------"+totCnt);
+		return "sample/empList";
+	}
+	
 //	/**
 //	 * 글 목록을 조회한다. (pageing)
 //	 * @param searchVO - 조회할 정보가 담긴 SampleDefaultVO
@@ -112,34 +162,7 @@ public class EgovSampleController {
 //		return "sample/egovSampleList";
 //	}
 	
-	@RequestMapping(value = "/mberList.do")
-	public String mberList(@ModelAttribute("searchVO") MberVO searchVO, ModelMap model) throws Exception {
-		System.out.println("[고객 리스트]");
-		/** EgovPropertyService.sample */
-		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
-		searchVO.setPageSize(propertiesService.getInt("pageSize"));
-
-		/** pageing setting */
-		PaginationInfo paginationInfo = new PaginationInfo();
-		paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
-		paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
-		paginationInfo.setPageSize(searchVO.getPageSize());
-
-		searchVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
-		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
-		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
-
-		List<?> sampleList = mberService.selectMberList(searchVO);
-		model.addAttribute("resultList", sampleList);
-
-		int totCnt = mberService.selectMberListTotCnt(searchVO);
-		paginationInfo.setTotalRecordCount(totCnt);
-		model.addAttribute("paginationInfo", paginationInfo);
-
-		System.out.println("_----------"+totCnt);
-		return "sample/mberList";
-	}
-
+	
 	/**
 	 * 글 등록 화면을 조회한다.
 	 * @param searchVO - 목록 조회조건 정보가 담긴 VO
