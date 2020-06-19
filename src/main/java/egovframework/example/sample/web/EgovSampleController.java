@@ -69,52 +69,52 @@ public class EgovSampleController {
 	@Resource(name = "beanValidator")
 	protected DefaultBeanValidator beanValidator;
 
-	/**
-	 * 글 목록을 조회한다. (pageing)
-	 * @param searchVO - 조회할 정보가 담긴 SampleDefaultVO
-	 * @param model
-	 * @return "egovSampleList"
-	 * @exception Exception
-	 */
-	@RequestMapping(value = "/egovSampleList.do")
-	public String selectSampleList(@ModelAttribute("searchVO") MberVO searchVO, ModelMap model) throws Exception {
-		System.out.println("@@@@@@@@@@@@@@@@@");
-		/** EgovPropertyService.sample */
-		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
-		searchVO.setPageSize(propertiesService.getInt("pageSize"));
-
-		/** pageing setting */
-		PaginationInfo paginationInfo = new PaginationInfo();
-		paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
-		paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
-		paginationInfo.setPageSize(searchVO.getPageSize());
-
-		searchVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
-		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
-		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
-
-		/**
-		 * 2020.06.12 이병준
-		 * - 페이지가 새로고침 될 때마다 Controller가 실행되고, MariaDB의 데이터가 생긴다면 즉각 반영되게 된다.
-		 * - mberService모듈의 selectMberList는 해당 searchVO(MberVO)를 이용해 List를 형성한다.
-		 * - 이때, selectMberList는 MberMapper를 객체로 이용한다.
-		 * 		 - MberMapper에서는 SQL에 동일한 id로 데이터베이스인 Mber_SQL.xml에 접근하게 된다.
-		 */
-		List<?> sampleList = mberService.selectMberList(searchVO);
-		model.addAttribute("resultList", sampleList);
-
-		int totCnt = mberService.selectMberListTotCnt(searchVO);
-		paginationInfo.setTotalRecordCount(totCnt);
-		model.addAttribute("paginationInfo", paginationInfo);
-
-		System.out.println("_----------"+totCnt);
-
-		return "sample/egovSampleList";
-	}
+//	/**
+//	 * 글 목록을 조회한다. (pageing)
+//	 * @param searchVO - 조회할 정보가 담긴 SampleDefaultVO
+//	 * @param model
+//	 * @return "egovSampleList"
+//	 * @exception Exception
+//	 */
+//	@RequestMapping(value = "/egovSampleList.do")
+//	public String selectSampleList(@ModelAttribute("searchVO") MberVO searchVO, ModelMap model) throws Exception {
+//		System.out.println("@@@@@@@@@@@@@@@@@");
+//		/** EgovPropertyService.sample */
+//		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
+//		searchVO.setPageSize(propertiesService.getInt("pageSize"));
+//
+//		/** pageing setting */
+//		PaginationInfo paginationInfo = new PaginationInfo();
+//		paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
+//		paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
+//		paginationInfo.setPageSize(searchVO.getPageSize());
+//
+//		searchVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
+//		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
+//		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+//
+//		/**
+//		 * 2020.06.12 이병준
+//		 * - 페이지가 새로고침 될 때마다 Controller가 실행되고, MariaDB의 데이터가 생긴다면 즉각 반영되게 된다.
+//		 * - mberService모듈의 selectMberList는 해당 searchVO(MberVO)를 이용해 List를 형성한다.
+//		 * - 이때, selectMberList는 MberMapper를 객체로 이용한다.
+//		 * 		 - MberMapper에서는 SQL에 동일한 id로 데이터베이스인 Mber_SQL.xml에 접근하게 된다.
+//		 */
+//		List<?> sampleList = mberService.selectMberList(searchVO);
+//		model.addAttribute("resultList", sampleList);
+//
+//		int totCnt = mberService.selectMberListTotCnt(searchVO);
+//		paginationInfo.setTotalRecordCount(totCnt);
+//		model.addAttribute("paginationInfo", paginationInfo);
+//
+//		System.out.println("_----------"+totCnt);
+//
+//		return "sample/egovSampleList";
+//	}
 	
-	@RequestMapping(value = "/egovTestPage.do")
-	public String list(@ModelAttribute("searchVO") MberVO searchVO, ModelMap model) throws Exception {
-		System.out.println("@@@@@@@@@@@@@@@@@11");
+	@RequestMapping(value = "/mberList.do")
+	public String mberList(@ModelAttribute("searchVO") MberVO searchVO, ModelMap model) throws Exception {
+		System.out.println("[고객 리스트]");
 		/** EgovPropertyService.sample */
 		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
 		searchVO.setPageSize(propertiesService.getInt("pageSize"));
@@ -137,7 +137,7 @@ public class EgovSampleController {
 		model.addAttribute("paginationInfo", paginationInfo);
 
 		System.out.println("_----------"+totCnt);
-		return "sample/egovTestPage";
+		return "sample/mberList";
 	}
 
 	/**
