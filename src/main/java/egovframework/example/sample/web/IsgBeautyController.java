@@ -119,6 +119,13 @@ public class IsgBeautyController {
 		return "sample/empList";
 	}
 	
+	@RequestMapping(value = "/mberRegister.do")
+	public String mberRegister(@ModelAttribute("searchVO") MberVO searchVO, ModelMap model) throws Exception {
+		System.out.println("[고객 등록]");
+		
+		return "sample/mberRegister";
+	}
+	
 //	/**
 //	 * 글 목록을 조회한다. (pageing)
 //	 * @param searchVO - 조회할 정보가 담긴 SampleDefaultVO

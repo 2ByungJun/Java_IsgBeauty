@@ -19,8 +19,8 @@
 	function empManage() {
 		location.href = "<c:url value='/empList.do'/>";
 	}
-	function opening() {
-		location.href = "<c:url value='/opening.do'/>";
+	function mberRegister() {
+		location.href = "<c:url value='/mberRegister.do'/>";
 	}
 	function view() {
 		location.href = "<c:url value='/junView.do'/>";
@@ -50,8 +50,6 @@
 			</div>
 			<div class="row">
 				<div class="alert" role="alert">
-
-
 					<div class="col-sm-6">
 						<button type="button" class="btn btn-info" onclick="empManage()">직원
 							관리</button>
@@ -72,8 +70,8 @@
 							</form>
 						</div>
 						<div align="right">
-							<button type="submit" class="btn btn-info">고객 등록</button>
-							<button type="submit" class="btn btn-info">이전</button>
+							<button type="button" class="btn btn-info" onclick="mberRegister()">고객 등록</button>
+							<button type="button" class="btn btn-info">이전</button>
 						</div>
 					</div>
 				</div>
@@ -100,7 +98,7 @@
 								<c:forEach var="result" items="${mberList}" varStatus="status">
 									<tr>
 										<td align="center" class="listtd"><c:out
-												value="${result.mberSn}" /></td>
+												value="${status.count}" /></td>
 										<td align="center" class="listtd"><a
 											href="javascript:fn_egov_select('<c:out 
 													value="${result.eEmpId}"/>')"><c:out
