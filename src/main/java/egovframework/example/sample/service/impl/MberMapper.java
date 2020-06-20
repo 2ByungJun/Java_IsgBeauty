@@ -19,7 +19,6 @@ import java.util.List;
 
 import egovframework.example.sample.service.MberVO;
 import egovframework.example.sample.service.SampleDefaultVO;
-
 import egovframework.rte.psl.dataaccess.mapper.Mapper;
 
 /**
@@ -65,5 +64,13 @@ public interface MberMapper {
 	 * @exception
 	 */
 	int selectMberListTotCnt(MberVO searchVO);
+	
+	/**
+	 * 글을 등록한다.
+	 * @param vo - 등록할 정보가 담긴 SampleVO
+	 * @return 등록 결과
+	 * @exception Exception
+	 */
+	void insertMber(MberVO vo) throws Exception;
 
 }

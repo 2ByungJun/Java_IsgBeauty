@@ -28,6 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
 /**
@@ -124,6 +125,15 @@ public class IsgBeautyController {
 		System.out.println("[고객 등록]");
 		
 		return "sample/mberRegister";
+	}
+	
+	@RequestMapping(value = "/addMber.do", method = RequestMethod.POST)
+	public String addSample(@ModelAttribute("searchVO") MberVO searchVO, MberVO sampleVO)
+			throws Exception {
+
+
+		mberService.insertMber(sampleVO);
+		return "forward:/mberList.do";
 	}
 	
 //	/**

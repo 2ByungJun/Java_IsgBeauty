@@ -39,5 +39,21 @@
 				</choose>
 			</if> -->
 	</select>
+	
+	<insert id="insertMber" parameterType="mberVO">
+	    
+	    insert into t_mber_m values (
+	    		${mberSn},
+				#{eEmpId},
+				#{mberNm},
+				#{sexdstn},
+				#{telno},
+				#{brthdy},
+				#{registId},
+				CURDATE(),
+				#{updtId},
+				CURDATE()
+	    )
+	</insert>
 
 </mapper>

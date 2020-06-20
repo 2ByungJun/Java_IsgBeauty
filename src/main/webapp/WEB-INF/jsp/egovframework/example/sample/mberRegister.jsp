@@ -16,27 +16,20 @@
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
-	function empManage() {
-		location.href = "<c:url value='/empList.do'/>";
-	}
-	function opening() {
-		location.href = "<c:url value='/opening.do'/>";
-	}
-	function view() {
-		location.href = "<c:url value='/junView.do'/>";
-	}
-	function excelDownload() {
-		location.href = "<c:url value='/junlistExcel.do'/>";
-	}
-	function fn_egov_link_page(pageNo) {
-		document.listForm.pageIndex.value = pageNo;
-		document.listForm.action = "<c:url value='/mberList.do'/>";
-		document.listForm.submit();
-	}
+	
+	 /* 글 등록 function */
+    function save() {
+    	frm = document.detailForm;
+    	
+        	frm.action = "<c:url value= '/addMber.do'/>";
+            frm.submit();
+        
+    }
+	 
 </script>
 </head>
 <body>
-	<form:form commandName="searchVO" id="listForm" name="listForm"
+	<form:form commandName="sampleVO" id="detailForm" name="detailForm"
 		method="post">
 		<div class="container">
 			<div class="jumbotron text-center alert" role="alert"
@@ -51,86 +44,86 @@
 		</div>
 		<div class="container">
 			<div class="form-inline form-group">
-				<label for="phone_num"
+				<label for="mberSn"
 					class="col-sm-2 col-sm-offset-1 control-label">순번*:</label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" id="phone_num"
-						name="phone_num">
+					<input type="text" class="form-control" id="mberSn"
+						name="mberSn">
 				</div>
-				<label for="phone_num" class="col-sm-2 control-label">담당
+				<label for="eEmpId" class="col-sm-2 control-label">담당
 					디자이너*:</label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" id="phone_num"
-						name="phone_num">
+					<input type="text" class="form-control" id="eEmpId"
+						name="eEmpId">
 				</div>
 			</div>
 
 			<div class="form-inline form-group">
-				<label for="phone_num"
+				<label for="mberNm"
 					class="col-sm-2 col-sm-offset-1 control-label">이름*:</label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" id="phone_num"
-						name="phone_num">
+					<input type="text" class="form-control" id="mberNm"
+						name="mberNm">
 				</div>
 			</div>
 			<div class="form-inline form-group">
-				<label for="phone_num" class="col-sm-2 control-label">등록자*:</label>
+				<label for="registId" class="col-sm-2 control-label">등록자*:</label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" id="phone_num"
-						name="phone_num">
+					<input type="text" class="form-control" id="registId"
+						name="registId">
 				</div>
 			</div>
 
 			<div class="form-inline form-group">
-				<label for="phone_num"
+				<label for="sexdstn"
 					class="col-sm-2 col-sm-offset-1 control-label">성별*:</label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" id="phone_num"
-						name="phone_num">
+					<input type="text" class="form-control" id="sexdstn"
+						name="sexdstn">
 				</div>
 			</div>
 			<div class="form-inline form-group">
-				<label for="phone_num" class="col-sm-2 control-label">등록일*:</label>
+				<label for="registDt" class="col-sm-2 control-label">등록일*:</label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" id="phone_num"
-						name="phone_num">
+					<input type="text" class="form-control" id="registDt"
+						name="registDt">
 				</div>
 			</div>
 
 			<div class="form-inline form-group">
-				<label for="phone_num"
+				<label for="telno"
 					class="col-sm-2 col-sm-offset-1 control-label">전화번호*:</label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" id="phone_num"
-						name="phone_num">
+					<input type="text" class="form-control" id="telno"
+						name="telno">
 				</div>
 			</div>
 			<div class="form-inline form-group">
-				<label for="phone_num" class="col-sm-2 control-label">수정자:</label>
+				<label for="updtId" class="col-sm-2 control-label">수정자:</label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" id="phone_num"
-						name="phone_num">
+					<input type="text" class="form-control" id="updtId"
+						name="updtId">
 				</div>
 			</div>
 
 			<div class="form-inline form-group">
-				<label for="phone_num"
+				<label for="brthdy"
 					class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" id="phone_num"
-						name="phone_num">
+					<input type="text" class="form-control" id="brthdy"
+						name="brthdy">
 				</div>
 			</div>
 			<div class="form-inline form-group">
-				<label for="phone_num" class="col-sm-2 control-label">수정일:</label>
+				<label for="updtDt" class="col-sm-2 control-label">수정일:</label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" id="phone_num"
-						name="phone_num">
+					<input type="text" class="form-control" id="updtDt"
+						name="updtDt">
 				</div>
 			</div>
 		</div>
 
-		<button type="button" class="btn btn-info col-sm-offset-6" onclick="">등록</button>
+		<button type="button" class="btn btn-info col-sm-offset-6" onclick="save()">등록</button>
 		<button type="button" class="btn btn-info" onclick="">취소</button>
 
 

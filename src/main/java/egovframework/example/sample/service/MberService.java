@@ -73,5 +73,12 @@ public class MberService {
 	public int selectMberListTotCnt(MberVO vo) throws Exception {
 		 return mapper.selectMberListTotCnt(vo);
 	}
+	
+	/**
+	 * 고객을 등록한다.
+	 */
+	public void insertMber(MberVO vo) throws Exception {
+		mapper.insertMber(vo);
+	}
 
 }
