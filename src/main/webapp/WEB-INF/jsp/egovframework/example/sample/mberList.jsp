@@ -47,7 +47,7 @@
 		method="post">
 		<input type="hidden" name="selectedId" />
 		<div class="container">
-			<div class="jumbotron text-center alert" role="alert"
+			<div class="jumbotron text-center alert-info" role="alert"
 				onclick="home()">
 				<h2>
 					<b>ISG Beauty</b>
@@ -59,9 +59,9 @@
 			<div class="row">
 				<div class="alert" role="alert">
 					<div class="col-sm-6">
-						<button type="button" class="btn btn-info" onclick="empManage()">직원
+						<button type="button" class="btn btn-success" onclick="empManage()">직원
 							관리</button>
-						<button type="button" class="btn btn-info" onclick="">예약
+						<button type="button" class="btn btn-danger" onclick="">예약
 							현황</button>
 					</div>
 					<div class="col-sm-6">

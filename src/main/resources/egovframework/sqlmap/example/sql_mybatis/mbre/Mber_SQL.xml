@@ -3,7 +3,6 @@
 <mapper namespace="egovframework.example.sample.service.impl.MberMapper">
 
     <!-- Mber -->
-    
     <resultMap id="mber" type="mberVO">
 		<result property="mberSn" column="mber_sn"/>
 		<result property="eEmpId" column="e_emp_id"/>

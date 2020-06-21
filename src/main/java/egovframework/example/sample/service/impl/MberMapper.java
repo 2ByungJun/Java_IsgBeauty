@@ -50,7 +50,7 @@ public interface MberMapper {
 	 */
 
 	/**
-	 * 글 목록을 조회한다.
+	 * 고객 목록을 조회한다.
 	 * @param searchVO - 조회할 정보가 담긴 VO
 	 * @return 글 목록
 	 * @exception Exception
@@ -58,7 +58,7 @@ public interface MberMapper {
 	List<?> selectMberList(MberVO searchVO) throws Exception;
 
 	/**
-	 * 글 총 갯수를 조회한다.
+	 * 고객 총 수를 조회한다.
 	 * @param searchVO - 조회할 정보가 담긴 VO
 	 * @return 글 총 갯수
 	 * @exception
@@ -66,13 +66,19 @@ public interface MberMapper {
 	int selectMberListTotCnt(MberVO searchVO);
 	
 	/**
-	 * 글을 등록한다.
+	 * 고객 등록
 	 * @param vo - 등록할 정보가 담긴 SampleVO
 	 * @return 등록 결과
 	 * @exception Exception
 	 */
 	void insertMber(MberVO vo) throws Exception;
 	
+	/**
+	 * 고객 상세보기
+	 * @param searchVO
+	 * @return
+	 * @throws Exception
+	 */
 	MberVO selectMber(MberVO searchVO) throws Exception;
 
 

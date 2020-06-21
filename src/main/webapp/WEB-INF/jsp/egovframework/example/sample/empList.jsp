@@ -19,6 +19,11 @@
 	function empRegister() {
 		location.href = "<c:url value='/empRegister.do'/>";
 	}
+    function view(id) {
+    	document.listForm.selectedId.value = id;
+       	document.listForm.action = "<c:url value='/empView.do'/>";
+       	document.listForm.submit();
+    }
 	function fn_egov_link_page(pageNo) {
 		document.listForm.pageIndex.value = pageNo;
 		document.listForm.action = "<c:url value='/empList.do'/>";
@@ -30,7 +35,7 @@
 	<form:form commandName="searchVO" id="listForm" name="listForm"
 		method="post">
 		<div class="container">
-			<div class="jumbotron text-center alert" role="alert"
+			<div class="jumbotron text-center alert-success" role="alert"
 				onclick="home()">
 				<h2>
 					<b>ISG Beauty</b>
@@ -57,7 +62,7 @@
 							</form>
 						</div>
 						<div align="right">
-							<button type="button" class="btn btn-info" onclick="empRegister()">직원 등록</button>
+							<button type="button" class="btn btn-success" onclick="empRegister()">직원 등록</button>
 							<button type="button" class="btn btn-info" onclick="home()">이전</button>
 						</div>
 					</div>
@@ -87,8 +92,10 @@
 									<tr>
 										<td align="center" class="listtd"><c:out
 												value="${result.empId}" /></td>
-										<td align="center" class="listtd"><c:out
-												value="${result.empNm}" />&nbsp;</td>
+										<td align="center" class="listtd"><a
+											href="javascript:view('<c:out 
+													value="${result.empId}"/>')"><c:out
+													value="${result.empNm}" /></a></td>
 										<td align="center" class="listtd"><c:out
 												value="${result.sexdstn}" />&nbsp;</td>
 										<td align="center" class="listtd"><c:out

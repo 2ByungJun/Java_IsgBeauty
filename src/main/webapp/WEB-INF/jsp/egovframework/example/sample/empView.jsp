@@ -14,8 +14,9 @@
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
 	function home() {
-		location.href = "<c:url value='/mberList.do'/>";
+		location.href = "<c:url value='/empList.do'/>";
 	}
+
 </script>
 <style>
 label {
@@ -39,42 +40,41 @@ p {
 				<h4 for="mberSn" class="control-label">
 					'
 					<c:out value="${result.mberNm}" />
-					'님 상세화면
+					'직원 상세화면
 				</h4>
 			</div>
 		</div>
 		<div class="container">
 			<div class="row">
 				<div class="form-inline form-group">
-					<label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번:</label>
+					<label for="empId" class="col-sm-2 col-sm-offset-1 control-label">아이디:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<c:out value="${result.mberSn}" />
+						<p for="empId" class="control-label">
+							<c:out value="${result.empId}" />
 						</p>
 					</div>
 
-					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
-						직원:</label>
+					<label for="empPassword" class="col-sm-2 col-sm-offset-1 control-label">비밀번호:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<c:out value="${result.eEmpId}" />
+						<p for="empPassword" class="control-label">
+							<c:out value="${result.empPassword}" />
 						</p>
 					</div>
 				</div>
 
 				<div class="form-inline form-group">
-					<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름:</label>
+					<label for="empNm" class="col-sm-2 col-sm-offset-1 control-label">이름:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<c:out value="${result.mberNm}" />
+						<p for="empNm" class="control-label">
+							<c:out value="${result.empNm}" />
 						</p>
 					</div>
 
-					<label for="registId"
-						class="col-sm-2 col-sm-offset-1 control-label">등록자:</label>
+					<label for="telno"
+						class="col-sm-2 col-sm-offset-1 control-label">전화번호:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<c:out value="${result.registId}" />
+						<p for="telno" class="control-label">
+							<c:out value="${result.telno}" />
 						</p>
 					</div>
 				</div>
@@ -87,52 +87,43 @@ p {
 						</p>
 					</div>
 
-					<label for="registDt"
-						class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
+					<label for="pspofc"
+						class="col-sm-2 col-sm-offset-1 control-label">직책:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<c:out value="${result.registDt}" />
+						<p for="pspofc" class="control-label">
+							<c:out value="${result.pspofc}" />
 						</p>
 					</div>
 				</div>
 
 				<div class="form-inline form-group">
-					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호:</label>
+					<label for="salary" class="col-sm-2 col-sm-offset-1 control-label">급여:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<c:out value="${result.telno}" />
+						<p for="salary" class="control-label">
+							<c:out value="${result.salary}" />
+						</p>
+					</div>
+
+					<label for="career" class="col-sm-2 col-sm-offset-1 control-label">경력:</label>
+					<div class="col-sm-3">
+						<p for="career" class="control-label">
+							<c:out value="${result.career}" />
+						</p>
+					</div>
+				</div>
+
+				<div class="form-inline form-group">
+					<label for="registId" class="col-sm-2 col-sm-offset-1 control-label">등록자:</label>
+					<div class="col-sm-3">
+						<p for="registId" class="control-label">
+							<c:out value="${result.registId}" />
 						</p>
 					</div>
 
 					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">수정자:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
+						<p for="updtId" class="control-label">
 							<c:out value="${result.updtId}" />
-						</p>
-					</div>
-				</div>
-
-				<div class="form-inline form-group">
-					<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
-					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<c:out value="${result.brthdy}" />
-						</p>
-					</div>
-
-					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">수정일:</label>
-					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<c:out value="${result.updtDt}" />
-						</p>
-					</div>
-				</div>
-
-				<div class="form-inline form-group">
-					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">예약내용:</label>
-					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<a href="">예약 내용</a>
 						</p>
 					</div>
 				</div>
@@ -140,9 +131,7 @@ p {
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="button" class="btn btn-info" onclick="">수정</button>
-			<button type="button" class="btn btn-info" onclick="">삭제</button>
-			<button type="button" class=" btn btn-danger" onclick="">예약상태</button>
+			<button type="button" class="btn btn-success" onclick="">수정</button>
 			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 		</div>
 

@@ -75,12 +75,20 @@ public class MberService {
 	}
 	
 	/**
-	 * 고객을 등록한다.
+	 * 고객 등록
+	 * @param vo
+	 * @throws Exception
 	 */
 	public void insertMber(MberVO vo) throws Exception {
 		mapper.insertMber(vo);
 	}
 	
+	/**
+	 * 고객 조회
+	 * @param vo
+	 * @return
+	 * @throws Exception
+	 */
 	public MberVO selectMber(MberVO vo) throws Exception {
 		return mapper.selectMber(vo);
 	}

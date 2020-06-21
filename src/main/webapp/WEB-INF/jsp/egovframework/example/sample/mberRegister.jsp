@@ -26,11 +26,20 @@
 	}
 </script>
 </head>
+<style>
+label {
+	margin-top: 30px;
+}
+
+input {
+	margin-top: 30px;
+}
+</style>
 <body>
 	<form:form commandName="mberVO" id="detailForm" name="detailForm"
 		method="post">
 		<div class="container">
-			<div class="jumbotron text-center alert" role="alert"
+			<div class="jumbotron text-center alert-info" role="alert"
 				onclick="home()">
 				<h2>
 					<b>ISG Beauty</b>
@@ -108,14 +117,12 @@
 						<input type="text" class="form-control" id="updtDt" name="updtDt">
 					</div>
 				</div>
-
-				<div class="container" style="text-align: center;">
-					<button type="button" class="btn btn-info" onclick="saveMber()">등록</button>
-					<button type="button" class=" btn btn-info" onclick="home()">취소</button>
-
-
-				</div>
 			</div>
+		</div>
+
+		<div class="container" style="text-align: center; margin-top: 30px">
+			<button type="button" class="btn btn-info" onclick="saveMber()">등록</button>
+			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
 		</div>
 
 	</form:form>

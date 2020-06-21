@@ -3,6 +3,40 @@
 <mapper namespace="egovframework.example.sample.service.impl.EmpMapper">
 
 	<!-- EMP -->
+	    <resultMap id="emp" type="empVO">
+		<result property="empId" column="emp_id"/>
+		<result property="empPassword" column="emp_password"/>
+		<result property="empNm" column="emp_nm"/>
+		<result property="telno" column="telno"/>
+		<result property="sexdstn" column="sexdstn"/>
+		<result property="pspofc" column="pspofc"/>
+		<result property="salary" column="salary"/>
+		<result property="career" column="career"/>
+		<result property="registId" column="regist_id"/>
+		<result property="registDt" column="regist_dt"/>
+		<result property="updtId" column="updt_id"/>
+		<result property="updtDt" column="updt_dt"/>
+	</resultMap>
+    
+    <select id="selectEmp" parameterType="empVO" resultMap="emp">
+
+			SELECT EMP_ID, 
+		       EMP_PASSWORD,    
+		       EMP_NM,
+		       TELNO,
+		       SEXDSTN,
+		       PSPOFC,
+		       SALARY,
+		       CAREER,
+		       REGIST_ID,
+		       REGIST_DT,
+		       UPDT_ID,
+		       UPDT_DT,
+		  FROM t_emp_m
+			WHERE EMP_ID =${empId}
+
+	</select>
+	
 	<select id="selectEmpList" parameterType="empVO" resultType="egovMap">
 	    
 			select a.EMP_ID, 

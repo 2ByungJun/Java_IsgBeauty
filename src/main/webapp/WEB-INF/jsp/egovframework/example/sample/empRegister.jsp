@@ -27,11 +27,20 @@
 	}
 </script>
 </head>
+<style>
+label {
+	margin-top: 30px;
+}
+
+input {
+	margin-top: 30px;
+}
+</style>
 <body>
 	<form:form commandName="empVO" id="detailForm" name="detailForm"
 		method="post">
 		<div class="container">
-			<div class="jumbotron text-center alert" role="alert"
+			<div class="jumbotron text-center alert-success" role="alert"
 				onclick="home()">
 				<h2>
 					<b>ISG Beauty</b>
@@ -77,11 +86,9 @@
 							name="sexdstn">
 					</div>
 
-					<label for="pspofc"
-						class="col-sm-2 col-sm-offset-1 control-label">직책:</label>
+					<label for="pspofc" class="col-sm-2 col-sm-offset-1 control-label">직책:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="pspofc"
-							name="pspofc">
+						<input type="text" class="form-control" id="pspofc" name="pspofc">
 					</div>
 				</div>
 
@@ -96,7 +103,7 @@
 						<input type="text" class="form-control" id="career" name="career">
 					</div>
 				</div>
-				
+
 				<div class="form-inline form-group">
 					<label for="registId"
 						class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
@@ -110,13 +117,12 @@
 						<input type="text" class="form-control" id="updtId" name="updtId">
 					</div>
 				</div>
-				
-
-				<div class="container" style="text-align: center;">
-					<button type="button" class="btn btn-info" onclick="saveEmp()">등록</button>
-					<button type="button" class=" btn btn-info" onclick="home()">취소</button>
-				</div>
 			</div>
+		</div>
+
+		<div class="container" style="text-align: center; margin-top:30px;">
+			<button type="button" class="btn btn-success" onclick="saveEmp()">등록</button>
+			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
 		</div>
 
 	</form:form>

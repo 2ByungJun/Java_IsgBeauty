@@ -38,7 +38,7 @@ import egovframework.example.sample.service.MberVO;
 public interface EmpMapper {
 
 	/**
-	 * 글 목록을 조회한다.
+	 * 직원 목록을 조회한다.
 	 * @param searchVO - 조회할 정보가 담긴 VO
 	 * @return 글 목록
 	 * @exception Exception
@@ -46,7 +46,7 @@ public interface EmpMapper {
 	List<?> selectEmpList(EmpVO searchVO) throws Exception;
 
 	/**
-	 * 글 총 갯수를 조회한다.
+	 * 직원 총 수를 조회한다.
 	 * @param searchVO - 조회할 정보가 담긴 VO
 	 * @return 글 총 갯수
 	 * @exception
@@ -54,11 +54,19 @@ public interface EmpMapper {
 	int selectEmpListTotCnt(EmpVO searchVO);
 	
 	/**
-	 * 글을 등록한다.
+	 * 직원을 등록한다.
 	 * @param vo - 등록할 정보가 담긴 SampleVO
 	 * @return 등록 결과
 	 * @exception Exception
 	 */
 	void insertEmp(EmpVO vo) throws Exception;
+	
+	/**
+	 * 직원 상세보기
+	 * @param searchVO
+	 * @return
+	 * @throws Exception
+	 */
+	EmpVO selectEmp(EmpVO searchVO) throws Exception;
 
 }

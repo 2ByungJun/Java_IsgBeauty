@@ -67,10 +67,22 @@ public class EmpService {
 	}
 	
 	/**
-	 * 직원을 등록한다.
+	 * 직원 등록
+	 * @param vo
+	 * @throws Exception
 	 */
 	public void insertEmp(EmpVO vo) throws Exception {
 		mapper.insertEmp(vo);
+	}
+	
+	/**
+	 * 직원 조회
+	 * @param vo
+	 * @return
+	 * @throws Exception
+	 */
+	public EmpVO selectEmp(EmpVO vo) throws Exception {
+		return mapper.selectEmp(vo);
 	}
 
 }

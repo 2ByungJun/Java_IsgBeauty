@@ -23,7 +23,7 @@
 </script>
 <body>
 	<div class="container">
-		<div class="jumbotron text-center alert" role="alert">
+		<div class="jumbotron text-center alert-info" role="alert">
 			<h2>
 				<b>ISG Beauty</b>
 			</h2>
@@ -33,11 +33,29 @@
 		</div>
 	</div>
 
+	<form class="form-horizontal" style="align: center;"action="/action_page.php">
+		<div class="form-group">
+			<label class="control-label col-sm-4" for="email">ID:</label>
+			<div class="col-sm-4">
+				<input type="email" class="form-control" id="email"
+					placeholder="Enter email">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-4" for="pwd">Password:</label>
+			<div class="col-sm-4">
+				<input type="password" class="form-control" id="pwd"
+					placeholder="Enter password">
+			</div>
+		</div>
+	</form>
+
+
 
 
 	<div class="container" style="text-align: center;">
 		<button type="button" class="btn btn-info" onclick="home()">로그인</button>
-		<button type="button" class=" btn btn-info" onclick="empRegister()">직원등록</button>
+		<button type="button" class=" btn btn-success" onclick="empRegister()">회원가입</button>
 	</div>
 
 
