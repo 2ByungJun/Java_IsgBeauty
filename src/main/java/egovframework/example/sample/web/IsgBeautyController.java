@@ -134,12 +134,28 @@ public class IsgBeautyController {
 	}
 	
 	@RequestMapping(value = "/addMber.do", method = RequestMethod.POST)
-	public String addSample(@ModelAttribute("searchVO") MberVO searchVO, MberVO sampleVO)
+	public String addMber(@ModelAttribute("searchVO") MberVO searchVO, MberVO sampleVO)
 			throws Exception {
 
 
 		mberService.insertMber(sampleVO);
 		return "forward:/mberList.do";
+	}
+	
+	@RequestMapping(value = "/empRegister.do")
+	public String empRegister(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model) throws Exception {
+		System.out.println("[직원/관리자 등록]");
+		
+		return "sample/empRegister";
+	}
+	
+	@RequestMapping(value = "/addEmp.do", method = RequestMethod.POST)
+	public String addEmp(@ModelAttribute("searchVO") EmpVO searchVO, EmpVO sampleVO)
+			throws Exception {
+
+
+		empService.insertEmp(sampleVO);
+		return "forward:/empList.do";
 	}
 	
 //	/**

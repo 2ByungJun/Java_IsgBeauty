@@ -22,12 +22,6 @@
 	function mberRegister() {
 		location.href = "<c:url value='/mberRegister.do'/>";
 	}
-	function view() {
-		location.href = "<c:url value='/junView.do'/>";
-	}
-	function excelDownload() {
-		location.href = "<c:url value='/junlistExcel.do'/>";
-	}
 	function fn_egov_link_page(pageNo) {
 		document.listForm.pageIndex.value = pageNo;
 		document.listForm.action = "<c:url value='/mberList.do'/>";
@@ -45,7 +39,7 @@
 					<b>ISG Beauty</b>
 				</h2>
 				<p>
-					<b>고객 관리</b>
+					<b>고객 관리 화면입니다.</b>
 				</p>
 			</div>
 			<div class="row">

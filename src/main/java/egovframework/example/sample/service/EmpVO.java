@@ -31,6 +31,7 @@ public class EmpVO extends SampleDefaultVO {
 	private String sexdstn;
 	private String pspofc;
 	private String salary;
+	private String career;
 	private String registId;
 	private String registDt;
 	private String updtId;
@@ -105,6 +106,13 @@ public class EmpVO extends SampleDefaultVO {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	public String getCareer() {
+		return career;
+	}
+	public void setCareer(String career) {
+		this.career = career;
+	}
+	
 
 }
 

@@ -66,5 +66,11 @@ public class EmpService {
 		 return mapper.selectEmpListTotCnt(vo);
 	}
 	
+	/**
+	 * 직원을 등록한다.
+	 */
+	public void insertEmp(EmpVO vo) throws Exception {
+		mapper.insertEmp(vo);
+	}
 
 }

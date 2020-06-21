@@ -16,6 +16,9 @@
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
+	function empRegister() {
+		location.href = "<c:url value='/empRegister.do'/>";
+	}
 	function fn_egov_link_page(pageNo) {
 		document.listForm.pageIndex.value = pageNo;
 		document.listForm.action = "<c:url value='/empList.do'/>";
@@ -33,18 +36,12 @@
 					<b>ISG Beauty</b>
 				</h2>
 				<p>
-					<b>직원 관리</b>
+					<b>직원 관리 화면입니다.</b>
 				</p>
 			</div>
 			<div class="row">
 				<div class="alert" role="alert">
-
-
 					<div class="col-sm-6">
-						<button type="button" class="btn btn-info" onclick="">직원
-							관리</button>
-						<button type="button" class="btn btn-info" onclick="">예약
-							현황</button>
 					</div>
 					<div class="col-sm-6">
 						<div class="col-xs-6">
@@ -60,8 +57,8 @@
 							</form>
 						</div>
 						<div align="right">
-							<button type="submit" class="btn btn-info">고객 등록</button>
-							<button type="submit" class="btn btn-info">이전</button>
+							<button type="button" class="btn btn-info" onclick="empRegister()">직원 등록</button>
+							<button type="button" class="btn btn-info" onclick="home()">이전</button>
 						</div>
 					</div>
 				</div>
@@ -75,12 +72,12 @@
 						<table id="table" class="table table-hover">
 							<thead>
 								<tr>
-									<td style="width: 10%" align="center"><b>ID</b></td>
-									<td style="width: 15%" align="center"><b>이름</b></td>
+									<td style="width: 15%" align="center"><b>ID</b></td>
+									<td style="width: 10%" align="center"><b>이름</b></td>
 									<td style="width: 10%" align="center"><b>성별</b></td>
 									<td style="width: 15%" align="center"><b>전화번호</b></td>
-									<td style="width: 15%" align="center"><b>직책</b></td>
-									<td style="width: 15%" align="center"><b>경력</b></td>
+									<td style="width: 10%" align="center"><b>직책</b></td>
+									<td style="width: 10%" align="center"><b>경력</b></td>
 									<td style="width: 15%" align="center"><b>등록일</b></td>
 									<td style="width: 15%" align="center"><b>수정일</b></td>
 								</tr>

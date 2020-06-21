@@ -18,6 +18,7 @@ package egovframework.example.sample.service.impl;
 import java.util.List;
 
 import egovframework.example.sample.service.EmpVO;
+import egovframework.example.sample.service.MberVO;
 
 /**
  * sample에 관한 데이터처리 매퍼 클래스
@@ -58,6 +59,6 @@ public interface EmpMapper {
 	 * @return 등록 결과
 	 * @exception Exception
 	 */
-//	void insertMber(EmpVO vo) throws Exception;
+	void insertEmp(EmpVO vo) throws Exception;
 
 }
