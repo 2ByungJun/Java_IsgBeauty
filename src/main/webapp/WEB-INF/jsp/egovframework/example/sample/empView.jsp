@@ -39,7 +39,7 @@ p {
 				</h2>
 				<h4 for="mberSn" class="control-label">
 					'
-					<c:out value="${result.mberNm}" />
+					<c:out value="${result.empNm}" />
 					'직원 상세화면
 				</h4>
 			</div>

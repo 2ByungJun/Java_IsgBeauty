@@ -28,7 +28,7 @@
 		       REGIST_DT,
 		       UPDT_ID,
 		       UPDT_DT
-		  from t_mber_m 
+		  	from t_mber_m 
 			where MBER_SN =${mberSn}
 
 	</select>

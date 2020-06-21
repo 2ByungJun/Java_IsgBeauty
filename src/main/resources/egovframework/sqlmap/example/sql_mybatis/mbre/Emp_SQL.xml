@@ -31,9 +31,9 @@
 		       REGIST_ID,
 		       REGIST_DT,
 		       UPDT_ID,
-		       UPDT_DT,
-		  FROM t_emp_m
-			WHERE EMP_ID =${empId}
+		       UPDT_DT
+		  	FROM t_emp_m
+			WHERE EMP_ID =#{empId}
 
 	</select>
 	
@@ -76,11 +76,11 @@
 		<insert id="insertEmp" parameterType="empVO">
 	    
 	    insert into t_emp_m values (
-	    		${empId},
+	    		#{empId},
 				#{empPassword},
 				#{empNm},
-				#{sexdstn},
 				#{telno},
+				#{sexdstn},
 				#{pspofc},
 				#{salary},
 				#{career},

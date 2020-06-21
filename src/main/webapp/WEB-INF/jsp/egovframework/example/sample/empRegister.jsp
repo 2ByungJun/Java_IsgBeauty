@@ -3,6 +3,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,8 +37,17 @@ label {
 input {
 	margin-top: 30px;
 }
+
+select {
+	margin-top: 30px;
+}
 </style>
 <body>
+	<%
+		Date now = new Date();
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		String today = sf.format(now);
+	%>
 	<form:form commandName="empVO" id="detailForm" name="detailForm"
 		method="post">
 		<div class="container">
@@ -82,25 +93,33 @@ input {
 				<div class="form-inline form-group">
 					<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="sexdstn"
+						<select type="text" class="form-control" id="sexdstn"
 							name="sexdstn">
+							<option value="Male" selected="selected">Male</option>
+							<option value="Female">Female</option>
+						</select>
 					</div>
 
 					<label for="pspofc" class="col-sm-2 col-sm-offset-1 control-label">직책:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="pspofc" name="pspofc">
+						<select type="text" class="form-control" id="pspofc" name="pspofc">
+							<option value="Admin" selected="selected">Admin</option>
+							<option value="Designer">Designer</option>
+						</select>
 					</div>
 				</div>
 
 				<div class="form-inline form-group">
 					<label for="salary" class="col-sm-2 col-sm-offset-1 control-label">급여:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="salary" name="salary">
+						<input type="text" class="form-control" id="salary" name="salary" 
+							value="_원">
 					</div>
 
 					<label for="career" class="col-sm-2 col-sm-offset-1 control-label">경력:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="career" name="career">
+						<input type="text" class="form-control" id="career" name="career"
+							value="_년">
 					</div>
 				</div>
 
@@ -109,18 +128,19 @@ input {
 						class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
 					<div class="col-md-3">
 						<input type="text" class="form-control" id="registId"
-							name="registId">
+							name="registId" value="test" readonly >
 					</div>
 
-					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">수정자:</label>
+					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="updtId" name="updtId">
+						<input type="text" class="form-control" id="registDt"
+							name="registDt" value="<%=today%>" readonly >
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="container" style="text-align: center; margin-top:30px;">
+		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="button" class="btn btn-success" onclick="saveEmp()">등록</button>
 			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
 		</div>

@@ -34,6 +34,7 @@
 <body>
 	<form:form commandName="searchVO" id="listForm" name="listForm"
 		method="post">
+		<input type="hidden" name="selectedId" />
 		<div class="container">
 			<div class="jumbotron text-center alert-success" role="alert"
 				onclick="home()">

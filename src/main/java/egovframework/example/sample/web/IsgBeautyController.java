@@ -181,7 +181,10 @@ public class IsgBeautyController {
 	@RequestMapping(value = "/mberRegister.do")
 	public String mberRegister(@ModelAttribute("searchVO") MberVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[고객 등록 페이지]");
-
+		
+		int totCnt = mberService.selectMberListTotCnt(searchVO);
+		model.addAttribute("mbertotCnt", totCnt);
+		
 		return "sample/mberRegister";
 	}
 
