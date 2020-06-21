@@ -72,5 +72,8 @@ public interface MberMapper {
 	 * @exception Exception
 	 */
 	void insertMber(MberVO vo) throws Exception;
+	
+	MberVO selectMber(MberVO searchVO) throws Exception;
+
 
 }

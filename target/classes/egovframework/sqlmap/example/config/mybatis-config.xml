@@ -21,6 +21,7 @@
 		<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
 		<typeAlias alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
 		<typeAlias alias="mberVO" type="egovframework.example.sample.service.MberVO"/>
+		<typeAlias alias="empVO" type="egovframework.example.sample.service.EmpVO"/>
 
 	</typeAliases>
 

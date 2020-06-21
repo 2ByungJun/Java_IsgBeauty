@@ -21,15 +21,15 @@ import egovframework.example.sample.service.EmpService;
 import egovframework.example.sample.service.EmpVO;
 import egovframework.example.sample.service.MberService;
 import egovframework.example.sample.service.MberVO;
+import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.rte.fdl.property.EgovPropertyService;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
@@ -224,6 +224,24 @@ public class IsgBeautyController {
 	public String addEmp(@ModelAttribute("searchVO") EmpVO searchVO, EmpVO sampleVO)throws Exception {
 		empService.insertEmp(sampleVO);
 		return "forward:/empList.do";
+	}
+	
+	//고객 상세화면 페이지
+	@RequestMapping("/mberView.do")
+
+	public String mberView(@RequestParam("selectedId") String mberSn,
+			@ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
+		MberVO sampleVO = new MberVO();
+		sampleVO.setMberSn(mberSn);
+		;
+		// 변수명은 CoC 에 따라 sampleVO
+		model.addAttribute("result", selectMber(sampleVO, searchVO));
+		return "sample/mberView";
+	}
+
+	// 고객 조회
+	public MberVO selectMber(MberVO sampleVO, @ModelAttribute("searchVO") SampleDefaultVO searchVO) throws Exception {
+		return mberService.selectMber(sampleVO);
 	}
 	
 	/**

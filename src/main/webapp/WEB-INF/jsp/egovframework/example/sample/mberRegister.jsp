@@ -20,7 +20,6 @@
 	/* 글 등록 function */
 	function saveMber() {
 		frm = document.detailForm;
-
 		frm.action = "<c:url value= '/addMber.do'/>";
 		frm.submit();
 

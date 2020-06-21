@@ -25,6 +25,12 @@
 	function logout() {
 		location.href = "<c:url value='/login.do'/>";
 	}
+	/* 글 수정 화면 function */
+    function view(id) {
+    	document.listForm.selectedId.value = id;
+       	document.listForm.action = "<c:url value='/mberView.do'/>";
+       	document.listForm.submit();
+    }
 	function fn_egov_link_page(pageNo) {
 		document.listForm.pageIndex.value = pageNo;
 		document.listForm.action = "<c:url value='/mberList.do'/>";
@@ -39,6 +45,7 @@
 <body>
 	<form:form commandName="searchVO" id="listForm" name="listForm"
 		method="post">
+		<input type="hidden" name="selectedId" />
 		<div class="container">
 			<div class="jumbotron text-center alert" role="alert"
 				onclick="home()">
@@ -101,8 +108,8 @@
 										<td align="center" class="listtd"><c:out
 												value="${status.count}" /></td>
 										<td align="center" class="listtd"><a
-											href="javascript:fn_egov_select('<c:out 
-													value="${result.eEmpId}"/>')"><c:out
+											href="javascript:view('<c:out 
+													value="${result.mberSn}"/>')"><c:out
 													value="${result.mberNm}" /></a></td>
 										<td align="center" class="listtd"><c:out
 												value="${result.sexdstn}" />&nbsp;</td>

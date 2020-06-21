@@ -80,5 +80,9 @@ public class MberService {
 	public void insertMber(MberVO vo) throws Exception {
 		mapper.insertMber(vo);
 	}
+	
+	public MberVO selectMber(MberVO vo) throws Exception {
+		return mapper.selectMber(vo);
+	}
 
 }
