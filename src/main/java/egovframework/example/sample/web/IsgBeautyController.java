@@ -69,6 +69,43 @@ public class IsgBeautyController {
 	@Resource(name = "beanValidator")
 	protected DefaultBeanValidator beanValidator;
 
+	
+	/**
+	 * 로그인 페이지
+	 * @param mberVO
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/login.do")
+	public String login(@ModelAttribute("searchVO") MberVO mberVO, ModelMap model) throws Exception {
+		System.out.println("[로그인]");
+		
+		return "sample/login";
+	}
+	
+	/**
+	 * 로그인-직원 등록 페이지
+	 * @param searchVO
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/loginEmpRegister.do")
+	public String loginEmpRegister(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model) throws Exception {
+		System.out.println("[로그인-직원/관리자 등록]");
+		
+		return "sample/loginEmpRegister";
+	}
+	
+	
+	/**
+	 * 고객 리스트
+	 * @param mberVO
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/mberList.do")
 	public String mberList(@ModelAttribute("searchVO") MberVO mberVO, ModelMap model) throws Exception {
 		System.out.println("[고객 리스트]");
@@ -97,6 +134,13 @@ public class IsgBeautyController {
 		return "sample/mberList";
 	}
 
+	/**
+	 * 직원 리스트
+	 * @param searchVO
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/empList.do")
 	public String empList(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[직원 리스트]");
@@ -126,6 +170,13 @@ public class IsgBeautyController {
 		return "sample/empList";
 	}
 	
+	/**
+	 * 고객 등록 페이지
+	 * @param searchVO
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/mberRegister.do")
 	public String mberRegister(@ModelAttribute("searchVO") MberVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[고객 등록]");
@@ -133,15 +184,28 @@ public class IsgBeautyController {
 		return "sample/mberRegister";
 	}
 	
+	/**
+	 * 고객 등록 기능
+	 * @param searchVO
+	 * @param sampleVO
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/addMber.do", method = RequestMethod.POST)
 	public String addMber(@ModelAttribute("searchVO") MberVO searchVO, MberVO sampleVO)
 			throws Exception {
-
 
 		mberService.insertMber(sampleVO);
 		return "forward:/mberList.do";
 	}
 	
+	/**
+	 * 직원 등록 페이지
+	 * @param searchVO
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/empRegister.do")
 	public String empRegister(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[직원/관리자 등록]");
@@ -149,58 +213,18 @@ public class IsgBeautyController {
 		return "sample/empRegister";
 	}
 	
+	/**
+	 * 직원 등록 기능
+	 * @param searchVO
+	 * @param sampleVO
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/addEmp.do", method = RequestMethod.POST)
-	public String addEmp(@ModelAttribute("searchVO") EmpVO searchVO, EmpVO sampleVO)
-			throws Exception {
-
-
+	public String addEmp(@ModelAttribute("searchVO") EmpVO searchVO, EmpVO sampleVO)throws Exception {
 		empService.insertEmp(sampleVO);
 		return "forward:/empList.do";
 	}
-	
-//	/**
-//	 * 글 목록을 조회한다. (pageing)
-//	 * @param searchVO - 조회할 정보가 담긴 SampleDefaultVO
-//	 * @param model
-//	 * @return "egovSampleList"
-//	 * @exception Exception
-//	 */
-//	@RequestMapping(value = "/egovSampleList.do")
-//	public String selectSampleList(@ModelAttribute("searchVO") MberVO searchVO, ModelMap model) throws Exception {
-//		System.out.println("@@@@@@@@@@@@@@@@@");
-//		/** EgovPropertyService.sample */
-//		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
-//		searchVO.setPageSize(propertiesService.getInt("pageSize"));
-//
-//		/** pageing setting */
-//		PaginationInfo paginationInfo = new PaginationInfo();
-//		paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
-//		paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
-//		paginationInfo.setPageSize(searchVO.getPageSize());
-//
-//		searchVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
-//		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
-//		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
-//
-//		/**
-//		 * 2020.06.12 이병준
-//		 * - 페이지가 새로고침 될 때마다 Controller가 실행되고, MariaDB의 데이터가 생긴다면 즉각 반영되게 된다.
-//		 * - mberService모듈의 selectMberList는 해당 searchVO(MberVO)를 이용해 List를 형성한다.
-//		 * - 이때, selectMberList는 MberMapper를 객체로 이용한다.
-//		 * 		 - MberMapper에서는 SQL에 동일한 id로 데이터베이스인 Mber_SQL.xml에 접근하게 된다.
-//		 */
-//		List<?> sampleList = mberService.selectMberList(searchVO);
-//		model.addAttribute("resultList", sampleList);
-//
-//		int totCnt = mberService.selectMberListTotCnt(searchVO);
-//		paginationInfo.setTotalRecordCount(totCnt);
-//		model.addAttribute("paginationInfo", paginationInfo);
-//
-//		System.out.println("_----------"+totCnt);
-//
-//		return "sample/egovSampleList";
-//	}
-	
 	
 	/**
 	 * 글 등록 화면을 조회한다.

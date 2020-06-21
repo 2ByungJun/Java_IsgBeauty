@@ -14,21 +14,21 @@
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
 	function home() {
-		location.href = "<c:url value='/mberList.do'/>";
+		location.href = "<c:url value='/login.do'/>";
 	}
 
 	/* 글 등록 function */
-	function saveMber() {
+	function saveEmp() {
 		frm = document.detailForm;
 
-		frm.action = "<c:url value= '/addMber.do'/>";
+		frm.action = "<c:url value= '/addEmp.do'/>";
 		frm.submit();
 
 	}
 </script>
 </head>
 <body>
-	<form:form commandName="mberVO" id="detailForm" name="detailForm"
+	<form:form commandName="empVO" id="detailForm" name="detailForm"
 		method="post">
 		<div class="container">
 			<div class="jumbotron text-center alert" role="alert"
@@ -37,7 +37,7 @@
 					<b>ISG Beauty</b>
 				</h2>
 				<p>
-					<b>고객 등록 화면입니다.</b>
+					<b>[미구현] 로그인-관리자/직원 등록 화면입니다.</b>
 				</p>
 			</div>
 		</div>
@@ -45,29 +45,28 @@
 		<div class="container">
 			<div class="row">
 				<div class=" form-inline form-group">
-					<label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번*:</label>
+					<label for="empId" class="col-sm-2 col-sm-offset-1 control-label">아이디*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="mberSn" name="mberSn">
+						<input type="text" class="form-control" id="empId" name="empId">
 					</div>
 
-					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
-						직원*:</label>
+					<label for="empPassword"
+						class="col-sm-2 col-sm-offset-1 control-label">비밀번호*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="eEmpId" name="eEmpId">
+						<input type="text" class="form-control" id="empPassword"
+							name="empPassword">
 					</div>
 				</div>
 
 				<div class="form-inline form-group">
-					<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름*:</label>
+					<label for="empNm" class="col-sm-2 col-sm-offset-1 control-label">이름*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="mberNm" name="mberNm">
+						<input type="text" class="form-control" id="empNm" name="empNm">
 					</div>
 
-					<label for="registId"
-						class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
+					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="registId"
-							name="registId">
+						<input type="text" class="form-control" id="telno" name="telno">
 					</div>
 				</div>
 
@@ -78,18 +77,32 @@
 							name="sexdstn">
 					</div>
 
-					<label for="registDt"
-						class="col-sm-2 col-sm-offset-1 control-label">등록일*:</label>
+					<label for="pspofc"
+						class="col-sm-2 col-sm-offset-1 control-label">직책:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="registDt"
-							name="registDt">
+						<input type="text" class="form-control" id="pspofc"
+							name="pspofc">
 					</div>
 				</div>
 
 				<div class="form-inline form-group">
-					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호*:</label>
+					<label for="salary" class="col-sm-2 col-sm-offset-1 control-label">급여:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="telno" name="telno">
+						<input type="text" class="form-control" id="salary" name="salary">
+					</div>
+
+					<label for="career" class="col-sm-2 col-sm-offset-1 control-label">경력:</label>
+					<div class="col-md-3">
+						<input type="text" class="form-control" id="career" name="career">
+					</div>
+				</div>
+				
+				<div class="form-inline form-group">
+					<label for="registId"
+						class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
+					<div class="col-md-3">
+						<input type="text" class="form-control" id="registId"
+							name="registId">
 					</div>
 
 					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">수정자:</label>
@@ -97,21 +110,10 @@
 						<input type="text" class="form-control" id="updtId" name="updtId">
 					</div>
 				</div>
-
-				<div class="form-inline form-group">
-					<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
-					<div class="col-md-3">
-						<input type="text" class="form-control" id="brthdy" name="brthdy">
-					</div>
-
-					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">수정일:</label>
-					<div class="col-md-3">
-						<input type="text" class="form-control" id="updtDt" name="updtDt">
-					</div>
-				</div>
+				
 
 				<div class="container" style="text-align: center;">
-					<button type="button" class="btn btn-info" onclick="saveMber()">등록</button>
+					<button type="button" class="btn btn-info" onclick="saveEmp()">등록</button>
 					<button type="button" class=" btn btn-info" onclick="home()">취소</button>
 
 

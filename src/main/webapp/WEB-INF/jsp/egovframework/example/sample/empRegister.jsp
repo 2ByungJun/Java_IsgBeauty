@@ -28,7 +28,7 @@
 </script>
 </head>
 <body>
-	<form:form commandName="sampleVO" id="detailForm" name="detailForm"
+	<form:form commandName="empVO" id="detailForm" name="detailForm"
 		method="post">
 		<div class="container">
 			<div class="jumbotron text-center alert" role="alert"
@@ -115,8 +115,6 @@
 				<div class="container" style="text-align: center;">
 					<button type="button" class="btn btn-info" onclick="saveEmp()">등록</button>
 					<button type="button" class=" btn btn-info" onclick="home()">취소</button>
-
-
 				</div>
 			</div>
 		</div>

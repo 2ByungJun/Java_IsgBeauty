@@ -22,11 +22,18 @@
 	function mberRegister() {
 		location.href = "<c:url value='/mberRegister.do'/>";
 	}
+	function logout() {
+		location.href = "<c:url value='/login.do'/>";
+	}
 	function fn_egov_link_page(pageNo) {
 		document.listForm.pageIndex.value = pageNo;
 		document.listForm.action = "<c:url value='/mberList.do'/>";
 		document.listForm.submit();
 	}
+	function fn_egov_selectList() {
+    	document.listForm.action = "<c:url value='/mberList.do'/>";
+       	document.listForm.submit();
+    }
 </script>
 </head>
 <body>
@@ -65,7 +72,7 @@
 						</div>
 						<div align="right">
 							<button type="button" class="btn btn-info" onclick="mberRegister()">고객 등록</button>
-							<button type="button" class="btn btn-info">이전</button>
+							<button type="button" class="btn btn-info" onclick="logout()">로그아웃</button>
 						</div>
 					</div>
 				</div>
