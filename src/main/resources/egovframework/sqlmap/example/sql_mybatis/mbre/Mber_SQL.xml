@@ -4,7 +4,20 @@
 
     <!-- Mber -->
     
-    <select id="selectMber" parameterType="mberVO" resultType="mberVO">
+    <resultMap id="mber" type="mberVO">
+		<result property="mberSn" column="mber_sn"/>
+		<result property="eEmpId" column="e_emp_id"/>
+		<result property="mberNm" column="mber_nm"/>
+		<result property="sexdstn" column="sexdstn"/>
+		<result property="telno" column="telno"/>
+		<result property="brthdy" column="brthdy"/>
+		<result property="registId" column="regist_id"/>
+		<result property="registDt" column="regist_dt"/>
+		<result property="updtId" column="updt_id"/>
+		<result property="updtDt" column="updt_dt"/>
+	</resultMap>
+    
+    <select id="selectMber" parameterType="mberVO" resultMap="mber">
 
 			select MBER_SN, 
 		       E_EMP_ID,    
@@ -17,7 +30,7 @@
 		       UPDT_ID,
 		       UPDT_DT
 		  from t_mber_m 
-			where MBER_SN =#{mberSn}
+			where MBER_SN =${mberSn}
 
 	</select>
 	
