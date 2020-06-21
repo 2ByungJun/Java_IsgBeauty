@@ -17,6 +17,8 @@ package egovframework.example.sample.web;
 
 import java.util.List;
 
+import egovframework.example.sample.service.EmpService;
+import egovframework.example.sample.service.EmpVO;
 import egovframework.example.sample.service.MberService;
 import egovframework.example.sample.service.MberVO;
 import egovframework.rte.fdl.property.EgovPropertyService;
@@ -54,6 +56,10 @@ public class IsgBeautyController {
 	/** mberService */
 	@Resource(name = "mberService")
 	private MberService mberService;
+	
+	/** mberService */
+	@Resource(name = "empService")
+	private EmpService empService;
 
 	/** EgovPropertyService */
 	@Resource(name = "propertiesService")
@@ -92,7 +98,7 @@ public class IsgBeautyController {
 	}
 
 	@RequestMapping(value = "/empList.do")
-	public String empList(@ModelAttribute("searchVO") MberVO searchVO, ModelMap model) throws Exception {
+	public String empList(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[직원 리스트]");
 		
 		/** EgovPropertyService.sample */
@@ -109,10 +115,10 @@ public class IsgBeautyController {
 		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
 		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
 
-		List<?> sampleList = mberService.selectMberList(searchVO);
+		List<?> sampleList = empService.selectEmpList(searchVO);
 		model.addAttribute("resultList", sampleList);
 
-		int totCnt = mberService.selectMberListTotCnt(searchVO);
+		int totCnt = empService.selectEmpListTotCnt(searchVO);
 		paginationInfo.setTotalRecordCount(totCnt);
 		model.addAttribute("paginationInfo", paginationInfo);
 

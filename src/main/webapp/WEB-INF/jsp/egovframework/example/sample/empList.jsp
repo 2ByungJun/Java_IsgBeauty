@@ -75,11 +75,12 @@
 						<table id="table" class="table table-hover">
 							<thead>
 								<tr>
-									<td style="width: 10%" align="center"><b>번호</b></td>
+									<td style="width: 10%" align="center"><b>ID</b></td>
 									<td style="width: 15%" align="center"><b>이름</b></td>
 									<td style="width: 10%" align="center"><b>성별</b></td>
 									<td style="width: 15%" align="center"><b>전화번호</b></td>
-									<td style="width: 15%" align="center"><b>담당디자이너</b></td>
+									<td style="width: 15%" align="center"><b>직책</b></td>
+									<td style="width: 15%" align="center"><b>경력</b></td>
 									<td style="width: 15%" align="center"><b>등록일</b></td>
 									<td style="width: 15%" align="center"><b>수정일</b></td>
 								</tr>
@@ -88,16 +89,17 @@
 								<c:forEach var="result" items="${resultList}" varStatus="status">
 									<tr>
 										<td align="center" class="listtd"><c:out
-												value="${result.mberSn}" /></td>
-										<td align="center" class="listtd"><a
-											href="javascript:fn_egov_select('<c:out value="${result.eEmpId}"/>')"><c:out
-													value="${result.mberNm}" /></a></td>
+												value="${result.empId}" /></td>
+										<td align="center" class="listtd"><c:out
+												value="${result.empNm}" />&nbsp;</td>
 										<td align="center" class="listtd"><c:out
 												value="${result.sexdstn}" />&nbsp;</td>
 										<td align="center" class="listtd"><c:out
 												value="${result.telno}" />&nbsp;</td>
 										<td align="center" class="listtd"><c:out
-												value="${result.eEmpId}" />&nbsp;</td>
+												value="${result.pspofc}" />&nbsp;</td>
+										<td align="center" class="listtd"><c:out
+												value="${result.career}" />&nbsp;</td>
 										<td align="center" class="listtd"><c:out
 												value="${result.registDt}" />&nbsp;</td>
 										<td align="center" class="listtd"><c:out
