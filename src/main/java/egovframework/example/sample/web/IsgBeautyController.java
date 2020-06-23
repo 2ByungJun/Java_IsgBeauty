@@ -259,11 +259,8 @@ public class IsgBeautyController {
 	
 	
 	/**
-	 * 고객을 삭제한다.
-	 * @param sampleVO - 삭제할 정보가 담긴 VO
-	 * @param searchVO - 목록 조회조건 정보가 담긴 VO
-	 * @param status
-	 * @return "forward:/egovSampleList.do"
+	 * 고객 삭제 기능
+	 * @return "forward:/mberList.do"
 	 * @exception Exception
 	 */
 	@RequestMapping("/deleteMber.do")
@@ -273,6 +270,20 @@ public class IsgBeautyController {
 		MberVO sampleVO = new MberVO();
 		sampleVO.setMberSn(mberSn);
 		mberService.deleteMber(sampleVO);
+		return "forward:/mberList.do";
+	}
+	
+	/**
+	 * 고객 수정 기능
+	 * @return "forward:/mberList.do"
+	 * @exception Exception
+	 */
+	
+	@RequestMapping(value = "/updateMber.do", method = RequestMethod.POST)
+	public String updateMber(@ModelAttribute("mberVO") MberVO sampleVO) throws Exception {
+		System.out.println("[고객 수정 기능]");
+		
+		mberService.updateMber(sampleVO);
 		return "forward:/mberList.do";
 	}
 
@@ -354,6 +365,8 @@ public class IsgBeautyController {
 		empService.deleteEmp(sampleVO);
 		return "forward:/empList.do";
 	}
+	
+	
 
 	/**
 	 * 글 등록 화면을 조회한다.
