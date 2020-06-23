@@ -24,7 +24,6 @@
 		frm = document.detailForm;
 		frm.action = "<c:url value= '/addMber.do'/>";
 		frm.submit();
-
 	}
 </script>
 </head>

@@ -93,6 +93,11 @@ public class MberService {
 		return mapper.selectMber(vo);
 	}
 	
+	/**
+	 * 고객 삭제
+	 * @param vo
+	 * @throws Exception
+	 */
 	public void deleteMber(MberVO vo) throws Exception {
 		mapper.deleteMber(vo);
 	}

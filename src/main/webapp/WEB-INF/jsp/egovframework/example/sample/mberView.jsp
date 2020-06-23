@@ -147,7 +147,7 @@ p {
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="button" class="btn btn-info" onclick="">수정</button>
-			<button type="button" class="btn btn-info" onclick="deleteMber('${result.mberSn}')">삭제</button>
+			<button type="button" class="btn btn-danger" onclick="deleteMber('${result.mberSn}')">삭제</button>
 			<button type="button" class=" btn btn-danger" onclick="">예약상태</button>
 			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 		</div>

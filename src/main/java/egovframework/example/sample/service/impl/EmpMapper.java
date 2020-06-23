@@ -68,5 +68,12 @@ public interface EmpMapper {
 	 * @throws Exception
 	 */
 	EmpVO selectEmp(EmpVO searchVO) throws Exception;
+	
+	/**
+	 * 직원 삭제
+	 * @param vo
+	 * @throws Exception
+	 */
+	void deleteEmp(EmpVO vo) throws Exception;
 
 }

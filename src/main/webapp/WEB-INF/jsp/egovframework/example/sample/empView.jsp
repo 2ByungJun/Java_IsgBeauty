@@ -16,6 +16,11 @@
 	function home() {
 		location.href = "<c:url value='/empList.do'/>";
 	}
+	function deleteEmp(id) {
+		document.detailForm.selectedId.value = id;
+		document.detailForm.action = "<c:url value='/deleteEmp.do'/>";
+       	document.detailForm.submit();
+	}
 
 </script>
 <style>
@@ -29,15 +34,16 @@ p {
 </style>
 </head>
 <body>
-	<form:form commandName="mberVO" id="detailForm" name="detailForm"
+	<form:form commandName="empVO" id="detailForm" name="detailForm"
 		method="post">
+		<input type="hidden" name="selectedId" />
 		<div class="container">
 			<div class="jumbotron text-center alert-info" role="alert"
 				onclick="home()">
 				<h2>
 					<b>ISG Beauty</b>
 				</h2>
-				<h4 for="mberSn" class="control-label">
+				<h4 for="empId" class="control-label">
 					'
 					<c:out value="${result.empNm}" />
 					'직원 상세화면
@@ -132,6 +138,7 @@ p {
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="button" class="btn btn-success" onclick="">수정</button>
+			<button type="button" class="btn btn-danger" onclick="deleteEmp('${result.empId}')">삭제</button>
 			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 		</div>
 

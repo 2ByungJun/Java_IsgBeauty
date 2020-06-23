@@ -239,16 +239,15 @@ public class IsgBeautyController {
 	
 	
 	/**
-	 * 글을 삭제한다.
+	 * 고객을 삭제한다.
 	 * @param sampleVO - 삭제할 정보가 담긴 VO
 	 * @param searchVO - 목록 조회조건 정보가 담긴 VO
 	 * @param status
 	 * @return "forward:/egovSampleList.do"
 	 * @exception Exception
 	 */
-	
 	@RequestMapping("/deleteMber.do")
-	public String deleteSample(@RequestParam("selectedId") String mberSn) throws Exception {
+	public String deleteMber(@RequestParam("selectedId") String mberSn) throws Exception {
 		System.out.println("[고객 삭제 기능]");
 		
 		MberVO sampleVO = new MberVO();
@@ -317,6 +316,22 @@ public class IsgBeautyController {
 	public EmpVO selectEmp(EmpVO sampleVO, @ModelAttribute("searchVO") SampleDefaultVO searchVO) throws Exception {
 		System.out.println("[직원 조회 기능]");
 		return empService.selectEmp(sampleVO);
+	}
+	
+	/**
+	 * 글 삭제기능
+	 * @param empId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/deleteEmp.do")
+	public String deleteEmp(@RequestParam("selectedId") String empId) throws Exception {
+		System.out.println("[고객 삭제 기능]");
+		
+		EmpVO sampleVO = new EmpVO();
+		sampleVO.setEmpId(empId);
+		empService.deleteEmp(sampleVO);
+		return "forward:/empList.do";
 	}
 
 	/**

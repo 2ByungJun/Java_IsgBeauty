@@ -90,5 +90,10 @@
 				CURDATE()
 	    )
 	</insert>
+	
+	<delete id="deleteEmp">
+	    delete from t_emp_m
+	    where EMP_ID = #{empId}
+	</delete>
 
 </mapper>

@@ -81,6 +81,11 @@ public interface MberMapper {
 	 */
 	MberVO selectMber(MberVO searchVO) throws Exception;
 
+	/**
+	 * 고객 삭제
+	 * @param vo
+	 * @throws Exception
+	 */
 	void deleteMber(MberVO vo) throws Exception;
 
 }
