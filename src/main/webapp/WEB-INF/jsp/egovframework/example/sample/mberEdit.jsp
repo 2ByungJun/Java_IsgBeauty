@@ -28,6 +28,10 @@
 		document.detailForm.action = "<c:url value='/mberView.do'/>";
 		document.detailForm.submit();
 	}
+	function update() {
+		document.detailForm.action = "<c:url value= '/updateMber.do'/>";
+		document.detailForm.submit();
+	}
 </script>
 <style>
 label {
@@ -175,7 +179,7 @@ select {
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="button" class="btn btn-info" onclick="">수정</button>
+			<button type="button" class="btn btn-info" onclick="update()">수정</button>
 			<button type="button" class="btn btn-danger"
 				onclick="deleteMber('${result.mberSn}')">삭제</button>
 			<button type="button" class=" btn btn-info" onclick="view('${result.mberSn}')">이전</button>
