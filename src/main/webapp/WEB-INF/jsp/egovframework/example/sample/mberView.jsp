@@ -16,6 +16,10 @@
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
+	function deleteMber() {
+		document.detailForm.action = "<c:url value='/deleteMber.do'/>";
+       	document.detailForm.submit();
+	}
 </script>
 <style>
 label {
@@ -30,6 +34,7 @@ p {
 <body>
 	<form:form commandName="mberVO" id="detailForm" name="detailForm"
 		method="post">
+		<input type="hidden" name="selectedId" />
 		<div class="container">
 			<div class="jumbotron text-center alert-info" role="alert"
 				onclick="home()">
@@ -141,7 +146,7 @@ p {
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="button" class="btn btn-info" onclick="">수정</button>
-			<button type="button" class="btn btn-info" onclick="">삭제</button>
+			<button type="button" class="btn btn-info" onclick="deleteMber()">삭제</button>
 			<button type="button" class=" btn btn-danger" onclick="">예약상태</button>
 			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 		</div>

@@ -31,6 +31,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
 /**
@@ -234,6 +235,26 @@ public class IsgBeautyController {
 	public MberVO selectMber(MberVO sampleVO, @ModelAttribute("searchVO") SampleDefaultVO searchVO) throws Exception {
 		System.out.println("[고객 조회 기능]");
 		return mberService.selectMber(sampleVO);
+	}
+	
+	
+	/**
+	 * 글을 삭제한다.
+	 * @param sampleVO - 삭제할 정보가 담긴 VO
+	 * @param searchVO - 목록 조회조건 정보가 담긴 VO
+	 * @param status
+	 * @return "forward:/egovSampleList.do"
+	 * @exception Exception
+	 */
+	
+	@RequestMapping("/deleteMber.do")
+	public String deleteSample(@RequestParam("selectedId") String mberSn) throws Exception {
+		System.out.println("[고객 삭제 기능]");
+		
+		MberVO sampleVO = new MberVO();
+		sampleVO.setMberSn(mberSn);
+		mberService.deleteMber(sampleVO);
+		return "forward:/mberList.do";
 	}
 
 	/**

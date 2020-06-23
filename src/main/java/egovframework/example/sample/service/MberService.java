@@ -92,5 +92,9 @@ public class MberService {
 	public MberVO selectMber(MberVO vo) throws Exception {
 		return mapper.selectMber(vo);
 	}
+	
+	public void deleteMber(MberVO vo) throws Exception {
+		mapper.deleteMber(vo);
+	}
 
 }

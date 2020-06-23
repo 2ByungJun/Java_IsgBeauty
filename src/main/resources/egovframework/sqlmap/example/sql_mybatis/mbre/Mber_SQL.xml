@@ -82,5 +82,10 @@
 				CURDATE()
 	    )
 	</insert>
+	
+	<delete id="deleteMber">
+	    delete from t_mber_m
+	    where MBER_SN =${mberSn}
+	</delete>
 
 </mapper>
