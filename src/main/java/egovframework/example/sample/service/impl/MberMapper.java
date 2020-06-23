@@ -95,4 +95,5 @@ public interface MberMapper {
 	 */
 	void updateMber(MberVO vo) throws Exception;
 
+	
 }
