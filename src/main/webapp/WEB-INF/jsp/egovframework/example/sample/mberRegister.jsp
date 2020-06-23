@@ -71,7 +71,7 @@ select {
 
 					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
 						직원*:</label>
-					<div class="col-md-3">
+					<div class="registIdcol-md-3">
 						<input type="text" class="form-control" id="eEmpId" name="eEmpId">
 					</div>
 				</div>

@@ -86,7 +86,7 @@
 				#{career},
 				#{registId},
 				CURDATE(),
-				#{updtId},
+				#{registId},
 				CURDATE()
 	    )
 	</insert>

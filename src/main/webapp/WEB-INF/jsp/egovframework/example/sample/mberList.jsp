@@ -25,7 +25,6 @@
 	function logout() {
 		location.href = "<c:url value='/login.do'/>";
 	}
-	/* 글 수정 화면 function */
     function view(id) {
     	document.listForm.selectedId.value = id;
        	document.listForm.action = "<c:url value='/mberView.do'/>";

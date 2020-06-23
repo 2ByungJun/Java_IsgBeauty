@@ -226,6 +226,26 @@ public class IsgBeautyController {
 	}
 	
 	/**
+	 * 고객 수정화면 페이지
+	 * @param mberSn
+	 * @param searchVO
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/mberEdit.do")
+	public String mberEdit(@RequestParam("selectedId") String mberSn,
+			@ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
+		System.out.println("[고객 수정화면]");
+		
+		MberVO sampleVO = new MberVO();
+		sampleVO.setMberSn(mberSn);
+		// 변수명은 CoC 에 따라 sampleVO
+		model.addAttribute("result", selectMber(sampleVO, searchVO));
+		return "sample/mberEdit";
+	}
+	
+	/**
 	 * 고객 조회 기능
 	 * @param sampleVO
 	 * @param searchVO
@@ -305,6 +325,7 @@ public class IsgBeautyController {
 		model.addAttribute("result", selectEmp(sampleVO, searchVO));
 		return "sample/empView";
 	}
+	
 
 	/**
 	 * 직원 조회 기능

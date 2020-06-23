@@ -16,18 +16,10 @@
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
-	function mberEdit() {
-		location.href = "<c:url value='/mberEdit.do'/>";
-	}
 	function deleteMber(id) {
 		document.detailForm.selectedId.value = id;
 		document.detailForm.action = "<c:url value='/deleteMber.do'/>";
-		document.detailForm.submit();
-	}
-	function view(id) {
-		document.detailForm.selectedId.value = id;
-		document.detailForm.action = "<c:url value='/mberEdit.do'/>";
-		document.detailForm.submit();
+       	document.detailForm.submit();
 	}
 </script>
 <style>
@@ -53,18 +45,16 @@ p {
 				<h4 for="mberSn" class="control-label">
 					'
 					<c:out value="${result.mberNm}" />
-					'님 상세화면
+					'님 수정화면
 				</h4>
 			</div>
 		</div>
 		<div class="container">
 			<div class="row">
 				<div class="form-inline form-group">
-					<label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번:</label>
-					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<c:out value="${result.mberSn}" />
-						</p>
+					<label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번*:</label>>
+					<div class="col-md-3">
+						<input type="text" class="form-control" id="mberSn" name="mberSn" value="${mbertotCnt+1}" readonly>
 					</div>
 
 					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
@@ -154,10 +144,8 @@ p {
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="button" class="btn btn-info" onclick="view('${result.mberSn}')">수정</button>
-			<button type="button" class="btn btn-danger"
-				onclick="deleteMber('${result.mberSn}')">삭제</button>
-			<button type="button" class=" btn btn-danger" onclick="">예약상태</button>
+			<button type="button" class="btn btn-info" onclick="">수정</button>
+			<button type="button" class="btn btn-danger" onclick="deleteMber('${result.mberSn}')">삭제</button>
 			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 		</div>
 
