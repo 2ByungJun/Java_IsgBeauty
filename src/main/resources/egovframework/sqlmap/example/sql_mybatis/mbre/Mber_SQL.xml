@@ -78,7 +78,7 @@
 				#{brthdy},
 				#{registId},
 				CURDATE(),
-				#{updtId},
+				#{registId},
 				CURDATE()
 	    )
 	</insert>

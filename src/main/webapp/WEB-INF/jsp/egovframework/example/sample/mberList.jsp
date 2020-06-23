@@ -106,7 +106,7 @@
 								<c:forEach var="result" items="${mberList}" varStatus="status">
 									<tr>
 										<td align="center" class="listtd"><c:out
-												value="${status.count}" /></td>
+												value="${result.mberSn}" /></td>
 										<td align="center" class="listtd"><a
 											href="javascript:view('<c:out 
 													value="${result.mberSn}"/>')"><c:out
