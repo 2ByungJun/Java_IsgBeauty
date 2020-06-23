@@ -16,15 +16,12 @@
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
-	function mberEdit() {
-		location.href = "<c:url value='/mberEdit.do'/>";
-	}
 	function deleteMber(id) {
 		document.detailForm.selectedId.value = id;
 		document.detailForm.action = "<c:url value='/deleteMber.do'/>";
 		document.detailForm.submit();
 	}
-	function view(id) {
+	function editMber(id) {
 		document.detailForm.selectedId.value = id;
 		document.detailForm.action = "<c:url value='/mberEdit.do'/>";
 		document.detailForm.submit();
@@ -154,9 +151,8 @@ p {
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="button" class="btn btn-info" onclick="view('${result.mberSn}')">수정</button>
-			<button type="button" class="btn btn-danger"
-				onclick="deleteMber('${result.mberSn}')">삭제</button>
+			<button type="button" class="btn btn-info" onclick="editMber('${result.mberSn}')">수정</button>
+			<button type="button" class="btn btn-danger" onclick="deleteMber('${result.mberSn}')">삭제</button>
 			<button type="button" class=" btn btn-danger" onclick="">예약상태</button>
 			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 		</div>

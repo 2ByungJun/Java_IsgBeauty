@@ -108,7 +108,7 @@
 		    CAREER=#{career},
 		    UPDT_ID=#{updtId},
 		    UPDT_DT=CURDATE()
-		    where EMP_ID=${empId}
+		    where EMP_ID=#{empId}
 	</update>
 
 </mapper>

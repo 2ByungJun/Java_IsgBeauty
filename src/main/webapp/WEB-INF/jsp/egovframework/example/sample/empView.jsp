@@ -21,6 +21,11 @@
 		document.detailForm.action = "<c:url value='/deleteEmp.do'/>";
        	document.detailForm.submit();
 	}
+	function editEmp(id) {
+		document.detailForm.selectedId.value = id;
+		document.detailForm.action = "<c:url value='/empEdit.do'/>";
+		document.detailForm.submit();
+	}
 
 </script>
 <style>
@@ -137,7 +142,7 @@ p {
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="button" class="btn btn-success" onclick="">수정</button>
+			<button type="button" class="btn btn-success" onclick="editEmp('${result.empId}')">수정</button>
 			<button type="button" class="btn btn-danger" onclick="deleteEmp('${result.empId}')">삭제</button>
 			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 		</div>

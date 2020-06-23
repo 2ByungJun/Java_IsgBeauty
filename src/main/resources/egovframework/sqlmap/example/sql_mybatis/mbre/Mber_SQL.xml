@@ -65,6 +65,8 @@
 					</when>
 				</choose>
 			</if> -->
+			ORDER BY MBER_SN ASC
+            LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
 	</select>
 	
 	<insert id="insertMber" parameterType="mberVO">

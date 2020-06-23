@@ -366,6 +366,39 @@ public class IsgBeautyController {
 		return "forward:/empList.do";
 	}
 	
+	/**
+	 * 고객 수정화면 페이지
+	 * @param empId
+	 * @param searchVO
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/empEdit.do")
+	public String empEdit(@RequestParam("selectedId") String empId,
+			@ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
+		System.out.println("[직원 수정화면]");
+		
+		EmpVO sampleVO = new EmpVO();
+		sampleVO.setEmpId(empId);
+		// 변수명은 CoC 에 따라 sampleVO
+		model.addAttribute("result", selectEmp(sampleVO, searchVO));
+		return "sample/empEdit";
+	}
+	
+	/**
+	 * 
+	 * @param sampleVO
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/updateEmp.do", method = RequestMethod.POST)
+	public String updateEmp(@ModelAttribute("empVO") EmpVO sampleVO) throws Exception {
+		System.out.println("[직원 수정 기능]");
+		
+		empService.updateEmp(sampleVO);
+		return "forward:/empList.do";
+	}
 	
 
 	/**
