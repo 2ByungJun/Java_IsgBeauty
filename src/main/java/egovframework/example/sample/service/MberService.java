@@ -102,6 +102,11 @@ public class MberService {
 		mapper.deleteMber(vo);
 	}
 	
+	/**
+	 * 고객 수정
+	 * @param vo
+	 * @throws Exception
+	 */
 	public void updateMber(MberVO vo) throws Exception {
 		mapper.updateMber(vo);
 	}

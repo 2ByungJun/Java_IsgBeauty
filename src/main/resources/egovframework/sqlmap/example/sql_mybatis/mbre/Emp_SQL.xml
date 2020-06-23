@@ -95,5 +95,20 @@
 	    delete from t_emp_m
 	    where EMP_ID = #{empId}
 	</delete>
+	
+	<update id="updateEmp">
+	    update t_emp_m
+	    set EMP_ID=#{empId},
+	    	EMP_PASSWORD=#{empPassword},
+	    	EMP_NM=#{empNm},
+	    	TELNO=#{telno},
+	    	SEXDSTN=#{sexdstn},
+		    PSPOFC=#{pspofc},
+		    SALARY=#{salary},
+		    CAREER=#{career},
+		    UPDT_ID=#{updtId},
+		    UPDT_DT=CURDATE()
+		    where EMP_ID=${empId}
+	</update>
 
 </mapper>

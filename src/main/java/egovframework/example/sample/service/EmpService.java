@@ -93,5 +93,14 @@ public class EmpService {
 	public void deleteEmp(EmpVO vo) throws Exception {
 		mapper.deleteEmp(vo);
 	}
+	
+	/**
+	 * 직원 수정
+	 * @param vo
+	 * @throws Exception
+	 */
+	public void updateEmp(EmpVO vo) throws Exception {
+		mapper.updateEmp(vo);
+	}
 
 }

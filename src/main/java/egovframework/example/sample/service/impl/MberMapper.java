@@ -88,7 +88,11 @@ public interface MberMapper {
 	 */
 	void deleteMber(MberVO vo) throws Exception;
 	
-	
+	/**
+	 * 고객 수정
+	 * @param vo
+	 * @throws Exception
+	 */
 	void updateMber(MberVO vo) throws Exception;
 
 }
