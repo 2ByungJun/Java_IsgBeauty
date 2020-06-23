@@ -101,5 +101,9 @@ public class MberService {
 	public void deleteMber(MberVO vo) throws Exception {
 		mapper.deleteMber(vo);
 	}
+	
+	public void updateMber(MberVO vo) throws Exception {
+		mapper.updateMber(vo);
+	}
 
 }
