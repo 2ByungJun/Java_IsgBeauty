@@ -3,6 +3,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,7 +21,12 @@
 	function deleteMber(id) {
 		document.detailForm.selectedId.value = id;
 		document.detailForm.action = "<c:url value='/deleteMber.do'/>";
-       	document.detailForm.submit();
+		document.detailForm.submit();
+	}
+	function view(id) {
+		document.detailForm.selectedId.value = id;
+		document.detailForm.action = "<c:url value='/mberView.do'/>";
+		document.detailForm.submit();
 	}
 </script>
 <style>
@@ -30,9 +37,19 @@ label {
 p {
 	margin-top: 30px;
 }
+
+select {
+	margin-top: 30px;
+}
 </style>
 </head>
 <body>
+	<%
+		Date now = new Date();
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+		String today = sf.format(now);
+	%>
+
 	<form:form commandName="mberVO" id="detailForm" name="detailForm"
 		method="post">
 		<input type="hidden" name="selectedId" />
@@ -52,16 +69,20 @@ p {
 		<div class="container">
 			<div class="row">
 				<div class="form-inline form-group">
-					<label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번*:</label>>
-					<div class="col-md-3">
-						<input type="text" class="form-control" id="mberSn" name="mberSn" value="${mbertotCnt+1}" readonly>
+					<label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번*:</label>
+					<div class="col-sm-3">
+						<p for="mberSn" class="control-label">
+							<input type="text" class="form-control" id="mberSn" name="mberSn"
+								value="<c:out value="${result.mberSn}" />" readonly>
+						</p>
 					</div>
 
 					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
 						직원:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<c:out value="${result.eEmpId}" />
+							<input type="text" class="form-control" id="eEmpId" name="eEmpId"
+								value="<c:out value="${result.eEmpId}" />">
 						</p>
 					</div>
 				</div>
@@ -70,7 +91,8 @@ p {
 					<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<c:out value="${result.mberNm}" />
+							<input type="text" class="form-control" id="mberNm" name="mberNm"
+								value="<c:out value="${result.mberNm}" />">
 						</p>
 					</div>
 
@@ -78,7 +100,8 @@ p {
 						class="col-sm-2 col-sm-offset-1 control-label">등록자:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<c:out value="${result.registId}" />
+							<input type="text" class="form-control" id="registId"
+								name="registId" value="<c:out value="${result.registId}" />" readonly>
 						</p>
 					</div>
 				</div>
@@ -86,16 +109,20 @@ p {
 				<div class="form-inline form-group">
 					<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<c:out value="${result.sexdstn}" />
-						</p>
+						<select type="text" class="form-control" id="sexdstn"
+							name="sexdstn">
+							<option value="${result.sexdstn}"><c:out value="${result.sexdstn}" /></option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+						</select>
 					</div>
 
 					<label for="registDt"
 						class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<c:out value="${result.registDt}" />
+							<input type="text" class="form-control" id="registDt"
+								name="registDt" value="<c:out value="${result.registDt}"/>" readonly>
 						</p>
 					</div>
 				</div>
@@ -104,14 +131,16 @@ p {
 					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<c:out value="${result.telno}" />
+							<input type="text" class="form-control" id="telno"
+								name="telno" value="<c:out value="${result.telno}"/>">
 						</p>
 					</div>
 
 					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">수정자:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<c:out value="${result.updtId}" />
+							<input type="text" class="form-control" id="updtId"
+								name="updtId" value="<c:out value="${result.updtId}"/>">
 						</p>
 					</div>
 				</div>
@@ -120,14 +149,16 @@ p {
 					<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<c:out value="${result.brthdy}" />
+							<input type="text" class="form-control" id="brthdy"
+								name="brthdy" value="<c:out value="${result.brthdy}"/>">
 						</p>
 					</div>
 
 					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">수정일:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<c:out value="${result.updtDt}" />
+							<input type="text" class="form-control" id="updtDt"
+								name="updtDt" value="<c:out value="<%=today%>"/>" readonly>
 						</p>
 					</div>
 				</div>
@@ -145,8 +176,9 @@ p {
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="button" class="btn btn-info" onclick="">수정</button>
-			<button type="button" class="btn btn-danger" onclick="deleteMber('${result.mberSn}')">삭제</button>
-			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
+			<button type="button" class="btn btn-danger"
+				onclick="deleteMber('${result.mberSn}')">삭제</button>
+			<button type="button" class=" btn btn-info" onclick="view('${result.mberSn}')">이전</button>
 		</div>
 
 	</form:form>

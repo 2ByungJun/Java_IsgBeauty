@@ -66,7 +66,8 @@ select {
 				<div class=" form-inline form-group">
 					<label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="mberSn" name="mberSn" value="${mbertotCnt+1}" readonly>
+						<input type="text" class="form-control" id="mberSn" name="mberSn"
+							value="${mbertotCnt+1}" readonly>
 					</div>
 
 					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
@@ -109,7 +110,7 @@ select {
 						class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
 					<div class="col-md-3">
 						<input type="text" class="form-control" id="registId"
-							name="registId" value="test" readonly >
+							name="registId" value="test" readonly>
 					</div>
 
 					<label for="registDt"
