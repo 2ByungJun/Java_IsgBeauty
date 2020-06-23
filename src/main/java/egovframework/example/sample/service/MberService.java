@@ -60,7 +60,7 @@ public class MberService {
 	 * @return 글 목록
 	 * @exception Exception
 	 */
-	public List selectMberList(MberVO vo) throws Exception {
+	public List selectMberList(SampleDefaultVO vo) throws Exception {
 		 return mapper.selectMberList(vo);
 	}
 
@@ -70,7 +70,7 @@ public class MberService {
 	 * @return 글 총 갯수
 	 * @exception
 	 */
-	public int selectMberListTotCnt(MberVO vo) throws Exception {
+	public int selectMberListTotCnt(SampleDefaultVO vo) throws Exception {
 		 return mapper.selectMberListTotCnt(vo);
 	}
 	

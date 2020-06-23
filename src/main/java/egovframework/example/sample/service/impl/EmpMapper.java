@@ -19,6 +19,7 @@ import java.util.List;
 
 import egovframework.example.sample.service.EmpVO;
 import egovframework.example.sample.service.MberVO;
+import egovframework.example.sample.service.SampleDefaultVO;
 
 /**
  * sample에 관한 데이터처리 매퍼 클래스
@@ -43,7 +44,7 @@ public interface EmpMapper {
 	 * @return 글 목록
 	 * @exception Exception
 	 */
-	List<?> selectEmpList(EmpVO searchVO) throws Exception;
+	List<?> selectEmpList(SampleDefaultVO searchVO) throws Exception;
 
 	/**
 	 * 직원 총 수를 조회한다.
@@ -51,7 +52,7 @@ public interface EmpMapper {
 	 * @return 글 총 갯수
 	 * @exception
 	 */
-	int selectEmpListTotCnt(EmpVO searchVO);
+	int selectEmpListTotCnt(SampleDefaultVO searchVO);
 	
 	/**
 	 * 직원을 등록한다.

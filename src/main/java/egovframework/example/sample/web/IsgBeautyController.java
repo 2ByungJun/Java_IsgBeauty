@@ -107,27 +107,27 @@ public class IsgBeautyController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/mberList.do")
-	public String mberList(@ModelAttribute("searchVO") MberVO mberVO, ModelMap model) throws Exception {
+	public String mberList(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[고객 리스트]");
 
 		/** EgovPropertyService.sample */
-		mberVO.setPageUnit(propertiesService.getInt("pageUnit"));
-		mberVO.setPageSize(propertiesService.getInt("pageSize"));
+		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
+		searchVO.setPageSize(propertiesService.getInt("pageSize"));
 
 		/** pageing setting */
 		PaginationInfo paginationInfo = new PaginationInfo();
-		paginationInfo.setCurrentPageNo(mberVO.getPageIndex());
-		paginationInfo.setRecordCountPerPage(mberVO.getPageUnit());
-		paginationInfo.setPageSize(mberVO.getPageSize());
+		paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
+		paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
+		paginationInfo.setPageSize(searchVO.getPageSize());
 
-		mberVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
-		mberVO.setLastIndex(paginationInfo.getLastRecordIndex());
-		mberVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
+		searchVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
+		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
+		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
 
-		List<?> mberList = mberService.selectMberList(mberVO);
+		List<?> mberList = mberService.selectMberList(searchVO);
 		model.addAttribute("mberList", mberList);
 
-		int totCnt = mberService.selectMberListTotCnt(mberVO);
+		int totCnt = mberService.selectMberListTotCnt(searchVO);
 		paginationInfo.setTotalRecordCount(totCnt);
 		model.addAttribute("paginationInfo", paginationInfo);
 
@@ -143,7 +143,7 @@ public class IsgBeautyController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/empList.do")
-	public String empList(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model) throws Exception {
+	public String empList(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[직원 리스트]");
 
 		/** EgovPropertyService.sample */

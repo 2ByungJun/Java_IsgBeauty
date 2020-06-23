@@ -34,7 +34,6 @@
 		       UPDT_DT
 		  	FROM t_emp_m
 			WHERE EMP_ID =#{empId}
-
 	</select>
 	
 	<select id="selectEmpList" parameterType="empVO" resultType="egovMap">
@@ -53,7 +52,8 @@
 		       a.UPDT_ID,
 		       a.UPDT_DT
 		  from t_emp_m a
-
+		  ORDER BY PSPOFC ASC
+          LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
 	</select>
 
 	<select id="selectEmpListTotCnt" parameterType="empVO" resultType="int">

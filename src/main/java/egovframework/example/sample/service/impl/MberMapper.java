@@ -55,7 +55,7 @@ public interface MberMapper {
 	 * @return 글 목록
 	 * @exception Exception
 	 */
-	List<?> selectMberList(MberVO searchVO) throws Exception;
+	List<?> selectMberList(SampleDefaultVO searchVO) throws Exception;
 
 	/**
 	 * 고객 총 수를 조회한다.
@@ -63,7 +63,7 @@ public interface MberMapper {
 	 * @return 글 총 갯수
 	 * @exception
 	 */
-	int selectMberListTotCnt(MberVO searchVO);
+	int selectMberListTotCnt(SampleDefaultVO searchVO);
 	
 	/**
 	 * 고객 등록

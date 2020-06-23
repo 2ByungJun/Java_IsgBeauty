@@ -52,7 +52,7 @@ public class EmpService {
 	 * @return 글 목록
 	 * @exception Exception
 	 */
-	public List selectEmpList(EmpVO vo) throws Exception {
+	public List selectEmpList(SampleDefaultVO vo) throws Exception {
 		 return mapper.selectEmpList(vo);
 	}
 
@@ -62,7 +62,7 @@ public class EmpService {
 	 * @return 글 총 갯수
 	 * @exception
 	 */
-	public int selectEmpListTotCnt(EmpVO vo) throws Exception {
+	public int selectEmpListTotCnt(SampleDefaultVO vo) throws Exception {
 		 return mapper.selectEmpListTotCnt(vo);
 	}
 	
