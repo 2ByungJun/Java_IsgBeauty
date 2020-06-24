@@ -29,6 +29,10 @@
 		document.listForm.action = "<c:url value='/empList.do'/>";
 		document.listForm.submit();
 	}
+	function fn_egov_selectList() {
+		document.listForm.action = "<c:url value='/empList.do'/>";
+		document.listForm.submit();
+	}
 </script>
 </head>
 <body>
@@ -51,16 +55,16 @@
 					</div>
 					<div class="col-sm-6">
 						<div class="col-xs-6">
-							<form>
+							<div id="search">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder="이름 검색">
-									<div class="input-group-btn">
-										<button class="btn btn-default" type="submit" style="font-size:18px;">
-											<i class="glyphicon glyphicon-search"></i>
-										</button>
-									</div>
+									<form:input path="searchKeyword" type="text" placeholder="이름 검색" cssClass="txt form-control" style="width:70%"/>
+									<button class="btn btn-default" style="font-size: 20px;">
+										<a href="javascript:fn_egov_selectList();"> <i
+											class="glyphicon glyphicon-search"></i>
+										</a>
+									</button>
 								</div>
-							</form>
+							</div>
 						</div>
 						<div align="right">
 							<button type="button" class="btn btn-success" onclick="empRegister()">직원 등록</button>
