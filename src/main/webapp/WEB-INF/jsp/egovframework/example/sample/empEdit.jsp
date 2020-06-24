@@ -19,9 +19,17 @@
 		location.href = "<c:url value='/mberList.do'/>";
 	}
 	function deleteMber(id) {
-		document.detailForm.selectedId.value = id;
-		document.detailForm.action = "<c:url value='/deleteEmp.do'/>";
-		document.detailForm.submit();
+		var check;
+		check = confirm("정말로 해당 직원을 삭제하시겠습니까?");
+
+		if (check) {
+			alert("삭제되었습니다.");
+			document.detailForm.selectedId.value = id;
+			document.detailForm.action = "<c:url value='/deleteEmp.do'/>";
+			document.detailForm.submit();
+		} else {
+			alert("취소하셨습니다.");
+		}
 	}
 	function view(id) {
 		document.detailForm.selectedId.value = id;
@@ -29,8 +37,16 @@
 		document.detailForm.submit();
 	}
 	function update() {
-		document.detailForm.action = "<c:url value= '/updateEmp.do'/>";
-		document.detailForm.submit();
+		var check;
+		check = confirm("변경된 사항들을 수정하시겠습니까?");
+
+		if (check) {
+			alert("변경되었습니다.");
+			document.detailForm.action = "<c:url value= '/updateEmp.do'/>";
+			document.detailForm.submit();
+		} else {
+			alert("취소하셨습니다.");
+		}
 	}
 </script>
 <style>

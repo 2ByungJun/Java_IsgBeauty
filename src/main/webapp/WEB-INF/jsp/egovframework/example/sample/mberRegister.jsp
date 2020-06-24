@@ -14,6 +14,8 @@
 	href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
 <script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
@@ -21,10 +23,60 @@
 
 	/* 글 등록 function */
 	function saveMber() {
-		frm = document.detailForm;
-		frm.action = "<c:url value= '/addMber.do'/>";
-		frm.submit();
+		var check;
+		check = confirm("해당 고객님을 등록하시겠습니까?");
+
+		if (check) {
+			alert("등록되었습니다.");
+			frm = document.detailForm;
+			frm.action = "<c:url value= '/addMber.do'/>";
+			frm.submit();
+		} else {
+			alert("취소하셨습니다.");
+		}
 	}
+
+	/* function() {
+		$("#detailForm").validate({
+			submitHandler: function(form){
+				form.submit();	
+			}
+			rules: {
+				extraMethod : {required: true, extraMethod: true},
+			},
+			message: {
+				extraMethod: {
+					required: "값을 입력해 주십시오.",
+					extraMethod: "올바른 값이 아닙니다."
+				}
+			})
+		});
+		$.extend( $.validator.messages, {
+			required: "필수 항목입니다."
+		});
+		$.validaate().setDefaults({
+			onkeyup:false;
+			onclick:false;
+			onfocusout:false;
+			showErrors:function(errorMap, errorList){
+				if(this.numberOfInvalids(){
+					alert(errorList[0].message);
+				});
+			}
+		});
+		$.validaate().addMethod({
+			"extraMethod",
+			function(value, element){
+				if(value != ""){
+					return true;
+				}
+				else {
+					return false;
+				}
+			},
+			"값이 없습니다."
+		});
+	} */
 </script>
 </head>
 <style>
@@ -72,7 +124,7 @@ select {
 
 					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
 						직원*:</label>
-					<div class="registIdcol-md-3">
+					<div class="col-md-3">
 						<input type="text" class="form-control" id="eEmpId" name="eEmpId">
 					</div>
 				</div>
@@ -93,7 +145,7 @@ select {
 					<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별*:</label>
 					<div class="col-md-3">
 						<select type="text" class="form-control" id="sexdstn"
-							name="sexdstn">
+							name="sexdstn" required>
 							<option value="Male" selected="selected">Male</option>
 							<option value="Female">Female</option>
 						</select>
@@ -120,19 +172,6 @@ select {
 							name="registDt" value="<%=today%>" readonly>
 					</div>
 				</div>
-
-				<%-- <div class="form-inline form-group">
-					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">수정자:</label>
-					<div class="col-md-3">
-						<input type="text" class="form-control" id="updtId" name="updtId">
-					</div>
-
-					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">수정일:</label>
-					<div class="col-md-3">
-						<input type="text" class="form-control" id="registDt"
-							name="registDt" value="<%=today%>">
-					</div>
-				</div> --%>
 			</div>
 		</div>
 

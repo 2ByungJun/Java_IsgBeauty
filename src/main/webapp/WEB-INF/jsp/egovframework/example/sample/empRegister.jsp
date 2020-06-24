@@ -21,11 +21,17 @@
 
 	/* 글 등록 function */
 	function saveEmp() {
-		frm = document.detailForm;
+		var check;
+		check = confirm("해당 직원을 등록하시겠습니까?");
 
-		frm.action = "<c:url value= '/addEmp.do'/>";
-		frm.submit();
-
+		if (check) {
+			alert("등록되었습니다.");
+			frm = document.detailForm;
+			frm.action = "<c:url value= '/addEmp.do'/>";
+			frm.submit();
+		} else {
+			alert("취소하셨습니다.");
+		}
 	}
 </script>
 </head>
@@ -112,7 +118,7 @@ select {
 				<div class="form-inline form-group">
 					<label for="salary" class="col-sm-2 col-sm-offset-1 control-label">급여:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="salary" name="salary" 
+						<input type="text" class="form-control" id="salary" name="salary"
 							value="_원">
 					</div>
 
@@ -128,13 +134,13 @@ select {
 						class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
 					<div class="col-md-3">
 						<input type="text" class="form-control" id="registId"
-							name="registId" value="test" readonly >
+							name="registId" value="test" readonly>
 					</div>
 
 					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
 					<div class="col-md-3">
 						<input type="text" class="form-control" id="registDt"
-							name="registDt" value="<%=today%>" readonly >
+							name="registDt" value="<%=today%>" readonly>
 					</div>
 				</div>
 			</div>

@@ -19,9 +19,17 @@
 		location.href = "<c:url value='/mberList.do'/>";
 	}
 	function deleteMber(id) {
-		document.detailForm.selectedId.value = id;
-		document.detailForm.action = "<c:url value='/deleteMber.do'/>";
-		document.detailForm.submit();
+		var check;
+		check = confirm("정말로 해당 고객님을 삭제하시겠습니까?");
+
+		if (check) {
+			alert("삭제되었습니다.");
+			document.detailForm.selectedId.value = id;
+			document.detailForm.action = "<c:url value='/deleteMber.do'/>";
+			document.detailForm.submit();
+		} else {
+			alert("취소하셨습니다.");
+		}
 	}
 	function view(id) {
 		document.detailForm.selectedId.value = id;
@@ -29,8 +37,16 @@
 		document.detailForm.submit();
 	}
 	function update() {
-		document.detailForm.action = "<c:url value= '/updateMber.do'/>";
-		document.detailForm.submit();
+		var check;
+		check = confirm("변경된 사항들을 수정하시겠습니까?");
+
+		if (check) {
+			alert("변경되었습니다.");
+			document.detailForm.action = "<c:url value= '/updateMber.do'/>";
+			document.detailForm.submit();
+		} else {
+			alert("취소하셨습니다.");
+		}
 	}
 </script>
 <style>
@@ -105,7 +121,8 @@ select {
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
 							<input type="text" class="form-control" id="registId"
-								name="registId" value="<c:out value="${result.registId}" />" readonly>
+								name="registId" value="<c:out value="${result.registId}" />"
+								readonly>
 						</p>
 					</div>
 				</div>
@@ -115,7 +132,8 @@ select {
 					<div class="col-sm-3">
 						<select type="text" class="form-control" id="sexdstn"
 							name="sexdstn">
-							<option value="${result.sexdstn}"><c:out value="${result.sexdstn}" /></option>
+							<option value="${result.sexdstn}"><c:out
+									value="${result.sexdstn}" /></option>
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
 						</select>
@@ -126,7 +144,8 @@ select {
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
 							<input type="text" class="form-control" id="registDt"
-								name="registDt" value="<c:out value="${result.registDt}"/>" readonly>
+								name="registDt" value="<c:out value="${result.registDt}"/>"
+								readonly>
 						</p>
 					</div>
 				</div>
@@ -135,16 +154,16 @@ select {
 					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<input type="text" class="form-control" id="telno"
-								name="telno" value="<c:out value="${result.telno}"/>">
+							<input type="text" class="form-control" id="telno" name="telno"
+								value="<c:out value="${result.telno}"/>">
 						</p>
 					</div>
 
 					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">수정자:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<input type="text" class="form-control" id="updtId"
-								name="updtId" value="<c:out value="${result.updtId}"/>">
+							<input type="text" class="form-control" id="updtId" name="updtId"
+								value="<c:out value="${result.updtId}"/>">
 						</p>
 					</div>
 				</div>
@@ -153,16 +172,16 @@ select {
 					<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<input type="text" class="form-control" id="brthdy"
-								name="brthdy" value="<c:out value="${result.brthdy}"/>">
+							<input type="text" class="form-control" id="brthdy" name="brthdy"
+								value="<c:out value="${result.brthdy}"/>">
 						</p>
 					</div>
 
 					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">수정일:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<input type="text" class="form-control" id="updtDt"
-								name="updtDt" value="<c:out value="<%=today%>"/>" readonly>
+							<input type="text" class="form-control" id="updtDt" name="updtDt"
+								value="<c:out value="<%=today%>"/>" readonly>
 						</p>
 					</div>
 				</div>
@@ -182,7 +201,8 @@ select {
 			<button type="button" class="btn btn-info" onclick="update()">수정</button>
 			<button type="button" class="btn btn-danger"
 				onclick="deleteMber('${result.mberSn}')">삭제</button>
-			<button type="button" class=" btn btn-info" onclick="view('${result.mberSn}')">이전</button>
+			<button type="button" class=" btn btn-info"
+				onclick="view('${result.mberSn}')">이전</button>
 		</div>
 
 	</form:form>

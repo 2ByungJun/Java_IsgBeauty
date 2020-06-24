@@ -17,9 +17,17 @@
 		location.href = "<c:url value='/mberList.do'/>";
 	}
 	function deleteMber(id) {
-		document.detailForm.selectedId.value = id;
-		document.detailForm.action = "<c:url value='/deleteMber.do'/>";
-		document.detailForm.submit();
+		var check;
+		check = confirm("정말로 해당 고객님을 삭제하시겠습니까?");
+
+		if (check) {
+			alert("삭제되었습니다.");
+			document.detailForm.selectedId.value = id;
+			document.detailForm.action = "<c:url value='/deleteMber.do'/>";
+			document.detailForm.submit();
+		} else {
+			alert("취소하셨습니다.");
+		}
 	}
 	function editMber(id) {
 		document.detailForm.selectedId.value = id;
