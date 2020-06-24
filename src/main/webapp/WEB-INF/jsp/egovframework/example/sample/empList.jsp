@@ -53,9 +53,9 @@
 						<div class="col-xs-6">
 							<form>
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Search">
+									<input type="text" class="form-control" placeholder="이름 검색">
 									<div class="input-group-btn">
-										<button class="btn btn-default" type="submit">
+										<button class="btn btn-default" type="submit" style="font-size:18px;">
 											<i class="glyphicon glyphicon-search"></i>
 										</button>
 									</div>

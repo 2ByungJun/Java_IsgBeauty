@@ -25,20 +25,20 @@
 	function logout() {
 		location.href = "<c:url value='/login.do'/>";
 	}
-    function view(id) {
-    	document.listForm.selectedId.value = id;
-       	document.listForm.action = "<c:url value='/mberView.do'/>";
-       	document.listForm.submit();
-    }
+	function view(id) {
+		document.listForm.selectedId.value = id;
+		document.listForm.action = "<c:url value='/mberView.do'/>";
+		document.listForm.submit();
+	}
 	function fn_egov_link_page(pageNo) {
 		document.listForm.pageIndex.value = pageNo;
 		document.listForm.action = "<c:url value='/mberList.do'/>";
 		document.listForm.submit();
 	}
 	function fn_egov_selectList() {
-    	document.listForm.action = "<c:url value='/mberList.do'/>";
-       	document.listForm.submit();
-    }
+		document.listForm.action = "<c:url value='/mberList.do'/>";
+		document.listForm.submit();
+	}
 </script>
 </head>
 <body>
@@ -58,26 +58,27 @@
 			<div class="row">
 				<div class="alert" role="alert">
 					<div class="col-sm-6">
-						<button type="button" class="btn btn-success" onclick="empManage()">직원
-							관리</button>
+						<button type="button" class="btn btn-success"
+							onclick="empManage()">직원 관리</button>
 						<button type="button" class="btn btn-danger" onclick="">예약
 							현황</button>
 					</div>
 					<div class="col-sm-6">
 						<div class="col-xs-6">
-							<form>
+							<div id="search">
 								<div class="input-group">
-									<input type="text" class="form-control" id="searchKeyword" name="searchKeyword" placeholder="이름 검색">
-									<div class="input-group-btn">
-										<button class="btn btn-default" type="submit" onclick="home()">
-											<i class="glyphicon glyphicon-search"></i>
-										</button>
-									</div>
+									<form:input path="searchKeyword" type="text" placeholder="이름 검색" cssClass="txt form-control" style="width:70%"/>
+									<button class="btn btn-default" style="font-size: 20px;">
+										<a href="javascript:fn_egov_selectList();"> <i
+											class="glyphicon glyphicon-search"></i>
+										</a>
+									</button>
 								</div>
-							</form>
+							</div>
 						</div>
 						<div align="right">
-							<button type="button" class="btn btn-info" onclick="mberRegister()">고객 등록</button>
+							<button type="button" class="btn btn-info"
+								onclick="mberRegister()">고객 등록</button>
 							<button type="button" class="btn btn-info" onclick="logout()">로그아웃</button>
 						</div>
 					</div>

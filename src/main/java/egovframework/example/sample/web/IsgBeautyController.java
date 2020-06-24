@@ -166,7 +166,7 @@ public class IsgBeautyController {
 		int totCnt = empService.selectEmpListTotCnt(searchVO);
 		paginationInfo.setTotalRecordCount(totCnt);
 		model.addAttribute("paginationInfo", paginationInfo);
-
+		
 		System.out.println("_----------" + totCnt);
 		return "sample/empList";
 	}
