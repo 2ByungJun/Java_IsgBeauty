@@ -46,6 +46,9 @@
 		       a.UPDT_ID,
 		       a.UPDT_DT
 		  from t_mber_m a
+		  <if test="searchKeyword != null and searchKeyword != ''">
+				WHERE MBER_NM LIKE CONCAT('%', #{searchKeyword},'%')
+			</if>
 		  ORDER BY MBER_SN ASC
           LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
 		  <!-- t_mber_m 테이블을 인식하고, 해당 코드에선 a라는 별칭을 부여하였다. -->
@@ -57,6 +60,10 @@
 			SELECT COUNT(*) totcnt
 			FROM t_mber_m
 			WHERE 1=1
+			<if test="searchKeyword != null and searchKeyword != ''">
+				AND MBER_NM LIKE CONCAT('%', #{searchKeyword},'%')
+			</if>
+			
 			<!-- <if test="searchKeyword != null and searchKeyword != ''">
 		        <choose>
 		            <when test="searchCondition == 0">
