@@ -31,6 +31,7 @@
 			alert("취소하셨습니다.");
 		}
 	}
+	
 	function view(id) {
 		document.detailForm.selectedId.value = id;
 		document.detailForm.action = "<c:url value='/mberView.do'/>";
