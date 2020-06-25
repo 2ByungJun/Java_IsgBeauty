@@ -14,6 +14,10 @@
 	href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
 <script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
 	function home() {
 		location.href = "<c:url value='/empList.do'/>";
@@ -33,6 +37,25 @@
 			alert("취소하셨습니다.");
 		}
 	}
+	
+	$(function() {
+		$("#detailForm").validate({
+			submitHandler: function() {
+				var check = confirm("해당 직원을 등록하시겠습니까?(validation)");
+				if(check) {
+					alert("등록되었습니다.");
+					frm = document.detailForm;
+					frm.action = "<c:url value= '/addEmp.do'/>";
+					frm.submit(); }
+				else {
+					alert("취소하셨습니다."); 
+					}
+				}
+				});
+		$.extend( $.validator.messages, {
+			required: "필수 항목입니다."
+			});
+		});
 </script>
 </head>
 <style>
@@ -73,26 +96,26 @@ select {
 				<div class=" form-inline form-group">
 					<label for="empId" class="col-sm-2 col-sm-offset-1 control-label">아이디*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="empId" name="empId">
+						<input type="text" class="form-control" id="empId" name="empId" required>
 					</div>
 
 					<label for="empPassword"
 						class="col-sm-2 col-sm-offset-1 control-label">비밀번호*:</label>
 					<div class="col-md-3">
 						<input type="text" class="form-control" id="empPassword"
-							name="empPassword">
+							name="empPassword" required>
 					</div>
 				</div>
 
 				<div class="form-inline form-group">
 					<label for="empNm" class="col-sm-2 col-sm-offset-1 control-label">이름*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="empNm" name="empNm">
+						<input type="text" class="form-control" id="empNm" name="empNm" required>
 					</div>
 
 					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="telno" name="telno">
+						<input type="text" class="form-control" id="telno" name="telno" required>
 					</div>
 				</div>
 
@@ -119,13 +142,13 @@ select {
 					<label for="salary" class="col-sm-2 col-sm-offset-1 control-label">급여:</label>
 					<div class="col-md-3">
 						<input type="text" class="form-control" id="salary" name="salary"
-							value="_원">
+							value="_원" required>
 					</div>
 
 					<label for="career" class="col-sm-2 col-sm-offset-1 control-label">경력:</label>
 					<div class="col-md-3">
 						<input type="text" class="form-control" id="career" name="career"
-							value="_년">
+							value="_년" required>
 					</div>
 				</div>
 
@@ -147,7 +170,7 @@ select {
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="button" class="btn btn-success" onclick="saveEmp()">등록</button>
+			<button type="submit" class="btn btn-success" onclick="">등록</button>
 			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
 		</div>
 

@@ -16,6 +16,8 @@
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
@@ -36,47 +38,24 @@
 		}
 	}
 
-	/* function() {
+	$(function() {
 		$("#detailForm").validate({
-			submitHandler: function(form){
-				form.submit();	
-			}
-			rules: {
-				extraMethod : {required: true, extraMethod: true},
-			},
-			message: {
-				extraMethod: {
-					required: "값을 입력해 주십시오.",
-					extraMethod: "올바른 값이 아닙니다."
+			submitHandler: function() {
+				var check = confirm("해당 고객님을 등록하시겠습니까?(validation)");
+				if(check) { 
+					alert("등록되었습니다.");
+					frm = document.detailForm;
+					frm.action = "<c:url value= '/addMber.do'/>";
+					frm.submit(); }
+				else {
+					alert("취소하셨습니다."); 
+					}
 				}
-			})
-		});
+				});
 		$.extend( $.validator.messages, {
 			required: "필수 항목입니다."
+			});
 		});
-		$.validaate().setDefaults({
-			onkeyup:false;
-			onclick:false;
-			onfocusout:false;
-			showErrors:function(errorMap, errorList){
-				if(this.numberOfInvalids(){
-					alert(errorList[0].message);
-				});
-			}
-		});
-		$.validaate().addMethod({
-			"extraMethod",
-			function(value, element){
-				if(value != ""){
-					return true;
-				}
-				else {
-					return false;
-				}
-			},
-			"값이 없습니다."
-		});
-	} */
 </script>
 </head>
 <style>
@@ -125,19 +104,22 @@ select {
 					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
 						직원*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="eEmpId" name="eEmpId">
+						<input type="text" class="form-control" id="eEmpId" name="eEmpId"
+							required>
 					</div>
 				</div>
 
 				<div class="form-inline form-group">
 					<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="mberNm" name="mberNm">
+						<input type="text" class="form-control" id="mberNm" name="mberNm"
+							required>
 					</div>
 
 					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="telno" name="telno">
+						<input type="text" class="form-control" id="telno" name="telno"
+							required>
 					</div>
 				</div>
 
@@ -176,7 +158,7 @@ select {
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px">
-			<button type="button" class="btn btn-info" onclick="saveMber()">등록</button>
+			<button type="submit" class="btn btn-info" onclick="">등록</button>
 			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
 		</div>
 
