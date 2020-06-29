@@ -14,9 +14,13 @@
 	href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
 <script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
 	function home() {
-		location.href = "<c:url value='/mberList.do'/>";
+		location.href = "<c:url value='/empList.do'/>";
 	}
 	function deleteMber(id) {
 		var check;
@@ -48,6 +52,24 @@
 			alert("취소하셨습니다.");
 		}
 	}
+	$(function() {
+		$("#detailForm").validate({
+			submitHandler: function() {
+				var check = confirm("수정된 정보를 저장하시겠습니까?");
+				if(check) {
+					alert("저장되었습니다.");
+					frm = document.detailForm;
+					frm.action = "<c:url value= '/updateEmp.do'/>";
+					frm.submit(); }
+				else {
+					alert("취소하셨습니다."); 
+					}
+				}
+				});
+		$.extend( $.validator.messages, {
+			required: "필수 항목입니다."
+			});
+		});
 </script>
 <style>
 label {
@@ -74,7 +96,7 @@ select {
 		method="post">
 		<input type="hidden" name="selectedId" />
 		<div class="container">
-			<div class="jumbotron text-center alert-info" role="alert"
+			<div class="jumbotron text-center alert-success" style="margin-top:30px" role="alert"
 				onclick="home()">
 				<h2>
 					<b>ISG Beauty</b>
@@ -93,7 +115,7 @@ select {
 					<div class="col-sm-3">
 						<p for="empId" class="control-label">
 							<input type="text" class="form-control" id="empId" name="empId"
-								value="<c:out value="${result.empId}"/>">
+								value="<c:out value="${result.empId}"/>" required>
 						</p>
 					</div>
 
@@ -103,7 +125,7 @@ select {
 						<p for="empPassword" class="control-label">
 							<input type="text" class="form-control" id="empPassword"
 								name="empPassword"
-								value="<c:out value="${result.empPassword}" />">
+								value="<c:out value="${result.empPassword}" />" required>
 						</p>
 					</div>
 				</div>
@@ -113,7 +135,7 @@ select {
 					<div class="col-sm-3">
 						<p for="empNm" class="control-label">
 							<input type="text" class="form-control" id="empNm" name="empNm"
-								value="<c:out value="${result.empNm}" />">
+								value="<c:out value="${result.empNm}" />" required>
 						</p>
 					</div>
 
@@ -121,7 +143,7 @@ select {
 					<div class="col-sm-3">
 						<p for="" telno"" class="control-label">
 							<input type="text" class="form-control" id="telno" name="telno"
-								value="<c:out value="${result.telno}" />">
+								value="<c:out value="${result.telno}" />" required>
 						</p>
 					</div>
 				</div>
@@ -152,7 +174,7 @@ select {
 					<div class="col-sm-3">
 						<p for="salary" class="control-label">
 							<input type="text" class="form-control" id="salary" name="salary"
-								value="<c:out value="${result.salary}"/>">
+								value="<c:out value="${result.salary}"/>" required>
 						</p>
 					</div>
 
@@ -160,7 +182,7 @@ select {
 					<div class="col-sm-3">
 						<p for="career" class="control-label">
 							<input type="career" class="form-control" id="career"
-								name="career" value="<c:out value="${result.career}"/>">
+								name="career" value="<c:out value="${result.career}"/>" required>
 						</p>
 					</div>
 				</div>
@@ -189,7 +211,7 @@ select {
 					<div class="col-sm-3">
 						<p for="updtId" class="control-label">
 							<input type="text" class="form-control" id="updtId"
-								name="updtId" value="<c:out value="${result.updtId}"/>">
+								name="updtId" value="<c:out value="${result.updtId}"/>" required>
 						</p>
 					</div>
 
@@ -206,7 +228,7 @@ select {
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="button" class="btn btn-info" onclick="update()">수정</button>
+			<button type="submit" class="btn btn-info" onclick="">수정</button>
 			<button type="button" class="btn btn-danger"
 				onclick="deleteMber('${result.empId}')">삭제</button>
 			<button type="button" class=" btn btn-info"

@@ -51,7 +51,7 @@ select {
 	<form:form commandName="empVO" id="detailForm" name="detailForm"
 		method="post">
 		<div class="container">
-			<div class="jumbotron text-center alert-success" role="alert"
+			<div class="jumbotron text-center alert-success" style="margin-top:30px" role="alert"
 				onclick="home()">
 				<h2>
 					<b>ISG Beauty</b>

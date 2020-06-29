@@ -23,7 +23,7 @@
 </script>
 <body>
 	<div class="container">
-		<div class="jumbotron text-center alert-info" role="alert">
+		<div class="jumbotron text-center alert-info" style="margin-top:30px" role="alert">
 			<h2>
 				<b>ISG Beauty</b>
 			</h2>
