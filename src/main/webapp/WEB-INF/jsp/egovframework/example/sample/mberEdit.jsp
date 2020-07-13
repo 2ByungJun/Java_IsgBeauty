@@ -167,7 +167,7 @@ select {
 						class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<input type="text" class="form-control" id="registDt"
+							<input type="date" class="form-control" id="registDt"
 								name="registDt" value="<c:out value="${result.registDt}"/>"
 								readonly>
 						</p>
@@ -204,7 +204,7 @@ select {
 					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">수정일:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<input type="text" class="form-control" id="updtDt" name="updtDt"
+							<input type="date" class="form-control" id="updtDt" name="updtDt"
 								value="<c:out value="<%=today%>"/>" readonly>
 						</p>
 					</div>

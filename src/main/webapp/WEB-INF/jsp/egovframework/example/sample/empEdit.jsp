@@ -123,7 +123,7 @@ select {
 						class="col-sm-2 col-sm-offset-1 control-label">비밀 번호:</label>
 					<div class="col-sm-3">
 						<p for="empPassword" class="control-label">
-							<input type="text" class="form-control" id="empPassword"
+							<input type="password" class="form-control" id="empPassword"
 								name="empPassword"
 								value="<c:out value="${result.empPassword}" />" required>
 						</p>
@@ -200,7 +200,7 @@ select {
 					<label for="registDt" class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
 					<div class="col-sm-3">
 						<p for="registDt" class="control-label">
-							<input type="text" class="form-control" id="registDt" name="registDt"
+							<input type="date" class="form-control" id="registDt" name="registDt"
 								value="<c:out value="${result.registDt}"/>" readonly>
 						</p>
 					</div>
@@ -218,7 +218,7 @@ select {
 					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">수정일:</label>
 					<div class="col-sm-3">
 						<p for="updtDt" class="control-label">
-							<input type="text" class="form-control" id="updtDt" name="updtDt"
+							<input type="date" class="form-control" id="updtDt" name="updtDt"
 								value="<c:out value="<%=today%>"/>" readonly>
 						</p>
 					</div>

@@ -150,7 +150,7 @@ select {
 					<label for="registDt"
 						class="col-sm-2 col-sm-offset-1 control-label">등록일*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="registDt"
+						<input type="date" class="form-control" id="registDt"
 							name="registDt" value="<%=today%>" readonly>
 					</div>
 				</div>
