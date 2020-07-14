@@ -40,24 +40,47 @@
 
 	$(function() {
 		$("#detailForm").validate({
-			submitHandler: function() {
+			submitHandler : function() {
 				var check = confirm("해당 고객님을 등록하시겠습니까?(validation)");
-				if(check) { 
+				if (check) {
 					alert("등록되었습니다.");
 					frm = document.detailForm;
 					frm.action = "<c:url value= '/addMber.do'/>";
-					frm.submit(); }
-				else {
-					alert("취소하셨습니다."); 
-					}
+					frm.submit();
+				} else {
+					alert("취소하셨습니다.");
 				}
-				});
-		$.extend( $.validator.messages, {
-			required: "필수 항목입니다."
-			});
+			},
+			rules: {
+				mberNm: {
+					required : true
+				},
+				telno: {
+					required : true,
+					digits : true
+				},
+				brthdy: {
+					required : true,
+					digits : true
+				}
+			},
+			messages: {
+				mberNm : {
+					required : "필수 입력 항목입니다."
+				},
+				telno : {
+					required : "필수 입력 항목입니다.",
+					digits : "숫자만 입력할 수 있습니다."
+				},
+				brthdy : {
+					required : "필수 입력 항목입니다.",
+					digits : "숫자만 입력할 수 있습니다."
+				}
+			}
 		});
-	
-	$( '.form-inline .form-control' ).removeAttr( 'width' );
+	});
+
+	$('.form-inline .form-control').removeAttr('width');
 </script>
 </head>
 <style>
@@ -88,7 +111,7 @@ select {
 				style="margin-top: 30px" role="alert" onclick="home()">
 				<h2>
 					<b>ISG Beauty</b>
-				</h2>  
+				</h2>
 				<p>
 					<b>고객 등록 화면입니다.</b>
 				</p>
@@ -107,7 +130,7 @@ select {
 					직원*:</label>
 				<div class="col-md-2">
 					<select type="text" class="form-control" id="empNm" name="empNm"
-						required>
+						>
 						<c:forEach var="result" items="${listEmpNM}" varStatus="status">
 							<option value=`${result.empNm}`>${result.empNm}</option>
 						</c:forEach>
@@ -125,7 +148,7 @@ select {
 				<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별*:</label>
 				<div class="col-md-2">
 					<select type="text" class="form-control" id="sexdstn"
-						name="sexdstn" required>
+						name="sexdstn" >
 						<option value="Male" selected="selected">Male</option>
 						<option value="Female">Female</option>
 					</select>

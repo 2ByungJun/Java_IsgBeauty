@@ -37,25 +37,68 @@
 			alert("취소하셨습니다.");
 		}
 	}
-	
+
 	$(function() {
 		$("#detailForm").validate({
-			submitHandler: function() {
-				var check = confirm("해당 직원을 등록하시겠습니까?(validation)");
-				if(check) {
+			submitHandler : function() {
+				var check = confirm("해당 직원을 등록하시겠습니까?");
+				if (check) {
 					alert("등록되었습니다.");
 					frm = document.detailForm;
 					frm.action = "<c:url value= '/addEmp.do'/>";
-					frm.submit(); }
-				else {
-					alert("취소하셨습니다."); 
-					}
+					frm.submit();
+				} else {
+					alert("취소하셨습니다.");
 				}
-				});
-		$.extend( $.validator.messages, {
-			required: "필수 항목입니다."
-			});
+			},
+			rules: {
+				empId: {
+					required : true
+				},
+				empPassword: {
+					required : true,
+					minlength : 4
+				},
+				empNm: {
+					required : true
+				},
+				telno: {
+					required : true,
+					digits : true
+				},
+				salary: {
+					required : true,
+					digits : true
+				},
+				career: {
+					required : true
+				}
+			},
+			messages: {
+				empId: {
+					required : "필수 입력 항목입니다.",
+				},
+				empPassword: {
+					required : "필수 입력 항목입니다.",
+					minlength : "비밀번호는 최소 4자리 이상입니다."
+				},
+				empNm : {
+					required : "필수 입력 항목입니다."
+				},
+				telno : {
+					required : "필수 입력 항목입니다.",
+					digits : "숫자만 입력할 수 있습니다."
+				},
+				salary : {
+					required : "필수 입력 항목입니다.",
+					digits : "숫자만 입력할 수 있습니다."
+				},
+				career : {
+					required : "필수 입력 항목입니다."
+				}
+			}
 		});
+	});
 </script>
 </head>
 <style>
@@ -80,8 +123,8 @@ select {
 	<form:form commandName="empVO" id="detailForm" name="detailForm"
 		method="post">
 		<div class="container">
-			<div class="jumbotron text-center alert-success" style="margin-top:30px" role="alert"
-				onclick="home()">
+			<div class="jumbotron text-center alert-success"
+				style="margin-top: 30px" role="alert" onclick="home()">
 				<h2>
 					<b>ISG Beauty</b>
 				</h2>
@@ -96,7 +139,8 @@ select {
 				<div class=" form-inline form-group">
 					<label for="empId" class="col-sm-2 col-sm-offset-1 control-label">아이디*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="empId" name="empId" required>
+						<input type="text" class="form-control" id="empId" name="empId"
+							required>
 					</div>
 
 					<label for="empPassword"
@@ -110,12 +154,14 @@ select {
 				<div class="form-inline form-group">
 					<label for="empNm" class="col-sm-2 col-sm-offset-1 control-label">이름*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="empNm" name="empNm" required>
+						<input type="text" class="form-control" id="empNm" name="empNm"
+							required>
 					</div>
 
 					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="telno" name="telno" required>
+						<input type="text" class="form-control" id="telno" name="telno"
+							required>
 					</div>
 				</div>
 
@@ -142,13 +188,13 @@ select {
 					<label for="salary" class="col-sm-2 col-sm-offset-1 control-label">급여:</label>
 					<div class="col-md-3">
 						<input type="text" class="form-control" id="salary" name="salary"
-							value="_원" required>
+							value="" required>
 					</div>
 
 					<label for="career" class="col-sm-2 col-sm-offset-1 control-label">경력:</label>
 					<div class="col-md-3">
 						<input type="text" class="form-control" id="career" name="career"
-							value="_년" required>
+							value="" required>
 					</div>
 				</div>
 
