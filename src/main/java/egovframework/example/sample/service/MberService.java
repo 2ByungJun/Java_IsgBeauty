@@ -60,7 +60,7 @@ public class MberService {
 	 * @return 글 목록
 	 * @exception Exception
 	 */
-	public List selectMberList(SampleDefaultVO vo) throws Exception {
+	public List<?> selectMberList(SampleDefaultVO vo) throws Exception {
 		 return mapper.selectMberList(vo);
 	}
 

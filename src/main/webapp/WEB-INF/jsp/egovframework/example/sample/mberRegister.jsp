@@ -96,65 +96,63 @@ select {
 		</div>
 
 		<div class="container">
-				<div class="form-inline form-group">
-					<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름*:</label>
-					<div class="col-xs-2">
-						<input type="text" class="form-control" id="mberNm" name="mberNm"
-							required>
-					</div>
-
-					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
-						직원*:</label>
-					<div class="col-md-2">
-						<select type="text" class="form-control" id="empNm"
-							name="empNm" required>
-						    <!--  디자이너 추가해야함 -->
-							<option value="Male" selected="selected">Male</option>
-							<option value="Female">Female</option>
-						</select>
-					</div>
+			<div class="form-inline form-group">
+				<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름*:</label>
+				<div class="col-xs-2">
+					<input type="text" class="form-control" id="mberNm" name="mberNm"
+						required>
 				</div>
 
-				<div class="form-inline form-group">
-					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호*:</label>
-					<div class="col-md-2">
-						<input type="text" class="form-control" id="telno" name="telno"
-							required>
-					</div>
-
-					<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별*:</label>
-					<div class="col-md-2">
-						<select type="text" class="form-control" id="sexdstn"
-							name="sexdstn" required>
-							<option value="Male" selected="selected">Male</option>
-							<option value="Female">Female</option>
-						</select>
-					</div>
-				</div>
-
-				<div class="form-inline form-group">
-					<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
-					<div class="col-md-2">
-						<input type="text" class="form-control" id="brthdy" name="brthdy">
-					</div>
-				</div>
-
-				<div class="form-inline form-group">
-					<label for="registId"
-						class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
-					<div class="col-md-2">
-						<input type="text" class="form-control" id="registId"
-							name="registId" value="test" readonly>
-					</div>
-
-					<label for="registDt"
-						class="col-sm-2 col-sm-offset-1 control-label">등록일*:</label>
-					<div class="col-md-2">
-						<input type="date" class="form-control" id="registDt"
-							name="registDt" value="<%=today%>" readonly>
-					</div>
+				<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
+					직원*:</label>
+				<div class="col-md-2">
+					<select type="text" class="form-control" id="empNm" name="empNm"
+						required>
+						<c:forEach var="result" items="${listEmpNM}" varStatus="status">
+							<option value=`${result.empNm}`>${result.empNm}</option>
+						</c:forEach>
+					</select>
 				</div>
 			</div>
+
+			<div class="form-inline form-group">
+				<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호*:</label>
+				<div class="col-md-2">
+					<input type="text" class="form-control" id="telno" name="telno"
+						required>
+				</div>
+
+				<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별*:</label>
+				<div class="col-md-2">
+					<select type="text" class="form-control" id="sexdstn"
+						name="sexdstn" required>
+						<option value="Male" selected="selected">Male</option>
+						<option value="Female">Female</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-inline form-group">
+				<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
+				<div class="col-md-2">
+					<input type="text" class="form-control" id="brthdy" name="brthdy">
+				</div>
+			</div>
+
+			<div class="form-inline form-group">
+				<label for="registId" class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
+				<div class="col-md-2">
+					<input type="text" class="form-control" id="registId"
+						name="registId" value="test" readonly>
+				</div>
+
+				<label for="registDt" class="col-sm-2 col-sm-offset-1 control-label">등록일*:</label>
+				<div class="col-md-2">
+					<input type="date" class="form-control" id="registDt"
+						name="registDt" value="<%=today%>" readonly>
+				</div>
+			</div>
+		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px">
 			<button type="submit" class="btn btn-info" onclick="">등록</button>

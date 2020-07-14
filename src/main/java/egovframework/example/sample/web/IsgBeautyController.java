@@ -111,8 +111,8 @@ public class IsgBeautyController {
 		mav.addObject("msg", "logout");
 		
 		return mav;
-	}
-	*/
+	}*/
+	
 	
 
 	/**
@@ -212,11 +212,11 @@ public class IsgBeautyController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/mberRegister.do")
-	public String mberRegister(@ModelAttribute("searchVO") MberVO searchVO, ModelMap model) throws Exception {
+	public String mberRegister(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[고객 등록 페이지]");
 		
-		int totCnt = mberService.selectMberListTotCnt(searchVO);
-		model.addAttribute("mbertotCnt", totCnt);
+		List<?> listEmpNM = empService.selectListEmpNM(searchVO);
+		model.addAttribute("listEmpNM", listEmpNM);
 		
 		return "sample/mberRegister";
 	}

@@ -54,7 +54,7 @@ public class EmpService {
 	 * @return 글 목록
 	 * @exception Exception
 	 */
-	public List selectEmpList(SampleDefaultVO vo) throws Exception {
+	public List<?> selectEmpList(SampleDefaultVO vo) throws Exception {
 		 return mapper.selectEmpList(vo);
 	}
 
@@ -104,6 +104,11 @@ public class EmpService {
 	public void updateEmp(EmpVO vo) throws Exception {
 		mapper.updateEmp(vo);
 	}
+	
+	public List<?> selectListEmpNM(EmpVO vo) throws Exception {
+		 return mapper.selectListEmpNM(vo);
+	}
+	
 	
 /*	*//**
 	 * 로그인 체크

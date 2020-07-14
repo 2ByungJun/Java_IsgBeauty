@@ -1,117 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="egovframework.example.sample.service.impl.EmpMapper">
+<mapper
+	namespace="egovframework.example.sample.service.impl.EmpMapper">
 
 	<!-- EMP -->
-	    <resultMap id="emp" type="empVO">
-		<result property="empId" column="emp_id"/>
-		<result property="empPassword" column="emp_password"/>
-		<result property="empNm" column="emp_nm"/>
-		<result property="telno" column="telno"/>
-		<result property="sexdstn" column="sexdstn"/>
-		<result property="pspofc" column="pspofc"/>
-		<result property="salary" column="salary"/>
-		<result property="career" column="career"/>
-		<result property="registId" column="regist_id"/>
-		<result property="registDt" column="regist_dt"/>
-		<result property="updtId" column="updt_id"/>
-		<result property="updtDt" column="updt_dt"/>
+	<resultMap id="emp" type="empVO">
+		<result property="empId" column="emp_id" />
+		<result property="empPassword" column="emp_password" />
+		<result property="empNm" column="emp_nm" />
+		<result property="telno" column="telno" />
+		<result property="sexdstn" column="sexdstn" />
+		<result property="pspofc" column="pspofc" />
+		<result property="salary" column="salary" />
+		<result property="career" column="career" />
+		<result property="registId" column="regist_id" />
+		<result property="registDt" column="regist_dt" />
+		<result property="updtId" column="updt_id" />
+		<result property="updtDt" column="updt_dt" />
 	</resultMap>
 
-    <select id="selectEmp" parameterType="empVO" resultMap="emp">
+	<select id="selectEmp" parameterType="empVO" resultMap="emp">
 
-			SELECT EMP_ID,
-		       EMP_PASSWORD,
-		       EMP_NM,
-		       TELNO,
-		       SEXDSTN,
-		       PSPOFC,
-		       SALARY,
-		       CAREER,
-		       REGIST_ID,
-		       REGIST_DT,
-		       UPDT_ID,
-		       UPDT_DT
-		  	FROM t_emp_m
-			WHERE EMP_ID =#{empId}
+		SELECT EMP_ID,
+		EMP_PASSWORD,
+		EMP_NM,
+		TELNO,
+		SEXDSTN,
+		PSPOFC,
+		SALARY,
+		CAREER,
+		REGIST_ID,
+		REGIST_DT,
+		UPDT_ID,
+		UPDT_DT
+		FROM t_emp_m
+		WHERE EMP_ID =#{empId}
 	</select>
 
-	<select id="selectEmpList" parameterType="empVO" resultType="egovMap">
+	<select id="selectEmpList" parameterType="empVO"
+		resultType="egovMap">
 
-			select a.EMP_ID,
-		       a.EMP_PASSWORD,
-		       a.EMP_NM,
-		       a.EMP_PASSWORD,
-		       a.TELNO,
-		       a.SEXDSTN,
-		       a.PSPOFC,
-		       a.SALARY,
-		       a.CAREER,
-		       a.REGIST_ID,
-		       a.REGIST_DT,
-		       a.UPDT_ID,
-		       a.UPDT_DT
-		  from t_emp_m a
-		  		  <if test="searchKeyword != null and searchKeyword != ''">
-				WHERE EMP_NM LIKE CONCAT('%', #{searchKeyword},'%')
-			</if>
-		  ORDER BY REGIST_DT ASC
-          LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+		select a.EMP_ID,
+		a.EMP_PASSWORD,
+		a.EMP_NM,
+		a.EMP_PASSWORD,
+		a.TELNO,
+		a.SEXDSTN,
+		a.PSPOFC,
+		a.SALARY,
+		a.CAREER,
+		a.REGIST_ID,
+		a.REGIST_DT,
+		a.UPDT_ID,
+		a.UPDT_DT
+		from t_emp_m a
+		<if test="searchKeyword != null and searchKeyword != ''">
+			WHERE EMP_NM LIKE CONCAT('%', #{searchKeyword},'%')
+		</if>
+		ORDER BY REGIST_DT ASC
+		LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
 	</select>
 
-	<select id="selectEmpListTotCnt" parameterType="empVO" resultType="int">
+	<select id="selectEmpListTotCnt" parameterType="empVO"
+		resultType="int">
 
-			SELECT COUNT(*) EMP_totcnt
-			FROM t_emp_m
-			WHERE 1=1
-			<!-- <if test="searchKeyword != null and searchKeyword != ''">
-		        <choose>
-		            <when test="searchCondition == 0">
-						AND ID LIKE '%' || #{searchKeyword} || '%'
-					</when>
-		            <when test="searchCondition == 1">
-						AND	NAME LIKE '%' || #{searchKeyword} || '%'
-					</when>
-				</choose>
-			</if> -->
+		SELECT COUNT(*) EMP_totcnt
+		FROM t_emp_m
+		WHERE 1=1
+		<!-- <if test="searchKeyword != null and searchKeyword != ''"> <choose> 
+			<when test="searchCondition == 0"> AND ID LIKE '%' || #{searchKeyword} || 
+			'%' </when> <when test="searchCondition == 1"> AND NAME LIKE '%' || #{searchKeyword} 
+			|| '%' </when> </choose> </if> -->
 	</select>
 
-		<insert id="insertEmp" parameterType="empVO">
+	<insert id="insertEmp" parameterType="empVO">
 
-	    insert into t_emp_m values (
-	    		#{empId},
-				#{empPassword},
-				#{empNm},
-				#{telno},
-				#{sexdstn},
-				#{pspofc},
-				#{salary},
-				#{career},
-				#{registId},
-				CURDATE(),
-				#{registId},
-				CURDATE()
-	    )
+		insert into t_emp_m values (
+		#{empId},
+		#{empPassword},
+		#{empNm},
+		#{telno},
+		#{sexdstn},
+		#{pspofc},
+		#{salary},
+		#{career},
+		#{registId},
+		CURDATE(),
+		#{registId},
+		CURDATE()
+		)
 	</insert>
 
 	<delete id="deleteEmp">
-	    delete from t_emp_m
-	    where EMP_ID = #{empId}
+		delete from t_emp_m
+		where EMP_ID = #{empId}
 	</delete>
 
 	<update id="updateEmp">
-	    update t_emp_m
-	    set EMP_ID=#{empId},
-	    	EMP_PASSWORD=#{empPassword},
-	    	EMP_NM=#{empNm},
-	    	TELNO=#{telno},
-	    	SEXDSTN=#{sexdstn},
-		    PSPOFC=#{pspofc},
-		    SALARY=#{salary},
-		    CAREER=#{career},
-		    UPDT_ID=#{updtId},
-		    UPDT_DT=CURDATE()
-		    where EMP_ID=#{empId}
+		update t_emp_m
+		set EMP_ID=#{empId},
+		EMP_PASSWORD=#{empPassword},
+		EMP_NM=#{empNm},
+		TELNO=#{telno},
+		SEXDSTN=#{sexdstn},
+		PSPOFC=#{pspofc},
+		SALARY=#{salary},
+		CAREER=#{career},
+		UPDT_ID=#{updtId},
+		UPDT_DT=CURDATE()
+		where EMP_ID=#{empId}
 	</update>
+
+	<select id="selectListEmpNM" parameterType="empVO" resultMap="emp">
+		SELECT EMP_NM
+		FROM t_emp_m
+		WHERE PSPOFC="Designer"
+	</select>
 
 </mapper>

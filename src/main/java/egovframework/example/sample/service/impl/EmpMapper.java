@@ -86,6 +86,14 @@ public interface EmpMapper {
 	 */
 	void updateEmp(EmpVO vo) throws Exception;
 	
+	
+	/**
+	 * 직원 "디자이너" 이름리스트
+	 * @param vo
+	 * @throws Exception
+	 */
+	List<?> selectListEmpNM(EmpVO vo) throws Exception;
+	
 /*	*//**
 	 * 로그인 체크
 	 * @param vo
