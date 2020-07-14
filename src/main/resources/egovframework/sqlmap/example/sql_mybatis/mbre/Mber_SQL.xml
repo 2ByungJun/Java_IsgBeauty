@@ -76,15 +76,17 @@
 			</if> -->
 	</select>
 
+
 	<insert id="insertMber" parameterType="mberVO">
-	     <!--   <selectKey keyProperty="mberSn" resultType="int" order="BEFORE">
-	        select NEXTVAL(mber_seq)
-		    </selectKey> -->
+	     <selectKey keyProperty="mberSn" resultType="string" order="BEFORE">
+	        select NEXTVAL(mber_seq) from dual
+		    </selectKey>
 			insert into t_mber_m (
 			mber_sn, e_emp_id, mber_nm, sexdstn, telno, brthdy, regist_id, regist_dt,
 			updt_id, updt_dt)
 			values (
-			(select NEXTVAL(mber_seq)),
+		<!-- 	(select NEXTVAL(mber_seq)), -->
+		   #{mberSn},
 			#{eEmpId},
 			#{mberNm},
 			#{sexdstn},
