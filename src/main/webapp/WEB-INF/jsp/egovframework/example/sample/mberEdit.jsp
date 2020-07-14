@@ -171,25 +171,6 @@ select {
 					</div>
 				</div>
 
-				<!-- 수정자, 수정일은 뒷단에 적용 예정 -->
-				<div class="form-inline form-group">
-					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">수정자:</label>
-					<div class="col-sm-2">
-						<p for="mberSn" class="control-label">
-							<input type="text" class="form-control" id="updtId" name="updtId"
-								value="<c:out value="${result.updtId}"/>" readonly>
-						</p>
-					</div>
-
-					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">수정일:</label>
-					<div class="col-sm-2">
-						<p for="mberSn" class="control-label">
-							<input type="date" class="form-control" id="updtDt" name="updtDt"
-								value="<c:out value="<%=today%>"/>" readonly>
-						</p>
-					</div>
-				</div>
-
 				<div class="form-inline form-group">
 					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">예약내용:</label>
 					<div class="col-sm-2">
@@ -207,6 +188,25 @@ select {
 				onclick="deleteMber('${result.mberSn}')">삭제</button>
 			<button type="button" class=" btn btn-info"
 				onclick="view('${result.mberSn}')">이전</button>
+		</div>
+
+		<!-- 수정자, 수정일은 뒷단에 적용 : 사용할 때는 opacity : 0.0으로 설정 -->
+		<div class="form-inline form-group" style="opacity: 0.0;">
+			<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">수정자:</label>
+			<div class="col-sm-2">
+				<p for="mberSn" class="control-label">
+					<input type="text" class="form-control" id="updtId" name="updtId"
+						value="<c:out value="${result.updtId}"/>" readonly>
+				</p>
+			</div>
+
+			<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">수정일:</label>
+			<div class="col-sm-2">
+				<p for="mberSn" class="control-label">
+					<input type="date" class="form-control" id="updtDt" name="updtDt"
+						value="<c:out value="<%=today%>"/>" readonly>
+				</p>
+			</div>
 		</div>
 
 	</form:form>
