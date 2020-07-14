@@ -106,9 +106,9 @@
 								<c:forEach var="result" items="${mberList}" varStatus="status">
 									<tr>
 										<td align="center" class="listtd"><c:out
-												value="${result.mberSn}" /></td>
+												value="${status.count+(paginationInfo.currentPageNo-1)*10}" /></td>
 										<td align="center" class="listtd"><a
-											href="javascript:view('<c:out 
+											href="javascript:view('<c:out
 													value="${result.mberSn}"/>')"><c:out
 													value="${result.mberNm}" /></a></td>
 										<td align="center" class="listtd"><c:out
