@@ -73,7 +73,7 @@ select {
 					<label for="empPassword"
 						class="col-sm-2 col-sm-offset-1 control-label">비밀번호*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="empPassword"
+						<input type="password" class="form-control" id="empPassword"
 							name="empPassword">
 					</div>
 				</div>
@@ -133,7 +133,7 @@ select {
 
 					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="registDt"
+						<input type="date" class="form-control" id="registDt"
 							name="registDt" value="<%=today%>" readonly >
 					</div>
 				</div>

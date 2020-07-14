@@ -76,7 +76,7 @@ p {
 					<label for="empPassword" class="col-sm-2 col-sm-offset-1 control-label">비밀번호:</label>
 					<div class="col-sm-3">
 						<p for="empPassword" class="control-label" >
-							<c:out value="${result.empPassword}" />
+							********
 						</p>
 					</div>
 				</div>

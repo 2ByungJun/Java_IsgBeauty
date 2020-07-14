@@ -26,12 +26,14 @@ import egovframework.rte.fdl.property.EgovPropertyService;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 import org.springmodules.validation.commons.DefaultBeanValidator;
 
 /**
@@ -77,11 +79,41 @@ public class IsgBeautyController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/login.do")
-	public String login(@ModelAttribute("searchVO") MberVO mberVO, ModelMap model) throws Exception {
+	public String login(){
 		System.out.println("[로그인]");
 
 		return "sample/login";
 	}
+	
+/*	@RequestMapping(value= "/loginCheck.do")
+	public ModelAndView loginCheck(@ModelAttribute MberVO vo, HttpSession session) {
+		
+		boolean result = empService.loginCheck(vo, session);
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("login");
+		
+		if(result) {
+			mav.addObject("msg", "성공");
+		}else {
+			mav.addObject("msg", "실패");
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping(value= "/logout.do")
+	public ModelAndView loginout(HttpSession session) {
+		
+		empService.logout(session);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("login");
+		mav.addObject("msg", "logout");
+		
+		return mav;
+	}
+	*/
+	
 
 	/**
 	 * 로그인-직원 등록 페이지

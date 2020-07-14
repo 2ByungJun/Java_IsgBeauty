@@ -95,11 +95,11 @@ select {
 		<div class="container">
 			<div class="row">
 				<div class=" form-inline form-group">
-					<label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번*:</label>
+					<%-- <label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번*:</label>
 					<div class="col-md-3">
 						<input type="text" class="form-control" id="mberSn" name="mberSn"
 							value="${mbertotCnt+1}" readonly>
-					</div>
+					</div> --%>
 
 					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
 						직원*:</label>
@@ -150,7 +150,7 @@ select {
 					<label for="registDt"
 						class="col-sm-2 col-sm-offset-1 control-label">등록일*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="registDt"
+						<input type="date" class="form-control" id="registDt"
 							name="registDt" value="<%=today%>" readonly>
 					</div>
 				</div>
