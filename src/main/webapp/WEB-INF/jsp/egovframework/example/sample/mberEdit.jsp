@@ -35,7 +35,7 @@
 			alert("취소하셨습니다.");
 		}
 	}
-	
+
 	function view(id) {
 		document.detailForm.selectedId.value = id;
 		document.detailForm.action = "<c:url value='/mberView.do'/>";
@@ -53,25 +53,25 @@
 			alert("취소하셨습니다.");
 		}
 	}
-	
+
 	$(function() {
 		$("#detailForm").validate({
-			submitHandler: function() {
+			submitHandler : function() {
 				var check = confirm("수정된 정보를 저장하시겠습니까?");
-				if(check) {
+				if (check) {
 					alert("저장되었습니다.");
 					frm = document.detailForm;
 					frm.action = "<c:url value= '/updateMber.do'/>";
-					frm.submit(); }
-				else {
-					alert("취소하셨습니다."); 
-					}
+					frm.submit();
+				} else {
+					alert("취소하셨습니다.");
 				}
-				});
-		$.extend( $.validator.messages, {
-			required: "필수 항목입니다."
-			});
+			}
 		});
+		$.extend($.validator.messages, {
+			required : "필수 항목입니다."
+		});
+	});
 </script>
 <style>
 label {
@@ -98,8 +98,8 @@ select {
 		method="post">
 		<input type="hidden" name="selectedId" />
 		<div class="container">
-			<div class="jumbotron text-center alert-info" style="margin-top:30px" role="alert"
-				onclick="home()">
+			<div class="jumbotron text-center alert-info"
+				style="margin-top: 30px" role="alert" onclick="home()">
 				<h2>
 					<b>ISG Beauty</b>
 				</h2>
@@ -113,17 +113,17 @@ select {
 		<div class="container">
 			<div class="row">
 				<div class="form-inline form-group">
-					<label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번*:</label>
-					<div class="col-sm-3">
+					<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름:</label>
+					<div class="col-sm-2">
 						<p for="mberSn" class="control-label">
-							<input type="text" class="form-control" id="mberSn" name="mberSn"
-								value="<c:out value="${result.mberSn}" />" readonly>
+							<input type="text" class="form-control" id="mberNm" name="mberNm"
+								value="<c:out value="${result.mberNm}" />" required>
 						</p>
 					</div>
 
 					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
 						직원:</label>
-					<div class="col-sm-3">
+					<div class="col-sm-2">
 						<p for="mberSn" class="control-label">
 							<input type="text" class="form-control" id="eEmpId" name="eEmpId"
 								value="<c:out value="${result.eEmpId}" />" required>
@@ -132,40 +132,37 @@ select {
 				</div>
 
 				<div class="form-inline form-group">
-					<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름:</label>
-					<div class="col-sm-3">
+					<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
+					<div class="col-sm-2">
 						<p for="mberSn" class="control-label">
-							<input type="text" class="form-control" id="mberNm" name="mberNm"
-								value="<c:out value="${result.mberNm}" />" required>
+							<input type="text" class="form-control" id="brthdy" name="brthdy"
+								value="<c:out value="${result.brthdy}"/>" required>
 						</p>
 					</div>
 
+					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호:</label>
+					<div class="col-sm-2">
+						<p for="mberSn" class="control-label">
+							<input type="text" class="form-control" id="telno" name="telno"
+								value="<c:out value="${result.telno}"/>" required>
+						</p>
+					</div>
+				</div>
+
+				<div class="form-inline form-group">
 					<label for="registId"
 						class="col-sm-2 col-sm-offset-1 control-label">등록자:</label>
-					<div class="col-sm-3">
+					<div class="col-sm-2">
 						<p for="mberSn" class="control-label">
 							<input type="text" class="form-control" id="registId"
 								name="registId" value="<c:out value="${result.registId}" />"
 								readonly>
 						</p>
 					</div>
-				</div>
-
-				<div class="form-inline form-group">
-					<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
-					<div class="col-sm-3">
-						<select type="text" class="form-control" id="sexdstn"
-							name="sexdstn">
-							<option value="${result.sexdstn}"><c:out
-									value="${result.sexdstn}" /></option>
-							<option value="Male">Male</option>
-							<option value="Female">Female</option>
-						</select>
-					</div>
 
 					<label for="registDt"
 						class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
-					<div class="col-sm-3">
+					<div class="col-sm-2">
 						<p for="mberSn" class="control-label">
 							<input type="date" class="form-control" id="registDt"
 								name="registDt" value="<c:out value="${result.registDt}"/>"
@@ -174,35 +171,18 @@ select {
 					</div>
 				</div>
 
+				<!-- 수정자, 수정일은 뒷단에 적용 예정 -->
 				<div class="form-inline form-group">
-					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호:</label>
-					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<input type="text" class="form-control" id="telno" name="telno"
-								value="<c:out value="${result.telno}"/>" required>
-						</p>
-					</div>
-
 					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">수정자:</label>
-					<div class="col-sm-3">
+					<div class="col-sm-2">
 						<p for="mberSn" class="control-label">
 							<input type="text" class="form-control" id="updtId" name="updtId"
-								value="<c:out value="${result.updtId}"/>" required>
-						</p>
-					</div>
-				</div>
-
-				<div class="form-inline form-group">
-					<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
-					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<input type="text" class="form-control" id="brthdy" name="brthdy"
-								value="<c:out value="${result.brthdy}"/>" required>
+								value="<c:out value="${result.updtId}"/>" readonly>
 						</p>
 					</div>
 
 					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">수정일:</label>
-					<div class="col-sm-3">
+					<div class="col-sm-2">
 						<p for="mberSn" class="control-label">
 							<input type="date" class="form-control" id="updtDt" name="updtDt"
 								value="<c:out value="<%=today%>"/>" readonly>
@@ -212,7 +192,7 @@ select {
 
 				<div class="form-inline form-group">
 					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">예약내용:</label>
-					<div class="col-sm-3">
+					<div class="col-sm-2">
 						<p for="mberSn" class="control-label">
 							<a href="">예약 내용</a>
 						</p>
@@ -232,3 +212,24 @@ select {
 	</form:form>
 </body>
 </html>
+
+<!-- 순번 -->
+<%-- <label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번*:</label>
+					<div class="col-sm-3">
+						<p for="mberSn" class="control-label">
+							<input type="text" class="form-control" id="mberSn" name="mberSn"
+								value="<c:out value="${result.mberSn}" />" readonly>
+						</p>
+					</div> --%>
+<!-- 성별 -->
+<%-- <label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
+					<div class="col-sm-2">
+						<select type="text" class="form-control" id="sexdstn"
+							name="sexdstn">
+							<option value="${result.sexdstn}"><c:out
+									value="${result.sexdstn}" /></option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+						</select>
+					</div> --%>
+

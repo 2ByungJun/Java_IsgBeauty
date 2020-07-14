@@ -50,8 +50,8 @@ p {
 		method="post">
 		<input type="hidden" name="selectedId" />
 		<div class="container">
-			<div class="jumbotron text-center alert-info" style="margin-top:30px" role="alert"
-				onclick="home()">
+			<div class="jumbotron text-center alert-info"
+				style="margin-top: 30px" role="alert" onclick="home()">
 				<h2>
 					<b>ISG Beauty</b>
 				</h2>
@@ -79,6 +79,8 @@ p {
 							<c:out value="${result.eEmpId}" />
 						</p>
 					</div>
+
+
 				</div>
 
 				<div class="form-inline form-group">
@@ -89,20 +91,37 @@ p {
 						</p>
 					</div>
 
-					<label for="registId"
-						class="col-sm-2 col-sm-offset-1 control-label">등록자:</label>
+					<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<c:out value="${result.registId}" />
+							<c:out value="${result.sexdstn}" />
+						</p>
+					</div>
+
+				</div>
+
+				<div class="form-inline form-group">
+					<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
+					<div class="col-sm-3">
+						<p for="mberSn" class="control-label">
+							<c:out value="${result.brthdy}" />
+						</p>
+					</div>
+
+					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호:</label>
+					<div class="col-sm-3">
+						<p for="mberSn" class="control-label">
+							<c:out value="${result.telno}" />
 						</p>
 					</div>
 				</div>
 
 				<div class="form-inline form-group">
-					<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
+					<label for="registId"
+						class="col-sm-2 col-sm-offset-1 control-label">등록자:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<c:out value="${result.sexdstn}" />
+							<c:out value="${result.registId}" />
 						</p>
 					</div>
 
@@ -116,26 +135,10 @@ p {
 				</div>
 
 				<div class="form-inline form-group">
-					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호:</label>
-					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<c:out value="${result.telno}" />
-						</p>
-					</div>
-
 					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">수정자:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
 							<c:out value="${result.updtId}" />
-						</p>
-					</div>
-				</div>
-
-				<div class="form-inline form-group">
-					<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
-					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<c:out value="${result.brthdy}" />
 						</p>
 					</div>
 
@@ -159,8 +162,10 @@ p {
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="button" class="btn btn-info" onclick="editMber('${result.mberSn}')">수정</button>
-			<button type="button" class="btn btn-danger" onclick="deleteMber('${result.mberSn}')">삭제</button>
+			<button type="button" class="btn btn-info"
+				onclick="editMber('${result.mberSn}')">수정</button>
+			<button type="button" class="btn btn-danger"
+				onclick="deleteMber('${result.mberSn}')">삭제</button>
 			<button type="button" class=" btn btn-danger" onclick="">예약상태</button>
 			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 		</div>
