@@ -49,7 +49,7 @@
 		  <if test="searchKeyword != null and searchKeyword != ''">
 				WHERE MBER_NM LIKE CONCAT('%', #{searchKeyword},'%')
 			</if>
-		  ORDER BY MBER_SN ASC
+		  ORDER BY REGIST_DT ASC
           LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
 		  <!-- t_mber_m 테이블을 인식하고, 해당 코드에선 a라는 별칭을 부여하였다. -->
 
