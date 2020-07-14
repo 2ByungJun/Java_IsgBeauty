@@ -17,6 +17,8 @@ package egovframework.example.sample.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -102,5 +104,29 @@ public class EmpService {
 	public void updateEmp(EmpVO vo) throws Exception {
 		mapper.updateEmp(vo);
 	}
+	
+/*	*//**
+	 * 로그인 체크
+	 * @param vo
+	 * @param session
+	 * @return
+	 *//*
+	public boolean loginCheck(EmpVO vo,HttpSession session) {
+		
+		boolean result = mapper.loginCheck(vo);
+		if( result == true) {
+			session.setAttribute("userId", vo.getEmpId());
+		}
+		
+		return result;
+	};
+		
+	*//**
+	 * 로그 아웃
+	 * @param session
+	 *//*
+	public void logout(HttpSession session) {
+		mapper.logout(session);
+	};*/
 
 }

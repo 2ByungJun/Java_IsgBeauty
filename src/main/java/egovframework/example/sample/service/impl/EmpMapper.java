@@ -17,6 +17,8 @@ package egovframework.example.sample.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import egovframework.example.sample.service.EmpVO;
 import egovframework.example.sample.service.MberVO;
 import egovframework.example.sample.service.SampleDefaultVO;
@@ -83,5 +85,19 @@ public interface EmpMapper {
 	 * @throws Exception
 	 */
 	void updateEmp(EmpVO vo) throws Exception;
+	
+/*	*//**
+	 * 로그인 체크
+	 * @param vo
+	 * @param session
+	 * @return
+	 *//*
+	public boolean loginCheck(EmpVO vo,HttpSession session);
+		
+	*//**
+	 * 로그아웃
+	 * @param session
+	 *//*
+	public void logout(HttpSession session);*/
 
 }

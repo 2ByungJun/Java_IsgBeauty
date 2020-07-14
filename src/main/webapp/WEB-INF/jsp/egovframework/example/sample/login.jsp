@@ -23,7 +23,8 @@
 </script>
 <body>
 	<div class="container">
-		<div class="jumbotron text-center alert-info" style="margin-top:30px" role="alert">
+		<div class="jumbotron text-center alert-info" style="margin-top: 30px"
+			role="alert">
 			<h2>
 				<b>ISG Beauty</b>
 			</h2>
@@ -33,30 +34,30 @@
 		</div>
 	</div>
 
-	<form class="form-horizontal" style="align: center;"action="/action_page.php">
+		<form class="form-horizontal" style="align: center;"action="/action_page.php">
 		<div class="form-group">
 			<label class="control-label col-sm-4" for="email">ID:</label>
 			<div class="col-sm-4">
-				<input type="email" class="form-control" id="email"
-					placeholder="Enter email">
+				<input type="text" class="form-control" id="userId" name="userId"
+					placeholder="아이디를 입력해주세요">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-4" for="pwd">Password:</label>
 			<div class="col-sm-4">
-				<input type="password" class="form-control" id="pwd"
-					placeholder="Enter password">
+				<input type="password" class="form-control" id="passwd" name="passwd"
+					placeholder="비밀번호를 입력해주세요">
 			</div>
 		</div>
 	</form>
+	
+</body>
 
 
-
-
-	<div class="container" style="text-align: center;">
-		<button type="button" class="btn btn-info" onclick="home()">로그인</button>
-		<button type="button" class=" btn btn-success" onclick="empRegister()">회원가입</button>
-	</div>
+<div class="container" style="text-align: center;">
+	<button type="button" class="btn btn-info" onclick="home()">로그인</button>
+	<button type="button" class=" btn btn-success" onclick="empRegister()">회원가입</button>
+</div>
 
 
 </body>
