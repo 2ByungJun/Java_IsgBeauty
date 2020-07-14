@@ -89,7 +89,7 @@ select {
 				<h2>
 					<b>ISG Beauty</b>
 				</h2>  
-				<p>
+				<p>  
 					<b>고객 등록 화면입니다.</b>
 				</p>
 			</div>
