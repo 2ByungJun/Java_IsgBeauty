@@ -15,11 +15,11 @@
 		<result property="updtId" column="updt_id"/>
 		<result property="updtDt" column="updt_dt"/>
 	</resultMap>
-    
+
     <select id="selectMber" parameterType="mberVO" resultMap="mber">
 
-			select MBER_SN, 
-		       E_EMP_ID,    
+			select MBER_SN,
+		       E_EMP_ID,
 		       MBER_NM,
 		       SEXDSTN,
 		       TELNO,
@@ -28,15 +28,15 @@
 		       REGIST_DT,
 		       UPDT_ID,
 		       UPDT_DT
-		  	from t_mber_m 
+		  	from t_mber_m
 			where MBER_SN =${mberSn}
 
 	</select>
-	
+
 	<select id="selectMberList" parameterType="mberVO" resultType="egovMap">
-	    
-			select a.MBER_SN, 
-		       a.E_EMP_ID,    
+
+			select a.MBER_SN,
+		       a.E_EMP_ID,
 		       a.MBER_NM,
 		       a.SEXDSTN,
 		       a.TELNO,
@@ -63,7 +63,7 @@
 			<if test="searchKeyword != null and searchKeyword != ''">
 				AND MBER_NM LIKE CONCAT('%', #{searchKeyword},'%')
 			</if>
-			
+
 			<!-- <if test="searchKeyword != null and searchKeyword != ''">
 		        <choose>
 		            <when test="searchCondition == 0">
@@ -75,28 +75,33 @@
 				</choose>
 			</if> -->
 	</select>
-	
+
 	<insert id="insertMber" parameterType="mberVO">
-	    
-	    insert into t_mber_m values (
-	    		${mberSn},
-				#{eEmpId},
-				#{mberNm},
-				#{sexdstn},
-				#{telno},
-				#{brthdy},
-				#{registId},
-				CURDATE(),
-				#{registId},
-				CURDATE()
-	    )
+	     <!--   <selectKey keyProperty="mberSn" resultType="int" order="BEFORE">
+	        select NEXTVAL(mber_seq)
+		    </selectKey> -->
+			insert into t_mber_m (
+			mber_sn, e_emp_id, mber_nm, sexdstn, telno, brthdy, regist_id, regist_dt,
+			updt_id, updt_dt)
+			values (
+			(select NEXTVAL(mber_seq)),
+			#{eEmpId},
+			#{mberNm},
+			#{sexdstn},
+			#{telno},
+			#{brthdy},
+			#{registId},
+			CURDATE(),
+			#{registId},
+			CURDATE()
+			)
 	</insert>
-	
+
 	<delete id="deleteMber">
 	    delete from t_mber_m
 	    where MBER_SN =${mberSn}
 	</delete>
-	
+
 	<update id="updateMber">
 	    update t_mber_m
 	    set E_EMP_ID=#{eEmpId},
@@ -108,6 +113,6 @@
 		    UPDT_DT=CURDATE()
 		    where MBER_SN=${mberSn}
 	</update>
-	
+
 
 </mapper>
