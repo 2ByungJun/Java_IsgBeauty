@@ -20,6 +20,7 @@ import java.util.List;
 import egovframework.example.sample.service.MberVO;
 import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.rte.psl.dataaccess.mapper.Mapper;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 /**
  * sample에 관한 데이터처리 매퍼 클래스
@@ -45,7 +46,7 @@ public interface MberMapper {
 	 *  : 패키지 이름+"."+인터페이스이름+"."+메서드이름이 네임스페이스+"."+SQL의 ID
 	 *  : SQL ID에는 매핑하는 메서드 이름을 지정하는 것이다.
 	 *  : + 메소드 명은 네임스페이스 ID랑 맞춰야 한다.
-	 *  
+	 *
 	 *  참고 링크 : https://bigstupid.tistory.com/23
 	 */
 
@@ -55,7 +56,7 @@ public interface MberMapper {
 	 * @return 글 목록
 	 * @exception Exception
 	 */
-	List<?> selectMberList(SampleDefaultVO searchVO) throws Exception;
+	List<EgovMap> selectMberList(SampleDefaultVO searchVO) throws Exception;
 
 	/**
 	 * 고객 총 수를 조회한다.
@@ -64,7 +65,7 @@ public interface MberMapper {
 	 * @exception
 	 */
 	int selectMberListTotCnt(SampleDefaultVO searchVO);
-	
+
 	/**
 	 * 고객 등록
 	 * @param vo - 등록할 정보가 담긴 SampleVO
@@ -72,7 +73,7 @@ public interface MberMapper {
 	 * @exception Exception
 	 */
 	void insertMber(MberVO vo) throws Exception;
-	
+
 	/**
 	 * 고객 상세보기
 	 * @param searchVO
@@ -87,7 +88,7 @@ public interface MberMapper {
 	 * @throws Exception
 	 */
 	void deleteMber(MberVO vo) throws Exception;
-	
+
 	/**
 	 * 고객 수정
 	 * @param vo
@@ -95,5 +96,5 @@ public interface MberMapper {
 	 */
 	void updateMber(MberVO vo) throws Exception;
 
-	
+
 }

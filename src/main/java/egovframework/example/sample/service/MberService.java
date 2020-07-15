@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 
 import egovframework.example.sample.service.impl.MberMapper;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 /**
  * @Class Name : EgovSampleService.java
@@ -48,7 +49,7 @@ public class MberService {
 	 * @Autowired
 	 *  : 의존 자동 주입 기능
 	 *  : XML설정에서 의존 주입 관련 설정을 별도로 하지 않아도 된다.
-	 *  
+	 *
 	 *  참고 링크 : https://m.blog.naver.com/PostView.nhn?blogId=sksk3479&logNo=221178451242&proxyReferer=https:%2F%2Fwww.google.com%2F
 	 */
 	@Autowired
@@ -60,7 +61,7 @@ public class MberService {
 	 * @return 글 목록
 	 * @exception Exception
 	 */
-	public List<?> selectMberList(SampleDefaultVO vo) throws Exception {
+	public List<EgovMap> selectMberList(SampleDefaultVO vo) throws Exception {
 		 return mapper.selectMberList(vo);
 	}
 
@@ -73,7 +74,7 @@ public class MberService {
 	public int selectMberListTotCnt(SampleDefaultVO vo) throws Exception {
 		 return mapper.selectMberListTotCnt(vo);
 	}
-	
+
 	/**
 	 * 고객 등록
 	 * @param vo
@@ -82,7 +83,7 @@ public class MberService {
 	public void insertMber(MberVO vo) throws Exception {
 		mapper.insertMber(vo);
 	}
-	
+
 	/**
 	 * 고객 조회
 	 * @param vo
@@ -92,7 +93,7 @@ public class MberService {
 	public MberVO selectMber(MberVO vo) throws Exception {
 		return mapper.selectMber(vo);
 	}
-	
+
 	/**
 	 * 고객 삭제
 	 * @param vo
@@ -101,7 +102,7 @@ public class MberService {
 	public void deleteMber(MberVO vo) throws Exception {
 		mapper.deleteMber(vo);
 	}
-	
+
 	/**
 	 * 고객 수정
 	 * @param vo

@@ -22,7 +22,6 @@ import javax.json.JsonObject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -40,6 +39,7 @@ import egovframework.example.sample.service.MberVO;
 import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.rte.fdl.property.EgovPropertyService;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+import net.sf.json.JSONObject;
 
 /**
  * @Class Name : EgovSampleController.java
@@ -147,55 +147,11 @@ public class IsgBeautyController {
 	public String mberList(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[고객 리스트]");
 
-		return "sample/mberList";
-	}
-
-
-  @ResponseBody
-	@RequestMapping(value = "/mberList.json")
-	public String mberListJson(@ModelAttribute("searchVO") SampleDefaultVO searchVO,  ModelMap model, HttpServletRequest request, HttpServletResponse response) throws Exception  {
-	  System.out.println("sfc/reagent/selectReagentList.json----------");
-
-/*		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
-		searchVO.setPageSize(propertiesService.getInt("pageSize"));
-
-		PaginationInfo paginationInfo = new PaginationInfo();
-		paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
-		paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
-		paginationInfo.setPageSize(searchVO.getPageSize());
-
-		searchVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
-		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
-		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());*/
-
-		List<?> mberList = mberService.selectMberList(searchVO);
-		model.addAttribute("mberList", mberList);
-
-		int totCnt = mberService.selectMberListTotCnt(searchVO);
-		/*paginationInfo.setTotalRecordCount(totCnt);
-		model.addAttribute("paginationInfo", paginationInfo);
-*/
-	   JSONObject jsonString = new JSONObject();
-
-       jsonString.put("dataCnt", totCnt);
-       jsonString.put("data", mberList);
-
-		response.setContentType("text/json; charset=UTF-8");
-		response.getOutputStream().write(jsonString.toString().getBytes("UTF-8"));
-
-		return "";
-
-	}
-
-/*	@RequestMapping(value = "/mberList.json")
-	public String mberListJson(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
-		System.out.println("[고객 리스트]");
-
-		*//** EgovPropertyService.sample *//*
+		/** EgovPropertyService.sample */
 		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
 		searchVO.setPageSize(propertiesService.getInt("pageSize"));
 
-		*//** pageing setting *//*
+		/** pageing setting */
 		PaginationInfo paginationInfo = new PaginationInfo();
 		paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
 		paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
@@ -213,7 +169,30 @@ public class IsgBeautyController {
 		model.addAttribute("paginationInfo", paginationInfo);
 
 		return "sample/mberList";
-	}*/
+	}
+
+
+	/*@ResponseBody
+	@RequestMapping(value = "/mberList.json")
+	public void mberListJson(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		System.out.println("sfc/reagent/selectReagentList.json----------");
+
+		List<?> mberList = mberService.selectMberList(searchVO);
+
+		int totCnt = mberService.selectMberListTotCnt(searchVO);
+
+		JSONObject jsonString = new JSONObject();
+
+		jsonString.put("dataCnt", totCnt);
+		jsonString.put("data", mberList);
+
+		response.setContentType("text/json; charset=UTF-8");
+		response.getOutputStream().write(jsonString.toString().getBytes("UTF-8"));
+
+	}
+*/
 
 	/**
 	 * 직원 리스트
