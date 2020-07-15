@@ -124,10 +124,14 @@ select {
 					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
 						직원:</label>
 					<div class="col-sm-2">
-						<p for="mberSn" class="control-label">
-							<input type="text" class="form-control" id="eEmpId" name="eEmpId"
-								value="<c:out value="${result.eEmpId}" />" required>
-						</p>
+						<select type="text" class="form-control" id="eEmpId" name="eEmpId">
+						<option value="${result.eEmpId}"><c:out
+									value="${result.empNm}" /></option>
+							<c:forEach var="listEmpNM" items="${listEmpNM}"
+								varStatus="status">
+								<option value="${listEmpNM.empId}">${listEmpNM.empNm}</option>
+							</c:forEach>
+						</select>
 					</div>
 				</div>
 
@@ -172,6 +176,19 @@ select {
 				</div>
 
 				<div class="form-inline form-group">
+					<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
+					<div class="col-sm-2">
+						<select type="text" class="form-control" id="sexdstn"
+							name="sexdstn">
+							<option value="${result.sexdstn}"><c:out
+									value="${result.sexdstn}" /></option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-inline form-group">
 					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">예약내용:</label>
 					<div class="col-sm-2">
 						<p for="mberSn" class="control-label">
@@ -200,15 +217,22 @@ select {
 				</p>
 			</div>
 
-			<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">수정일:</label>
+<%-- 			<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">수정일:</label>
 			<div class="col-sm-2">
 				<p for="mberSn" class="control-label">
 					<input type="date" class="form-control" id="updtDt" name="updtDt"
 						value="<c:out value="<%=today%>"/>" readonly>
 				</p>
 			</div>
+ --%>
+			<label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번*:</label>
+			<div class="col-sm-3">
+				<p for="mberSn" class="control-label">
+					<input type="text" class="form-control" id="mberSn" name="mberSn"
+						value="<c:out value="${result.mberSn}" />" readonly>
+				</p>
+			</div>
 		</div>
-
 	</form:form>
 </body>
 </html>

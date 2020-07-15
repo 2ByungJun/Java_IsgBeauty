@@ -267,13 +267,17 @@ public class IsgBeautyController {
 	 */
 	@RequestMapping("/mberEdit.do")
 	public String mberEdit(@RequestParam("selectedId") String mberSn,
-			@ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
+			@ModelAttribute("searchVO") EmpVO searchVO, Model model) throws Exception {
 		System.out.println("[고객 수정화면]");
 		
 		MberVO sampleVO = new MberVO();
 		sampleVO.setMberSn(mberSn);
 		// 변수명은 CoC 에 따라 sampleVO
 		model.addAttribute("result", selectMber(sampleVO, searchVO));
+		
+		List<?> listEmpNM = empService.selectListEmpNM(searchVO);
+		model.addAttribute("listEmpNM", listEmpNM);
+		
 		return "sample/mberEdit";
 	}
 	
