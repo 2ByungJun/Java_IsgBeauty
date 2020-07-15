@@ -13,6 +13,59 @@
 <script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
+
+
+	/* $(document).ready(function() {
+		fnSelectJsonList(1);
+	});
+
+	function fnSelectJsonList(pageNo){
+	    var url  =  "<c:url value='/mberList.json'/>";
+	     $.post(url,{},function(data){
+	    	console.log(data);
+
+	    });
+
+		 $.ajax({
+			headers: {
+			    Accept: "application/json;utf-8"
+			  }
+			,dataType: "json"
+			,type: "POST"
+			,url: url
+			,data: []
+		    ,success:function(data){
+		    	console.log(data)
+		    	  var html = '';
+				if(data.data.length==0){
+					html += '<tr>';
+					html += '	<td colspan="5" style="text-align:center">표시할 데이터가 없습니다.</td>';
+					html += '</tr>';
+				}else{
+					$.each(data.data, function(index, item) {
+						html += '<tr>';
+						html += '	<td class="text-center"><input type="checkbox" name="chk"  value="'+item.reagentSeq+'"></td>';
+						var onclick = "fnEgovSelect('"+item.reagentSeq+"');"
+						html += '	<td class="table-title"><a href="javascript:void(0);" onclick="'+onclick+'" class="text-truncate">'+item.reagentNm+'</a></td>';
+						html += '	<td>'+item.stndrd+'</td>';
+						html += '	<td>'+item.qy+'</td>';
+						html += '	<td>'+item.reagentRlSeq+'</td>';
+						html += '	<td><button type="button" onclick="fnManage();"	class="btn-outline-secondary"> 재고관리</button></td>';
+						html += '</tr>';
+					});
+				}
+				$('#tableList').html(html);
+			}
+			,error:function(e){
+			   	console.log(e.status, e.statusText);
+			   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
+			}
+		});
+
+	} */
+
+
+
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
@@ -102,7 +155,7 @@
 									<td style="width: 15%" align="center"><b>수정일</b></td>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="tableList">
 								<c:forEach var="result" items="${mberList}" varStatus="status">
 									<tr>
 										<td align="center" class="listtd"><c:out
