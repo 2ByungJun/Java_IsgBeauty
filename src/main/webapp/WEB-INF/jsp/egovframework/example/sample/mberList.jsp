@@ -116,7 +116,7 @@
 										<td align="center" class="listtd"><c:out
 												value="${result.telno}" />&nbsp;</td>
 										<td align="center" class="listtd"><c:out
-												value="${result.eEmpId}" />&nbsp;</td>
+												value="${result.empNm}" />&nbsp;</td>
 										<td align="center" class="listtd"><c:out
 												value="${result.registDt}" />&nbsp;</td>
 										<td align="center" class="listtd"><c:out
