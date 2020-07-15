@@ -112,7 +112,7 @@
 	</update>
 
 	<select id="selectListEmpNM" parameterType="empVO" resultMap="emp">
-		SELECT EMP_NM
+		SELECT EMP_ID,EMP_NM
 		FROM t_emp_m
 		WHERE PSPOFC="Designer"
 	</select>

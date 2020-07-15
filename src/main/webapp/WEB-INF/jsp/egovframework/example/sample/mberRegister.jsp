@@ -51,26 +51,26 @@
 					alert("취소하셨습니다.");
 				}
 			},
-			rules: {
-				mberNm: {
+			rules : {
+				mberNm : {
 					required : true
 				},
-				telno: {
+				telno : {
 					required : true,
-					digits : true
+				/* digits : true */
 				},
-				brthdy: {
+				brthdy : {
 					required : true,
 					digits : true
 				}
 			},
-			messages: {
+			messages : {
 				mberNm : {
 					required : "필수 입력 항목입니다."
 				},
 				telno : {
 					required : "필수 입력 항목입니다.",
-					digits : "숫자만 입력할 수 있습니다."
+				/* digits : "숫자만 입력할 수 있습니다." */
 				},
 				brthdy : {
 					required : "필수 입력 항목입니다.",
@@ -79,8 +79,6 @@
 			}
 		});
 	});
-
-	$('.form-inline .form-control').removeAttr('width');
 </script>
 </head>
 <style>
@@ -123,18 +121,17 @@ select {
 				<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름*:</label>
 				<div class="col-xs-2">
 					<input type="text" class="form-control" id="mberNm" name="mberNm"
-						required>
+						placeholder="이름을 입력하세요" maxlength="10" required>
 				</div>
-
+				
 				<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
 					직원*:</label>
 				<div class="col-md-2">
-					<select type="text" class="form-control" id="empNm" name="empNm"
-						>
+						<select type="text" class="form-control" id="eEmpId" name="eEmpId">
 						<c:forEach var="result" items="${listEmpNM}" varStatus="status">
-							<option value=`${result.empNm}`>${result.empNm}</option>
-						</c:forEach>
-					</select>
+							<option value="${result.empId}">${result.empNm}</option>
+							</c:forEach>
+						</select>
 				</div>
 			</div>
 
@@ -142,13 +139,14 @@ select {
 				<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호*:</label>
 				<div class="col-md-2">
 					<input type="text" class="form-control" id="telno" name="telno"
-						required>
+						pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}" title="###-####-####"
+						placeholder="###-####-####" required>
 				</div>
 
 				<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별*:</label>
 				<div class="col-md-2">
 					<select type="text" class="form-control" id="sexdstn"
-						name="sexdstn" >
+						name="sexdstn">
 						<option value="Male" selected="selected">Male</option>
 						<option value="Female">Female</option>
 					</select>
@@ -158,7 +156,8 @@ select {
 			<div class="form-inline form-group">
 				<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
 				<div class="col-md-2">
-					<input type="text" class="form-control" id="brthdy" name="brthdy">
+					<input type="text" class="form-control" id="brthdy" name="brthdy"
+						pattern="[0-9]{6}" title="주민번호 앞 6자리를 입력해주세요." placeholder="생년월일을 6자리">
 				</div>
 			</div>
 
