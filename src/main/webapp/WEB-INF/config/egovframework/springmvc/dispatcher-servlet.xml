@@ -13,6 +13,22 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
     </context:component-scan>
 
+	<!-- Annotation 활성화 -->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <!-- @ResponseBody로 String 처리할때 한글처리 -->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes" value="text/html;charset=UTF-8"/>
+            </bean>
+            <!-- pom에 jackson dependency 있어야함 -->
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes" value="application/json;charset=UTF-8" />
+            </bean>
+            <bean class="org.springframework.http.converter.FormHttpMessageConverter" />
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="webBindingInitializer">
             <bean class="egovframework.example.cmmn.web.EgovBindingInitializer"/>
@@ -25,7 +41,7 @@
             </list>
         </property>
     </bean>
-    
+
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
     <!-- 쿠키를 이용한 Locale 이용시 <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"/> -->
     <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
@@ -59,6 +75,11 @@
         </property>
     </bean>
 	<!-- /For Pagination Tag -->
-
+   <!--  <mvc:interceptors>
+         <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <bean id="logonInterceptor" class="egovframework.example.inteceptor.LogonInterceptor" />
+         </mvc:interceptor>
+    </mvc:interceptors> -->
     <mvc:view-controller path="/cmmn/validator.do" view-name="cmmn/validator"/>
 </beans>
