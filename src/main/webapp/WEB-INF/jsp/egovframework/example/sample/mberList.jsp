@@ -15,13 +15,18 @@
 <script type="text/javaScript" language="javascript" defer="defer">
 
 
-	$(document).ready(function() {
+	/* $(document).ready(function() {
 		fnSelectJsonList(1);
 	});
 
 	function fnSelectJsonList(pageNo){
 	    var url  =  "<c:url value='/mberList.json'/>";
-		$.ajax({
+	     $.post(url,{},function(data){
+	    	console.log(data);
+
+	    });
+
+		 $.ajax({
 			headers: {
 			    Accept: "application/json;utf-8"
 			  }
@@ -31,7 +36,7 @@
 			,data: []
 		    ,success:function(data){
 		    	console.log(data)
-		    	/*  var html = '';
+		    	  var html = '';
 				if(data.data.length==0){
 					html += '<tr>';
 					html += '	<td colspan="5" style="text-align:center">표시할 데이터가 없습니다.</td>';
@@ -49,7 +54,7 @@
 						html += '</tr>';
 					});
 				}
-				$('#tableList').html(html);  */
+				$('#tableList').html(html);
 			}
 			,error:function(e){
 			   	console.log(e.status, e.statusText);
@@ -57,7 +62,7 @@
 			}
 		});
 
-	}
+	} */
 
 
 
@@ -151,7 +156,7 @@
 								</tr>
 							</thead>
 							<tbody id="tableList">
-								<%-- <c:forEach var="result" items="${mberList}" varStatus="status">
+								<c:forEach var="result" items="${mberList}" varStatus="status">
 									<tr>
 										<td align="center" class="listtd"><c:out
 												value="${status.count+(paginationInfo.currentPageNo-1)*10}" /></td>
@@ -170,15 +175,15 @@
 										<td align="center" class="listtd"><c:out
 												value="${result.updtDt}" />&nbsp;</td>
 									</tr>
-								</c:forEach> --%>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
 				<div class="text-center">
 					<div id="paging">
-					<%-- 	<ui:pagination paginationInfo="${paginationInfo}" type="image"
-							jsFunction="fn_egov_link_page" /> --%>
+						<ui:pagination paginationInfo="${paginationInfo}" type="image"
+							jsFunction="fn_egov_link_page" />
 						<form:hidden path="pageIndex" />
 					</div>
 				</div>
