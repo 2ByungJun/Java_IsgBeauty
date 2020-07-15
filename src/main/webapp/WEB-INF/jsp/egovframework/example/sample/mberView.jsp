@@ -76,11 +76,9 @@ p {
 						직원:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
-							<c:out value="${result.eEmpId}" />
+							<c:out value="${result.empNm}" />
 						</p>
 					</div>
-
-
 				</div>
 
 				<div class="form-inline form-group">

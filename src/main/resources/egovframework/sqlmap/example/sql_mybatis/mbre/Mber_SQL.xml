@@ -27,7 +27,12 @@
 		       REGIST_ID,
 		       REGIST_DT,
 		       UPDT_ID,
-		       UPDT_DT
+		       UPDT_DT,(
+		       	select EMP_NM
+		       	from t_emp_m b
+		       	where 1=1
+		       	and b.EMP_ID = t_mber_m.E_EMP_ID
+		       ) AS empNm
 		  	from t_mber_m
 			where MBER_SN =${mberSn}
 
@@ -44,7 +49,14 @@
 		       a.REGIST_ID,
 		       a.REGIST_DT,
 		       a.UPDT_ID,
-		       a.UPDT_DT
+		       a.UPDT_DT,
+		       (
+		       select EMP_NM
+		       from t_emp_m b
+		       WHERE 1=1
+		       AND b.EMP_ID = a.E_EMP_ID
+		       )
+		       AS empNm
 		  from t_mber_m a
 		  <if test="searchKeyword != null and searchKeyword != ''">
 				WHERE MBER_NM LIKE CONCAT('%', #{searchKeyword},'%')

@@ -46,6 +46,7 @@ public class MberVO extends SampleDefaultVO {
 	private String registDt;
 	private String updtId;
 	private String updtDt;
+	private String empNm;
 
 
 	public String getMberSn() {
@@ -108,6 +109,14 @@ public class MberVO extends SampleDefaultVO {
 	public void setUpdtDt(String updtDt) {
 		this.updtDt = updtDt;
 	}
+	public String getEmpNm() {
+		return empNm;
+	}
+	public void setEmpNm(String empNm) {
+		this.empNm = empNm;
+	}
+	
+	
 }
 
 
