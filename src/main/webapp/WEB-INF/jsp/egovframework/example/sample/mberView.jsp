@@ -79,8 +79,6 @@ p {
 							<c:out value="${result.empNm}" />
 						</p>
 					</div>
-
-
 				</div>
 
 				<div class="form-inline form-group">
