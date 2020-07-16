@@ -36,12 +36,6 @@
 		document.detailForm.action = "<c:url value='/mberEdit.do'/>";
 		document.detailForm.submit();
 	}
-	
-	function resveRegister(id) {
-		document.detailForm.selectedId.value = id;
-		document.detailForm.action = "<c:url value='/resveRegister.do'/>";
-		document.detailForm.submit();
-	}
 </script>
 <style>
 label {
@@ -172,7 +166,6 @@ p {
 				onclick="editMber('${result.mberSn}')">수정</button>
 			<button type="button" class="btn btn-danger"
 				onclick="deleteMber('${result.mberSn}')">삭제</button>
-			<button type="button" class=" btn btn-danger" onclick="resveRegister('${result.mberSn}')">예약등록</button>
 			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 		</div>
 

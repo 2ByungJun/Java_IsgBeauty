@@ -19,26 +19,20 @@
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
-	function view(id) {
-		document.detailForm.selectedId.value = id;
-		document.detailForm.action = "<c:url value='/mberView.do'/>";
-		document.detailForm.submit();
-	}
-	
-	function home() {
-		location.href = "<c:url value='/mberList.do'/>";
+	function resveView() {
+		location.href = "<c:url value='/resveView.do'/>";
 	}
 
 	/* 글 등록 function */
 	function saveResve() {
 		var check;
-		check = confirm("해당 예약을 진행하시겠습니까?");
+		check = confirm("예약을 진행하시겠습니까?");
 
 		if (check) {
 			alert("예약되었습니다.");
-			frm = document.detailForm;
+			/* frm = document.detailForm;
 			frm.action = "<c:url value= '/addResve.do'/>";
-			frm.submit();
+			frm.submit(); */
 		} else {
 			alert("취소하셨습니다.");
 		}
@@ -74,11 +68,7 @@ select {
 				<h2>
 					<b>ISG Beauty</b>
 				</h2>
-				<h4 for="mberSn" class="control-label">
-					'
-					<c:out value="${result.mberNm}" />
-					'님 예약등록
-				</h4>
+				<h4 class="control-label">고객들의 예약님의 도와드립니다!</h4>
 			</div>
 		</div>
 
@@ -88,7 +78,24 @@ select {
 				<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">예약자*:</label>
 				<div class="col-xs-2">
 					<input type="text" class="form-control" id="mberNm" name="mberNm"
-						value="<c:out value="${result.mberNm}" />" readonly>
+						value="<c:out value="예약자명" />" readonly>
+				</div>
+
+				<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">예약일시*:</label>
+				<div class="col-md-2">
+					<input type="date" class="form-control" id="resveDt" name="resveDt"
+						required>
+				</div>
+			</div>
+
+			<div class="form-inline form-group">
+				<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">시술명*:</label>
+				<div class="col-md-2">
+					<select type="text" class="form-control" id="treSN" name="treSN">
+						<option value="">컷팅</option>
+						<option value="">펌</option>
+						<option value="">염색</option>
+					</select>
 				</div>
 
 				<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
@@ -96,25 +103,8 @@ select {
 				<div class="col-md-2">
 					<select type="text" class="form-control" id="eEmpId" name="eEmpId">
 						<c:forEach var="result" items="${listEmpNM}" varStatus="status">
-							<option value="${result.empId}">${result.empNm}</option>
+<%-- 							<option value="${result.empId}">${result.empNm}</option> --%>
 						</c:forEach>
-					</select>
-				</div>
-			</div>
-
-			<div class="form-inline form-group">
-				<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">예약일시*:</label>
-				<div class="col-md-2">
-					<input type="date" class="form-control" id="resveDt" name="resveDt"
-						required>
-				</div>
-
-				<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">시술명*:</label>
-				<div class="col-md-2">
-					<select type="text" class="form-control" id="treSN" name="treSN">
-						<option value="">컷팅</option>
-						<option value="">펌</option>
-						<option value="">염색</option>
 					</select>
 				</div>
 			</div>
@@ -135,11 +125,8 @@ select {
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px">
-			<button type="submit" class="btn btn-success" onclick="">등록</button>
-			<%-- <button type="button" class=" btn btn-info"
-				onclick="view('${result.mberSn}')">이전</button> --%>
-				<button type="button" class=" btn btn-info"
-				onclick="home()">이전</button>
+			<button type="submit" class="btn btn-success" onclick="resveView()">등록</button>
+			<button type="button" class=" btn btn-info" onclick="resveView()">이전</button>
 		</div>
 
 	</form:form>
