@@ -15,7 +15,9 @@
  */
 package egovframework.example.sample.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.json.JsonObject;
@@ -36,6 +38,7 @@ import egovframework.example.sample.service.EmpService;
 import egovframework.example.sample.service.EmpVO;
 import egovframework.example.sample.service.MberService;
 import egovframework.example.sample.service.MberVO;
+import egovframework.example.sample.service.Paging;
 import egovframework.example.sample.service.ResveService;
 import egovframework.example.sample.service.ResveVO;
 import egovframework.example.sample.service.SampleDefaultVO;
@@ -68,7 +71,7 @@ public class IsgBeautyController {
 	/** mberService */
 	@Resource(name = "empService")
 	private EmpService empService;
-	
+
 	/** resveService */
 	@Resource(name = "resveService")
 	private ResveService resveService;
@@ -178,27 +181,29 @@ public class IsgBeautyController {
 	}
 
 
-	/*@ResponseBody
+	@ResponseBody
 	@RequestMapping(value = "/mberList.json")
 	public void mberListJson(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("sfc/reagent/selectReagentList.json----------");
+		System.out.println("json@@@@@@@@@@@@@@@@@@@@@@@");
 
-		List<?> mberList = mberService.selectMberList(searchVO);
+		List<egovMap> mberList = mberService.selectMberList(searchVO);
 
 		int totCnt = mberService.selectMberListTotCnt(searchVO);
 
-		JSONObject jsonString = new JSONObject();
+		Paging paging = new Paging();
 
-		jsonString.put("dataCnt", totCnt);
-		jsonString.put("data", mberList);
+		paging.setPageCount((mberService.selectMberListTotCnt(searchVO)/10)+1);
+		paging.setPageNo(searchVO.getPageIndex());
 
-		response.setContentType("text/json; charset=UTF-8");
-		response.getOutputStream().write(jsonString.toString().getBytes("UTF-8"));
+		Map<String, Object> arrayMap = new HashMap<>();
+		arrayMap.put("pages", paging);
+		arrayMap.put("dataList", mberList);
+		arrayMap.put("datacnt", totcnt);
+
 
 	}
-*/
 
 	/**
 	 * 직원 리스트
@@ -288,7 +293,7 @@ public class IsgBeautyController {
 		sampleVO.setMberSn(mberSn);
 		// 변수명은 CoC 에 따라 sampleVO
 		model.addAttribute("result", selectMber(sampleVO, searchVO));
-		
+
 		return "sample/mberView";
 	}
 
@@ -309,10 +314,10 @@ public class IsgBeautyController {
 		sampleVO.setMberSn(mberSn);
 		// 변수명은 CoC 에 따라 sampleVO
 		model.addAttribute("result", selectMber(sampleVO, searchVO));
-		
+
 		List<?> listEmpNM = empService.selectListEmpNM(searchVO);
 		model.addAttribute("listEmpNM", listEmpNM);
-		
+
 		return "sample/mberEdit";
 	}
 
@@ -483,7 +488,7 @@ public class IsgBeautyController {
 	@RequestMapping(value = "/resveRegister.do")
 	public String resveRegister(@RequestParam("selectedId") String mberSn, @ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
 		System.out.println("[예약 등록 페이지]");
-		
+
 		MberVO sampleVO = new MberVO();
 		sampleVO.setMberSn(mberSn);
 		model.addAttribute("result", selectMber(sampleVO, searchVO));
@@ -502,14 +507,14 @@ public class IsgBeautyController {
 	@RequestMapping(value = "/addResve.do", method = RequestMethod.POST)
 	public String addResve(@ModelAttribute("searchVO") ResveVO searchVO) throws Exception {
 		System.out.println("[예약 등록]");
-		
+
 		resveService.insertResve(searchVO);
 		return "forward:/resveView.do";
 	}
-	
+
 	/**
 	 * 예약 뷰
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(value = "/resveView.do")
@@ -518,7 +523,7 @@ public class IsgBeautyController {
 
 		return "sample/resveView";
 	}
-	
+
 	/**
 	 * 글 등록 화면을 조회한다.
 	 *
