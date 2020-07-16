@@ -8,6 +8,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>IsgBeauty 프로젝트</title>
+
+
+<link rel="stylesheet" href="<c:url  value='js/main.css'/>">
+<link rel="stylesheet" href="<c:url  value='js/main.min.css'/>">
+<script src="<c:url value='js/main.js' />"></script>
+<script src="<c:url value='js/main.min.js'/>"></script>
+
 <link rel="stylesheet"
 	href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
 <script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
@@ -17,6 +24,15 @@
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
+
+	document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
+	
 </script>
 <body>
 	<div class="container">
@@ -29,17 +45,12 @@
 				<b>예약 캘린더</b>
 			</p>
 		</div>
+
+		<button type="button" style="margin-bottom:10px;" class="btn btn-danger" onclick="home()">이전</button>
+
+		<div id="calendar"></div>
+
 	</div>
-
-	
 </body>
 
-
-<div class="container" style="text-align: center;">
-	<button type="button" class="btn btn-success" onclick="">등록</button>
-	<button type="button" class=" btn btn-info" onclick="home()">이전</button>
-</div>
-
-
-</body>
 </html>
