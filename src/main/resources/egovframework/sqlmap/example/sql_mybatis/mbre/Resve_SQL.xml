@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.example.sample.service.impl.ResveMapper">
+
+    <!-- Resve -->
+    <resultMap id="resve" type="resveVO">
+		<result property="resveSn" column="resve_sn"/>
+		<result property="mberSn" column="mber_sn"/>
+		<result property="resveDt" column="resve_dt"/>
+		<result property="resveCn" column="resve_cn"/>
+		<result property="pymntMthd" column="pymnt_mthd"/>
+		<result property="pymntAmount" column="pymnt_amount"/>
+		<result property="processSttus" column="process_sttus"/>
+		<result property="registId" column="regist_id"/>
+		<result property="registDt" column="regist_dt"/>
+		<result property="updtId" column="updt_id"/>
+		<result property="updtDt" column="updt_dt"/>
+	</resultMap>
+
+    <select id="selectResve" parameterType="resveVO" resultMap="resve">
+
+			select RESVE_SN,
+			   MBER_SN,
+		       RESVE_DT,
+		       RESVE_CN,
+		       PYMNT_MTHD,
+		       PYMNT_AMOUNT,
+		       PROCESS_STTUS,
+		       REGIST_ID,
+		       REGIST_DT,
+		       UPDT_ID,
+		       UPDT_DT
+		  	from t_resve_m
+			where 1=1
+
+	</select>
+
+	<select id="selectResveList" parameterType="resveVO" resultType="egovMap">
+
+			select a.RESVE_SN,
+			   a.MBER_SN,
+		       a.RESVE_DT,
+		       a.RESVE_CN,
+		       a.PYMNT_MTHD,
+		       a.PROCESS_STTUS,
+		       a.REGIST_ID,
+		       a.REGIST_DT,
+		       a.UPDT_ID,
+		       a.UPDT_DT
+		  from t_resve_m a
+	</select>
+
+	<select id="selectResveListTotCnt" parameterType="resveVO" resultType="int">
+
+			SELECT COUNT(*) totcnt
+			FROM t_resve_m
+			WHERE 1=1
+	</select>
+
+
+	<insert id="insertResve" parameterType="resveVO">
+			insert into t_resve_m (
+			resve_sn, mber_sn, resve_dt, resve_cn, pymnt_mthd, pymnt_amount, process_sttus, regist_id, regist_dt,
+			updt_id, updt_dt)
+			values (
+		<!-- 	(select NEXTVAL(mber_seq)), -->
+		   #{resveSn},
+			#{mberSn},
+			#{resveDt},
+			#{resveCn},
+			#{pymntMthd},
+			#{pymntAmount},
+			#{processSttus},
+			#{registId},
+			CURDATE(),
+			#{registId},
+			CURDATE()
+			)
+	</insert>
+
+	<delete id="deleteResve">
+	    delete from t_resve_m
+	    where RESVE_SN =${resveSn}
+	</delete>
+
+<!-- 	<update id="updateResve">
+	    update t_resve_m
+	    set E_EMP_ID=#{eEmpId},
+	    	MBER_NM=#{mberNm},
+	    	SEXDSTN=#{sexdstn},
+	    	TELNO=#{telno},
+		    BRTHDY=#{brthdy},
+		    UPDT_ID=#{updtId},
+		    UPDT_DT=CURDATE()
+		    where MBER_SN=${mberSn}
+	</update> -->
+
+
+</mapper>

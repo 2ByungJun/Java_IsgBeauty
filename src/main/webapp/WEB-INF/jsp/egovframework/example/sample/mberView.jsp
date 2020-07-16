@@ -16,6 +16,7 @@
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
+	
 	function deleteMber(id) {
 		var check;
 		check = confirm("정말로 해당 고객님을 삭제하시겠습니까?");
@@ -29,9 +30,16 @@
 			alert("취소하셨습니다.");
 		}
 	}
+	
 	function editMber(id) {
 		document.detailForm.selectedId.value = id;
 		document.detailForm.action = "<c:url value='/mberEdit.do'/>";
+		document.detailForm.submit();
+	}
+	
+	function resveRegister(id) {
+		document.detailForm.selectedId.value = id;
+		document.detailForm.action = "<c:url value='/resveRegister.do'/>";
 		document.detailForm.submit();
 	}
 </script>
@@ -164,7 +172,7 @@ p {
 				onclick="editMber('${result.mberSn}')">수정</button>
 			<button type="button" class="btn btn-danger"
 				onclick="deleteMber('${result.mberSn}')">삭제</button>
-			<button type="button" class=" btn btn-danger" onclick="">예약상태</button>
+			<button type="button" class=" btn btn-danger" onclick="resveRegister('${result.mberSn}')">예약등록</button>
 			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 		</div>
 

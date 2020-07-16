@@ -36,6 +36,8 @@ import egovframework.example.sample.service.EmpService;
 import egovframework.example.sample.service.EmpVO;
 import egovframework.example.sample.service.MberService;
 import egovframework.example.sample.service.MberVO;
+import egovframework.example.sample.service.ResveService;
+import egovframework.example.sample.service.ResveVO;
 import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.rte.fdl.property.EgovPropertyService;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
@@ -66,6 +68,10 @@ public class IsgBeautyController {
 	/** mberService */
 	@Resource(name = "empService")
 	private EmpService empService;
+	
+	/** resveService */
+	@Resource(name = "resveService")
+	private ResveService resveService;
 
 	/** EgovPropertyService */
 	@Resource(name = "propertiesService")
@@ -282,6 +288,7 @@ public class IsgBeautyController {
 		sampleVO.setMberSn(mberSn);
 		// 변수명은 CoC 에 따라 sampleVO
 		model.addAttribute("result", selectMber(sampleVO, searchVO));
+		
 		return "sample/mberView";
 	}
 
@@ -465,6 +472,45 @@ public class IsgBeautyController {
 	}
 
 
+	/**
+	 * 예약 등록 페이지
+	 *
+	 * @param searchVO
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/resveRegister.do")
+	public String resveRegister(@RequestParam("selectedId") String mberSn, @ModelAttribute("searchVO") EmpVO searchVO, Model model) throws Exception {
+		System.out.println("[예약 등록 페이지]");
+		
+		MberVO sampleVO = new MberVO();
+		sampleVO.setMberSn(mberSn);
+		model.addAttribute("result", selectMber(sampleVO, searchVO));
+
+		List<?> listEmpNM = empService.selectListEmpNM(searchVO);
+		model.addAttribute("listEmpNM", listEmpNM);
+
+		return "sample/resveRegister";
+	}
+
+	/**
+	 * 예약 등록 기능
+	 *
+	 * @param searchVO
+	 * @param sampleVO
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/addResve.do", method = RequestMethod.POST)
+	public String addResve(@RequestParam("selectedId") String mberSn, @ModelAttribute("searchVO") ResveVO searchVO) throws Exception {
+		System.out.println("[예약 등록]");
+		
+		resveService.insertResve(searchVO);
+		return "forward:/mberView.do";
+	}
+	
+	
 	/**
 	 * 글 등록 화면을 조회한다.
 	 *
