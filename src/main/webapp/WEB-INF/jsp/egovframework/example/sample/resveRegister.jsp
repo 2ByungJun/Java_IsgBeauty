@@ -127,8 +127,8 @@ select {
 				</div>
 			</div>
 			
-			<input type="hidden" id="resveSn" name="resveSn"
-						value="<c:out value="2" />">
+			<%-- <input type="hidden" id="resveSn" name="resveSn"
+						value="<c:out value="2" />"> --%>
 			<input type="hidden" id="mberSn" name="mberSn"
 						value="<c:out value="${result.mberSn}" />">
 			<input type="hidden" id="processSttus" name="processSttus"

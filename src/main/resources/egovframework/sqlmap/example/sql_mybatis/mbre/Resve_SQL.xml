@@ -51,6 +51,9 @@
 
 
 	<insert id="insertResve" parameterType="resveVO">
+	    <selectKey keyProperty="resveSn" resultType="string" order="BEFORE">
+	        select NEXTVAL(resve_seq) from dual
+		    </selectKey>
 			insert into t_resve_m (resve_sn, mber_sn, resve_dt, resve_time, tretment_nm, process_sttus, regist_id, regist_dt)
 				values (
 		   		#{resveSn},
