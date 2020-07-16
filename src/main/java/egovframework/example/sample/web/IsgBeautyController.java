@@ -510,6 +510,17 @@ public class IsgBeautyController {
 		return "forward:/mberView.do";
 	}
 	
+	/**
+	 * 예약 뷰
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/resveView.do")
+	public String resveView(){
+		System.out.println("[예약 캘린더]");
+
+		return "sample/resveView";
+	}
 	
 	/**
 	 * 글 등록 화면을 조회한다.

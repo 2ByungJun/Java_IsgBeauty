@@ -78,6 +78,9 @@
 	function logout() {
 		location.href = "<c:url value='/login.do'/>";
 	}
+	function resve() {
+		location.href = "<c:url value='/resveView.do'/>";
+	}
 	function view(id) {
 		document.listForm.selectedId.value = id;
 		document.listForm.action = "<c:url value='/mberView.do'/>";
@@ -113,7 +116,7 @@
 					<div class="col-sm-6">
 						<button type="button" class="btn btn-success"
 							onclick="empManage()">직원 관리</button>
-						<button type="button" class="btn btn-danger" onclick="">예약
+						<button type="button" class="btn btn-danger" onclick="resve()">예약
 							현황</button>
 					</div>
 					<div class="col-sm-6">
