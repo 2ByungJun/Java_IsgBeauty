@@ -36,6 +36,12 @@
 		document.detailForm.action = "<c:url value='/mberEdit.do'/>";
 		document.detailForm.submit();
 	}
+	
+	function resveRegister(id) {
+		document.detailForm.selectedId.value = id;
+		document.detailForm.action = "<c:url value='/resveRegister.do'/>";
+		document.detailForm.submit();
+	}
 </script>
 <style>
 label {
@@ -150,22 +156,16 @@ p {
 					</div>
 				</div>
 
-				<div class="form-inline form-group">
-					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">예약내용:</label>
-					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<a href="">예약 내용</a>
-						</p>
-					</div>
-				</div>
 			</div>
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="button" class="btn btn-info"
-				onclick="editMber('${result.mberSn}')">수정</button>
-			<button type="button" class="btn btn-danger"
+				onclick="editMber('${result.mberSn}')">수정</button> 
+			<button type="button" class="btn btn-danger" 
 				onclick="deleteMber('${result.mberSn}')">삭제</button>
+			<button type="button" class="btn btn-success" 
+				onclick="resveRegister('${result.mberSn}')">예약등록</button>	
 			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 		</div>
 

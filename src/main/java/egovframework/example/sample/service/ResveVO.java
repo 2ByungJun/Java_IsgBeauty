@@ -12,14 +12,11 @@ public class ResveVO extends SampleDefaultVO {
 	private String resveSn;
 	private String mberSn;
 	private String resveDt;
-	private String resveCn;
-	private String pymntMthd;
-	private String pymntAmount;
+	private String resveTime;
+	private String tretmentNm;
 	private String processSttus;
 	private String registId;
 	private String registDt;
-	private String updtId;
-	private String updtDt;
 	
 	
 	public String getResveSn() {
@@ -40,23 +37,17 @@ public class ResveVO extends SampleDefaultVO {
 	public void setResveDt(String resveDt) {
 		this.resveDt = resveDt;
 	}
-	public String getResveCn() {
-		return resveCn;
+	public String getResveTime() {
+		return resveTime;
 	}
-	public void setResveCn(String resveCn) {
-		this.resveCn = resveCn;
+	public void setResveTime(String resveTime) {
+		this.resveTime = resveTime;
 	}
-	public String getPymntMthd() {
-		return pymntMthd;
+	public String getTretmentNm() {
+		return tretmentNm;
 	}
-	public void setPymntMthd(String pymntMthd) {
-		this.pymntMthd = pymntMthd;
-	}
-	public String getPymntAmount() {
-		return pymntAmount;
-	}
-	public void setPymntAmount(String pymntAmount) {
-		this.pymntAmount = pymntAmount;
+	public void setTretmentNm(String tretmentNm) {
+		this.tretmentNm = tretmentNm;
 	}
 	public String getProcessSttus() {
 		return processSttus;
@@ -76,19 +67,6 @@ public class ResveVO extends SampleDefaultVO {
 	public void setRegistDt(String registDt) {
 		this.registDt = registDt;
 	}
-	public String getUpdtId() {
-		return updtId;
-	}
-	public void setUpdtId(String updtId) {
-		this.updtId = updtId;
-	}
-	public String getUpdtDt() {
-		return updtDt;
-	}
-	public void setUpdtDt(String updtDt) {
-		this.updtDt = updtDt;
-	}
-	
 	
 }
 

@@ -41,6 +41,7 @@
 		document.detailForm.action = "<c:url value='/mberView.do'/>";
 		document.detailForm.submit();
 	}
+	
 	function update() {
 		var check;
 		check = confirm("변경된 사항들을 수정하시겠습니까?");
@@ -125,7 +126,7 @@ select {
 						직원:</label>
 					<div class="col-sm-2">
 						<select type="text" class="form-control" id="eEmpId" name="eEmpId">
-						<option value="${result.eEmpId}"><c:out
+							<option value="${result.eEmpId}"><c:out
 									value="${result.empNm}" /></option>
 							<c:forEach var="listEmpNM" items="${listEmpNM}"
 								varStatus="status">
@@ -188,14 +189,6 @@ select {
 					</div>
 				</div>
 
-				<div class="form-inline form-group">
-					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">예약내용:</label>
-					<div class="col-sm-2">
-						<p for="mberSn" class="control-label">
-							<a href="">예약 내용</a>
-						</p>
-					</div>
-				</div>
 			</div>
 		</div>
 
@@ -217,43 +210,10 @@ select {
 				</p>
 			</div>
 
-<%-- 			<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">수정일:</label>
-			<div class="col-sm-2">
-				<p for="mberSn" class="control-label">
-					<input type="date" class="form-control" id="updtDt" name="updtDt"
-						value="<c:out value="<%=today%>"/>" readonly>
-				</p>
-			</div>
- --%>
-			<label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번*:</label>
-			<div class="col-sm-3">
-				<p for="mberSn" class="control-label">
-					<input type="text" class="form-control" id="mberSn" name="mberSn"
-						value="<c:out value="${result.mberSn}" />" readonly>
-				</p>
-			</div>
+			<input type="hidden" class="form-control" id="mberSn" name="mberSn"
+				value="<c:out value="${result.mberSn}" />" readonly>
 		</div>
 	</form:form>
 </body>
 </html>
-
-<!-- 순번 -->
-<%-- <label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번*:</label>
-					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<input type="text" class="form-control" id="mberSn" name="mberSn"
-								value="<c:out value="${result.mberSn}" />" readonly>
-						</p>
-					</div> --%>
-<!-- 성별 -->
-<%-- <label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
-					<div class="col-sm-2">
-						<select type="text" class="form-control" id="sexdstn"
-							name="sexdstn">
-							<option value="${result.sexdstn}"><c:out
-									value="${result.sexdstn}" /></option>
-							<option value="Male">Male</option>
-							<option value="Female">Female</option>
-						</select>
-					</div> --%>
 

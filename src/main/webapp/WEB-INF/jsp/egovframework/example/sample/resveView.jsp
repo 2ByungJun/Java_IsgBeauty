@@ -51,22 +51,28 @@
 		
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView : 'dayGridMonth', // 월 달력
+			// 달력 툴
+			headerToolbar: {
+			      left: 'prev',
+			      center: 'title',
+			      right: 'next today,dayGridMonth'
+			 },
 			editable: true, // 드래그 수정 가능
 			locale : 'ko',  // 한국어 설정
-			// 요일 클릭 이벤트
+			 // 요일 클릭 이벤트
 			dateClick : function() {
 				alert('요일 클릭!');
 			},
 			// 일정 클릭 이벤트
 			eventClick : function() {
 				alert('일정 클릭!');
-			},
+			}, 
 		});	
 		
 		// 데이터 삽입방식
-		calendar.addEvent({'title':'고객1-컷팅', 'start':'2020-07-16', 'end':'2020-07-16'});
-		calendar.addEvent({'title':'고객2-펌', 'start':'2020-07-18', 'end':'2020-07-18'});
-		calendar.addEvent({'title':'고객3-염색', 'start':'2020-07-20', 'end':'2020-07-20'});
+		calendar.addEvent({'title':'고객1-컷팅', 'start':'2020-07-16T15:00'});
+		calendar.addEvent({'title':'고객2-펌', 'start':'2020-07-18T22:00'});
+		calendar.addEvent({'title':'고객3-염색', 'start':'2020-07-20T09:00'});
 		
 		// 렌더링
 		calendar.render();
@@ -86,8 +92,6 @@
 			</p>
 		</div>
 
-		<button type="button" style="margin-bottom: 10px;"
-			class="btn btn-success" onclick="resveRegister()">등록</button>
 		<button type="button" style="margin-bottom: 10px;"
 			class="btn btn-danger" onclick="home()">이전</button>
 

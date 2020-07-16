@@ -481,15 +481,12 @@ public class IsgBeautyController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/resveRegister.do")
-	public String resveRegister(@ModelAttribute("searchVO") EmpVO searchVO, Model model) throws Exception {
+	public String resveRegister(@RequestParam("selectedId") String mberSn, @ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
 		System.out.println("[예약 등록 페이지]");
 		
-		/*MberVO sampleVO = new MberVO();
+		MberVO sampleVO = new MberVO();
 		sampleVO.setMberSn(mberSn);
-		model.addAttribute("result", selectMber(sampleVO, searchVO));*/
-
-		List<?> listEmpNM = empService.selectListEmpNM(searchVO);
-		model.addAttribute("listEmpNM", listEmpNM);
+		model.addAttribute("result", selectMber(sampleVO, searchVO));
 
 		return "sample/resveRegister";
 	}
@@ -506,8 +503,8 @@ public class IsgBeautyController {
 	public String addResve(@ModelAttribute("searchVO") ResveVO searchVO) throws Exception {
 		System.out.println("[예약 등록]");
 		
-		/*resveService.insertResve(searchVO);*/
-		return "forward:/mberView.do";
+		resveService.insertResve(searchVO);
+		return "forward:/resveView.do";
 	}
 	
 	/**
