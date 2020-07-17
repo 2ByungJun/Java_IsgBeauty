@@ -53,7 +53,7 @@ public interface ResveMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	ResveVO selectResve(ResveVO searchVO) throws Exception;
+	ResveVO selectResve(ResveVO vo) throws Exception;
 
 	/**
 	 * 고객 삭제

@@ -48,7 +48,6 @@
 
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
-		
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView : 'dayGridMonth', // 월 달력
 			// 달력 툴
@@ -69,34 +68,27 @@
 			},
 		});
 		
-		// 데이터 삽입방식
-		calendar.addEvent({'title':'고객1-컷팅', 'start':'2020-07-16T15:00'});
-		calendar.addEvent({'title':'고객2-펌', 'start':'2020-07-18T22:00'});
-		calendar.addEvent({'title':'고객3-염색', 'start':'2020-07-20T09:00'});
-		
-		// 렌더링
-		calendar.render();
-	});
-	
-	var obj = {"resveSn": 1, "mberSn" : 2 };
-	function test(){
+		var obj = {};
 		$.ajax({
-	        url: "<c:url value="/resveView.json" />",
+	        url: "<c:url value="/resveView.do"/>",
 	        type: "post",
-	        data: JSON.stringify(obj),
 	        dataType: "json",
+	        data: JSON.stringify(obj),
 	        contentType: "application/json",
 	        success: function(data) {
-	        	console.log(data)
-	            alert("성공");
-	            document.write(data);
+	        	console.log(data);
+	        	$.each(data.resveList, function(index, item){
+	    			calendar.addEvent({'title': item.mberNm + '-' + item.tretmentNm , 'start':item.resveDt + 'T' + item.resveTime });
+	    		});
 	        },
 	        error: function(errorThrown) {
 	            alert(errorThrown.statusText);
 	        }
 	    });
-	}
-	
+		
+		// 렌더링
+		calendar.render();
+	});
 </script>
 
 <body>
@@ -110,9 +102,6 @@
 			<h4 class="control-label">예약 캘린더</h4>
 			</p>
 		</div>
-
-		<button type="button" style="margin-bottom: 10px;"
-			class="btn btn-danger" onclick="test()">test</button>
 
 		<button type="button" style="margin-bottom: 10px;"
 			class="btn btn-danger" onclick="home()">이전</button>

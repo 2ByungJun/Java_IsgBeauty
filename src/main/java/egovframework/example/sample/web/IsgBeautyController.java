@@ -534,7 +534,7 @@ public class IsgBeautyController {
 		return "sample/resveView";
 	}
 	
-/*	@ResponseBody
+	/*	@ResponseBody
 	@RequestMapping(value = "/resveView.json", method = RequestMethod.POST)
 	public HashMap<String, Object> init(@RequestBody ResveVO resveVO, SampleDefaultVO searchVO) throws Exception{
 		System.out.println("[예약 캘린더]");
@@ -551,5 +551,19 @@ public class IsgBeautyController {
 		return map;
 	}
 */
+	
+	@ResponseBody
+	@RequestMapping(value = "/resveView.do", method = RequestMethod.POST)
+	public HashMap<String, Object> init(@RequestBody HashMap<String, Object> map) throws Exception{
+		System.out.println("[예약 캘린더]");
+	
+		ResveVO resveVO = new ResveVO();
+		List<?> resveList = resveService.selectResveList(resveVO);
+
+		map.put("resveList", resveList);
+		
+		return map;
+	}
+
 
 }

@@ -24,7 +24,7 @@
 	}
 
 	/* 글 등록 function */
-	function addResve(id) {
+	function addResve() {
 		var check;
 		check = confirm("예약을 진행하시겠습니까?");
 
@@ -123,8 +123,6 @@ select {
 				</div>
 			</div>
 			
-			<%-- <input type="hidden" id="resveSn" name="resveSn"
-						value="<c:out value="2" />"> --%>
 			<input type="hidden" id="mberSn" name="mberSn"
 						value="<c:out value="${result.mberSn}" />">
 			<input type="hidden" id="processSttus" name="processSttus"
@@ -132,7 +130,7 @@ select {
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px">
-			<button type="submit" class="btn btn-success" onclick="addResve('${result.mberSn}')">예약등록</button>
+			<button type="submit" class="btn btn-success" onclick="addResve()">예약등록</button>
 			<button type="button" class="btn btn-info" onclick="home()">취소</button>
 		</div>
 

@@ -17,6 +17,7 @@ public class ResveVO extends SampleDefaultVO {
 	private String processSttus;
 	private String registId;
 	private String registDt;
+	private String mberNm;
 	
 	
 	public String getResveSn() {
@@ -67,6 +68,14 @@ public class ResveVO extends SampleDefaultVO {
 	public void setRegistDt(String registDt) {
 		this.registDt = registDt;
 	}
+	public String getMberNm() {
+		return mberNm;
+	}
+	public void setMberNm(String mberNm) {
+		this.mberNm = mberNm;
+	}
+	
+	
 	
 }
 
