@@ -15,7 +15,6 @@
 	</resultMap>
 
     <select id="selectResve" parameterType="resveVO" resultMap="resve">
-
 			select RESVE_SN,
 			   MBER_SN,
 		       RESVE_DT,
@@ -26,7 +25,6 @@
 		       REGIST_DT,
 		  	from t_resve_m
 			where 1=1
-
 	</select>
 
 	<select id="selectResveList" parameterType="resveVO" resultType="egovMap">
