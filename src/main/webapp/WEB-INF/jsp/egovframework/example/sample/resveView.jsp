@@ -78,17 +78,18 @@
 		calendar.render();
 	});
 	
-	var obj = {"name": "kim", "age": 30};
+	var obj = {"resveSn": 1, "mberSn" : 2 };
 	function test(){
 		$.ajax({
-	        url: "<c:url value="/resveView.do" />",
-	        type: "get",
+	        url: "<c:url value="/resveView.json" />",
+	        type: "post",
 	        data: JSON.stringify(obj),
 	        dataType: "json",
 	        contentType: "application/json",
 	        success: function(data) {
+	        	console.log(data)
 	            alert("성공");
-	            document.write(data['name']);
+	            document.write(data);
 	        },
 	        error: function(errorThrown) {
 	            alert(errorThrown.statusText);

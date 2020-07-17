@@ -185,22 +185,31 @@ public class IsgBeautyController {
 	@RequestMapping(value = "/mberList.json")
      public Map<String, Object> mberListJson(@RequestBody SampleDefaultVO searchVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		System.out.println(searchVO.getSearchKeyword()+"_______________");
 
-		List<EgovMap> mberList = mberService.selectMberList(searchVO);
+		System.out.println(searchVO.getSearchKeyword()+"_______________");
 
 		int totCnt = mberService.selectMberListTotCnt(searchVO);
 
-		Paging paging = new Paging();
+		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
+		searchVO.setPageSize(propertiesService.getInt("pageSize"));
 
-		paging.setPageCount((mberService.selectMberListTotCnt(searchVO)/10)+1);
-		paging.setPageNo(searchVO.getPageIndex());
+		Paging paging = new Paging();
+		paging.setCurrentPageNo(searchVO.getPageIndex());
+		paging.setRecordCountPerPage(searchVO.getPageUnit());
+		paging.setPageSize(searchVO.getPageSize());
+		paging.setPageCount((totCnt/10)+1);
+
+		searchVO.setFirstIndex(paging.getFirstRecordIndex());
+		searchVO.setLastIndex(paging.getLastRecordIndex());
+		searchVO.setRecordCountPerPage(paging.getRecordCountPerPage());
+
+		List<EgovMap> mberList = mberService.selectMberList(searchVO);
 
 		Map<String, Object> arrayMap = new HashMap<>();
 		arrayMap.put("pages", paging);
 		arrayMap.put("dataList", mberList);
 		arrayMap.put("datacnt", totCnt);
+
 		return arrayMap;
 
 
@@ -524,5 +533,23 @@ public class IsgBeautyController {
 
 		return "sample/resveView";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/resveView.json", method = RequestMethod.POST)
+	public HashMap<String, Object> init(@RequestBody ResveVO resveVO, SampleDefaultVO searchVO) throws Exception{
+		System.out.println("[예약 캘린더]");
+		
+		ResveVO resveVO2 = resveService.selectResve(searchVO);
+		System.out.println(resveVO2);
+		
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("resveVO", resveVO2);
+		System.out.println("------------------");
+		System.out.println(map);
+		System.out.println("------------------");
+		return map;
+	}
+
 
 }
