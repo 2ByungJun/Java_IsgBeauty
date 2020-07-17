@@ -186,7 +186,7 @@ public class IsgBeautyController {
      public Map<String, Object> mberListJson(@RequestBody SampleDefaultVO searchVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println(searchVO.getSearchKeyword()+"_______________");
+		System.out.println(searchVO.getSearchKeyword()+"_______________test");
 
 		int totCnt = mberService.selectMberListTotCnt(searchVO);
 
