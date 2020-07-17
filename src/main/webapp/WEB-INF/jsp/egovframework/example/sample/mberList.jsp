@@ -77,13 +77,14 @@
 
 		function fnSelectList(pageNo){
 		   var url  =  "<c:url value='/mberList.json'/>";
-		   var jsonData = {searchKeyword: "searchKeyword"};
+		   var jsonData = {"searchKeyword": "test11111111"};
+		   
+		   $("#listForm").serialize()
 
 		   $.ajax({
 				headers: {
 					Accept: "application/json;utf-8"
 				}
-
 				,contentType: "application/json;utf-8"
 				,dataType: "json"
 				,type: "POST"
