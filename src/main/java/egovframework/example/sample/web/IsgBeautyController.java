@@ -534,7 +534,7 @@ public class IsgBeautyController {
 		return "sample/resveView";
 	}
 	
-	@ResponseBody
+/*	@ResponseBody
 	@RequestMapping(value = "/resveView.json", method = RequestMethod.POST)
 	public HashMap<String, Object> init(@RequestBody ResveVO resveVO, SampleDefaultVO searchVO) throws Exception{
 		System.out.println("[예약 캘린더]");
@@ -550,6 +550,6 @@ public class IsgBeautyController {
 		System.out.println("------------------");
 		return map;
 	}
-
+*/
 
 }
