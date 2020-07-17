@@ -77,16 +77,21 @@
 
 		function fnSelectList(pageNo){
 		   var url  =  "<c:url value='/mberList.json'/>";
-			console.log(pageNo);
-			 $.ajax({
-				contentType:"application/json"
+		   var jsonData = {searchKeyword: "searchKeyword"};
+
+		   $.ajax({
+				headers: {
+					Accept: "application/json;utf-8"
+				}
+
+				,contentType: "application/json;utf-8"
 				,dataType: "json"
 				,type: "POST"
 				,url: url
-				,data: {}
+				,data:    JSON.stringify(jsonData)
 				,success:function(data){
 					console.log(data);
-
+/*
 			    	var html = '';
 					if(data.dataList.length==0){
 						html += '<tr>';
@@ -112,7 +117,7 @@
 
 
 					document.listForm.pageIndex.value = pageNo;
-					fn_createPaging(data.pages,"paging");
+					fn_createPaging(data.pages,"paging"); */
 				}
 				,error:function(e){
 				   	console.log(e.status, e.statusText);

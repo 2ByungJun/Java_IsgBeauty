@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.json.JsonObject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,8 +43,8 @@ import egovframework.example.sample.service.ResveService;
 import egovframework.example.sample.service.ResveVO;
 import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.rte.fdl.property.EgovPropertyService;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
-import net.sf.json.JSONObject;
 
 /**
  * @Class Name : EgovSampleController.java
@@ -156,11 +156,11 @@ public class IsgBeautyController {
 	public String mberList(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[고객 리스트]");
 
-		/** EgovPropertyService.sample */
+/*
 		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
 		searchVO.setPageSize(propertiesService.getInt("pageSize"));
 
-		/** pageing setting */
+		*//** pageing setting *//*
 		PaginationInfo paginationInfo = new PaginationInfo();
 		paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
 		paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
@@ -176,19 +176,17 @@ public class IsgBeautyController {
 		int totCnt = mberService.selectMberListTotCnt(searchVO);
 		paginationInfo.setTotalRecordCount(totCnt);
 		model.addAttribute("paginationInfo", paginationInfo);
-
+*/
 		return "sample/mberList";
 	}
 
 
 	@ResponseBody
 	@RequestMapping(value = "/mberList.json")
-	public void mberListJson(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model,
+     public Map<String, Object> mberListJson(@RequestBody SampleDefaultVO searchVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("json@@@@@@@@@@@@@@@@@@@@@@@");
-
-		List<egovMap> mberList = mberService.selectMberList(searchVO);
+		List<EgovMap> mberList = mberService.selectMberList(searchVO);
 
 		int totCnt = mberService.selectMberListTotCnt(searchVO);
 
@@ -200,7 +198,8 @@ public class IsgBeautyController {
 		Map<String, Object> arrayMap = new HashMap<>();
 		arrayMap.put("pages", paging);
 		arrayMap.put("dataList", mberList);
-		arrayMap.put("datacnt", totcnt);
+		arrayMap.put("datacnt", totCnt);
+		return arrayMap;
 
 
 	}
