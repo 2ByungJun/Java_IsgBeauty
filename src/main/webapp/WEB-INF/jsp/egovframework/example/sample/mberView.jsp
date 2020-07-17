@@ -16,7 +16,7 @@
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
-	
+
 	function deleteMber(id) {
 		var check;
 		check = confirm("정말로 해당 고객님을 삭제하시겠습니까?");
@@ -30,13 +30,13 @@
 			alert("취소하셨습니다.");
 		}
 	}
-	
+
 	function editMber(id) {
 		document.detailForm.selectedId.value = id;
 		document.detailForm.action = "<c:url value='/mberEdit.do'/>";
 		document.detailForm.submit();
 	}
-	
+
 	function resveRegister(id) {
 		document.detailForm.selectedId.value = id;
 		document.detailForm.action = "<c:url value='/resveRegister.do'/>";
@@ -73,33 +73,34 @@ p {
 		<div class="container">
 			<div class="row">
 				<div class="form-inline form-group">
-					<label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번:</label>
+					<%-- <label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번:</label>
 					<div class="col-sm-3">
 						<p for="mberSn" class="control-label">
 							<c:out value="${result.mberSn}" />
 						</p>
-					</div>
+					</div> --%>
 
-					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
-						직원:</label>
+					<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<c:out value="${result.empNm}" />
+						<p for="mberNm" class="control-label">
+							<c:out value="${result.mberNm}" />
 						</p>
 					</div>
 				</div>
 
 				<div class="form-inline form-group">
-					<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름:</label>
+
+					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
+						직원:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<c:out value="${result.mberNm}" />
+						<p for="eEmpId" class="control-label">
+							<c:out value="${result.empNm}" />
 						</p>
 					</div>
 
 					<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
+						<p for="sexdstn" class="control-label">
 							<c:out value="${result.sexdstn}" />
 						</p>
 					</div>
@@ -109,14 +110,14 @@ p {
 				<div class="form-inline form-group">
 					<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
+						<p for="brthdy" class="control-label">
 							<c:out value="${result.brthdy}" />
 						</p>
 					</div>
 
 					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
+						<p for="telno" class="control-label">
 							<c:out value="${result.telno}" />
 						</p>
 					</div>
@@ -126,7 +127,7 @@ p {
 					<label for="registId"
 						class="col-sm-2 col-sm-offset-1 control-label">등록자:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
+						<p for="registId" class="control-label">
 							<c:out value="${result.registId}" />
 						</p>
 					</div>
@@ -134,7 +135,7 @@ p {
 					<label for="registDt"
 						class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
+						<p for="registDt" class="control-label">
 							<c:out value="${result.registDt}" />
 						</p>
 					</div>
@@ -143,14 +144,14 @@ p {
 				<div class="form-inline form-group">
 					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">수정자:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
+						<p for="updtId" class="control-label">
 							<c:out value="${result.updtId}" />
 						</p>
 					</div>
 
 					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">수정일:</label>
 					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
+						<p for="updtDt" class="control-label">
 							<c:out value="${result.updtDt}" />
 						</p>
 					</div>
@@ -161,11 +162,11 @@ p {
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="button" class="btn btn-info"
-				onclick="editMber('${result.mberSn}')">수정</button> 
-			<button type="button" class="btn btn-danger" 
+				onclick="editMber('${result.mberSn}')">수정</button>
+			<button type="button" class="btn btn-danger"
 				onclick="deleteMber('${result.mberSn}')">삭제</button>
-			<button type="button" class="btn btn-success" 
-				onclick="resveRegister('${result.mberSn}')">예약등록</button>	
+			<button type="button" class="btn btn-success"
+				onclick="resveRegister('${result.mberSn}')">예약등록</button>
 			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 		</div>
 

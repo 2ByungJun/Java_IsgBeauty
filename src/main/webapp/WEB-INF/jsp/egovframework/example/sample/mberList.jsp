@@ -21,7 +21,7 @@
 
 
 		function fn_createPaging(pages,pageId) {
-			   var page   = Number(pages.pageNo);
+			   var page   = Number(pages.currentPageNo);
 			   var totalPages  =  parseInt(pages.pageCount);
 			   var pageSize  = Number(10);
 			   $("#paging").children().remove();
@@ -77,8 +77,8 @@
 
 		function fnSelectList(pageNo){
 		   var url  =  "<c:url value='/mberList.json'/>";
-		   var jsonData = {"searchKeyword": "test11111111"};
-		   
+		   var jsonData = {"pageIndex": pageNo};
+
 		   $("#listForm").serialize()
 
 		   $.ajax({
@@ -89,10 +89,10 @@
 				,dataType: "json"
 				,type: "POST"
 				,url: url
-				,data:    JSON.stringify(jsonData)
+				,data: JSON.stringify(jsonData)
 				,success:function(data){
 					console.log(data);
-/*
+
 			    	var html = '';
 					if(data.dataList.length==0){
 						html += '<tr>';
@@ -115,10 +115,7 @@
 					}
 					$('#tableList').html(html);
 
-
-
-					document.listForm.pageIndex.value = pageNo;
-					fn_createPaging(data.pages,"paging"); */
+					fn_createPaging(data.pages,"paging");
 				}
 				,error:function(e){
 				   	console.log(e.status, e.statusText);
