@@ -48,6 +48,7 @@
 
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
+		
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView : 'dayGridMonth', // 월 달력
 			// 달력 툴
