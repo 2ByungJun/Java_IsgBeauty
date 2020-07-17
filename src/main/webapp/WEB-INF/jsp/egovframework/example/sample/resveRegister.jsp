@@ -19,29 +19,53 @@
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
-	function resveView() {
-		location.href = "<c:url value='/resveView.do'/>";
-	}
-
-	/* 글 등록 function */
-	function addResve() {
-		var check;
-		check = confirm("예약을 진행하시겠습니까?");
-
-		if (check) {
-			alert("예약되었습니다.");
-			frm = document.detailForm;
-			frm.action = "<c:url value= '/addResve.do'/>";
-			frm.submit();
-		} else {
-			alert("취소하셨습니다.");
-			location.href = "<c:url value='/mberList.do'/>";
-		}
-	}
-	
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
+
+	function resveView() {
+		location.href = "<c:url value='/resveView.do'/>";
+	}
+	
+	/* Validation */
+	$(function() {
+		$("#detailForm").validate({
+			submitHandler : function() {
+				var check = confirm("예약하시겠습니까?");
+				if (check) {
+					alert("예약되었습니다.");
+					frm = document.detailForm;
+					frm.action = "<c:url value= '/addResve.do'/>";
+					frm.submit();
+				} else {
+					alert("취소하셨습니다.");
+					location.href = "<c:url value='/mberList.do'/>";
+				}
+			},
+			rules : {
+				tretmentNm : {
+					required : true
+				},
+				resveDt : {
+					required : true,
+				},
+				resveTime : {
+					required : true,
+				}
+			},
+			messages : {
+				tretmentNm : {
+					required : "필수 입력 항목입니다."
+				},
+				resveDt : {
+					required : "필수 입력 항목입니다."
+				},
+				resveTime : {
+					required : "필수 입력 항목입니다."
+				}
+			}
+		});
+	});
 </script>
 </head>
 <style>
@@ -73,23 +97,25 @@ select {
 				<h2>
 					<b>ISG Beauty</b>
 				</h2>
-				<h4 class="control-label">${result.mberNm}님의 예약님의 도와드립니다!</h4>
+				<h4 class="control-label">${result.mberNm}님의예약님의 도와드립니다!</h4>
 			</div>
 		</div>
 
 		<div class="container">
 
-			<div class="form-inline form-group">	
+			<div class="form-inline form-group">
 				<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">예약자*:</label>
 				<div class="col-xs-2">
-					<input type="text" class="form-control" value="<c:out value="${result.mberNm}" />" readonly>
+					<input type="text" class="form-control"
+						value="<c:out value="${result.mberNm}" />" readonly>
 				</div>
 
-				<label for="tretmentNm" class="col-sm-2 col-sm-offset-1 control-label">시술*:</label>
+				<label for="tretmentNm"
+					class="col-sm-2 col-sm-offset-1 control-label">시술*:</label>
 				<div class="col-md-2">
-					<select type="text" class="form-control" id="tretmentNm" name="tretmentNm">
+					<select class="form-control" id="tretmentNm" name="tretmentNm" required>
 						<option value="cut">cut</option>
-						<option value="peom">peom</option>
+						<option value="perm">perm</option>
 						<option value="special">special</option>
 					</select>
 				</div>
@@ -98,14 +124,14 @@ select {
 			<div class="form-inline form-group">
 				<label for="resveDt" class="col-sm-2 col-sm-offset-1 control-label">예약일시*:</label>
 				<div class="col-md-2">
-					<input type="date" class="form-control" id="resveDt" name="resveDt"
-						>
+					<input type="date" class="form-control" id="resveDt" name="resveDt" required>
 				</div>
 
-				<label for="resveTime" class="col-sm-2 col-sm-offset-1 control-label">예약시간*:</label>
+				<label for="resveTime"
+					class="col-sm-2 col-sm-offset-1 control-label">예약시간*:</label>
 				<div class="col-md-2">
-					<input type="time" class="form-control" id="resveTime" name="resveTime"
-						>
+					<input type="time" class="form-control" id="resveTime"
+						name="resveTime" required>
 				</div>
 			</div>
 
@@ -122,15 +148,14 @@ select {
 						name="registDt" value="<%=today%>" readonly>
 				</div>
 			</div>
-			
+
 			<input type="hidden" id="mberSn" name="mberSn"
-						value="<c:out value="${result.mberSn}" />">
-			<input type="hidden" id="processSttus" name="processSttus"
-						value="N">
+				value="<c:out value="${result.mberSn}" />"> <input
+				type="hidden" id="processSttus" name="processSttus" value="N">
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px">
-			<button type="submit" class="btn btn-success" onclick="addResve()">예약등록</button>
+			<button type="submit" class="btn btn-success" onclick="">예약등록</button>
 			<button type="button" class="btn btn-info" onclick="home()">취소</button>
 		</div>
 

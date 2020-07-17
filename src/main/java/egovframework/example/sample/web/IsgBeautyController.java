@@ -519,7 +519,7 @@ public class IsgBeautyController {
 		System.out.println("[예약 등록]");
 
 		resveService.insertResve(searchVO);
-		return "forward:/resveView.do";
+		return "redirect:/resveView.do";
 	}
 
 	/**
