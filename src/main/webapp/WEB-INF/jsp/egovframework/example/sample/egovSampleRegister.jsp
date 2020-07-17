@@ -28,11 +28,11 @@
                   <c:if test="${registerFlag == 'modify'}"><spring:message code="button.modify" /></c:if>
     </title>
     <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/sample.css'/>"/>
-    
+
     <!--For Commons Validator Client Side-->
     <script type="text/javascript" src="<c:url value='/cmmn/validator.do'/>"></script>
     <validator:javascript formName="sampleVO" staticJavascript="false" xhtml="true" cdata="false"/>
-    
+
     <script type="text/javaScript" language="javascript" defer="defer">
         <!--
         /* 글 목록 화면 function */
@@ -40,13 +40,13 @@
            	document.detailForm.action = "<c:url value='/egovSampleList.do'/>";
            	document.detailForm.submit();
         }
-        
+
         /* 글 삭제 function */
         function fn_egov_delete() {
            	document.detailForm.action = "<c:url value='/deleteSample.do'/>";
            	document.detailForm.submit();
         }
-        
+
         /* 글 등록 function */
         function fn_egov_save() {
         	frm = document.detailForm;
@@ -57,7 +57,7 @@
                 frm.submit();
             }
         }
-        
+
         -->
     </script>
 </head>
