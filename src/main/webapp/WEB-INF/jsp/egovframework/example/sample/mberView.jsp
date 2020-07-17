@@ -42,6 +42,48 @@
 		document.detailForm.action = "<c:url value='/resveRegister.do'/>";
 		document.detailForm.submit();
 	}
+	
+	$(function() {
+		$("#detailForm").validate({
+			submitHandler : function() {
+				var check = confirm("해당 고객님을 등록하시겠습니까?(validation)");
+				if (check) {
+					alert("등록되었습니다.");
+					frm = document.detailForm;
+					frm.action = "<c:url value= '/addMber.do'/>";
+					frm.submit();
+				} else {
+					alert("취소하셨습니다.");
+				}
+			},
+			rules : {
+				mberNm : {
+					required : true
+				},
+				telno : {
+					required : true,
+				/* digits : true */
+				},
+				brthdy : {
+					required : true,
+					digits : true
+				}
+			},
+			messages : {
+				mberNm : {
+					required : "필수 입력 항목입니다."
+				},
+				telno : {
+					required : "필수 입력 항목입니다.",
+				/* digits : "숫자만 입력할 수 있습니다." */
+				},
+				brthdy : {
+					required : "필수 입력 항목입니다.",
+					digits : "숫자만 입력할 수 있습니다."
+				}
+			}
+		});
+	});
 </script>
 <style>
 label {
