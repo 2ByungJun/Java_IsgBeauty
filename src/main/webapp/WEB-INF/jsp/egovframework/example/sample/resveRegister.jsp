@@ -35,16 +35,12 @@
 			frm.submit();
 		} else {
 			alert("취소하셨습니다.");
-			document.detailForm.selectedId.value = id;
-			document.detailForm.action = "<c:url value='/mberView.do'/>";
-			document.detailForm.submit();
+			location.href = "<c:url value='/mberList.do'/>";
 		}
 	}
 	
-	function view(id) {
-		document.detailForm.selectedId.value = id;
-		document.detailForm.action = "<c:url value='/mberView.do'/>";
-		document.detailForm.submit();
+	function home() {
+		location.href = "<c:url value='/mberList.do'/>";
 	}
 </script>
 </head>
@@ -137,7 +133,7 @@ select {
 
 		<div class="container" style="text-align: center; margin-top: 30px">
 			<button type="submit" class="btn btn-success" onclick="addResve('${result.mberSn}')">예약등록</button>
-			<button type="button" class=" btn btn-info" onclick="view('${result.mberSn}')">취소</button>
+			<button type="button" class="btn btn-info" onclick="home()">취소</button>
 		</div>
 
 	</form:form>

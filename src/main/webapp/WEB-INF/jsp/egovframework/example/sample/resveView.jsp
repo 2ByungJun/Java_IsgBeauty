@@ -66,8 +66,8 @@
 			// 일정 클릭 이벤트
 			eventClick : function() {
 				alert('일정 클릭!');
-			}, 
-		});	
+			},
+		});
 		
 		// 데이터 삽입방식
 		calendar.addEvent({'title':'고객1-컷팅', 'start':'2020-07-16T15:00'});
@@ -77,6 +77,24 @@
 		// 렌더링
 		calendar.render();
 	});
+	
+	var obj = {"name": "kim", "age": 30};
+	function test(){
+		$.ajax({
+	        url: "<c:url value="/resveView.do" />",
+	        type: "get",
+	        data: JSON.stringify(obj),
+	        dataType: "json",
+	        contentType: "application/json",
+	        success: function(data) {
+	            alert("성공");
+	            document.write(data['name']);
+	        },
+	        error: function(errorThrown) {
+	            alert(errorThrown.statusText);
+	        }
+	    });
+	}
 	
 </script>
 
@@ -88,9 +106,12 @@
 				<b>ISG Beauty</b>
 			</h2>
 			<p>
-				<h4 class="control-label">예약 캘린더</h4>
+			<h4 class="control-label">예약 캘린더</h4>
 			</p>
 		</div>
+
+		<button type="button" style="margin-bottom: 10px;"
+			class="btn btn-danger" onclick="test()">test</button>
 
 		<button type="button" style="margin-bottom: 10px;"
 			class="btn btn-danger" onclick="home()">이전</button>
