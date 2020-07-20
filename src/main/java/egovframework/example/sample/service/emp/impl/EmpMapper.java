@@ -77,6 +77,9 @@ public interface EmpMapper {
 	 */
 	List<?> selectListEmpNM(EmpVO vo) throws Exception;
 
+
+	EmpVO loginCheck(EmpVO vo) throws Exception;
+
 /*	*//**
 	 * 로그인 체크
 	 * @param vo

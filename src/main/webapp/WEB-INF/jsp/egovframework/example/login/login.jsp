@@ -15,7 +15,7 @@
 </head>
 <script type="text/javaScript" language="javascript" defer="defer">
 
-	$('#loginBtn').click(function() {
+	function login() {
 		var url  =  "<c:url value='/loginCheck.json'/>";
 		var jsonData = {"empId": $("#email").val(), "empPassword": $("#pwd").val()};
 
@@ -29,10 +29,17 @@
 			,url: url
 			,data: JSON.stringify(jsonData)
 			,success:function(data){
-
+				console.log(data);
+				if(data.result=="idError") {
+					alert("아이디 혹은 비밀번호를 확인하세요.");
+				}else if(data.result=="pwdError") {
+					alert("아이디 혹은 비밀번호를 확인하세요.");
+				}else {
+					location.href = "<c:url value='/mberList.do'/>";
+				}
 			}
 		})
-	})
+	}
 
 
 	function home() {
@@ -59,14 +66,14 @@
 		<div class="form-group">
 			<label class="control-label col-sm-4" for="email">ID:</label>
 			<div class="col-sm-4">
-				<input type="text" class="form-control" id="userId" name="userId"
+				<input type="text" class="form-control" id="email" name="email"
 					placeholder="아이디를 입력해주세요">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-4" for="pwd">Password:</label>
 			<div class="col-sm-4">
-				<input type="password" class="form-control" id="passwd" name="passwd"
+				<input type="password" class="form-control" id="pwd" name="pwd"
 					placeholder="비밀번호를 입력해주세요">
 			</div>
 		</div>
@@ -76,7 +83,7 @@
 
 
 <div class="container" style="text-align: center;">
-	<button type="button" class="btn btn-info" onclick="home()">로그인</button>
+	<button type="button" class="btn btn-info" onclick="login()">로그인</button>
 	<button type="button" class=" btn btn-success" onclick="empRegister()">회원가입</button>
 </div>
 

@@ -108,6 +108,10 @@ public class EmpService {
 		 return mapper.selectListEmpNM(vo);
 	}
 
+	public EmpVO loginCheck(EmpVO vo) throws Exception {
+		return mapper.loginCheck(vo);
+	}
+
 
 
 /*	*//**

@@ -15,16 +15,21 @@
 	</resultMap>
 
     <select id="selectResve" parameterType="resveVO" resultMap="resve">
-			select RESVE_SN,
-			   MBER_SN,
-		       RESVE_DT,
-		       RESVE_TIME,
-		       TRETMENT_NM,
-		       PROCESS_STTUS,
-		       REGIST_ID,
-		       REGIST_DT
-		  	from t_resve_m
-			where 1=1
+			select a.RESVE_SN,
+			   a.MBER_SN,
+		       a.RESVE_DT,
+		       a.RESVE_TIME,
+		       a.TRETMENT_NM,
+		       a.PROCESS_STTUS,
+		       a.REGIST_ID,
+		       a.REGIST_DT,(
+		       	select MBER_NM
+		       	from t_mber_m b
+		       	where 1=1
+		       	and b.MBER_SN = a.MBER_SN
+		       ) AS mberNm
+		  	from t_resve_m a
+			where RESVE_SN = ${resveSn}
 	</select>
 
 	<select id="selectResveList" parameterType="resveVO" resultType="egovMap">
