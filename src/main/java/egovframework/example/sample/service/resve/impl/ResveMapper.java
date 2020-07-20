@@ -1,9 +1,9 @@
-package egovframework.example.sample.service.impl;
+package egovframework.example.sample.service.resve.impl;
 
 import java.util.List;
 
-import egovframework.example.sample.service.ResveVO;
 import egovframework.example.sample.service.SampleDefaultVO;
+import egovframework.example.sample.service.resve.ResveVO;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 /**

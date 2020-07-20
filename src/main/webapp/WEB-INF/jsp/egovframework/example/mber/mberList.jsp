@@ -125,9 +125,6 @@
 
 	}
 
-
-
-
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
@@ -182,7 +179,7 @@
 							현황</button>
 					</div>
 					<div class="col-sm-6">
-						<div class="col-xs-6">
+						<%-- <div class="col-xs-6">
 							<div id="search">
 								<div class="input-group">
 									<form:input path="searchKeyword" type="text" id="serachKeyword" placeholder="이름 검색" cssClass="txt form-control" style="width:70%"/>
@@ -193,7 +190,7 @@
 									</button>
 								</div>
 							</div>
-						</div>
+						</div> --%>
 						<div align="right">
 							<button type="button" class="btn btn-info"
 								onclick="mberRegister()">고객 등록</button>

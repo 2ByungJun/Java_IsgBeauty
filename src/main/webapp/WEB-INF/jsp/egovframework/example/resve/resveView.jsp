@@ -48,26 +48,6 @@
 
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
-
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView : 'dayGridMonth', // 월 달력
-			// 달력 툴
-			headerToolbar: {
-			      left: 'prev',
-			      center: 'title',
-			      right: 'next today,dayGridMonth'
-			 },
-			editable: true, // 드래그 수정 가능
-			locale : 'ko',  // 한국어 설정
-			 // 요일 클릭 이벤트
-			dateClick : function() {
-				alert('요일 클릭!');
-			},
-			// 일정 클릭 이벤트
-			eventClick : function() {
-				alert('일정 클릭!');
-			},
-		});
 		
 		var obj = {};
 		$.ajax({
@@ -86,6 +66,26 @@
 	            alert(errorThrown.statusText);
 	        }
 	    });
+		
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			initialView : 'dayGridMonth', // 월 달력
+			// 달력 툴
+			headerToolbar: {
+			      left: 'prevYear,prev,next,nextYear,today',
+			      center: 'title',
+			      right: 'dayGridMonth,dayGridWeek,dayGridDay'
+			 },
+			editable: true, // 드래그 수정 가능
+			locale : 'ko',  // 한국어 설정
+			 // 요일 클릭 이벤트
+			dateClick : function() {
+				alert('요일 클릭!');
+			},
+			// 일정 클릭 이벤트
+			eventClick : function() {
+				alert('일정 클릭!');
+			},
+		});
 		
 		// 렌더링
 		calendar.render();

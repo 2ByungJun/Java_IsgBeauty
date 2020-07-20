@@ -1,12 +1,12 @@
-package egovframework.example.sample.service;
+package egovframework.example.sample.service.resve;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import egovframework.example.sample.service.impl.ResveMapper;
+import egovframework.example.sample.service.SampleDefaultVO;
+import egovframework.example.sample.service.resve.impl.ResveMapper;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 @Service

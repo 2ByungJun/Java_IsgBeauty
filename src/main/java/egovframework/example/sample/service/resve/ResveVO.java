@@ -1,4 +1,6 @@
-package egovframework.example.sample.service;
+package egovframework.example.sample.service.resve;
+
+import egovframework.example.sample.service.SampleDefaultVO;
 
 /**
  * ResveVO

@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package egovframework.example.sample.service.impl;
+package egovframework.example.sample.service.mber.impl;
 
 import java.util.List;
 
-import egovframework.example.sample.service.MberVO;
+import egovframework.example.sample.service.mber.MberVO;
 import egovframework.example.sample.service.SampleDefaultVO;
-import egovframework.rte.psl.dataaccess.mapper.Mapper;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 /**

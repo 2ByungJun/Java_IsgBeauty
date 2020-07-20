@@ -1,4 +1,4 @@
-package egovframework.example.sample.service;
+package egovframework.example.sample.service.paging;
 
 public class Paging {
 	private int pageNo;

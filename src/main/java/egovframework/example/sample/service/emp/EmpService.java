@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package egovframework.example.sample.service;
+package egovframework.example.sample.service.emp;
 
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import egovframework.example.sample.service.impl.MberMapper;
-import egovframework.rte.psl.dataaccess.util.EgovMap;
+import egovframework.example.sample.service.SampleDefaultVO;
+import egovframework.example.sample.service.emp.impl.EmpMapper;
 
 /**
  * @Class Name : EgovSampleService.java
@@ -42,18 +42,10 @@ import egovframework.rte.psl.dataaccess.util.EgovMap;
  */
 
 @Service
-public class MberService {
+public class EmpService {
 
-	/*
-	 * 2020.06.12 - 이병준
-	 * @Autowired
-	 *  : 의존 자동 주입 기능
-	 *  : XML설정에서 의존 주입 관련 설정을 별도로 하지 않아도 된다.
-	 *
-	 *  참고 링크 : https://m.blog.naver.com/PostView.nhn?blogId=sksk3479&logNo=221178451242&proxyReferer=https:%2F%2Fwww.google.com%2F
-	 */
 	@Autowired
-    private MberMapper mapper;
+    private EmpMapper mapper;
 
 	/**
 	 * 고객 목록을 조회한다.
@@ -61,8 +53,8 @@ public class MberService {
 	 * @return 글 목록
 	 * @exception Exception
 	 */
-	public List<EgovMap> selectMberList(SampleDefaultVO vo) throws Exception {
-		 return mapper.selectMberList(vo);
+	public List<?> selectEmpList(SampleDefaultVO vo) throws Exception {
+		 return mapper.selectEmpList(vo);
 	}
 
 	/**
@@ -71,45 +63,75 @@ public class MberService {
 	 * @return 글 총 갯수
 	 * @exception
 	 */
-	public int selectMberListTotCnt(SampleDefaultVO vo) throws Exception {
-		 return mapper.selectMberListTotCnt(vo);
+	public int selectEmpListTotCnt(SampleDefaultVO vo) throws Exception {
+		 return mapper.selectEmpListTotCnt(vo);
 	}
-
+	
 	/**
-	 * 고객 등록
+	 * 직원 등록
 	 * @param vo
 	 * @throws Exception
 	 */
-	public void insertMber(MberVO vo) throws Exception {
-		mapper.insertMber(vo);
+	public void insertEmp(EmpVO vo) throws Exception {
+		mapper.insertEmp(vo);
 	}
-
+	
 	/**
-	 * 고객 조회
+	 * 직원 조회
 	 * @param vo
 	 * @return
 	 * @throws Exception
 	 */
-	public MberVO selectMber(MberVO vo) throws Exception {
-		return mapper.selectMber(vo);
+	public EmpVO selectEmp(EmpVO vo) throws Exception {
+		return mapper.selectEmp(vo);
 	}
-
+	
 	/**
-	 * 고객 삭제
+	 * 직원 삭제
 	 * @param vo
 	 * @throws Exception
 	 */
-	public void deleteMber(MberVO vo) throws Exception {
-		mapper.deleteMber(vo);
+	public void deleteEmp(EmpVO vo) throws Exception {
+		mapper.deleteEmp(vo);
 	}
-
+	
 	/**
-	 * 고객 수정
+	 * 직원 수정
 	 * @param vo
 	 * @throws Exception
 	 */
-	public void updateMber(MberVO vo) throws Exception {
-		mapper.updateMber(vo);
+	public void updateEmp(EmpVO vo) throws Exception {
+		mapper.updateEmp(vo);
 	}
+	
+	public List<?> selectListEmpNM(EmpVO vo) throws Exception {
+		 return mapper.selectListEmpNM(vo);
+	}
+
+	
+	
+/*	*//**
+	 * 로그인 체크
+	 * @param vo
+	 * @param session
+	 * @return
+	 *//*
+	public boolean loginCheck(EmpVO vo,HttpSession session) {
+		
+		boolean result = mapper.loginCheck(vo);
+		if( result == true) {
+			session.setAttribute("userId", vo.getEmpId());
+		}
+		
+		return result;
+	};
+		
+	*//**
+	 * 로그 아웃
+	 * @param session
+	 *//*
+	public void logout(HttpSession session) {
+		mapper.logout(session);
+	};*/
 
 }
