@@ -102,7 +102,6 @@ select {
 		</div>
 
 		<div class="container">
-
 			<div class="form-inline form-group">
 				<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">예약자*:</label>
 				<div class="col-xs-2">

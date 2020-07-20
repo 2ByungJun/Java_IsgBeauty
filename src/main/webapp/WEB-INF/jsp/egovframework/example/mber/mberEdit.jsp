@@ -200,19 +200,12 @@ select {
 				onclick="view('${result.mberSn}')">이전</button>
 		</div>
 
-		<!-- 수정자, 수정일은 뒷단에 적용 : 사용할 때는 opacity : 0.0으로 설정 -->
-		<div class="form-inline form-group" style="opacity: 0.0;">
-			<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">수정자:</label>
-			<div class="col-sm-2">
-				<p for="mberSn" class="control-label">
-					<input type="text" class="form-control" id="updtId" name="updtId"
-						value="<c:out value="${result.updtId}"/>" readonly>
-				</p>
-			</div>
+		<!-- hidden -->
+		<input type="hidden" class="form-control" id="updtId" name="updtId"
+			value="<c:out value="${result.updtId}"/>" readonly>
+		<input type="hidden" class="form-control" id="mberSn" name="mberSn"
+			value="<c:out value="${result.mberSn}" />" readonly>
 
-			<input type="hidden" class="form-control" id="mberSn" name="mberSn"
-				value="<c:out value="${result.mberSn}" />" readonly>
-		</div>
 	</form:form>
 </body>
 </html>
