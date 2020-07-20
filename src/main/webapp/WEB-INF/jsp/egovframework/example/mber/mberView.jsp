@@ -115,23 +115,13 @@ p {
 		<div class="container">
 			<div class="row">
 				<div class="form-inline form-group">
-					<%-- <label for="mberSn" class="col-sm-2 col-sm-offset-1 control-label">순번:</label>
-					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<c:out value="${result.mberSn}" />
-						</p>
-					</div> --%>
-
 					<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름:</label>
 					<div class="col-sm-3">
 						<p for="mberNm" class="control-label">
 							<c:out value="${result.mberNm}" />
 						</p>
-					</div>
-				</div>
-
-				<div class="form-inline form-group">
-
+					</div>					
+					
 					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
 						직원:</label>
 					<div class="col-sm-3">
@@ -139,14 +129,6 @@ p {
 							<c:out value="${result.empNm}" />
 						</p>
 					</div>
-
-					<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
-					<div class="col-sm-3">
-						<p for="sexdstn" class="control-label">
-							<c:out value="${result.sexdstn}" />
-						</p>
-					</div>
-
 				</div>
 
 				<div class="form-inline form-group">
@@ -161,6 +143,22 @@ p {
 					<div class="col-sm-3">
 						<p for="telno" class="control-label">
 							<c:out value="${result.telno}" />
+						</p>
+					</div>
+				</div>
+
+				<div class="form-inline form-group">
+					<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
+					<div class="col-sm-3">
+						<p for="sexdstn" class="control-label">
+							<c:out value="${result.sexdstn}" />
+						</p>
+					</div>
+					
+					<label for="sexdstn" style="opacity:0.0;" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
+					<div class="col-sm-3" style="opacity:0.0;">
+						<p for="sexdstn" class="control-label">
+							틀을 맞춰주기 위함
 						</p>
 					</div>
 				</div>

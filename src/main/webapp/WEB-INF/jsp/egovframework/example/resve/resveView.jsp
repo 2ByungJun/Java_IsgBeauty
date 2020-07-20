@@ -37,7 +37,6 @@
 
 <!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
-
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
@@ -46,50 +45,76 @@
 		location.href = "<c:url value='/resveRegister.do'/>";
 	}
 
-	document.addEventListener('DOMContentLoaded', function() {
-		var calendarEl = document.getElementById('calendar');
-		
-		var obj = {};
-		$.ajax({
-	        url: "<c:url value="/resveView.do"/>",
-	        type: "post",
-	        dataType: "json",
-	        data: JSON.stringify(obj),
-	        contentType: "application/json",
-	        success: function(data) {
-	        	console.log(data);
-	        	$.each(data.resveList, function(index, item){
-	    			calendar.addEvent({'title': item.mberNm + '-' + item.tretmentNm , 'start':item.resveDt + 'T' + item.resveTime });
-	    		});
-	        },
-	        error: function(errorThrown) {
-	            alert(errorThrown.statusText);
-	        }
-	    });
-		
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView : 'dayGridMonth', // 월 달력
-			// 달력 툴
-			headerToolbar: {
-			      left: 'prevYear,prev,next,nextYear,today',
-			      center: 'title',
-			      right: 'dayGridMonth,dayGridWeek,dayGridDay'
-			 },
-			editable: true, // 드래그 수정 가능
-			locale : 'ko',  // 한국어 설정
-			 // 요일 클릭 이벤트
-			dateClick : function() {
-				alert('요일 클릭!');
-			},
-			// 일정 클릭 이벤트
-			eventClick : function() {
-				alert('일정 클릭!');
-			},
-		});
-		
-		// 렌더링
-		calendar.render();
-	});
+	document.addEventListener(
+					'DOMContentLoaded',
+					function() {
+						var calendarEl = document.getElementById('calendar');
+
+						var obj = {};
+						$.ajax({
+							url : "<c:url value="/resveView.do"/>",
+							type : "post",
+							dataType : "json",
+							data : JSON.stringify(obj),
+							contentType : "application/json",
+							success : function(data) {
+								console.log(data);
+								$.each(data.resveList, function(index, item) {
+									calendar.addEvent({
+										'title' : item.mberNm + '-'
+												+ item.tretmentNm,
+										'start' : item.resveDt + 'T'
+												+ item.resveTime,
+										'resveSn' : item.resveSn
+									});
+								});
+							},
+							error : function(errorThrown) {
+								alert(errorThrown.statusText);
+							}
+						});
+
+						var calendar = new FullCalendar.Calendar(
+								calendarEl,
+								{
+									initialView : 'dayGridMonth', // 월 달력
+									// 달력 툴
+									headerToolbar : {
+										left : 'prevYear,prev,next,nextYear,today',
+										center : 'title',
+										right : 'dayGridMonth,dayGridWeek,dayGridDay'
+									},
+									editable : true, // 드래그 수정 가능
+									navLinks : true, // 클릭시, 달력-주 달력으로 넘어감
+									eventLimit : true, // 셀 크기보다 많은 이벤트가 존재할 시, 'more'로 표기함
+									locale : 'ko', // 한국어 설정
+									// 일정 클릭 이벤트
+									eventClick : function(data) {
+										var retVal = confirm("예약을 변경하시겠습니까?");
+										if (retVal == true) {
+											console.log(data.event.extendedProps.resveSn);
+											$.ajax({
+												url : "<c:url value="/resveEdit.do"/>",
+												type : "post",
+												dataType : "json",
+												data : JSON.stringify(data.event.extendedProps.resveSn),
+												contentType : "application/json",
+												success : function() {
+													location.href = "<c:url value='/resveEdit.do'/>";
+												},
+												error : function(errorThrown) {
+													alert(errorThrown.statusText);
+												}
+											});
+										}
+									},
+								});
+
+						// 렌더링
+						calendar.render();
+					});
+	
+	
 </script>
 
 <body>
@@ -99,16 +124,15 @@
 			<h2>
 				<b>ISG Beauty</b>
 			</h2>
-			<p>
 			<h4 class="control-label">예약 캘린더</h4>
-			</p>
 		</div>
 
 		<button type="button" style="margin-bottom: 10px;"
 			class="btn btn-danger" onclick="home()">이전</button>
 
-		<div id="calendar"></div>
+			<div id="calendar"></div>
 
+		
 	</div>
 </body>
 

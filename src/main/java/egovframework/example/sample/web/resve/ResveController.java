@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.example.sample.service.SampleDefaultVO;
+import egovframework.example.sample.service.emp.EmpVO;
 import egovframework.example.sample.service.mber.MberService;
 import egovframework.example.sample.service.mber.MberVO;
 import egovframework.example.sample.service.resve.ResveService;
@@ -32,7 +33,7 @@ public class ResveController {
 	private ResveService resveService;
 	
 	/**
-	 * 예약 등록 페이지
+	 * 예약 등록 View
 	 *
 	 * @param searchVO
 	 * @param model
@@ -51,24 +52,7 @@ public class ResveController {
 	}
 
 	/**
-	 * 예약 등록 기능
-	 *
-	 * @param searchVO
-	 * @param sampleVO
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/addResve.do", method = RequestMethod.POST)
-	public String addResve(@ModelAttribute("searchVO") ResveVO searchVO) throws Exception {
-		System.out.println("[예약 등록]");
-
-		resveService.insertResve(searchVO);
-		
-		return "redirect:/resveView.do";
-	}
-
-	/**
-	 * 예약 뷰
+	 * 예약 캘린더 View
 	 *
 	 * @return
 	 */
@@ -78,6 +62,61 @@ public class ResveController {
 
 		return "resve/resveView";
 	}
+	
+	
+	@RequestMapping(value = "/resveEdit.do")
+	public String resveEdit(){
+		System.out.println("[예약 캘린더]");
+
+		return "resve/resveEdit";
+	}
+	
+     /**
+	 * 예약 수정 View
+	 *
+	 * @return
+     * @throws Exception 
+	 */
+/*	@ResponseBody
+	@RequestMapping(value = "/resveEdit.do")
+	public ResveVO resveEdit2(@RequestBody String resveSn, @ModelAttribute("searchVO") ResveVO searchVO ,Model model) throws Exception{
+		System.out.println("[예약 수정]" + resveSn);
+		
+		ResveVO sampleVO = new ResveVO();
+		sampleVO.setResveSn(resveSn);
+		
+		model.addAttribute("result", resveService.selectResve(sampleVO));
+
+		System.out.println(resveService.selectResve(sampleVO));
+
+		return resveService.selectResve(sampleVO);
+	}*/
+	
+	/**
+	 * 예약 수정
+	 * 
+	 * @param resveSn
+	 * @param searchVO
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	/*@ResponseBody
+	@RequestMapping(value = "/resveEdit.do", method = RequestMethod.POST)
+	public  HashMap<String, Object> resveEdit2(@RequestBody String resveSn, @ModelAttribute("searchVO") ResveVO searchVO) throws Exception{
+		System.out.println("[예약 수정 기능]");
+
+		ResveVO sampleVO = new ResveVO();
+		sampleVO.setResveSn(resveSn);
+		
+		HashMap<String, Object> map = new  HashMap<String, Object>();
+		map.put("result", resveService.selectResve(sampleVO) );
+		
+		System.out.println(resveService.selectResve(sampleVO));
+		
+		return map;
+	}*/
+	
 	
 	/**
 	 * (Ajax) ResveVO 전달
@@ -99,7 +138,24 @@ public class ResveController {
 	}
 	
 	/**
-	 * 고객 조회 기능
+	 * 예약 등록
+	 *
+	 * @param searchVO
+	 * @param sampleVO
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/addResve.do", method = RequestMethod.POST)
+	public String addResve(@ModelAttribute("searchVO") ResveVO searchVO) throws Exception {
+		System.out.println("[예약 등록]");
+
+		resveService.insertResve(searchVO);
+		
+		return "redirect:/resveView.do";
+	}
+	
+	/**
+	 * 고객 조회 
 	 * @param sampleVO
 	 * @param searchVO
 	 * @return
