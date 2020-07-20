@@ -80,7 +80,7 @@
 
 	function fnSelectList(pageNo){
 	  var url  =  "<c:url value='/mberList.json'/>";
-	  var jsonData = {"pageIndex": pageNo, "searchKeyword": $("#serachKeyword").val()};
+	  var jsonData = {"pageIndex": pageNo, "searchKeyword": $("#searchKeyword").val()};
 
 	  $.ajax({
 			headers: {
@@ -179,18 +179,16 @@
 							현황</button>
 					</div>
 					<div class="col-sm-6">
-						<%-- <div class="col-xs-6">
+						<div class="col-xs-6">
 							<div id="search">
 								<div class="input-group">
-									<form:input path="searchKeyword" type="text" id="serachKeyword" placeholder="이름 검색" cssClass="txt form-control" style="width:70%"/>
+									<form:input path="searchKeyword" type="text" id="searchKeyword" placeholder="이름 검색" cssClass="txt form-control" style="width:70%"/>
 									<button class="btn btn-default" style="font-size: 20px;">
-										<a href="javascript:fn_egov_selectList();"> <i
-											class="glyphicon glyphicon-search"></i>
-										</a>
+										<i class="glyphicon glyphicon-search"></i>
 									</button>
 								</div>
 							</div>
-						</div> --%>
+						</div>
 						<div align="right">
 							<button type="button" class="btn btn-info"
 								onclick="mberRegister()">고객 등록</button>

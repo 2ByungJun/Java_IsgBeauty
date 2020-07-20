@@ -29,7 +29,7 @@ import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 @Controller
 public class MberController {
-	
+
 	/** mberService */
 	@Resource(name = "mberService")
 	private MberService mberService;
@@ -37,11 +37,11 @@ public class MberController {
 	/** empService */
 	@Resource(name = "empService")
 	private EmpService empService;
-	
+
 	/** EgovPropertyService */
 	@Resource(name = "propertiesService")
 	protected EgovPropertyService propertiesService;
-	
+
 	/**
 	 * 고객 View
 	 *
@@ -51,12 +51,12 @@ public class MberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/mberList.do")
-	public String mberList() throws Exception {
+	public String mberList(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[고객 리스트]");
 
 		return "mber/mberList";
 	}
-	
+
 	/**
 	 * 고객 등록 View
 	 *
@@ -118,10 +118,10 @@ public class MberController {
 
 		return "mber/mberEdit";
 	}
-	
+
 	/**
 	 * (Ajax)고객 List
-	 * 
+	 *
 	 * @param searchVO
 	 * @param request
 	 * @param response
@@ -130,7 +130,7 @@ public class MberController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/mberList.json")
-     public Map<String, Object> mberListJson(@RequestBody SampleDefaultVO searchVO,
+     public Map<String, Object> mberListJson(@RequestBody MberVO searchVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		System.out.println(searchVO.getSearchKeyword()+"_______________test");
@@ -176,7 +176,7 @@ public class MberController {
 		mberService.insertMber(sampleVO);
 		return "forward:/mberList.do";
 	}
-	
+
 	/**
 	 * 고객 조회
 	 * @param sampleVO
@@ -202,7 +202,7 @@ public class MberController {
 		mberService.updateMber(sampleVO);
 		return "forward:/mberList.do";
 	}
-	
+
 	/**
 	 * 고객 삭제
 	 * @return "forward:/mberList.do"

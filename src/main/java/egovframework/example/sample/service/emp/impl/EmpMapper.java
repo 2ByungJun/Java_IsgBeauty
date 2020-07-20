@@ -1,8 +1,10 @@
 package egovframework.example.sample.service.emp.impl;
 
 import java.util.List;
-import egovframework.example.sample.service.emp.EmpVO;
+
 import egovframework.example.sample.service.SampleDefaultVO;
+import egovframework.example.sample.service.emp.EmpVO;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 /**
  * sample에 관한 데이터처리 매퍼 클래스
@@ -27,7 +29,7 @@ public interface EmpMapper {
 	 * @return 글 목록
 	 * @exception Exception
 	 */
-	List<?> selectEmpList(SampleDefaultVO searchVO) throws Exception;
+	List<EgovMap> selectEmpList(SampleDefaultVO searchVO) throws Exception;
 
 	/**
 	 * 직원 총 수를 조회한다.
@@ -36,7 +38,7 @@ public interface EmpMapper {
 	 * @exception
 	 */
 	int selectEmpListTotCnt(SampleDefaultVO searchVO);
-	
+
 	/**
 	 * 직원을 등록한다.
 	 * @param vo - 등록할 정보가 담긴 SampleVO
@@ -44,7 +46,7 @@ public interface EmpMapper {
 	 * @exception Exception
 	 */
 	void insertEmp(EmpVO vo) throws Exception;
-	
+
 	/**
 	 * 직원 상세보기
 	 * @param searchVO
@@ -52,29 +54,29 @@ public interface EmpMapper {
 	 * @throws Exception
 	 */
 	EmpVO selectEmp(EmpVO searchVO) throws Exception;
-	
+
 	/**
 	 * 직원 삭제
 	 * @param vo
 	 * @throws Exception
 	 */
 	void deleteEmp(EmpVO vo) throws Exception;
-	
+
 	/**
 	 * 직원 수정
 	 * @param vo
 	 * @throws Exception
 	 */
 	void updateEmp(EmpVO vo) throws Exception;
-	
-	
+
+
 	/**
 	 * 직원 "디자이너" 이름리스트
 	 * @param vo
 	 * @throws Exception
 	 */
 	List<?> selectListEmpNM(EmpVO vo) throws Exception;
-	
+
 /*	*//**
 	 * 로그인 체크
 	 * @param vo
@@ -82,7 +84,7 @@ public interface EmpMapper {
 	 * @return
 	 *//*
 	public boolean loginCheck(EmpVO vo,HttpSession session);
-		
+
 	*//**
 	 * 로그아웃
 	 * @param session

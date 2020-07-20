@@ -14,6 +14,27 @@
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
 </head>
 <script type="text/javaScript" language="javascript" defer="defer">
+
+	$('#loginBtn').click(function() {
+		var url  =  "<c:url value='/loginCheck.json'/>";
+		var jsonData = {"empId": $("#email").val(), "empPassword": $("#pwd").val()};
+
+		$.ajax({
+			headers: {
+				Accept: "application/json;utf-8"
+			}
+			,contentType: "application/json;utf-8"
+			,dataType: "json"
+			,type: "POST"
+			,url: url
+			,data: JSON.stringify(jsonData)
+			,success:function(data){
+
+			}
+		})
+	})
+
+
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
@@ -50,7 +71,7 @@
 			</div>
 		</div>
 	</form>
-	
+
 </body>
 
 

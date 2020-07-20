@@ -67,9 +67,12 @@
 		SELECT COUNT(*) EMP_totcnt
 		FROM t_emp_m
 		WHERE 1=1
-		<!-- <if test="searchKeyword != null and searchKeyword != ''"> <choose> 
-			<when test="searchCondition == 0"> AND ID LIKE '%' || #{searchKeyword} || 
-			'%' </when> <when test="searchCondition == 1"> AND NAME LIKE '%' || #{searchKeyword} 
+		<if test="searchKeyword != null and searchKeyword != ''">
+				AND EMP_NM LIKE CONCAT('%', #{searchKeyword},'%')
+			</if>
+		<!-- <if test="searchKeyword != null and searchKeyword != ''"> <choose>
+			<when test="searchCondition == 0"> AND ID LIKE '%' || #{searchKeyword} ||
+			'%' </when> <when test="searchCondition == 1"> AND NAME LIKE '%' || #{searchKeyword}
 			|| '%' </when> </choose> </if> -->
 	</select>
 

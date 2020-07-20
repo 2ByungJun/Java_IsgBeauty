@@ -17,12 +17,12 @@ package egovframework.example.sample.service.emp;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.example.sample.service.emp.impl.EmpMapper;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 /**
  * @Class Name : EgovSampleService.java
@@ -53,7 +53,7 @@ public class EmpService {
 	 * @return 글 목록
 	 * @exception Exception
 	 */
-	public List<?> selectEmpList(SampleDefaultVO vo) throws Exception {
+	public List<EgovMap> selectEmpList(SampleDefaultVO vo) throws Exception {
 		 return mapper.selectEmpList(vo);
 	}
 
@@ -66,7 +66,7 @@ public class EmpService {
 	public int selectEmpListTotCnt(SampleDefaultVO vo) throws Exception {
 		 return mapper.selectEmpListTotCnt(vo);
 	}
-	
+
 	/**
 	 * 직원 등록
 	 * @param vo
@@ -75,7 +75,7 @@ public class EmpService {
 	public void insertEmp(EmpVO vo) throws Exception {
 		mapper.insertEmp(vo);
 	}
-	
+
 	/**
 	 * 직원 조회
 	 * @param vo
@@ -85,7 +85,7 @@ public class EmpService {
 	public EmpVO selectEmp(EmpVO vo) throws Exception {
 		return mapper.selectEmp(vo);
 	}
-	
+
 	/**
 	 * 직원 삭제
 	 * @param vo
@@ -94,7 +94,7 @@ public class EmpService {
 	public void deleteEmp(EmpVO vo) throws Exception {
 		mapper.deleteEmp(vo);
 	}
-	
+
 	/**
 	 * 직원 수정
 	 * @param vo
@@ -103,13 +103,13 @@ public class EmpService {
 	public void updateEmp(EmpVO vo) throws Exception {
 		mapper.updateEmp(vo);
 	}
-	
+
 	public List<?> selectListEmpNM(EmpVO vo) throws Exception {
 		 return mapper.selectListEmpNM(vo);
 	}
 
-	
-	
+
+
 /*	*//**
 	 * 로그인 체크
 	 * @param vo
@@ -117,15 +117,15 @@ public class EmpService {
 	 * @return
 	 *//*
 	public boolean loginCheck(EmpVO vo,HttpSession session) {
-		
+
 		boolean result = mapper.loginCheck(vo);
 		if( result == true) {
 			session.setAttribute("userId", vo.getEmpId());
 		}
-		
+
 		return result;
 	};
-		
+
 	*//**
 	 * 로그 아웃
 	 * @param session
