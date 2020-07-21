@@ -54,6 +54,7 @@ public class LoginController {
 	public String loginEmpRegister(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[회원가입]");
 
+
 		return "login/loginEmpRegister";
 	}
 
@@ -71,7 +72,8 @@ public class LoginController {
 		if(empLoginVO != null) {
 			if(empLoginVO.getEmpPassword().equals(searchVO.getEmpPassword())) {
 				arrayMap.put("result", "true");
-				session.setAttribute("empId", searchVO.getEmpId());
+				session.setAttribute("empId", empLoginVO.getEmpId());
+				session.setAttribute("pspofc", empLoginVO.getPspofc());
 			}
 			else {
 				arrayMap.put("result", "pwdError");

@@ -1,8 +1,3 @@
-		$(document).ready(function() {
-			 fnSelectList(1);
-		});
-
-
 		function fn_createPaging(pages,pageId) {
 			   var page   = Number(pages.currentPageNo);
 			   var totalPages  =  parseInt(pages.pageCount);
@@ -57,52 +52,3 @@
 			 }
 
 
-
-		function fnSelectList(pageNo){
-		   var url  =  "<c:url value='/mberList.json'/>";
-		   var jsonData = {"pageIndex": pageNo, "searchKeyword": $("#serachKeyword").val()};
-
-		   $("#listForm").serialize()
-
-		   $.ajax({
-				headers: {
-					Accept: "application/json;utf-8"
-				}
-				,contentType: "application/json;utf-8"
-				,dataType: "json"
-				,type: "POST"
-				,url: url
-				,data: JSON.stringify(jsonData)
-				,success:function(data){
-					console.log(data);
-
-			    	var html = '';
-					if(data.dataList.length==0){
-						html += '<tr>';
-						html += '	<td colspan="5" style="text-align:center">표시할 데이터가 없습니다.</td>';
-						html += '</tr>';
-					}else{
-						$.each(data.dataList, function(index, item) {
-							html += '<tr>';
-							html += '<td align="center" class="listtd" >'+(index+1+((pageNo-1)*10))+'</td>';
-							html += '<td align="center" class="listtd"><a href="javascript:view(\''+item.mberSn+'\')">' + item.mberNm + '</td>';
-							html += '<td align="center" class="listtd" >' + item.sexdstn + '</td>';
-							html += '<td align="center" class="listtd" >' + item.telno + '</td>';
-							html += '<td align="center" class="listtd" >' + item.eEmpId + '</td>';
-							html += '<td align="center" class="listtd" >' + item.registDt + '</td>';
-							html += '<td align="center" class="listtd" >' + item.updtDt + '</td>';
-							html += '</tr>';
-
-						});
-					}
-					$('#tableList').html(html);
-
-					fn_createPaging(data.pages,"paging");
-				}
-				,error:function(e){
-				   	console.log(e.status, e.statusText);
-				   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
-				}
-			});
-
-		}

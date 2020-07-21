@@ -15,17 +15,6 @@
 </head>
 <script type="text/javaScript" language="javascript" defer="defer">
 
-
-	$(document).ready(function() {
-
-		<%  String str = (String) session.getAttribute("empId");
-		 if(str != null) {
-		%> location.href = "<c:url value='/mberList.do'/>";
-		<% } %>
-	});
-
-
-
 	function login() {
 		var url  =  "<c:url value='/loginCheck.json'/>";
 		var jsonData = {"empId": $("#email").val(), "empPassword": $("#pwd").val()};
@@ -78,14 +67,14 @@
 			<label class="control-label col-sm-4" for="email">ID:</label>
 			<div class="col-sm-4">
 				<input type="text" class="form-control" id="email" name="email"
-					placeholder="아이디를 입력해주세요">
+					placeholder="아이디를 입력해주세요" value=직원테스트>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-4" for="pwd">Password:</label>
 			<div class="col-sm-4">
 				<input type="password" class="form-control" id="pwd" name="pwd"
-					placeholder="비밀번호를 입력해주세요">
+					placeholder="비밀번호를 입력해주세요" value=1234>
 			</div>
 		</div>
 	</form>

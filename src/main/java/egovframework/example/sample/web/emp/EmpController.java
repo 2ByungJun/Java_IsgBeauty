@@ -80,8 +80,6 @@ public class EmpController {
      public Map<String, Object> empListJson(@RequestBody EmpVO searchVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println(searchVO.getSearchKeyword()+"_______________test");
-
 		int totCnt = empService.selectEmpListTotCnt(searchVO);
 
 		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));

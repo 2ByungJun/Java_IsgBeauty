@@ -146,8 +146,6 @@ public class MberController {
      public Map<String, Object> mberListJson(@RequestBody MberVO searchVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println(searchVO.getSearchKeyword()+"_______________test");
-
 		int totCnt = mberService.selectMberListTotCnt(searchVO);
 
 		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));

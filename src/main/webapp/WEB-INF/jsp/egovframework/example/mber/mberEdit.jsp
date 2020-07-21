@@ -41,19 +41,6 @@
 		document.detailForm.action = "<c:url value='/mberView.do'/>";
 		document.detailForm.submit();
 	}
-	
-	function update() {
-		var check;
-		check = confirm("변경된 사항들을 수정하시겠습니까?");
-
-		if (check) {
-			alert("변경되었습니다.");
-			document.detailForm.action = "<c:url value= '/updateMber.do'/>";
-			document.detailForm.submit();
-		} else {
-			alert("취소하셨습니다.");
-		}
-	}
 
 	$(function() {
 		$("#detailForm").validate({

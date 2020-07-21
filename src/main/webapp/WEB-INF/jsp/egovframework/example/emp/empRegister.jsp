@@ -24,20 +24,6 @@
 	}
 
 	/* 글 등록 function */
-	function saveEmp() {
-		var check;
-		check = confirm("해당 직원을 등록하시겠습니까?");
-
-		if (check) {
-			alert("등록되었습니다.");
-			frm = document.detailForm;
-			frm.action = "<c:url value= '/addEmp.do'/>";
-			frm.submit();
-		} else {
-			alert("취소하셨습니다.");
-		}
-	}
-
 	$(function() {
 		$("#detailForm").validate({
 			submitHandler : function() {

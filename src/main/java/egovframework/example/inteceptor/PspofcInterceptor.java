@@ -14,22 +14,31 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 
-public class LogonInterceptor extends HandlerInterceptorAdapter {
+public class PspofcInterceptor extends HandlerInterceptorAdapter {
 
 	private final String AJAX_HEADER = "AJAX";
 
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException, ModelAndViewDefiningException {
 
-
 		request.setAttribute("contextPath", request.getContextPath());
 		HttpSession session = request.getSession();
 
-		if(session.getAttribute("empId")==null) {
+
+		System.out.println(session.getAttribute("pspofc")+"@@@@@@@@@@@@@@@@@@@");
+		System.out.println(session.getAttribute("empId")+"@@@@@@@@@@@@@@@@@@@");
+
+
+
+
+		if(!session.getAttribute("pspofc").equals("Admin")) {
+
+			System.out.println(session.getAttribute("pspofc")+"_____________________________");
+			System.out.println(session.getAttribute(request.getRequestURL() + ""));
 
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('로그인 후 이용하실 수 있습니다.'); location.href='login.do';</script>");
+			out.println("<script>alert('관리자 권한이 필요합니다.'); location.href='mberList.do';</script>");
 			out.flush();
 
 			return false;

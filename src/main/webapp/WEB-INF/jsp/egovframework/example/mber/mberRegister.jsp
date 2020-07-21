@@ -24,24 +24,10 @@
 	}
 
 	/* 글 등록 function */
-	function saveMber() {
-		var check;
-		check = confirm("해당 고객님을 등록하시겠습니까?");
-
-		if (check) {
-			alert("등록되었습니다.");
-			frm = document.detailForm;
-			frm.action = "<c:url value= '/addMber.do'/>";
-			frm.submit();
-		} else {
-			alert("취소하셨습니다.");
-		}
-	}
-
 	$(function() {
 		$("#detailForm").validate({
 			submitHandler : function() {
-				var check = confirm("해당 고객님을 등록하시겠습니까?(validation)");
+				var check = confirm("해당 고객님을 등록하시겠습니까?");
 				if (check) {
 					alert("등록되었습니다.");
 					frm = document.detailForm;
@@ -123,7 +109,7 @@ select {
 					<input type="text" class="form-control" id="mberNm" name="mberNm"
 						placeholder="이름을 입력하세요" maxlength="10" required>
 				</div>
-				
+
 				<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
 					직원*:</label>
 				<div class="col-md-2">

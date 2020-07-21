@@ -12,8 +12,8 @@
 	href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
 <script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
+<script src="<c:url value='js/paging.js' />"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
-
 
 	<%  String str = (String) session.getAttribute("empId"); %>
 
@@ -24,72 +24,13 @@
 		 welcomeHtml += '<b>'+'[<%=str%>]' + '님 환영합니다.</b>';
 		 welcomeHtml += '<b>고객 관리 화면입니다.</b>';
 		 $('#welcome').html(welcomeHtml);
-
-		 fnSelectList(1);
 	});
 
-
-
-	function fn_createPaging(pages,pageId) {
-		   var page   = Number(pages.currentPageNo);
-		   var totalPages  =  parseInt(pages.pageCount);
-		   var pageSize  = Number(10);
-		   $("#paging").children().remove();
-		   var pagingHtml = '';
-
-		   var pagingIndex = parseInt((page-1)/pageSize);
-		   var pagingStart = (pagingIndex*pageSize)+1;
-		   var pagingEnd  = (pagingIndex+1)*pageSize;
-
-
-		   //alert(totalPages);
-		   if (pagingEnd > totalPages){
-			   pagingEnd = totalPages;
-		   }
-		   var before = pagingStart - 1;
-		   pagingHtml += '<ul class="pagination">';
-		   if (page > pageSize) {
-			   pagingHtml += ' <li class="prev"><a href=\"javascript:fnSelectList(1);\" class="first"><<</a><li><li class="prev"><a class="prev" href=\"javascript:fnSelectList(' + before + ');\"><</a></li>';
-		   }else{
-			   pagingHtml += '  <li class="disabled"><a href="#" ><<</a></li><li class="disabled"><a  href="#"><</a></li>';
-
-		   }
-
-		  // pagingHtml += '<span>';
-		   for (var i = pagingStart; i <= pagingEnd; i++) {
-		    if(i == pagingStart){
-			     //pagingHtml += '<a href="#" class="first-num">'+ i +'</a>';
-			     if (page == i) {
-			      pagingHtml += '<li data-lp="'+ i +'" class="disabled"><a href="#" class="on" style="color: blue; font-weight: bolder;">'+ i +'</a></li>';
-			     }else {
-			      pagingHtml += '<li data-lp="'+ i +'"><a href=\"javascript:fnSelectList(' + i + ');">'+ i +'</a></li>';
-			     }
-		    }else{
-		     if (page == i) {
-		      pagingHtml += '<li data-lp="'+ i +'" class="disabled"><a href="#" class="on" style="color: blue; font-weight: bolder;">'+ i +'</a></li>';
-		     } else {
-		      pagingHtml += '<li data-lp="'+ i +'"><a href=\"javascript:fnSelectList(' + i + ');">'+ i +'</a></li>';
-		     }
-		    }
-		   }
-
-		   var after = pagingEnd + 1;
-		   if (pagingEnd < totalPages) {
-		    pagingHtml += ' <li class="next"><a href=\"javascript:fnSelectList(' + after + ');\" class="next">></a></li><li class="next"><a class="last" href=\"javascript:fnSelectList(' + totalPages + ');\">>></a></li>';
-		   }else{
-			   pagingHtml += ' <li class="disabled"><a href=\"#" >></a></li><li class="disabled"><a href=\"javascript:#">>></a></li>';
-		   }
-		   pagingHtml += '</ul>'
-		   $("#"+pageId).empty().append(pagingHtml);
-		 }
-
-
-
-	 function fnSelectList(pageNo){
+	function fnSelectList(pageNo){
 		 var url  =  "<c:url value='/empList.json'/>";
 		 var jsonData = {"pageIndex": pageNo, "searchKeyword": $("#serachKeyword").val()};
-
 		 $.ajax({
+
 			headers: {
 				Accept: "application/json;utf-8"
 			}
@@ -104,7 +45,7 @@
 		    	var html = '';
 				if(data.dataList.length==0){
 					html += '<tr>';
-					html += '	<td colspan="5" style="text-align:center">표시할 데이터가 없습니다.</td>';
+					html += '	<td colspan="7" style="text-align:center">표시할 데이터가 없습니다.</td>';
 					html += '</tr>';
 				}else{
 					$.each(data.dataList, function(index, item) {
@@ -134,8 +75,6 @@
 	}
 
 
-
-
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
@@ -147,15 +86,6 @@
        	document.listForm.action = "<c:url value='/empView.do'/>";
        	document.listForm.submit();
     }
-/* 	function fn_egov_link_page(pageNo) {
-		document.listForm.pageIndex.value = pageNo;
-		document.listForm.action = "<c:url value='/empList.do'/>";
-		document.listForm.submit();
-	}
-	function fn_egov_selectList() {
-		document.listForm.action = "<c:url value='/empList.do'/>";
-		document.listForm.submit();
-	} */
 </script>
 </head>
 <body>
@@ -190,13 +120,10 @@
 						<div align="right">
 							<button type="button" class="btn btn-success" onclick="empRegister()">직원 등록</button>
 							<button type="button" class="btn btn-info" onclick="home()">이전</button>
-							<button type="button" class="btn btn-info" onclick="fnSelectList(1)">검색</button>
 						</div>
 					</div>
 				</div>
 			</div>
-
-
 
 			<div class="panel panel-default">
 				<div class="panel-body">
@@ -215,37 +142,12 @@
 								</tr>
 							</thead>
 							<tbody id=tableList>
-								<%-- <c:forEach var="result" items="${resultList}" varStatus="status">
-									<tr>
-										<td align="center" class="listtd"><c:out
-												value="${result.empId}" /></td>
-										<td align="center" class="listtd"><a
-											href="javascript:view('<c:out
-													value="${result.empId}"/>')"><c:out
-													value="${result.empNm}" /></a></td>
-										<td align="center" class="listtd"><c:out
-												value="${result.sexdstn}" />&nbsp;</td>
-										<td align="center" class="listtd"><c:out
-												value="${result.telno}" />&nbsp;</td>
-										<td align="center" class="listtd"><c:out
-												value="${result.pspofc}" />&nbsp;</td>
-										<td align="center" class="listtd"><c:out
-												value="${result.career}" />&nbsp;</td>
-										<td align="center" class="listtd"><c:out
-												value="${result.registDt}" />&nbsp;</td>
-										<td align="center" class="listtd"><c:out
-												value="${result.updtDt}" />&nbsp;</td>
-									</tr>
-								</c:forEach> --%>
 							</tbody>
 						</table>
 					</div>
 				</div>
 				<div class="text-center">
 					<div id="paging">
-						<%-- <ui:pagination paginationInfo="${paginationInfo}" type="image"
-							jsFunction="fn_egov_link_page" />
-						<form:hidden path="pageIndex" /> --%>
 					</div>
 				</div>
 			</div>
