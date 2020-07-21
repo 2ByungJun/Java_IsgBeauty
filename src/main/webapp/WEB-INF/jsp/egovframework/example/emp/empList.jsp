@@ -154,7 +154,7 @@
        	document.listForm.action = "<c:url value='/empView.do'/>";
        	document.listForm.submit();
     }
-	function fn_egov_link_page(pageNo) {
+/* 	function fn_egov_link_page(pageNo) {
 		document.listForm.pageIndex.value = pageNo;
 		document.listForm.action = "<c:url value='/empList.do'/>";
 		document.listForm.submit();
@@ -162,7 +162,7 @@
 	function fn_egov_selectList() {
 		document.listForm.action = "<c:url value='/empList.do'/>";
 		document.listForm.submit();
-	}
+	} */
 </script>
 </head>
 <body>

@@ -75,11 +75,13 @@
         </property>
     </bean>
 	<!-- /For Pagination Tag -->
-   <!--  <mvc:interceptors>
+  <mvc:interceptors>
          <mvc:interceptor>
             <mvc:mapping path="/**" />
+             <!-- <mvc:exclude-mapping path="/common/user/login.do"/> -->
             <bean id="logonInterceptor" class="egovframework.example.inteceptor.LogonInterceptor" />
          </mvc:interceptor>
-    </mvc:interceptors> -->
+    </mvc:interceptors>
+
     <mvc:view-controller path="/cmmn/validator.do" view-name="cmmn/validator"/>
 </beans>
