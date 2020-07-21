@@ -56,14 +56,14 @@ public interface ResveMapper {
 	ResveVO selectResve(ResveVO vo) throws Exception;
 
 	/**
-	 * 고객 삭제
+	 * 예약 삭제
 	 * @param vo
 	 * @throws Exception
 	 */
 	void deleteResve(ResveVO vo) throws Exception;
 
 	/**
-	 * 고객 수정
+	 * 예약 수정
 	 * @param vo
 	 * @throws Exception
 	 */
