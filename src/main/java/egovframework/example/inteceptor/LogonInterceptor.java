@@ -2,6 +2,7 @@ package egovframework.example.inteceptor;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Locale;
 
 import javax.jms.Session;
@@ -17,6 +18,7 @@ public class LogonInterceptor extends HandlerInterceptorAdapter {
 
 	private final String AJAX_HEADER = "AJAX";
 
+
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException, ModelAndViewDefiningException {
 
 
@@ -25,8 +27,17 @@ public class LogonInterceptor extends HandlerInterceptorAdapter {
 
 		request.setAttribute("contextPath", request.getContextPath());
 		HttpSession session = request.getSession();
-		System.out.println(session+"@@@@@@@@@@");
-		System.out.println(session.getAttribute("empId")+"111@@@@@@@@@@");
+
+		if(session.getAttribute("empId")==null) {
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('로그인 후 이용하실 수 있습니다.'); location.href='login.do';</script>");
+			out.flush();
+
+			return false;
+		}
+
 		return true;
 	}
 

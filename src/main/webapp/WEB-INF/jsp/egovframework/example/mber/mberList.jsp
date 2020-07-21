@@ -19,12 +19,15 @@
 <script type="text/javaScript" language="javascript" defer="defer">
 
 
-<%  String str = (String) session.getAttribute("empId"); %>
+	<%  String str = (String) session.getAttribute("empId"); %>
 
 
 	$(document).ready(function() {
 		 fnSelectList(1);
 		 var welcomeHtml = '';
+		 welcomeHtml += '<b>'+'[<%=str%>]' + '님 환영합니다.</b>';
+		 welcomeHtml += '<b>고객 관리 화면입니다.</b>';
+		 $('#welcome').html(welcomeHtml);
 	});
 
 
@@ -188,7 +191,7 @@
 							<div id="search">
 								<div class="input-group">
 									<form:input path="searchKeyword" type="text" id="searchKeyword" placeholder="이름 검색" cssClass="txt form-control" style="width:70%"/>
-									<button class="btn btn-default" style="font-size: 20px;">
+									<button class="btn btn-default" type="button" onclick="javascript:fnSelectList(1)" style="font-size: 20px;">
 										<i class="glyphicon glyphicon-search"></i>
 									</button>
 								</div>

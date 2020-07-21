@@ -14,25 +14,18 @@
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
 
-	$(document).ready(function() {
 
-		<%  String str = (String) session.getAttribute("empId");
-		%>
+	<%  String str = (String) session.getAttribute("empId"); %>
+
+
+	$(document).ready(function() {
 		 fnSelectList(1);
 		 var welcomeHtml = '';
+		 welcomeHtml += '<b>'+'[<%=str%>]' + '님 환영합니다.</b>';
+		 welcomeHtml += '<b>고객 관리 화면입니다.</b>';
+		 $('#welcome').html(welcomeHtml);
 
-		 <%
-		 if(str == null) {
-		%> alert("로그인이 필요합니다.");
-		location.href = "<c:url value='/login.do'/>";
-		<%
-		 } else {
-			 %> welcomeHtml += '<b>'+'[<%=str%>]' + '님 환영합니다.</b>';
-			 welcomeHtml += '<b>직원 관리 화면입니다.</b>';
-			 $('#welcome').html(welcomeHtml);<%
-		 }%>
-
-		fnSelectList(1);
+		 fnSelectList(1);
 	});
 
 
@@ -188,7 +181,7 @@
 							<div id="search">
 								<div class="input-group">
 									<form:input path="searchKeyword" type="text" id="serachKeyword" placeholder="이름 검색" cssClass="txt form-control" style="width:70%"/>
-									<button class="btn btn-default" style="font-size: 20px;" onclick="fnSelectList(1)">
+									<button class="btn btn-default" type="button" style="font-size: 20px;" onclick="fnSelectList(1)">
 										<i class="glyphicon glyphicon-search"></i>
 									</button>
 								</div>
@@ -197,6 +190,7 @@
 						<div align="right">
 							<button type="button" class="btn btn-success" onclick="empRegister()">직원 등록</button>
 							<button type="button" class="btn btn-info" onclick="home()">이전</button>
+							<button type="button" class="btn btn-info" onclick="fnSelectList(1)">검색</button>
 						</div>
 					</div>
 				</div>

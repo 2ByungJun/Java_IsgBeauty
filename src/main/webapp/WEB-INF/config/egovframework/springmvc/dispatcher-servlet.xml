@@ -78,7 +78,12 @@
   <mvc:interceptors>
          <mvc:interceptor>
             <mvc:mapping path="/**" />
-             <!-- <mvc:exclude-mapping path="/common/user/login.do"/> -->
+            <mvc:exclude-mapping path="/index.jsp"/>
+            <mvc:exclude-mapping path="/login.jsp"/>
+            <mvc:exclude-mapping path="/login.do"/>
+            <mvc:exclude-mapping path="/log*.do"/>
+            <mvc:exclude-mapping path="/loginCheck.json"/>
+            <mvc:exclude-mapping path="/log*.*"/>
             <bean id="logonInterceptor" class="egovframework.example.inteceptor.LogonInterceptor" />
          </mvc:interceptor>
     </mvc:interceptors>

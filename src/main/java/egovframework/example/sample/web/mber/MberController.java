@@ -56,7 +56,7 @@ public class MberController {
 	public String mberList(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model, HttpServletRequest request,HttpServletResponse response) throws Exception {
 		System.out.println("[고객 리스트]");
 
-		HttpSession session = request.getSession();
+		/*HttpSession session = request.getSession();
 
 		String str = (String) session.getAttribute("empId");
 
@@ -65,7 +65,7 @@ public class MberController {
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('로그인 후 이용하실 수 있습니다.'); location.href='login.do';</script>");
 			out.flush();
-		}	
+		}*/
 
 		return "mber/mberList";
 	}
