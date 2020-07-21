@@ -22,26 +22,9 @@
 <%  String str = (String) session.getAttribute("empId"); %>
 
 
-         $(document).ready(function() {
-
+	$(document).ready(function() {
 		 fnSelectList(1);
 		 var welcomeHtml = '';
-
-		 var welcomeHtml = '';
-		 welcomeHtml += '<b>'+'[<%=str%>]' + '님 환영합니다.</b>';
-		 welcomeHtml += '<b>로그인 고객 관리 화면입니다.</b>';
-		 $('#welcome').html(welcomeHtml);
-
-		 <%
-		 if(str == null) {
-		%> alert("로그인이 필요합니다.");
-		location.href = "<c:url value='/login.do'/>";
-		<%
-		 } else {
-			 %> welcomeHtml += '<b>'+'[<%=str%>]' + '님 환영합니다.</b>';
-			 welcomeHtml += '<b>로그인 고객 관리 화면입니다.</b>';
-			 $('#welcome').html(welcomeHtml);<%
-		 }%>
 	});
 
 

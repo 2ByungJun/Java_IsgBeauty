@@ -15,32 +15,14 @@
 </head>
 <script type="text/javaScript" language="javascript" defer="defer">
 
-	function login() {
-		var url  =  "<c:url value='/loginCheck.json'/>";
-		var jsonData = {"empId": $("#email").val(), "empPassword": $("#pwd").val()};
+	$(document).ready(function() {
 
-		$.ajax({
-			headers: {
-				Accept: "application/json;utf-8"
-			}
-			,contentType: "application/json;utf-8"
-			,dataType: "json"
-			,type: "POST"
-			,url: url
-			,data: JSON.stringify(jsonData)
-			,success:function(data){
-				console.log(data);
-				if(data.result=="idError") {
-					alert("아이디 혹은 비밀번호를 확인하세요.");
-				}else if(data.result=="pwdError") {
-					alert("아이디 혹은 비밀번호를 확인하세요.");
-				}else {
-					location.href = "<c:url value='/mberList.do'/>";
-				}
-			}
-		})
-		location.href = "<c:url value='/mberList.do'/>";
-	}
+		<%  String str = (String) session.getAttribute("empId");
+		session.setMaxInactiveInterval(30*60);
+		 if(str != null) {
+		%> location.href = "<c:url value='/mberList.do'/>";
+		<% } %>
+	});
 
 
 	function home() {
