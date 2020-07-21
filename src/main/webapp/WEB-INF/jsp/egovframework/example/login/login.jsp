@@ -39,6 +39,7 @@
 				}
 			}
 		})
+		location.href = "<c:url value='/mberList.do'/>";
 	}
 
 

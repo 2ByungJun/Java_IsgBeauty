@@ -22,15 +22,15 @@
 <%  String str = (String) session.getAttribute("empId"); %>
 
 
-	$(document).ready(function() {
+         $(document).ready(function() {
 
 		 fnSelectList(1);
 		 var welcomeHtml = '';
 
-		 <%-- var welcomeHtml = '';
+		 var welcomeHtml = '';
 		 welcomeHtml += '<b>'+'[<%=str%>]' + '님 환영합니다.</b>';
 		 welcomeHtml += '<b>로그인 고객 관리 화면입니다.</b>';
-		 $('#welcome').html(welcomeHtml); --%>
+		 $('#welcome').html(welcomeHtml);
 
 		 <%
 		 if(str == null) {
@@ -168,7 +168,6 @@
 		document.listForm.submit();
 	}
 	function logout() {
-
 		check = confirm("로그아웃 하시겠습니까?");
 
 		if (check) {

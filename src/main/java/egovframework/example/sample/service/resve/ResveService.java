@@ -16,7 +16,7 @@ public class ResveService {
     private ResveMapper mapper;
 
 	/**
-	 * 고객 목록을 조회한다.
+	 * 예약 목록을 조회한다.
 	 * @param searchVO - 조회할 정보가 담긴 VO
 	 * @return 글 목록
 	 * @exception Exception
@@ -26,7 +26,7 @@ public class ResveService {
 	}
 
 	/**
-	 * 고객 총 수를 조회한다.
+	 * 예약 총 수를 조회한다.
 	 * @param searchVO - 조회할 정보가 담긴 VO
 	 * @return 글 총 갯수
 	 * @exception
@@ -36,7 +36,7 @@ public class ResveService {
 	}
 
 	/**
-	 * 고객 등록
+	 * 예약 등록
 	 * @param vo
 	 * @throws Exception
 	 */
@@ -45,7 +45,7 @@ public class ResveService {
 	}
 
 	/**
-	 * 고객 조회
+	 * 예약 조회
 	 * @param vo
 	 * @return
 	 * @throws Exception
@@ -55,7 +55,7 @@ public class ResveService {
 	}
 
 	/**
-	 * 고객 삭제
+	 * 예약 삭제
 	 * @param vo
 	 * @throws Exception
 	 */
@@ -64,7 +64,7 @@ public class ResveService {
 	}
 
 	/**
-	 * 고객 수정
+	 * 예약 수정
 	 * @param vo
 	 * @throws Exception
 	 */

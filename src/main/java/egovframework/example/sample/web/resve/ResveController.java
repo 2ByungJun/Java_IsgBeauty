@@ -63,60 +63,22 @@ public class ResveController {
 		return "resve/resveView";
 	}
 	
-	
-	@RequestMapping(value = "/resveEdit.do")
-	public String resveEdit(){
-		System.out.println("[예약 캘린더]");
-
-		return "resve/resveEdit";
-	}
-	
      /**
 	 * 예약 수정 View
 	 *
 	 * @return
      * @throws Exception 
 	 */
-/*	@ResponseBody
-	@RequestMapping(value = "/resveEdit.do")
-	public ResveVO resveEdit2(@RequestBody String resveSn, @ModelAttribute("searchVO") ResveVO searchVO ,Model model) throws Exception{
-		System.out.println("[예약 수정]" + resveSn);
-		
+	@RequestMapping("/resveEdit.do")
+	public String resveEdit(@RequestParam("selectedId") String resveSn, @ModelAttribute("searchVO") ResveVO searchVO, Model model) throws Exception {
+		System.out.println("[예약 수정화면]");
+
 		ResveVO sampleVO = new ResveVO();
 		sampleVO.setResveSn(resveSn);
-		
 		model.addAttribute("result", resveService.selectResve(sampleVO));
 
-		System.out.println(resveService.selectResve(sampleVO));
-
-		return resveService.selectResve(sampleVO);
-	}*/
-	
-	/**
-	 * 예약 수정
-	 * 
-	 * @param resveSn
-	 * @param searchVO
-	 * @param model
-	 * @return
-	 * @throws Exception
-	 */
-	/*@ResponseBody
-	@RequestMapping(value = "/resveEdit.do", method = RequestMethod.POST)
-	public  HashMap<String, Object> resveEdit2(@RequestBody String resveSn, @ModelAttribute("searchVO") ResveVO searchVO) throws Exception{
-		System.out.println("[예약 수정 기능]");
-
-		ResveVO sampleVO = new ResveVO();
-		sampleVO.setResveSn(resveSn);
-		
-		HashMap<String, Object> map = new  HashMap<String, Object>();
-		map.put("result", resveService.selectResve(sampleVO) );
-		
-		System.out.println(resveService.selectResve(sampleVO));
-		
-		return map;
-	}*/
-	
+		return "resve/resveEdit";
+	}
 	
 	/**
 	 * (Ajax) ResveVO 전달
@@ -138,6 +100,19 @@ public class ResveController {
 	}
 	
 	/**
+	 * 고객 조회 
+	 * @param sampleVO
+	 * @param searchVO
+	 * @return
+	 * @throws Exception
+	 */
+	public MberVO selectMber(MberVO sampleVO, @ModelAttribute("searchVO") SampleDefaultVO searchVO) throws Exception {
+		System.out.println("[고객 조회 기능]");
+		
+		return mberService.selectMber(sampleVO);
+	}
+	
+	/**
 	 * 예약 등록
 	 *
 	 * @param searchVO
@@ -155,15 +130,33 @@ public class ResveController {
 	}
 	
 	/**
-	 * 고객 조회 
-	 * @param sampleVO
-	 * @param searchVO
-	 * @return
-	 * @throws Exception
+	 * 예약 수정
+	 * @return "forward:/resveView.do"
+	 * @exception Exception
 	 */
-	public MberVO selectMber(MberVO sampleVO, @ModelAttribute("searchVO") SampleDefaultVO searchVO) throws Exception {
-		System.out.println("[고객 조회 기능]");
+
+	@RequestMapping(value = "/updateResve.do", method = RequestMethod.POST)
+	public String updateResve(@ModelAttribute("resveVO") ResveVO sampleVO) throws Exception {
+		System.out.println("[예약 수정 기능]");
+
+		resveService.updateResve(sampleVO);
 		
-		return mberService.selectMber(sampleVO);
+		return "redirect:/resveView.do";
+	}
+	
+	/**
+	 * 예약 삭제
+	 * @return "forward:/resveView.do"
+	 * @exception Exception
+	 */
+	@RequestMapping(value = "/deleteResve.do")
+	public String deleteResve(@RequestParam("selectedId") String resveSn) throws Exception {
+		System.out.println("[예약 삭제 기능]");
+
+		ResveVO sampleVO = new ResveVO();
+		sampleVO.setResveSn(resveSn);
+		resveService.deleteResve(sampleVO);
+		
+		return "redirect:/resveView.do";
 	}
 }

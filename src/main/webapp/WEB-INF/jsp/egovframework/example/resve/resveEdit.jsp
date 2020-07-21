@@ -23,19 +23,38 @@
 		location.href = "<c:url value='/resveView.do'/>";
 	}
 	
-	$.ajax({
-		url : "<c:url value="/resveEdit.json"/>",
-		type : "post",
-		dataType : "json",
-		contentType : "application/json",
-		success : function(data) {
-			console.log(data);
-		},
-		error : function(errorThrown) {
-			alert(errorThrown.statusText);
+	function deleteResve(id) {
+		var check;
+		check = confirm("정말로 해당 예약을 삭제하시겠습니까?");
+
+		if (check) {
+			alert("삭제되었습니다.");
+			document.detailForm.selectedId.value = id;
+			document.detailForm.action = "<c:url value='/deleteResve.do'/>";
+			document.detailForm.submit();
+		} else {
+			alert("취소하셨습니다.");
 		}
-	});
+	}
 	
+	$(function() {
+		$("#detailForm").validate({
+			submitHandler : function() {
+				var check = confirm("예약을 수정하시겠습니까?");
+				if (check) {
+					alert("수정되었습니다.");
+					frm = document.detailForm;
+					frm.action = "<c:url value= '/updateResve.do'/>";
+					frm.submit();
+				} else {
+					alert("취소하셨습니다.");
+				}
+			}
+		});
+		$.extend($.validator.messages, {
+			required : "필수 항목입니다."
+		});
+	});
 </script>
 <style>
 label {
@@ -62,7 +81,6 @@ select {
 	<form:form commandName="resveVO" id="detailForm" name="detailForm"
 		method="post">
 		<input type="hidden" name="selectedId" />
-		
 		<div class="container">
 			<div class="jumbotron text-center alert-info"
 				style="margin-top: 30px" role="alert" onclick="home()">
@@ -87,10 +105,11 @@ select {
 							value="<c:out value="${result.mberNm}" />" readonly>
 					</div>
 
-					<label for="tretmentNm" class="col-sm-2 col-sm-offset-1 control-label">시술*:</label>
+					<label for="tretmentNm"
+						class="col-sm-2 col-sm-offset-1 control-label">시술*:</label>
 					<div class="col-md-2">
-						<select class="form-control" id="tretmentNm" name="tretmentNm"
-							>
+						<select class="form-control" id="tretmentNm" name="tretmentNm" required>
+							<option value="${result.tretmentNm}" selected>${result.tretmentNm}</option>
 							<option value="cut">cut</option>
 							<option value="perm">perm</option>
 							<option value="special">special</option>
@@ -102,13 +121,14 @@ select {
 					<label for="resveDt" class="col-sm-2 col-sm-offset-1 control-label">예약일시*:</label>
 					<div class="col-sm-2">
 						<input type="date" class="form-control" id="resveDt"
-							name="resveDt">
+							name="resveDt" value="${result.resveDt}" required>
 					</div>
 
-					<label for="resveTime" class="col-sm-2 col-sm-offset-1 control-label">예약시간*:</label>
+					<label for="resveTime"
+						class="col-sm-2 col-sm-offset-1 control-label">예약시간*:</label>
 					<div class="col-sm-2">
 						<input type="time" class="form-control" id="resveTime"
-							name="resveTime">
+							name="resveTime" value="${result.resveTime}" required>
 					</div>
 				</div>
 
@@ -117,26 +137,29 @@ select {
 						class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
 					<div class="col-sm-2">
 						<input type="text" class="form-control" id="registId"
-							name="registId" value="test" readonly>
+							name="registId" value="${result.registId}" readonly>
 					</div>
 
 					<label for="registDt"
 						class="col-sm-2 col-sm-offset-1 control-label">등록일*:</label>
 					<div class="col-sm-2">
 						<input type="date" class="form-control" id="registDt"
-							name="registDt" value="<%=today%>" readonly>
+							name="registDt" value="${result.registDt}" readonly>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="submit" class="btn btn-success" onclick="">수정</button>
 			<button type="button" class="btn btn-danger"
-				onclick="deleteMber('${result.mberSn}')">삭제</button>
+				onclick="deleteResve('${result.resveSn}')">삭제</button>
 			<button type="button" class=" btn btn-info" onclick="resveView()">이전</button>
 		</div>
+		
+		<input type="hidden" class="form-control" id="resveSn" name="resveSn"
+			value="<c:out value="${result.resveSn}" />" readonly>
 	</form:form>
 </body>
 </html>
