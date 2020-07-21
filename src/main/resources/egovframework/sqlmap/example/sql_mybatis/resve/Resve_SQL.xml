@@ -14,6 +14,8 @@
 		<result property="registDt" column="regist_dt"/>
 	</resultMap>
 
+    
+    
     <select id="selectResve" parameterType="resveVO" resultMap="resve">
 			select a.RESVE_SN,
 			   a.MBER_SN,
