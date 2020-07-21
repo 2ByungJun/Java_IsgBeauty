@@ -20,8 +20,9 @@
  	<typeAliases>
 		<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
 		<typeAlias alias="searchVO" type="egovframework.example.sample.service.SampleDefaultVO"/>
-		<typeAlias alias="mberVO" type="egovframework.example.sample.service.MberVO"/>
-		<typeAlias alias="empVO" type="egovframework.example.sample.service.EmpVO"/>
+		<typeAlias alias="mberVO" type="egovframework.example.sample.service.mber.MberVO"/>
+		<typeAlias alias="empVO" type="egovframework.example.sample.service.emp.EmpVO"/>
+		<typeAlias alias="resveVO" type="egovframework.example.sample.service.resve.ResveVO"/>
 
 	</typeAliases>
 

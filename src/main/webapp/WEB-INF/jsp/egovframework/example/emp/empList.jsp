@@ -15,8 +15,26 @@
 <script type="text/javaScript" language="javascript" defer="defer">
 
 	$(document).ready(function() {
+
+		<%  String str = (String) session.getAttribute("empId");
+		%>
 		 fnSelectList(1);
+		 var welcomeHtml = '';
+
+		 <%
+		 if(str == null) {
+		%> alert("로그인이 필요합니다.");
+		location.href = "<c:url value='/login.do'/>";
+		<%
+		 } else {
+			 %> welcomeHtml += '<b>'+'[<%=str%>]' + '님 환영합니다.</b>';
+			 welcomeHtml += '<b>직원 관리 화면입니다.</b>';
+			 $('#welcome').html(welcomeHtml);<%
+		 }%>
+
+		fnSelectList(1);
 	});
+
 
 
 	function fn_createPaging(pages,pageId) {
@@ -157,8 +175,8 @@
 				<h2>
 					<b>ISG Beauty</b>
 				</h2>
-				<p>
-					<b>직원 관리 화면입니다.</b>
+				<p id="welcome">
+					<!-- <b>직원 관리 화면입니다.</b> -->
 				</p>
 			</div>
 			<div class="row">

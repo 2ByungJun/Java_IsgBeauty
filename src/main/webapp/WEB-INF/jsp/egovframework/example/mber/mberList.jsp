@@ -22,15 +22,15 @@
 <%  String str = (String) session.getAttribute("empId"); %>
 
 
-	$(document).ready(function() {
+         $(document).ready(function() {
 
 		 fnSelectList(1);
 		 var welcomeHtml = '';
 
-		 <%-- var welcomeHtml = '';
+		 var welcomeHtml = '';
 		 welcomeHtml += '<b>'+'[<%=str%>]' + '님 환영합니다.</b>';
 		 welcomeHtml += '<b>로그인 고객 관리 화면입니다.</b>';
-		 $('#welcome').html(welcomeHtml); --%>
+		 $('#welcome').html(welcomeHtml);
 
 		 <%
 		 if(str == null) {
@@ -172,9 +172,7 @@
 		check = confirm("로그아웃 하시겠습니까?");
 
 		if (check) {
-			alert("로그아웃 되었습니다.");
-			<% session.invalidate(); %>
-			location.href = "<c:url value='/login.do'/>";
+			location.href = "<c:url value='/logout.do'/>";
 		} else {
 			alert("취소하셨습니다.");
 		}
@@ -267,9 +265,6 @@
 				</div>
 				<div class="text-center">
 					<div id="paging">
-						<<%-- ui:pagination paginationInfo="${paginationInfo}" type="image"
-							jsFunction="fn_egov_link_page" />
-						<form:hidden path="pageIndex" /> --%>
 					</div>
 				</div>
 

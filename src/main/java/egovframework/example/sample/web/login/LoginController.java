@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.example.sample.service.emp.EmpService;
 import egovframework.example.sample.service.emp.EmpVO;
 
@@ -61,7 +62,7 @@ public class LoginController {
 	public Map<String, Object> loginCheckJson(@RequestBody EmpVO searchVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println(searchVO.getEmpId()+"_______________test"+searchVO.getEmpPassword());
+		System.out.println("[로그인 체크]");
 
 		EmpVO empLoginVO = empService.selectEmp(searchVO);
 		Map<String, Object> arrayMap = new HashMap<>();
@@ -80,5 +81,12 @@ public class LoginController {
 		}
 
 		return arrayMap;
+	}
+
+	@RequestMapping(value = "/logout.do")
+	public String mberList() throws Exception {
+		System.out.println("[로그아웃]");
+
+		return "login/logout";
 	}
 }
