@@ -74,6 +74,28 @@
             </map>
         </property>
     </bean>
+
+
+ 	<!-- Resolves views  -->
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+         <property name="order" value="1"/>
+    </bean>
+
+    <!-- tiles 레이아웃적용 -->
+  <!-- View Resolover For Tiles Tag -->
+    <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" id="viewResolver">
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.tiles3.TilesView</value>
+		</property>
+		<property name="order" value="0"/>
+	</bean>
+    <bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer" id="tilesConfigurer">
+        <property name="definitions">
+            <list>
+                 <value>/WEB-INF/config/tiles3def/**/*.xml</value>
+            </list>
+        </property>
+    </bean>
 	<!-- /For Pagination Tag -->
   <mvc:interceptors>
          <mvc:interceptor>

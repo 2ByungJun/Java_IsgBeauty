@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="useLayout"   template="/common/layouts/userLayout/standard.jsp">
+		<put-attribute name="top"   value="/common/layouts/userLayout/top.jsp"   />
+		<put-attribute name="content"  expression="${requestScope.body}" />
+		<put-attribute name="footer"	value="/common/layouts/userLayout/footer.jsp" />
+	</definition>
+
+	<definition name="/useLayout/**" extends="useLayout">
+		<put-attribute name="content"	value="/WEB-INF/jsp/egovframework/example/{1}.jsp" />
+	</definition>
+
+
+</tiles-definitions>

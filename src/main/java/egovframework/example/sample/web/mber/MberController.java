@@ -67,7 +67,7 @@ public class MberController {
 			out.flush();
 		}*/
 
-		return "mber/mberList";
+		return "/useLayout/mber/mberList";
 	}
 
 	/**

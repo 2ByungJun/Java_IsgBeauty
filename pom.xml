@@ -19,6 +19,7 @@
 	<properties>
 	    <spring.maven.artifact.version>4.3.16.RELEASE</spring.maven.artifact.version>
 		<egovframework.rte.version>3.8.0</egovframework.rte.version>
+		<org.apache.tiles-version>3.0.5</org.apache.tiles-version>
 	</properties>
 
 	<repositories>
@@ -82,6 +83,35 @@
 			<artifactId>egovframework.rte.fdl.property</artifactId>
 			<version>${egovframework.rte.version}</version>
 		</dependency>
+
+
+  		<!-- tiles 시작 -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-servlet</artifactId>
+			<version>${org.apache.tiles-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-api</artifactId>
+			<version>${org.apache.tiles-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>${org.apache.tiles-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-core</artifactId>
+			<version>${org.apache.tiles-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-template</artifactId>
+			<version>${org.apache.tiles-version}</version>
+		</dependency>
+		<!-- tiles 종료 -->
 
         <dependency>
 		    <groupId>javax.servlet</groupId>
