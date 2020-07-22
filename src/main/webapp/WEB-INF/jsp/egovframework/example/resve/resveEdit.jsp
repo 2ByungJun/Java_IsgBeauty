@@ -22,7 +22,7 @@
 	function resveView() {
 		location.href = "<c:url value='/resveView.do'/>";
 	}
-	
+
 	function deleteResve(id) {
 		var check;
 		check = confirm("정말로 해당 예약을 삭제하시겠습니까?");
@@ -36,7 +36,7 @@
 			alert("취소하셨습니다.");
 		}
 	}
-	
+
 	$(function() {
 		$("#detailForm").validate({
 			submitHandler : function() {
@@ -55,6 +55,7 @@
 			required : "필수 항목입니다."
 		});
 	});
+
 </script>
 <style>
 label {
@@ -108,7 +109,8 @@ select {
 					<label for="tretmentNm"
 						class="col-sm-2 col-sm-offset-1 control-label">시술*:</label>
 					<div class="col-md-2">
-						<select class="form-control" id="tretmentNm" name="tretmentNm" required>
+						<select class="form-control" id="tretmentNm" name="tretmentNm"
+							required>
 							<option value="${result.tretmentNm}" selected>${result.tretmentNm}</option>
 							<option value="cut">cut</option>
 							<option value="perm">perm</option>
@@ -148,16 +150,26 @@ select {
 					</div>
 				</div>
 
+				<div class="form-inline form-group">
+					<label for="processSttus"
+						class="col-sm-2 col-sm-offset-1 control-label">처리상태:</label>
+					<div class="col-md-2">
+						<select class="form-control" id="processSttus" name="processSttus">
+							<option value="${result.processSttus}" selected>${result.processSttus}</option>
+							<option value="Y">Y</option>
+							<option value="N">N</option>
+						</select>
+					</div>
+				</div>
 			</div>
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="submit" class="btn btn-success" onclick="">수정</button>
-			<button type="button" class="btn btn-danger"
-				onclick="deleteResve('${result.resveSn}')">삭제</button>
+			<button type="submit" class="btn btn-primary" onclick="">수정</button>
+			<button type="button" class="btn btn-danger" onclick="deleteResve('${result.resveSn}')">삭제</button>
 			<button type="button" class=" btn btn-info" onclick="resveView()">이전</button>
 		</div>
-		
+
 		<input type="hidden" class="form-control" id="resveSn" name="resveSn"
 			value="<c:out value="${result.resveSn}" />" readonly>
 	</form:form>

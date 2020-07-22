@@ -21,13 +21,12 @@
 		check = confirm("정말로 해당 직원을 삭제하시겠습니까?");
 
 		if (check) {
-			alert("삭제되었습니다.");
-			document.detailForm.selectedId.value = id;
 			document.detailForm.action = "<c:url value='/deleteEmp.do'/>";
+			document.detailForm.selectedId.value = id;
 			document.detailForm.submit();
 		} else {
 			alert("취소하셨습니다.");
-		}	
+		}
 	}
 	function editEmp(id) {
 		document.detailForm.selectedId.value = id;
@@ -72,11 +71,11 @@ p {
 							<c:out value="${result.empId}" />
 						</p>
 					</div>
-
-					<label for="empPassword" class="col-sm-2 col-sm-offset-1 control-label">비밀번호:</label>
+					<label for="pspofc"
+						class="col-sm-2 col-sm-offset-1 control-label">직책:</label>
 					<div class="col-sm-3">
-						<p for="empPassword" class="control-label" >
-							********
+						<p for="pspofc" class="control-label">
+							<c:out value="${result.pspofc}" />
 						</p>
 					</div>
 				</div>
@@ -105,12 +104,10 @@ p {
 							<c:out value="${result.sexdstn}" />
 						</p>
 					</div>
-
-					<label for="pspofc"
-						class="col-sm-2 col-sm-offset-1 control-label">직책:</label>
-					<div class="col-sm-3">
-						<p for="pspofc" class="control-label">
-							<c:out value="${result.pspofc}" />
+					<label for="sexdstn" style="opacity:0.0;" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
+					<div class="col-sm-3" style="opacity:0.0;">
+						<p for="sexdstn" class="control-label">
+							틀을 맞춰주기 위함
 						</p>
 					</div>
 				</div>

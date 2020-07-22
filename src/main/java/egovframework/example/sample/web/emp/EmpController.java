@@ -182,6 +182,37 @@ public class EmpController {
 		return "forward:/empList.do";
 	}
 
+	@RequestMapping(value = "/addAdmin.do", method = RequestMethod.POST)
+	public String addAdmin(@ModelAttribute("searchVO") EmpVO searchVO, @RequestParam("snKey") String snKey) throws Exception {
+		System.out.println("[관리자 등록 기능]");
+
+		searchVO.setCareer("0");
+		searchVO.setSalary("0");
+
+		empService.insertEmp(searchVO);
+
+		return "login/login";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/addAdminCheck.json")
+     public HashMap<String, Object> snKeyCheck(@RequestBody HashMap<String, Object> map,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		System.out.println("[시리얼 키 확인]");
+		System.out.println("result============="+ map.get("snKey"));
+		String result = empService.snKeyCheck((String) map.get("snKey"));
+		System.out.println("result@@@@@@@@@@@@@@@"+ result);
+
+		if(result != null) {
+			map.put("result", "true");
+		} else {
+			map.put("result", "false");
+		}
+
+		return map;
+	}
+
 	/**
 	 * 직원 조회
 	 *

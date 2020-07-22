@@ -79,11 +79,15 @@ public class MberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/mberRegister.do")
-	public String mberRegister(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model) throws Exception {
+	public String mberRegister(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model,HttpServletRequest request,HttpServletResponse response) throws Exception {
 		System.out.println("[고객 등록 페이지]");
 
 		List<?> listEmpNM = empService.selectListEmpNM(searchVO);
 		model.addAttribute("listEmpNM", listEmpNM);
+
+		HttpSession session = request.getSession();
+		model.addAttribute("registId", session.getAttribute("empId"));
+
 
 		return "mber/mberRegister";
 	}

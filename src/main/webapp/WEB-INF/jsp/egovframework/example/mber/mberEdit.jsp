@@ -27,7 +27,6 @@
 		check = confirm("정말로 해당 고객님을 삭제하시겠습니까?");
 
 		if (check) {
-			alert("삭제되었습니다.");
 			document.detailForm.selectedId.value = id;
 			document.detailForm.action = "<c:url value='/deleteMber.do'/>";
 			document.detailForm.submit();

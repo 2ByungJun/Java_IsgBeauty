@@ -62,7 +62,7 @@
 		</div>
 	</div>
 
-		<form class="form-horizontal" style="align: center;"action="/action_page.php">
+		<form class="form-horizontal" style="align: center" >
 		<div class="form-group">
 			<label class="control-label col-sm-4" for="email">ID:</label>
 			<div class="col-sm-4">
@@ -74,7 +74,7 @@
 			<label class="control-label col-sm-4" for="pwd">Password:</label>
 			<div class="col-sm-4">
 				<input type="password" class="form-control" id="pwd" name="pwd"
-					placeholder="비밀번호를 입력해주세요" value=1234>
+					placeholder="비밀번호를 입력해주세요" value=1234 onkeydown = "if(event.keyCode==13) login()" >
 			</div>
 		</div>
 	</form>

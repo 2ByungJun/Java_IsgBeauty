@@ -52,7 +52,7 @@
 				}else{
 					$.each(data.dataList, function(index, item) {
 						html += '<tr>';
-						html += '<td align="center" class="listtd" >'+(index+1+((pageNo-1)*10))+'</td>';
+						html += '<td align="right" class="listtd" >'+(index+1+((pageNo-1)*10))+'</td>';
 						html += '<td align="center" class="listtd"><a href="javascript:view(\''+item.mberSn+'\')">' + item.mberNm + '</td>';
 						html += '<td align="center" class="listtd" >' + item.sexdstn + '</td>';
 						html += '<td align="center" class="listtd" >' + item.telno + '</td>';
@@ -153,7 +153,7 @@
 						<table id="table" class="table table-hover">
 							<thead>
 								<tr>
-									<td style="width: 10%" align="center"><b>번호</b></td>
+									<td style="width: 5%" align="right"><b>번호</b></td>
 									<td style="width: 15%" align="center"><b>이름</b></td>
 									<td style="width: 10%" align="center"><b>성별</b></td>
 									<td style="width: 15%" align="center"><b>전화번호</b></td>

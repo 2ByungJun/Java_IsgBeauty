@@ -14,8 +14,8 @@
 		<result property="registDt" column="regist_dt"/>
 	</resultMap>
 
-    
-    
+
+
     <select id="selectResve" parameterType="resveVO" resultMap="resve">
 			select a.RESVE_SN,
 			   a.MBER_SN,
@@ -81,12 +81,13 @@
 	    delete from t_resve_m
 	    where RESVE_SN =${resveSn}
 	</delete>
-	
+
 	<update id="updateResve">
 	    update t_resve_m
 	    set RESVE_DT=#{resveDt},
 	    	RESVE_TIME=#{resveTime},
-	    	TRETMENT_NM=#{tretmentNm}
+	    	TRETMENT_NM=#{tretmentNm},
+	    	PROCESS_STTUS=#{processSttus}
 		    where RESVE_SN=${resveSn}
 	</update>
 
