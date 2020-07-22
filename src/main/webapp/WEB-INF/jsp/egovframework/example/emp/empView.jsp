@@ -71,6 +71,13 @@ p {
 							<c:out value="${result.empId}" />
 						</p>
 					</div>
+					<label for="pspofc"
+						class="col-sm-2 col-sm-offset-1 control-label">직책:</label>
+					<div class="col-sm-3">
+						<p for="pspofc" class="control-label">
+							<c:out value="${result.pspofc}" />
+						</p>
+					</div>
 				</div>
 
 				<div class="form-inline form-group">
@@ -97,12 +104,10 @@ p {
 							<c:out value="${result.sexdstn}" />
 						</p>
 					</div>
-
-					<label for="pspofc"
-						class="col-sm-2 col-sm-offset-1 control-label">직책:</label>
-					<div class="col-sm-3">
-						<p for="pspofc" class="control-label">
-							<c:out value="${result.pspofc}" />
+					<label for="sexdstn" style="opacity:0.0;" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
+					<div class="col-sm-3" style="opacity:0.0;">
+						<p for="sexdstn" class="control-label">
+							틀을 맞춰주기 위함
 						</p>
 					</div>
 				</div>

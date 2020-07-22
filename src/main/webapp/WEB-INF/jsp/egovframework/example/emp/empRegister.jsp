@@ -23,6 +23,8 @@
 		location.href = "<c:url value='/empList.do'/>";
 	}
 
+
+
 	/* 글 등록 function */
 	$(function() {
 		$("#detailForm").validate({
@@ -50,7 +52,8 @@
 				},
 				telno: {
 					required : true,
-					digits : true
+					minlength : 13
+					/* digits : true */
 				},
 				salary: {
 					required : true,
@@ -73,7 +76,8 @@
 				},
 				telno : {
 					required : "필수 입력 항목입니다.",
-					digits : "숫자만 입력할 수 있습니다."
+					/* digits : "숫자만 입력할 수 있습니다." */
+					minlength : "휴대폰 번호를 완전히 입력해주세요."
 				},
 				salary : {
 					required : "필수 입력 항목입니다.",
@@ -85,6 +89,34 @@
 			}
 		});
 	});
+
+	function inputPhoneNumber(obj) {
+
+	    var number = obj.value.replace(/[^0-9]/g, "");
+	    var phone = "";
+
+	    if(number.length < 4) {
+	        return number;
+	    } else if(number.length < 7) {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3);
+	    } else if(number.length < 11) {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3, 3);
+	        phone += "-";
+	        phone += number.substr(6);
+	    } else {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3, 4);
+	        phone += "-";
+	        phone += number.substr(7);
+	    }
+	    obj.value = phone;
+	}
+
 </script>
 </head>
 <style>
@@ -144,10 +176,9 @@ select {
 							required>
 					</div>
 
-					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호*:</label>
+					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label" >전화번호*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="telno" name="telno"
-							required>
+						<input type="text" class="form-control" id="telno" name="telno" maxlength="13" onkeyup="inputPhoneNumber(this)" required>
 					</div>
 				</div>
 

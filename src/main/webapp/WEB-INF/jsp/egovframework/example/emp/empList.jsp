@@ -50,8 +50,8 @@
 				}else{
 					$.each(data.dataList, function(index, item) {
 						html += '<tr>';
-						html += '<td align="center" class="listtd" >'+(index+1+((pageNo-1)*10))+'</td>';
-						html += '<td align="center" class="listtd"><a href="javascript:view(\''+item.empId+'\')">' + item.empId + '</td>';
+						html += '<td align="center" class="listtd"><a href="javascript:view(\''+item.empId+'\')">' + item.empId +'</td>';
+						html += '<td align="center" class="listtd">' + item.empNm + '</td>';
 						html += '<td align="center" class="listtd" >' + item.sexdstn + '</td>';
 						html += '<td align="center" class="listtd" >' + item.telno + '</td>';
 						html += '<td align="center" class="listtd" >' + item.pspofc + '</td>';
