@@ -42,6 +42,7 @@
 	function resveRegister() {
 		location.href = "<c:url value='/resveRegister.do'/>";
 	}
+
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
 		var obj = {};
@@ -54,25 +55,46 @@
 			success : function(data) {
 				console.log(data);
 				$.each(data.resveList, function(index, item) {
-					calendar.addEvent({
-						'title' : item.mberNm + '-' + item.tretmentNm,
-						'start' : item.resveDt + 'T' + item.resveTime,
-						'classNames' : ["bjTool", "aa"+item.resveSn],
-						'resveSn' : item.resveSn,
-						'mberNm' : item.mberNm,
-						'resveDt' : item.resveDt,
-						'resveTime' : item.resveTime,
-						'tretmentNm' : item.tretmentNm,
-						'processSttus' : item.processSttus,
-						'registId' : item.registId,
-						'registDt' : item.registDt
-					});
+					if(item.processSttus === 'N'){
+						// 처리상태  : N
+						calendar.addEvent({
+							'title' : item.mberNm + '-' + item.tretmentNm,
+							'start' : item.resveDt + 'T' + item.resveTime,
+							'classNames' : ["bjTool", "aa"+item.resveSn],
+							'resveSn' : item.resveSn,
+							'mberNm' : item.mberNm,
+							'resveDt' : item.resveDt,
+							'resveTime' : item.resveTime,
+							'tretmentNm' : item.tretmentNm,
+							'processSttus' : "처리중",
+							'registId' : item.registId,
+							'registDt' : item.registDt
+						})
+					}
+					else{
+						// 처리상태 : Y
+						calendar.addEvent({
+							'title' : item.mberNm + '-' + item.tretmentNm,
+							'start' : item.resveDt + 'T' + item.resveTime,
+							'classNames' : ["bjTool", "aa"+item.resveSn],
+							'resveSn' : item.resveSn,
+							'mberNm' : item.mberNm,
+							'resveDt' : item.resveDt,
+							'resveTime' : item.resveTime,
+							'tretmentNm' : item.tretmentNm,
+							'processSttus' : "완료",
+							'registId' : item.registId,
+							'registDt' : item.registDt,
+							'color' : 'red'
+						});
+					}
 				});
 			},
 			error : function(errorThrown) {
 				alert(errorThrown.statusText);
 			}
 		});
+
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView : 'dayGridMonth', // 월 달력
 			// 달력 툴
@@ -90,7 +112,6 @@
 				}
 			},
 			locale : 'ko', // 한국어 설정
-			// 일정 - 마우스 클릭 이벤트
 			eventClick : function(data) {
 				var check = confirm("예약을 변경하시겠습니까?");
 				if (check) {
@@ -103,7 +124,6 @@
 			// 일정 - 마우스 오버 이벤트
 			eventMouseEnter : function(data) {
 				console.log($(data));
-
 				// topic 서식
 				var topic = "\n♦ 예약자 : " + data.event._def.extendedProps.mberNm
 					+ '\n' + "\n♦ 예약일 : " + data.event._def.extendedProps.resveDt
@@ -114,15 +134,28 @@
 				$('.bjTool').attr("data-toggle", topic);
 				$('.bjTool').attr("title", topic);
 
-				/***** 부트스트랩 Test용 *****/
-				/* $('.bjTool').attr("data-original-title", topic); */
-				/* $('.aa' + data.event._def.extendedProps.resveSn).tooltip('show'); */
-				/* $('.tooltip-inner').html(data.event._def.title); */
-
-			}
+				$('.aa' + data.event._def.extendedProps.resveSn).css('color','green');
+			},
+			eventMouseLeave : function(data) {
+				$('.aa' + data.event._def.extendedProps.resveSn).css('color','#337ab7');
+			},
+			customButtons: {
+			    myCustomButton: {
+			      text: 'custom!',
+			      click: function() {
+			        alert('clicked the custom button!');
+			      }
+			    }
+			  },
 		});
+
 		// 렌더링
 		calendar.render();
+
+		dayColor();
+		$(".fc-button").click(function() {
+		       dayColor();
+		});
 	});
 
 	function view(id) {
@@ -130,6 +163,14 @@
 		document.detailForm.action = "<c:url value='/resveEdit.do'/>";
 		document.detailForm.submit();
 	}
+
+	/***** Calendar CSS *****/
+	function dayColor(){
+		// 토요일 & 일요일 색상
+		$('.fc-day-sat .fc-daygrid-day-number').css("color", "#0000FF");
+		$('.fc-day-sun .fc-daygrid-day-number').css("color", "#FF0000");
+	}
+
 </script>
 </head>
 <body>
@@ -151,7 +192,6 @@
 
 			<div id="calendar"></div>
 		</div>
-
 	</form:form>
 </body>
 </html>
