@@ -124,13 +124,22 @@
 			// 일정 - 마우스 오버 이벤트
 			eventMouseEnter : function(data) {
 				console.log($(data));
-				// topic 서식
-				var topic = "\n♦ 예약자 : " + data.event._def.extendedProps.mberNm
+
+				if( data.event._def.extendedProps.processSttus == '완료'){
+					var topic = "\n♦ 예약자 : " + data.event._def.extendedProps.mberNm
 					+ '\n' + "\n♦ 예약일 : " + data.event._def.extendedProps.resveDt
 					+ '\n' + "\n♦ 예약시간 : " + data.event._def.extendedProps.resveTime
 					+ '\n' + "\n♦ 시술 : " + data.event._def.extendedProps.tretmentNm
 					+ '\n' + "\n♦ 처리상태 : " + data.event._def.extendedProps.processSttus
 					+ '\n';
+				}else{
+					var topic = "\n◇ 예약자 : " + data.event._def.extendedProps.mberNm
+					+ '\n' + "\n◇ 예약일 : " + data.event._def.extendedProps.resveDt
+					+ '\n' + "\n◇ 예약시간 : " + data.event._def.extendedProps.resveTime
+					+ '\n' + "\n◇ 시술 : " + data.event._def.extendedProps.tretmentNm
+					+ '\n' + "\n◇ 처리상태 : " + data.event._def.extendedProps.processSttus
+					+ '\n';
+				}
 				$('.bjTool').attr("data-toggle", topic);
 				$('.bjTool').attr("title", topic);
 
