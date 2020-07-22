@@ -84,6 +84,8 @@
             <mvc:exclude-mapping path="/log*.do"/>
             <mvc:exclude-mapping path="/loginCheck.json"/> -->
             <mvc:exclude-mapping path="/log*.*"/>
+            <mvc:exclude-mapping path="/addAdmin*.do"/>
+            <mvc:exclude-mapping path="/addAdminCheck.json"/>
             <bean id="logonInterceptor" class="egovframework.example.inteceptor.LogonInterceptor" />
          </mvc:interceptor>
          <mvc:interceptor>
@@ -93,6 +95,7 @@
             <mvc:mapping path="/upadteEmp.do"/>
             <mvc:mapping path="/deleteEmp.do"/>
             <mvc:exclude-mapping path="/loginEmpRegister.do"/>
+            <mvc:exclude-mapping path="/addAdminCheck.json"/>
             <bean id="PspofcInterceptor" class="egovframework.example.inteceptor.PspofcInterceptor" />
          </mvc:interceptor>
     </mvc:interceptors>

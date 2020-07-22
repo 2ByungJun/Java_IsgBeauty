@@ -108,10 +108,10 @@ public class EmpService {
 		 return mapper.selectListEmpNM(vo);
 	}
 
-	public EmpVO loginCheck(EmpVO vo) throws Exception {
+	/*public EmpVO loginCheck(EmpVO vo) throws Exception {
 		return mapper.loginCheck(vo);
 	}
-
+*/
 
 
 /*	*//**
@@ -138,4 +138,7 @@ public class EmpService {
 		mapper.logout(session);
 	};*/
 
+	public String snKeyCheck(String snKey) throws Exception {
+		return mapper.snKeyCheck(snKey);
+	}
 }

@@ -14,19 +14,100 @@
 	href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
 <script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
 	function home() {
 		location.href = "<c:url value='/login.do'/>";
 	}
 
 	/* 글 등록 function */
-	function saveEmp() {
-		frm = document.detailForm;
+	$(function() {
+		$("#detailForm").validate({
+			submitHandler : function() {
+				if($("#snCheck").val()=="true") {
+					var check = confirm("관리자를 등록하시겠습니까?");
+					if (check) {
+						document.detailForm.action = "<c:url value= '/addAdmin.do'/>";
+						document.detailForm.submit();
+						alert("등록되었습니다.");
+					} else {
+						alert("취소하셨습니다.");
+					}
+				} else {
+					alert("시리얼 키를 확인해주세요.");
+				}
+			},
+			rules: {
+				empId: {
+					required : true
+				},
+				empPassword: {
+					required : true,
+					minlength : 4
+				},
+				empNm: {
+					required : true
+				},
+				telno: {
+					required : true,
+					digits : true
+				}
+			},
+			messages: {
+				empId: {
+					required : "필수 입력 항목입니다.",
+				},
+				empPassword: {
+					required : "필수 입력 항목입니다.",
+					minlength : "비밀번호는 최소 4자리 이상입니다."
+				},
+				empNm : {
+					required : "필수 입력 항목입니다."
+				},
+				telno : {
+					required : "필수 입력 항목입니다.",
+					digits : "숫자만 입력할 수 있습니다."
+				}
+			}
+		});
+	});
 
-		frm.action = "<c:url value= '/addEmp.do'/>";
-		frm.submit();
+	function snKeyCehck() {
+		 var url  =  "<c:url value='/addAdminCheck.json'/>";
+		 var jsonData = {"snKey": $("#snKey").val()};
+		 $.ajax({
 
+			headers: {
+				Accept: "application/json;utf-8"
+			}
+			,contentType: "application/json;utf-8"
+			,dataType: "json"
+			,type: "POST"
+			,url: url
+			,data: JSON.stringify(jsonData)
+			,success:function(data){
+				console.log(data);
+
+				if(data.result=="true") {
+					 $("#snCheck").val("true");
+					 alert("사용 가능한 시리얼 키 입니다.");
+				} else {
+					$("#snCheck").val("false");
+					alert("올바르지 않은 시리얼 키입니다.");
+				}
+
+			}
+			,error:function(e){
+			   	console.log(e.status, e.statusText);
+			   	alert("서버 오류 입니다. 관리자에게 문의하세요.");
+			}
+		});
 	}
+
+
 </script>
 </head>
 <style>
@@ -102,46 +183,37 @@ select {
 
 					<label for="pspofc" class="col-sm-2 col-sm-offset-1 control-label">직책:</label>
 					<div class="col-md-3">
-						<select type="text" class="form-control" id="pspofc" name="pspofc">
+						<select type="text" class="form-control" id="pspofc" name="pspofc" disabled="disabled">
 							<option value="Admin" selected="selected">Admin</option>
 							<option value="Designer">Designer</option>
 						</select>
 					</div>
 				</div>
-
 				<div class="form-inline form-group">
-					<label for="salary" class="col-sm-2 col-sm-offset-1 control-label">급여:</label>
-					<div class="col-md-3">
-						<input type="text" class="form-control" id="salary" name="salary"
-							value="_원">
-					</div>
 
-					<label for="career" class="col-sm-2 col-sm-offset-1 control-label">경력:</label>
+					<label for="snKey"
+						class="col-sm-2 col-sm-offset-1 control-label">시리얼 키*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="career" name="career"
-							value="_년">
+						<input type="password" class="form-control" id="snKey"
+							name="snKey" value="123456">
 					</div>
-				</div>
-
-				<div class="form-inline form-group">
-					<label for="registId"
-						class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
-					<div class="col-md-3">
-						<input type="text" class="form-control" id="registId"
-							name="registId" value="test" readonly >
-					</div>
-
 					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
 					<div class="col-md-3">
 						<input type="date" class="form-control" id="registDt"
 							name="registDt" value="<%=today%>" readonly >
 					</div>
 				</div>
+				<button type="button" class=" btn btn-info" onclick="snKeyCehck()">시리얼 확인</button>
+
+
 			</div>
 		</div>
+				<input type="hidden" class="form-control" id="registId"
+							name="registId" value="test" readonly >
+				<input type="hidden" id="snCheck" name="snCheck" value="false" readonly >
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="button" class="btn btn-success" onclick="saveEmp()">등록</button>
+			<button type="submit" class="btn btn-success" onclick="" >등록</button>
 			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
 		</div>
 

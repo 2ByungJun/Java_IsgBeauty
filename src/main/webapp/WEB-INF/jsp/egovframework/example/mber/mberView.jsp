@@ -22,7 +22,6 @@
 		check = confirm("정말로 해당 고객님을 삭제하시겠습니까?");
 
 		if (check) {
-			alert("삭제되었습니다.");
 			document.detailForm.selectedId.value = id;
 			document.detailForm.action = "<c:url value='/deleteMber.do'/>";
 			document.detailForm.submit();
@@ -42,7 +41,7 @@
 		document.detailForm.action = "<c:url value='/resveRegister.do'/>";
 		document.detailForm.submit();
 	}
-	
+
 	$(function() {
 		$("#detailForm").validate({
 			submitHandler : function() {
@@ -120,8 +119,8 @@ p {
 						<p for="mberNm" class="control-label">
 							<c:out value="${result.mberNm}" />
 						</p>
-					</div>					
-					
+					</div>
+
 					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
 						직원:</label>
 					<div class="col-sm-3">
@@ -154,7 +153,7 @@ p {
 							<c:out value="${result.sexdstn}" />
 						</p>
 					</div>
-					
+
 					<label for="sexdstn" style="opacity:0.0;" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
 					<div class="col-sm-3" style="opacity:0.0;">
 						<p for="sexdstn" class="control-label">

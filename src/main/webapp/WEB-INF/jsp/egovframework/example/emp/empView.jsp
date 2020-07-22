@@ -21,13 +21,12 @@
 		check = confirm("정말로 해당 직원을 삭제하시겠습니까?");
 
 		if (check) {
-			alert("삭제되었습니다.");
-			document.detailForm.selectedId.value = id;
 			document.detailForm.action = "<c:url value='/deleteEmp.do'/>";
+			document.detailForm.selectedId.value = id;
 			document.detailForm.submit();
 		} else {
 			alert("취소하셨습니다.");
-		}	
+		}
 	}
 	function editEmp(id) {
 		document.detailForm.selectedId.value = id;
@@ -70,13 +69,6 @@ p {
 					<div class="col-sm-3">
 						<p for="empId" class="control-label">
 							<c:out value="${result.empId}" />
-						</p>
-					</div>
-
-					<label for="empPassword" class="col-sm-2 col-sm-offset-1 control-label">비밀번호:</label>
-					<div class="col-sm-3">
-						<p for="empPassword" class="control-label" >
-							********
 						</p>
 					</div>
 				</div>

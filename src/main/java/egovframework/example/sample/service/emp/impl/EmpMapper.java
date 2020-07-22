@@ -78,7 +78,7 @@ public interface EmpMapper {
 	List<?> selectListEmpNM(EmpVO vo) throws Exception;
 
 
-	EmpVO loginCheck(EmpVO vo) throws Exception;
+	String snKeyCheck(String snKey) throws Exception;
 
 /*	*//**
 	 * 로그인 체크
