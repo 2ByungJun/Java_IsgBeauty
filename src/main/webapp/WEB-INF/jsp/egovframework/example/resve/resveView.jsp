@@ -39,14 +39,12 @@
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
-
 	function resveRegister() {
 		location.href = "<c:url value='/resveRegister.do'/>";
 	}
 
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
-
 		var obj = {};
 		$.ajax({
 			url : "<c:url value="/resveView.do"/>",
@@ -57,13 +55,39 @@
 			success : function(data) {
 				console.log(data);
 				$.each(data.resveList, function(index, item) {
-					calendar.addEvent({
-						'title' : item.mberNm + '-' + item.tretmentNm,
-						'start' : item.resveDt + 'T' + item.resveTime,
-						'resveSn' : item.resveSn,
-						'processSttus' : item.processSttus,
-						'classNames' : 'bjTooltip'
-					});
+					if(item.processSttus === 'N'){
+						// 처리상태  : N
+						calendar.addEvent({
+							'title' : item.mberNm + '-' + item.tretmentNm,
+							'start' : item.resveDt + 'T' + item.resveTime,
+							'classNames' : ["bjTool", "aa"+item.resveSn],
+							'resveSn' : item.resveSn,
+							'mberNm' : item.mberNm,
+							'resveDt' : item.resveDt,
+							'resveTime' : item.resveTime,
+							'tretmentNm' : item.tretmentNm,
+							'processSttus' : "처리중",
+							'registId' : item.registId,
+							'registDt' : item.registDt
+						})
+					}
+					else{
+						// 처리상태 : Y
+						calendar.addEvent({
+							'title' : item.mberNm + '-' + item.tretmentNm,
+							'start' : item.resveDt + 'T' + item.resveTime,
+							'classNames' : ["bjTool", "aa"+item.resveSn],
+							'resveSn' : item.resveSn,
+							'mberNm' : item.mberNm,
+							'resveDt' : item.resveDt,
+							'resveTime' : item.resveTime,
+							'tretmentNm' : item.tretmentNm,
+							'processSttus' : "완료",
+							'registId' : item.registId,
+							'registDt' : item.registDt,
+							'color' : 'red'
+						});
+					}
 				});
 			},
 			error : function(errorThrown) {
@@ -88,7 +112,6 @@
 				}
 			},
 			locale : 'ko', // 한국어 설정
-			// 일정 - 마우스 클릭 이벤트
 			eventClick : function(data) {
 				var check = confirm("예약을 변경하시겠습니까?");
 				if (check) {
@@ -98,22 +121,50 @@
 					// 취소
 				}
 			},
+			// 일정 - 마우스 오버 이벤트
 			eventMouseEnter : function(data) {
-				console.log(data);
 				console.log($(data));
-				console.log(data.event._def);
-				$(".bjTooltip").attr("data-toggle","tooltip");
-			    $(".bjTooltip").attr("data-placement","top");
-				$(".bjTooltip").attr("title",data.event._def.title);
-				$(".bjTooltip").css("background-color","blue")
-			},
-			// 일정 - 마우스가 벗어날 경우
-			eventMouseLeave : function(data) {
 
-			}
+				if( data.event._def.extendedProps.processSttus == '완료'){
+					var topic = "\n♦ 예약자 : " + data.event._def.extendedProps.mberNm
+					+ '\n' + "\n♦ 예약일 : " + data.event._def.extendedProps.resveDt
+					+ '\n' + "\n♦ 예약시간 : " + data.event._def.extendedProps.resveTime
+					+ '\n' + "\n♦ 시술 : " + data.event._def.extendedProps.tretmentNm
+					+ '\n' + "\n♦ 처리상태 : " + data.event._def.extendedProps.processSttus
+					+ '\n';
+				}else{
+					var topic = "\n◇ 예약자 : " + data.event._def.extendedProps.mberNm
+					+ '\n' + "\n◇ 예약일 : " + data.event._def.extendedProps.resveDt
+					+ '\n' + "\n◇ 예약시간 : " + data.event._def.extendedProps.resveTime
+					+ '\n' + "\n◇ 시술 : " + data.event._def.extendedProps.tretmentNm
+					+ '\n' + "\n◇ 처리상태 : " + data.event._def.extendedProps.processSttus
+					+ '\n';
+				}
+				$('.bjTool').attr("data-toggle", topic);
+				$('.bjTool').attr("title", topic);
+
+				$('.aa' + data.event._def.extendedProps.resveSn).css('color','green');
+			},
+			eventMouseLeave : function(data) {
+				$('.aa' + data.event._def.extendedProps.resveSn).css('color','#337ab7');
+			},
+			customButtons: {
+			    myCustomButton: {
+			      text: 'custom!',
+			      click: function() {
+			        alert('clicked the custom button!');
+			      }
+			    }
+			  },
 		});
+
 		// 렌더링
 		calendar.render();
+
+		dayColor();
+		$(".fc-button").click(function() {
+		       dayColor();
+		});
 	});
 
 	function view(id) {
@@ -122,17 +173,15 @@
 		document.detailForm.submit();
 	}
 
-	$(function () {
-		$('[data-toggle="tooltip"]').tooltip()
-	})
+	/***** Calendar CSS *****/
+	function dayColor(){
+		// 토요일 & 일요일 색상
+		$('.fc-day-sat .fc-daygrid-day-number').css("color", "#0000FF");
+		$('.fc-day-sun .fc-daygrid-day-number').css("color", "#FF0000");
+	}
+
 </script>
 </head>
-<style>
-.bjTooltip {
-	background-color: red;
-}
-
-</style>
 <body>
 	<form:form commandName="resveVO" id="detailForm" name="detailForm"
 		method="post">
@@ -152,7 +201,6 @@
 
 			<div id="calendar"></div>
 		</div>
-
 	</form:form>
 </body>
 </html>
