@@ -22,7 +22,7 @@
 	function resveView() {
 		location.href = "<c:url value='/resveView.do'/>";
 	}
-	
+
 	function deleteResve(id) {
 		var check;
 		check = confirm("정말로 해당 예약을 삭제하시겠습니까?");
@@ -36,7 +36,7 @@
 			alert("취소하셨습니다.");
 		}
 	}
-	
+
 	$(function() {
 		$("#detailForm").validate({
 			submitHandler : function() {
@@ -157,7 +157,7 @@ select {
 				onclick="deleteResve('${result.resveSn}')">삭제</button>
 			<button type="button" class=" btn btn-info" onclick="resveView()">이전</button>
 		</div>
-		
+
 		<input type="hidden" class="form-control" id="resveSn" name="resveSn"
 			value="<c:out value="${result.resveSn}" />" readonly>
 	</form:form>

@@ -39,14 +39,11 @@
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
-
 	function resveRegister() {
 		location.href = "<c:url value='/resveRegister.do'/>";
 	}
-
 	document.addEventListener('DOMContentLoaded', function() {
 		var calendarEl = document.getElementById('calendar');
-
 		var obj = {};
 		$.ajax({
 			url : "<c:url value="/resveView.do"/>",
@@ -60,9 +57,15 @@
 					calendar.addEvent({
 						'title' : item.mberNm + '-' + item.tretmentNm,
 						'start' : item.resveDt + 'T' + item.resveTime,
+						'classNames' : ["bjTool", "aa"+item.resveSn],
 						'resveSn' : item.resveSn,
+						'mberNm' : item.mberNm,
+						'resveDt' : item.resveDt,
+						'resveTime' : item.resveTime,
+						'tretmentNm' : item.tretmentNm,
 						'processSttus' : item.processSttus,
-						'classNames' : 'bjTooltip'
+						'registId' : item.registId,
+						'registDt' : item.registDt
 					});
 				});
 			},
@@ -70,7 +73,6 @@
 				alert(errorThrown.statusText);
 			}
 		});
-
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView : 'dayGridMonth', // 월 달력
 			// 달력 툴
@@ -98,17 +100,24 @@
 					// 취소
 				}
 			},
+			// 일정 - 마우스 오버 이벤트
 			eventMouseEnter : function(data) {
-				console.log(data);
 				console.log($(data));
-				console.log(data.event._def);
-				$(".bjTooltip").attr("data-toggle","tooltip");
-			    $(".bjTooltip").attr("data-placement","top");
-				$(".bjTooltip").attr("title",data.event._def.title);
-				$(".bjTooltip").css("background-color","blue")
-			},
-			// 일정 - 마우스가 벗어날 경우
-			eventMouseLeave : function(data) {
+
+				// topic 서식
+				var topic = "\n♦ 예약자 : " + data.event._def.extendedProps.mberNm
+					+ '\n' + "\n♦ 예약일 : " + data.event._def.extendedProps.resveDt
+					+ '\n' + "\n♦ 예약시간 : " + data.event._def.extendedProps.resveTime
+					+ '\n' + "\n♦ 시술 : " + data.event._def.extendedProps.tretmentNm
+					+ '\n' + "\n♦ 처리상태 : " + data.event._def.extendedProps.processSttus
+					+ '\n';
+				$('.bjTool').attr("data-toggle", topic);
+				$('.bjTool').attr("title", topic);
+
+				/***** 부트스트랩 Test용 *****/
+				/* $('.bjTool').attr("data-original-title", topic); */
+				/* $('.aa' + data.event._def.extendedProps.resveSn).tooltip('show'); */
+				/* $('.tooltip-inner').html(data.event._def.title); */
 
 			}
 		});
@@ -121,18 +130,8 @@
 		document.detailForm.action = "<c:url value='/resveEdit.do'/>";
 		document.detailForm.submit();
 	}
-
-	$(function () {
-		$('[data-toggle="tooltip"]').tooltip()
-	})
 </script>
 </head>
-<style>
-.bjTooltip {
-	background-color: red;
-}
-
-</style>
 <body>
 	<form:form commandName="resveVO" id="detailForm" name="detailForm"
 		method="post">
