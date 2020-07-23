@@ -89,7 +89,7 @@ public class MberController {
 		model.addAttribute("registId", session.getAttribute("empId"));
 
 
-		return "mber/mberRegister";
+		return "/useLayout/mber/mberRegister";
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class MberController {
 		// 변수명은 CoC 에 따라 sampleVO
 		model.addAttribute("result", selectMber(sampleVO, searchVO));
 
-		return "mber/mberView";
+		return "/useLayout/mber/mberView";
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class MberController {
 		List<?> listEmpNM = empService.selectListEmpNM(searchVO);
 		model.addAttribute("listEmpNM", listEmpNM);
 
-		return "mber/mberEdit";
+		return "/useLayout/mber/mberEdit";
 	}
 
 	/**

@@ -72,7 +72,7 @@ public class EmpController {
 
 		System.out.println("_----------" + totCnt);*/
 
-		return "emp/empList";
+		return "/useLayout/emp/empList";
 	}
 
 	@ResponseBody
@@ -120,7 +120,7 @@ public class EmpController {
 	public String empRegister(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[직원/관리자 등록]");
 
-		return "emp/empRegister";
+		return "/useLayout/emp/empRegister";
 	}
 
 	/**
@@ -141,7 +141,7 @@ public class EmpController {
 		sampleVO.setEmpId(empId);
 		model.addAttribute("result", selectEmp(sampleVO, searchVO));
 
-		return "emp/empView";
+		return "/useLayout/emp/empView";
 	}
 
 	/**
@@ -162,7 +162,7 @@ public class EmpController {
 		sampleVO.setEmpId(empId);
 		model.addAttribute("result", selectEmp(sampleVO, searchVO));
 
-		return "emp/empEdit";
+		return "/useLayout/emp/empEdit";
 	}
 
 	/**

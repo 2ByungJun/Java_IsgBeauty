@@ -27,11 +27,11 @@ public class ResveController {
 	/** mberService */
 	@Resource(name = "mberService")
 	private MberService mberService;
-	
+
 	/** resveService */
 	@Resource(name = "resveService")
 	private ResveService resveService;
-	
+
 	/**
 	 * 예약 등록 View
 	 *
@@ -60,14 +60,14 @@ public class ResveController {
 	public String resveView(){
 		System.out.println("[예약 캘린더]");
 
-		return "resve/resveView";
+		return "/useLayout/resve/resveView";
 	}
-	
+
      /**
 	 * 예약 수정 View
 	 *
 	 * @return
-     * @throws Exception 
+     * @throws Exception
 	 */
 	@RequestMapping("/resveEdit.do")
 	public String resveEdit(@RequestParam("selectedId") String resveSn, @ModelAttribute("searchVO") ResveVO searchVO, Model model) throws Exception {
@@ -77,12 +77,12 @@ public class ResveController {
 		sampleVO.setResveSn(resveSn);
 		model.addAttribute("result", resveService.selectResve(sampleVO));
 
-		return "resve/resveEdit";
+		return "/useLayout/resve/resveEdit";
 	}
-	
+
 	/**
 	 * (Ajax) ResveVO 전달
-	 * 
+	 *
 	 * @param map
 	 * @return
 	 * @throws Exception
@@ -91,16 +91,16 @@ public class ResveController {
 	@RequestMapping(value = "/resveView.do", method = RequestMethod.POST)
 	public HashMap<String, Object> init(@RequestBody HashMap<String, Object> map) throws Exception{
 		System.out.println("[예약 캘린더]");
-	
+
 		ResveVO resveVO = new ResveVO();
 		List<?> resveList = resveService.selectResveList(resveVO);
 		map.put("resveList", resveList);
-		
+
 		return map;
 	}
-	
+
 	/**
-	 * 고객 조회 
+	 * 고객 조회
 	 * @param sampleVO
 	 * @param searchVO
 	 * @return
@@ -108,10 +108,10 @@ public class ResveController {
 	 */
 	public MberVO selectMber(MberVO sampleVO, @ModelAttribute("searchVO") SampleDefaultVO searchVO) throws Exception {
 		System.out.println("[고객 조회 기능]");
-		
+
 		return mberService.selectMber(sampleVO);
 	}
-	
+
 	/**
 	 * 예약 등록
 	 *
@@ -125,10 +125,10 @@ public class ResveController {
 		System.out.println("[예약 등록]");
 
 		resveService.insertResve(searchVO);
-		
+
 		return "redirect:/resveView.do";
 	}
-	
+
 	/**
 	 * 예약 수정
 	 * @return "forward:/resveView.do"
@@ -140,10 +140,10 @@ public class ResveController {
 		System.out.println("[예약 수정 기능]");
 
 		resveService.updateResve(sampleVO);
-		
+
 		return "redirect:/resveView.do";
 	}
-	
+
 	/**
 	 * 예약 삭제
 	 * @return "forward:/resveView.do"
@@ -156,7 +156,7 @@ public class ResveController {
 		ResveVO sampleVO = new ResveVO();
 		sampleVO.setResveSn(resveSn);
 		resveService.deleteResve(sampleVO);
-		
+
 		return "redirect:/resveView.do";
 	}
 }
