@@ -53,24 +53,89 @@
 				} else {
 					alert("취소하셨습니다.");
 				}
-			}
-		});
-		$.extend($.validator.messages, {
-			required : "필수 항목입니다."
+			},
+			rules: {
+				mberNm: {
+					required : true
+				},
+				telno: {
+					required : true,
+					minlength : 12,
+					regex : "^(010)[-\\s]?\\d{3,4}[-\\s]?\\d{4}$"
+				},
+				brthdy : {
+					required : true
+				}
+			},
+			messages: {
+				mberNm : {
+					required : "필수 입력 항목입니다."
+				},
+				telno : {
+					required : "필수 입력 항목입니다.",
+					minlength : "휴대폰 번호를 완전히 입력해주세요.",
+					regex : "휴대폰 번호 양식을 제대로 입력해주세요."
+				},
+				brthdy : {
+					required : "필수 입력 항목입니다."
+				}
+			}, onkeyup : false, onfocusout : false
 		});
 	});
+
+	$.validator.addMethod("regex", function(value, element, regexp) {
+		let re = new RegExp(regexp);
+		let res = re.test(value);
+		console.log(res, value, regexp, re)
+		return res;
+	})
+
+	function inputPhoneNumber(obj) {
+
+	    var number = obj.value.replace(/[^0-9]/g, "");
+	    var phone = "";
+
+	    if(number.length < 4) {
+	        return number;
+	    } else if(number.length < 7) {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3);
+	    } else if(number.length < 11) {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3, 3);
+	        phone += "-";
+	        phone += number.substr(6);
+	    } else {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3, 4);
+	        phone += "-";
+	        phone += number.substr(7);
+	    }
+	    obj.value = phone;
+	}
 </script>
 <style>
 label {
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
-p {
-	margin-top: 30px;
+input {
+	margin-top: 10px;
 }
 
 select {
-	margin-top: 30px;
+	margin-top: 10px;
+}
+
+input.error {
+	border: 1px solid red;
+}
+
+label.error {
+	color: red;
 }
 </style>
 </head>
@@ -85,24 +150,17 @@ select {
 		method="post">
 		<input type="hidden" name="selectedId" />
 		<div class="container">
-			<div class="jumbotron text-center alert-info"
-				style="margin-top: 30px" role="alert" onclick="home()">
-				<h2>
-					<b>ISG Beauty</b>
-				</h2>
-				<h4 for="mberSn" class="control-label">
-					'
-					<c:out value="${result.mberNm}" />
-					'님 수정화면
-				</h4>
-			</div>
+			<h2 style="text-align: center;">
+				<b>' <c:out value="${result.mberNm}" />'고객님 수정화면
+				</b>
+			</h2>
 		</div>
 		<div class="container">
 			<div class="row">
 				<div class="form-inline form-group">
 					<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름:</label>
 					<div class="col-sm-2">
-						<p for="mberSn" class="control-label">
+						<p for="mberNm" class="control-label">
 							<input type="text" class="form-control" id="mberNm" name="mberNm"
 								value="<c:out value="${result.mberNm}" />" required>
 						</p>
@@ -125,17 +183,17 @@ select {
 				<div class="form-inline form-group">
 					<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
 					<div class="col-sm-2">
-						<p for="mberSn" class="control-label">
+						<p for="brthdy" class="control-label">
 							<input type="text" class="form-control" id="brthdy" name="brthdy"
-								value="<c:out value="${result.brthdy}"/>" required>
+								value="${result.brthdy}" required>
 						</p>
 					</div>
 
 					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호:</label>
 					<div class="col-sm-2">
-						<p for="mberSn" class="control-label">
-							<input type="text" class="form-control" id="telno" name="telno"
-								value="<c:out value="${result.telno}"/>" required>
+						<p for="telno" class="control-label">
+							<input type="text" class="form-control" id="telno" name="telno" value="${result.telno}"
+								placeholder="000-0000-0000" maxlength="13" required onkeyup="inputPhoneNumber(this)">
 						</p>
 					</div>
 				</div>
@@ -144,7 +202,7 @@ select {
 					<label for="registId"
 						class="col-sm-2 col-sm-offset-1 control-label">등록자:</label>
 					<div class="col-sm-2">
-						<p for="mberSn" class="control-label">
+						<p for="registId" class="control-label">
 							<input type="text" class="form-control" id="registId"
 								name="registId" value="<c:out value="${result.registId}" />"
 								readonly>
@@ -154,7 +212,7 @@ select {
 					<label for="registDt"
 						class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
 					<div class="col-sm-2">
-						<p for="mberSn" class="control-label">
+						<p for="registDt" class="control-label">
 							<input type="date" class="form-control" id="registDt"
 								name="registDt" value="<c:out value="${result.registDt}"/>"
 								readonly>

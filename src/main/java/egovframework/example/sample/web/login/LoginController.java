@@ -36,8 +36,14 @@ public class LoginController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/login.do")
-	public String login(){
+	public String login(@ModelAttribute("searchVO") SampleDefaultVO searchVO, HttpServletRequest request, HttpServletResponse response){
 		System.out.println("[로그인]");
+
+		HttpSession session = request.getSession();
+
+		if(session.getAttribute("empId") != null) {
+			return "/useLayout/mber/mberList";
+		}
 
 		return "login/login";
 	}
@@ -53,7 +59,6 @@ public class LoginController {
 	@RequestMapping(value = "/loginEmpRegister.do")
 	public String loginEmpRegister(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[회원가입]");
-
 
 		return "login/loginEmpRegister";
 	}
