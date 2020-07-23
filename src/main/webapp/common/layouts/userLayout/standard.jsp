@@ -5,7 +5,7 @@
 <html xml:lang="ko" lang="ko" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <%@ include file="commonInclude.jsp"%>
-  <meta charset="utf-8">
+ <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>GSIPA</title>
@@ -17,13 +17,13 @@
 });
 
 </script>
-	<form id="menuForm"></form>
 	<form id="hiddenForm"></form>
+
 		<!--========== HEADER ==========-->
         <tiles:insertAttribute name="top"/>
 	    <!--========== END HEADER ==========-->
-	    <!--========== CONTENTS ==========-->
 	     <main class="page-content" id="content">
+	    <!--========== CONTENTS ==========-->
 	    	<!-- 본문 -->
         		<tiles:insertAttribute name="content"/>
 		    	<!-- END 우측 컬럼 -->
