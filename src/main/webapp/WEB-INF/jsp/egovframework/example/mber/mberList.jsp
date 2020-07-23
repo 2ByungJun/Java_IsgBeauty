@@ -50,7 +50,7 @@
 						html += '<td align="center" class="listtd"><a href="javascript:view(\''+item.mberSn+'\')">' + item.mberNm + '</td>';
 						html += '<td align="center" class="listtd" >' + item.sexdstn + '</td>';
 						html += '<td align="center" class="listtd" >' + item.telno + '</td>';
-						html += '<td align="center" class="listtd" >' + item.eEmpId + '</td>';
+						html += '<td align="center" class="listtd" >' + item.empNm + '</td>';
 						html += '<td align="center" class="listtd" >' + item.registDt + '</td>';
 						html += '<td align="center" class="listtd" >' + item.updtDt + '</td>';
 						html += '</tr>';
