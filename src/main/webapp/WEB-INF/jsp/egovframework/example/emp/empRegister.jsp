@@ -23,8 +23,6 @@
 		location.href = "<c:url value='/empList.do'/>";
 	}
 
-
-
 	/* 글 등록 function */
 	$(function() {
 		$("#detailForm").validate({
@@ -52,8 +50,8 @@
 				},
 				telno: {
 					required : true,
-					minlength : 13
-					/* digits : true */
+					minlength : 12,
+					regex : "^(010)[-\\s]?\\d{3,4}[-\\s]?\\d{4}$"
 				},
 				salary: {
 					required : true,
@@ -76,8 +74,8 @@
 				},
 				telno : {
 					required : "필수 입력 항목입니다.",
-					/* digits : "숫자만 입력할 수 있습니다." */
-					minlength : "휴대폰 번호를 완전히 입력해주세요."
+					minlength : "휴대폰 번호를 완전히 입력해주세요.",
+					regex : "휴대폰 번호 양식을 제대로 입력해주세요."
 				},
 				salary : {
 					required : "필수 입력 항목입니다.",
@@ -86,9 +84,16 @@
 				career : {
 					required : "필수 입력 항목입니다."
 				}
-			}
+			}, onkeyup : false, onfocusout : false
 		});
 	});
+
+	$.validator.addMethod("regex", function(value, element, regexp) {
+		let re = new RegExp(regexp);
+		let res = re.test(value);
+		console.log(res, value, regexp, re)
+		return res;
+	})
 
 	function inputPhoneNumber(obj) {
 
@@ -121,15 +126,23 @@
 </head>
 <style>
 label {
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 input {
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 select {
-	margin-top: 30px;
+	margin-top: 10px;
+}
+
+input.error {
+	border: 1px solid red;
+}
+
+label.error {
+	color: red;
 }
 </style>
 <body>
@@ -141,15 +154,9 @@ select {
 	<form:form commandName="empVO" id="detailForm" name="detailForm"
 		method="post">
 		<div class="container">
-			<div class="jumbotron text-center alert-success"
-				style="margin-top: 30px" role="alert" onclick="home()">
-				<h2>
-					<b>ISG Beauty</b>
+			<h2 style="text-align:center;">
+					<b>직원 등록</b>
 				</h2>
-				<p>
-					<b>관리자/직원 등록 화면입니다.</b>
-				</p>
-			</div>
 		</div>
 
 		<div class="container">
@@ -177,9 +184,11 @@ select {
 					</div>
 
 					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label" >전화번호*:</label>
-					<div class="col-md-3">
-						<input type="text" class="form-control" id="telno" name="telno" maxlength="13" onkeyup="inputPhoneNumber(this)" required>
-					</div>
+					<div class="col-md-2">
+					<input type="text" class="form-control" id="telno" name="telno"
+						placeholder="000-0000-0000" maxlength="13" required onkeyup="inputPhoneNumber(this)">
+				</div>
+
 				</div>
 
 				<div class="form-inline form-group">
@@ -223,7 +232,7 @@ select {
 							name="registId" value="test" readonly>
 					</div>
 
-					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
+					<label for="registDt" class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
 					<div class="col-md-3">
 						<input type="date" class="form-control" id="registDt"
 							name="registDt" value="<%=today%>" readonly>

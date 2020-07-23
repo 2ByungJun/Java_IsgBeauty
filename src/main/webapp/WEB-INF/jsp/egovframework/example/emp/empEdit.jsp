@@ -67,7 +67,8 @@
 				},
 				telno : {
 					required : true,
-					digits : true
+					minlength : 12,
+					regex : "^(010)[-\\s]?\\d{3,4}[-\\s]?\\d{4}$"
 				},
 				salary : {
 					required : true,
@@ -90,7 +91,8 @@
 				},
 				telno : {
 					required : "필수 입력 항목입니다.",
-					digits : "숫자만 입력할 수 있습니다."
+					minlength : "휴대폰 번호를 완전히 입력해주세요.",
+					regex : "휴대폰 번호 양식을 제대로 입력해주세요."
 				},
 				salary : {
 					required : "필수 입력 항목입니다.",
@@ -99,21 +101,63 @@
 				career : {
 					required : "필수 입력 항목입니다."
 				}
-			}
+			}, onkeyup : false, onfocusout : false
 		});
 	});
+
+	$.validator.addMethod("regex", function(value, element, regexp) {
+		let re = new RegExp(regexp);
+		let res = re.test(value);
+		console.log(res, value, regexp, re)
+		return res;
+	})
+
+	function inputPhoneNumber(obj) {
+
+	    var number = obj.value.replace(/[^0-9]/g, "");
+	    var phone = "";
+
+	    if(number.length < 4) {
+	        return number;
+	    } else if(number.length < 7) {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3);
+	    } else if(number.length < 11) {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3, 3);
+	        phone += "-";
+	        phone += number.substr(6);
+	    } else {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3, 4);
+	        phone += "-";
+	        phone += number.substr(7);
+	    }
+	    obj.value = phone;
+	}
 </script>
 <style>
 label {
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
-p {
-	margin-top: 30px;
+input {
+	margin-top: 10px;
 }
 
 select {
-	margin-top: 30px;
+	margin-top: 10px;
+}
+
+input.error {
+	border: 1px solid red;
+}
+
+label.error {
+	color: red;
 }
 </style>
 </head>
@@ -128,17 +172,10 @@ select {
 		method="post">
 		<input type="hidden" name="selectedId" />
 		<div class="container">
-			<div class="jumbotron text-center alert-success"
-				style="margin-top: 30px" role="alert" onclick="home()">
-				<h2>
-					<b>ISG Beauty</b>
-				</h2>
-				<h4 for="empId" class="control-label">
-					'
-					<c:out value="${result.empNm}" />
-					'님 수정화면
-				</h4>
-			</div>
+			<h2 style="text-align:center;">
+					<b>'<c:out value="${result.empNm}" />'직원 수정 화면</b>
+			</h2>
+
 		</div>
 		<div class="container">
 			<div class="row">
@@ -147,7 +184,7 @@ select {
 					<div class="col-sm-3">
 						<p for="empId" class="control-label">
 							<input type="text" class="form-control" id="empId" name="empId"
-								value="<c:out value="${result.empId}"/>" required>
+								value="<c:out value="${result.empId}"/>" readonly required>
 						</p>
 					</div>
 
@@ -174,8 +211,8 @@ select {
 					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호:</label>
 					<div class="col-sm-3">
 						<p for="" telno"" class="control-label">
-							<input type="text" class="form-control" id="telno" name="telno"
-								value="<c:out value="${result.telno}" />" required>
+							<input type="text" class="form-control" id="telno" name="telno" value="${result.telno}"
+								placeholder="000-0000-0000" maxlength="13" required onkeyup="inputPhoneNumber(this)">
 						</p>
 					</div>
 				</div>

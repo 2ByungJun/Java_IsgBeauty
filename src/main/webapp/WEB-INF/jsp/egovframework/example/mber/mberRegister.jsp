@@ -43,11 +43,11 @@
 				},
 				telno : {
 					required : true,
-				/* digits : true */
+					minlength : 12,
+					regex : "^(010)[-\\s]?\\d{3,4}[-\\s]?\\d{4}$"
 				},
 				brthdy : {
-					required : true,
-					digits : true
+					required : true
 				}
 			},
 			messages : {
@@ -56,29 +56,70 @@
 				},
 				telno : {
 					required : "필수 입력 항목입니다.",
-				/* digits : "숫자만 입력할 수 있습니다." */
+					minlength : "휴대폰 번호를 완전히 입력해주세요.",
+					regex : "휴대폰 번호 양식을 제대로 입력해주세요."
 				},
 				brthdy : {
-					required : "필수 입력 항목입니다.",
-					digits : "숫자만 입력할 수 있습니다."
+					required : "필수 입력 항목입니다."
 				}
-			}
+			}, onkeyup : false, onfocusout : false
 		});
 	});
+
+	$.validator.addMethod("regex", function(value, element, regexp) {
+		let re = new RegExp(regexp);
+		let res = re.test(value);
+		console.log(res, value, regexp, re)
+		return res;
+	})
+
+	function inputPhoneNumber(obj) {
+
+	    var number = obj.value.replace(/[^0-9]/g, "");
+	    var phone = "";
+
+	    if(number.length < 4) {
+	        return number;
+	    } else if(number.length < 7) {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3);
+	    } else if(number.length < 11) {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3, 3);
+	        phone += "-";
+	        phone += number.substr(6);
+	    } else {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3, 4);
+	        phone += "-";
+	        phone += number.substr(7);
+	    }
+	    obj.value = phone;
+	}
 </script>
 </head>
 <style>
 label {
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 input {
-	margin-top: 30px;
-	width: 200px;
+	margin-top: 10px;
 }
 
 select {
-	margin-top: 30px;
+	margin-top: 10px;
+}
+
+input.error {
+	border: 1px solid red;
+}
+
+label.error {
+	color: red;
 }
 </style>
 <body>
@@ -91,80 +132,72 @@ select {
 	<form:form commandName="mberVO" id="detailForm" name="detailForm"
 		method="post">
 		<div class="container">
-			<div class="jumbotron text-center alert-info"
-				style="margin-top: 30px" role="alert" onclick="home()">
-				<h2>
-					<b>ISG Beauty</b>
+			<h2 style="text-align:center;">
+					<b>고객 등록</b>
 				</h2>
-				<p>
-					<b>고객 등록 화면입니다.</b>
-				</p>
-			</div>
 		</div>
 
 		<div class="container">
-			<div class="form-inline form-group">
-				<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름*:</label>
-				<div class="col-xs-2">
-					<input type="text" class="form-control" id="mberNm" name="mberNm"
-						placeholder="이름을 입력하세요" maxlength="10" required>
-				</div>
+			<div class="row">
+				<div class="form-inline form-group">
+					<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름*:</label>
+					<div class="col-md-3">
+						<input type="text" class="form-control" id="mberNm" name="mberNm"
+							placeholder="이름을 입력하세요" maxlength="10" required>
+					</div>
 
-				<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
-					직원*:</label>
-				<div class="col-md-2">
+					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
+						직원*:</label>
+					<div class="col-md-3">
 						<select type="text" class="form-control" id="eEmpId" name="eEmpId">
 						<c:forEach var="result" items="${listEmpNM}" varStatus="status">
 							<option value="${result.empId}">${result.empNm}</option>
 							</c:forEach>
 						</select>
-				</div>
-			</div>
-
-			<div class="form-inline form-group">
-				<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호*:</label>
-				<div class="col-md-2">
-					<input type="text" class="form-control" id="telno" name="telno"
-						pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}" title="###-####-####"
-						placeholder="###-####-####" required>
+					</div>
 				</div>
 
-				<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별*:</label>
-				<div class="col-md-2">
-					<select type="text" class="form-control" id="sexdstn"
-						name="sexdstn">
-						<option value="Male" selected="selected">Male</option>
-						<option value="Female">Female</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="form-inline form-group">
-				<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
-				<div class="col-md-2">
-					<input type="text" class="form-control" id="brthdy" name="brthdy"
-						pattern="[0-9]{6}" title="주민번호 앞 6자리를 입력해주세요." placeholder="생년월일을 6자리">
-				</div>
-			</div>
-
-			<div class="form-inline form-group">
-				<label for="registId" class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
-				<div class="col-md-2">
-					<input type="text" class="form-control" id="registId"
-						name="registId" value="${registId}" readonly>
+				<div class="form-inline form-group">
+					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호*:</label>
+					<div class="col-md-3">
+						<input type="text" class="form-control" id="telno" name="telno"
+							placeholder="000-0000-0000" maxlength="13" required onkeyup="inputPhoneNumber(this)">
+					</div>
+					<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별*:</label>
+					<div class="col-md-3">
+						<select type="text" class="form-control" id="sexdstn"
+							name="sexdstn">
+							<option value="Male" selected="selected">Male</option>
+							<option value="Female">Female</option>
+						</select>
+					</div>
 				</div>
 
-				<label for="registDt" class="col-sm-2 col-sm-offset-1 control-label">등록일*:</label>
-				<div class="col-md-2">
-					<input type="date" class="form-control" id="registDt"
-						name="registDt" value="<%=today%>" readonly>
+				<div class="form-inline form-group">
+					<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
+					<div class="col-md-3">
+						<input type="date" class="form-control" id="brthdy" name="brthdy">
+					</div>
+					<label for="registId" class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="registId"
+							name="registId" value="${registId}" readonly>
+					</div>
+				</div>
+
+				<div class="form-inline form-group">
+					<label for="registDt" class="col-sm-2 col-sm-offset-1 control-label">등록일*:</label>
+					<div class="col-md-3">
+						<input type="date" class="form-control" id="registDt"
+							name="registDt" value="<%=today%>" readonly>
+					</div>
 				</div>
 			</div>
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px">
 			<button type="submit" class="btn btn-info" onclick="">등록</button>
-			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
+			<button type="button" class=" btn btn-danger" onclick="home()">취소</button>
 		</div>
 
 	</form:form>

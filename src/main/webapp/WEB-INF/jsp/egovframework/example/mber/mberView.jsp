@@ -99,18 +99,12 @@ p {
 		method="post">
 		<input type="hidden" name="selectedId" />
 		<div class="container">
-			<div class="jumbotron text-center alert-info"
-				style="margin-top: 30px" role="alert" onclick="home()">
-				<h2>
-					<b>ISG Beauty</b>
-				</h2>
-				<h4 for="mberSn" class="control-label">
-					'
-					<c:out value="${result.mberNm}" />
-					'님 상세화면
-				</h4>
-			</div>
+			<h2 style="text-align: center;">
+				<b>'<c:out value="${result.mberNm}" />'고객님 상세화면
+				</b>
+			</h2>
 		</div>
+
 		<div class="container">
 			<div class="row">
 				<div class="form-inline form-group">
@@ -154,11 +148,10 @@ p {
 						</p>
 					</div>
 
-					<label for="sexdstn" style="opacity:0.0;" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
-					<div class="col-sm-3" style="opacity:0.0;">
-						<p for="sexdstn" class="control-label">
-							틀을 맞춰주기 위함
-						</p>
+					<label for="sexdstn" style="opacity: 0.0;"
+						class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
+					<div class="col-sm-3" style="opacity: 0.0;">
+						<p for="sexdstn" class="control-label">틀을 맞춰주기 위함</p>
 					</div>
 				</div>
 

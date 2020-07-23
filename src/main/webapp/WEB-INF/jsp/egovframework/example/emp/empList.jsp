@@ -93,15 +93,9 @@
 		method="post">
 		<input type="hidden" name="selectedId" />
 		<div class="container">
-			<div class="jumbotron text-center alert-success" style="margin-top:30px" role="alert"
-				onclick="home()">
-				<h2>
-					<b>ISG Beauty</b>
+			<h2 style="text-align:center;">
+					<b>직원 관리</b>
 				</h2>
-				<p id="welcome">
-					<!-- <b>직원 관리 화면입니다.</b> -->
-				</p>
-			</div>
 			<div class="row">
 				<div class="alert" role="alert">
 					<div class="col-sm-6">
