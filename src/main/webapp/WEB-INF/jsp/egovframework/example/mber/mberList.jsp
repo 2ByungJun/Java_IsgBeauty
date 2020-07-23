@@ -4,12 +4,12 @@
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>IsgBeauty 프로젝트</title>
 
 <script type="text/javaScript" language="javascript" defer="defer">
-
-
 	<%  String str = (String) session.getAttribute("empId"); %>
 
 
@@ -102,20 +102,15 @@
 		method="post">
 		<input type="hidden" name="selectedId" />
 		<div class="container">
-			<div class="jumbotron text-center alert-info" style="margin-top:30px" role="alert"
-				onclick="home()">
-				<h2>
-					<b>ISG Beauty</b>
-				</h2>
-				<p id="welcome">
-					<!-- <b>고객 관리 화면입니다.</b> -->
-				</p>
-			</div>
+			<h2 style="text-align: center;">
+				<b>고객 관리</b>
+			</h2>
+
 			<div class="row">
 				<div class="alert" role="alert">
 					<div class="col-sm-6">
-						<button type="button" class="btn btn-success"
-							onclick="empManage()">직원 관리</button>
+						<button type="button" class="btn btn-success" onclick="empManage()">직원
+							관리</button>
 						<button type="button" class="btn btn-danger" onclick="resve()">예약
 							현황</button>
 					</div>
@@ -123,8 +118,11 @@
 						<div class="col-xs-6">
 							<div id="search">
 								<div class="input-group">
-									<form:input path="searchKeyword" type="text" id="searchKeyword" placeholder="이름 검색" cssClass="txt form-control" style="width:70%"/>
-									<button class="btn btn-default" type="button" onclick="javascript:fnSelectList(1)" style="font-size: 20px;">
+									<form:input path="searchKeyword" type="text" id="searchKeyword"
+										placeholder="이름 검색" cssClass="txt form-control"
+										style="width:70%" />
+									<button class="btn btn-default" type="button"
+										onclick="javascript:fnSelectList(1)" style="font-size: 20px;">
 										<i class="glyphicon glyphicon-search"></i>
 									</button>
 								</div>
@@ -162,11 +160,10 @@
 					</div>
 				</div>
 				<div class="text-center">
-					<div id="paging">
-					</div>
+					<div id="paging"></div>
 				</div>
-
 			</div>
+		</div>
 	</form:form>
 </body>
 </html>
