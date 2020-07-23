@@ -43,129 +43,165 @@
 		location.href = "<c:url value='/resveRegister.do'/>";
 	}
 
-	document.addEventListener('DOMContentLoaded', function() {
-		var calendarEl = document.getElementById('calendar');
-		var obj = {};
-		$.ajax({
-			url : "<c:url value="/resveView.do"/>",
-			type : "post",
-			dataType : "json",
-			data : JSON.stringify(obj),
-			contentType : "application/json",
-			success : function(data) {
-				console.log(data);
-				$.each(data.resveList, function(index, item) {
-					if(item.processSttus === 'N'){
-						// 처리상태  : N
-						calendar.addEvent({
-							'title' : item.mberNm + '-' + item.tretmentNm,
-							'start' : item.resveDt + 'T' + item.resveTime,
-							'classNames' : ["bjTool", "aa"+item.resveSn],
-							'resveSn' : item.resveSn,
-							'mberNm' : item.mberNm,
-							'resveDt' : item.resveDt,
-							'resveTime' : item.resveTime,
-							'tretmentNm' : item.tretmentNm,
-							'processSttus' : "처리중",
-							'registId' : item.registId,
-							'registDt' : item.registDt
-						})
-					}
-					else{
-						// 처리상태 : Y
-						calendar.addEvent({
-							'title' : item.mberNm + '-' + item.tretmentNm,
-							'start' : item.resveDt + 'T' + item.resveTime,
-							'classNames' : ["bjTool", "aa"+item.resveSn],
-							'resveSn' : item.resveSn,
-							'mberNm' : item.mberNm,
-							'resveDt' : item.resveDt,
-							'resveTime' : item.resveTime,
-							'tretmentNm' : item.tretmentNm,
-							'processSttus' : "완료",
-							'registId' : item.registId,
-							'registDt' : item.registDt,
-							'color' : 'red'
+	document
+			.addEventListener(
+					'DOMContentLoaded',
+					function() {
+						var calendarEl = document.getElementById('calendar');
+						var obj = {};
+						$.ajax({
+							url : "<c:url value="/resveView.do"/>",
+							type : "post",
+							dataType : "json",
+							data : JSON.stringify(obj),
+							contentType : "application/json",
+							success : function(data) {
+								console.log(data);
+								$.each(data.resveList, function(index, item) {
+									if (item.processSttus === 'N') {
+										// 처리상태  : N
+										calendar.addEvent({
+											'title' : item.mberNm + '-'
+													+ item.tretmentNm,
+											'start' : item.resveDt + 'T'
+													+ item.resveTime,
+											'classNames' : [ "bjTool",
+													"aa" + item.resveSn ],
+											'resveSn' : item.resveSn,
+											'mberNm' : item.mberNm,
+											'resveDt' : item.resveDt,
+											'resveTime' : item.resveTime,
+											'tretmentNm' : item.tretmentNm,
+											'processSttus' : "처리중",
+											'registId' : item.registId,
+											'registDt' : item.registDt
+										})
+									} else {
+										// 처리상태 : Y
+										calendar.addEvent({
+											'title' : item.mberNm + '-'
+													+ item.tretmentNm,
+											'start' : item.resveDt + 'T'
+													+ item.resveTime,
+											'classNames' : [ "bjTool",
+													"aa" + item.resveSn ],
+											'resveSn' : item.resveSn,
+											'mberNm' : item.mberNm,
+											'resveDt' : item.resveDt,
+											'resveTime' : item.resveTime,
+											'tretmentNm' : item.tretmentNm,
+											'processSttus' : "완료",
+											'registId' : item.registId,
+											'registDt' : item.registDt,
+											'color' : 'red'
+										});
+									}
+								});
+							},
+							error : function(errorThrown) {
+								alert(errorThrown.statusText);
+							}
 						});
-					}
-				});
-			},
-			error : function(errorThrown) {
-				alert(errorThrown.statusText);
-			}
-		});
 
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView : 'dayGridMonth', // 월 달력
-			// 달력 툴
-			headerToolbar : {
-				left : 'prevYear,prev,next,nextYear,today',
-				center : 'title',
-				right : 'dayGridMonth,dayGridWeek,dayGridDay'
-			},
-			editable : true, // 드래그 수정 가능
-			navLinks : true, // 클릭시, 달력-주 달력으로 넘어감
-			dayMaxEventRows : true, // 셀 크기보다 많은 이벤트가 존재할 시, 'more'로 표기함
-			views : {
-				dayGrid : {
-					dayMaxEventRows : 3
-				}
-			},
-			locale : 'ko', // 한국어 설정
-			eventClick : function(data) {
-				var check = confirm("예약을 변경하시겠습니까?");
-				if (check) {
-					$("#resveSn").val(data.event.extendedProps.resveSn);
-					view(data.event.extendedProps.resveSn);
-				} else {
-					// 취소
-				}
-			},
-			// 일정 - 마우스 오버 이벤트
-			eventMouseEnter : function(data) {
-				console.log($(data));
+						var calendar = new FullCalendar.Calendar(
+								calendarEl,
+								{
+									initialView : 'dayGridMonth', // 월 달력
+									// 달력 툴
+									headerToolbar : {
+										left : 'prev,next,today',
+										center : 'title',
+										right : 'dayGridMonth,dayGridWeek,dayGridDay'
+									},
+									editable : true, // 드래그 수정 가능
+									navLinks : true, // 클릭시, 달력-주 달력으로 넘어감
+									dayMaxEventRows : true, // 셀 크기보다 많은 이벤트가 존재할 시, 'more'로 표기함
+									views : {
+										dayGrid : {
+											dayMaxEventRows : 3
+										}
+									},
+									locale : 'ko', // 한국어 설정
+									eventClick : function(data) {
+										var check = confirm("예약을 변경하시겠습니까?");
+										if (check) {
+											$("#resveSn")
+													.val(
+															data.event.extendedProps.resveSn);
+											view(data.event.extendedProps.resveSn);
+										} else {
+											// 취소
+										}
+									},
+									// 일정 - 마우스 오버 이벤트
+									eventMouseEnter : function(data) {
+										console.log($(data));
 
-				if( data.event._def.extendedProps.processSttus == '완료'){
-					var topic = "\n♦ 예약자 : " + data.event._def.extendedProps.mberNm
-					+ '\n' + "\n♦ 예약일 : " + data.event._def.extendedProps.resveDt
-					+ '\n' + "\n♦ 예약시간 : " + data.event._def.extendedProps.resveTime
-					+ '\n' + "\n♦ 시술 : " + data.event._def.extendedProps.tretmentNm
-					+ '\n' + "\n♦ 처리상태 : " + data.event._def.extendedProps.processSttus
-					+ '\n';
-				}else{
-					var topic = "\n◇ 예약자 : " + data.event._def.extendedProps.mberNm
-					+ '\n' + "\n◇ 예약일 : " + data.event._def.extendedProps.resveDt
-					+ '\n' + "\n◇ 예약시간 : " + data.event._def.extendedProps.resveTime
-					+ '\n' + "\n◇ 시술 : " + data.event._def.extendedProps.tretmentNm
-					+ '\n' + "\n◇ 처리상태 : " + data.event._def.extendedProps.processSttus
-					+ '\n';
-				}
-				$('.bjTool').attr("data-toggle", topic);
-				$('.bjTool').attr("title", topic);
+										if (data.event._def.extendedProps.processSttus == '완료') {
+											var topic = "\n♦ 예약자 : "
+													+ data.event._def.extendedProps.mberNm
+													+ '\n'
+													+ "\n♦ 예약일 : "
+													+ data.event._def.extendedProps.resveDt
+													+ '\n'
+													+ "\n♦ 예약시간 : "
+													+ data.event._def.extendedProps.resveTime
+													+ '\n'
+													+ "\n♦ 시술 : "
+													+ data.event._def.extendedProps.tretmentNm
+													+ '\n'
+													+ "\n♦ 처리상태 : "
+													+ data.event._def.extendedProps.processSttus
+													+ '\n';
+										} else {
+											var topic = "\n◇ 예약자 : "
+													+ data.event._def.extendedProps.mberNm
+													+ '\n'
+													+ "\n◇ 예약일 : "
+													+ data.event._def.extendedProps.resveDt
+													+ '\n'
+													+ "\n◇ 예약시간 : "
+													+ data.event._def.extendedProps.resveTime
+													+ '\n'
+													+ "\n◇ 시술 : "
+													+ data.event._def.extendedProps.tretmentNm
+													+ '\n'
+													+ "\n◇ 처리상태 : "
+													+ data.event._def.extendedProps.processSttus
+													+ '\n';
+										}
+										$('.bjTool').attr("data-toggle", topic);
+										$('.bjTool').attr("title", topic);
 
-				$('.aa' + data.event._def.extendedProps.resveSn).css('color','green');
-			},
-			eventMouseLeave : function(data) {
-				$('.aa' + data.event._def.extendedProps.resveSn).css('color','#337ab7');
-			},
-			customButtons: {
-			    myCustomButton: {
-			      text: 'custom!',
-			      click: function() {
-			        alert('clicked the custom button!');
-			      }
-			    }
-			  },
-		});
+										$(
+												'.aa'
+														+ data.event._def.extendedProps.resveSn)
+												.css('color', 'green');
+									},
+									eventMouseLeave : function(data) {
+										$(
+												'.aa'
+														+ data.event._def.extendedProps.resveSn)
+												.css('color', '#337ab7');
+									},
+									customButtons : {
+										myCustomButton : {
+											text : 'custom!',
+											click : function() {
+												alert('clicked the custom button!');
+											}
+										}
+									},
+								});
 
-		// 렌더링
-		calendar.render();
+						// 렌더링
+						calendar.render();
 
-		dayColor();
-		$(".fc-button").click(function() {
-		       dayColor();
-		});
-	});
+						dayColor();
+						$(".fc-button").click(function() {
+							dayColor();
+						});
+					});
 
 	function view(id) {
 		document.detailForm.selectedId.value = id;
@@ -174,12 +210,11 @@
 	}
 
 	/***** Calendar CSS *****/
-	function dayColor(){
+	function dayColor() {
 		// 토요일 & 일요일 색상
 		$('.fc-day-sat .fc-daygrid-day-number').css("color", "#0000FF");
 		$('.fc-day-sun .fc-daygrid-day-number').css("color", "#FF0000");
 	}
-
 </script>
 </head>
 <body>
@@ -188,13 +223,9 @@
 		<input type="hidden" id="resveSn" name="selectedId" />
 
 		<div class="container">
-			<div class="jumbotron text-center alert-info"
-				style="margin-top: 30px" role="alert">
-				<h2>
-					<b>ISG Beauty</b>
-				</h2>
-				<h4 class="control-label">예약 캘린더</h4>
-			</div>
+			<h2 style="text-align: center;">
+				<b>예약 캘린더</b>
+			</h2>
 
 			<button type="button" style="margin-bottom: 10px;"
 				class="btn btn-danger" onclick="home()">이전</button>

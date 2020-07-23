@@ -23,8 +23,6 @@
 		location.href = "<c:url value='/empList.do'/>";
 	}
 
-
-
 	/* 글 등록 function */
 	$(function() {
 		$("#detailForm").validate({
@@ -141,15 +139,9 @@ select {
 	<form:form commandName="empVO" id="detailForm" name="detailForm"
 		method="post">
 		<div class="container">
-			<div class="jumbotron text-center alert-success"
-				style="margin-top: 30px" role="alert" onclick="home()">
-				<h2>
-					<b>ISG Beauty</b>
+			<h2 style="text-align:center;">
+					<b>직원 등록</b>
 				</h2>
-				<p>
-					<b>관리자/직원 등록 화면입니다.</b>
-				</p>
-			</div>
 		</div>
 
 		<div class="container">

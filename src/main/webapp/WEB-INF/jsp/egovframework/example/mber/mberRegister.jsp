@@ -91,15 +91,9 @@ select {
 	<form:form commandName="mberVO" id="detailForm" name="detailForm"
 		method="post">
 		<div class="container">
-			<div class="jumbotron text-center alert-info"
-				style="margin-top: 30px" role="alert" onclick="home()">
-				<h2>
-					<b>ISG Beauty</b>
+			<h2 style="text-align:center;">
+					<b>고객 등록</b>
 				</h2>
-				<p>
-					<b>고객 등록 화면입니다.</b>
-				</p>
-			</div>
 		</div>
 
 		<div class="container">

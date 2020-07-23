@@ -85,17 +85,10 @@ select {
 		method="post">
 		<input type="hidden" name="selectedId" />
 		<div class="container">
-			<div class="jumbotron text-center alert-info"
-				style="margin-top: 30px" role="alert" onclick="home()">
-				<h2>
-					<b>ISG Beauty</b>
-				</h2>
-				<h4 for="mberSn" class="control-label">
-					'
-					<c:out value="${result.mberNm}" />
-					'님 수정화면
-				</h4>
-			</div>
+			<h2 style="text-align: center;">
+				<b>' <c:out value="${result.mberNm}" />'고객님 수정화면
+				</b>
+			</h2>
 		</div>
 		<div class="container">
 			<div class="row">

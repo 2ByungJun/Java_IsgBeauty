@@ -55,7 +55,6 @@
 			required : "필수 항목입니다."
 		});
 	});
-
 </script>
 <style>
 label {
@@ -83,17 +82,10 @@ select {
 		method="post">
 		<input type="hidden" name="selectedId" />
 		<div class="container">
-			<div class="jumbotron text-center alert-info"
-				style="margin-top: 30px" role="alert" onclick="home()">
-				<h2>
-					<b>ISG Beauty</b>
-				</h2>
-				<h4 for="mberSn" class="control-label">
-					'
-					<c:out value="${result.mberNm}" />
-					'님 예약변경
-				</h4>
-			</div>
+			<h2 style="text-align: center;">
+				<b>'<c:out value="${result.mberNm}" />'고객님 예약변경
+				</b>
+			</h2>
 		</div>
 
 
@@ -166,7 +158,8 @@ select {
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="submit" class="btn btn-primary" onclick="">수정</button>
-			<button type="button" class="btn btn-danger" onclick="deleteResve('${result.resveSn}')">삭제</button>
+			<button type="button" class="btn btn-danger"
+				onclick="deleteResve('${result.resveSn}')">삭제</button>
 			<button type="button" class=" btn btn-info" onclick="resveView()">이전</button>
 		</div>
 

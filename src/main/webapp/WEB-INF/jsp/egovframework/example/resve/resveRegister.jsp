@@ -26,7 +26,7 @@
 	function resveView() {
 		location.href = "<c:url value='/resveView.do'/>";
 	}
-	
+
 	/* Validation */
 	$(function() {
 		$("#detailForm").validate({
@@ -92,13 +92,9 @@ select {
 	<form:form commandName="mberVO" id="detailForm" name="detailForm"
 		method="post">
 		<div class="container">
-			<div class="jumbotron text-center alert-info"
-				style="margin-top: 30px" role="alert" onclick="home()">
-				<h2>
-					<b>ISG Beauty</b>
-				</h2>
-				<h4 class="control-label">${result.mberNm}님의예약님의 도와드립니다!</h4>
-			</div>
+			<h2 style="text-align: center;">
+				<b>${result.mberNm}고객님의 예약을 도와드립니다!</b>
+			</h2>
 		</div>
 
 		<div class="container">
@@ -112,7 +108,8 @@ select {
 				<label for="tretmentNm"
 					class="col-sm-2 col-sm-offset-1 control-label">시술*:</label>
 				<div class="col-md-2">
-					<select class="form-control" id="tretmentNm" name="tretmentNm" required>
+					<select class="form-control" id="tretmentNm" name="tretmentNm"
+						required>
 						<option value="cut">cut</option>
 						<option value="perm">perm</option>
 						<option value="special">special</option>
@@ -123,7 +120,8 @@ select {
 			<div class="form-inline form-group">
 				<label for="resveDt" class="col-sm-2 col-sm-offset-1 control-label">예약일시*:</label>
 				<div class="col-md-2">
-					<input type="date" class="form-control" id="resveDt" name="resveDt" required>
+					<input type="date" class="form-control" id="resveDt" name="resveDt"
+						required>
 				</div>
 
 				<label for="resveTime"

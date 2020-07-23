@@ -128,17 +128,10 @@ select {
 		method="post">
 		<input type="hidden" name="selectedId" />
 		<div class="container">
-			<div class="jumbotron text-center alert-success"
-				style="margin-top: 30px" role="alert" onclick="home()">
-				<h2>
-					<b>ISG Beauty</b>
-				</h2>
-				<h4 for="empId" class="control-label">
-					'
-					<c:out value="${result.empNm}" />
-					'님 수정화면
-				</h4>
-			</div>
+			<h2 style="text-align:center;">
+					<b>'<c:out value="${result.empNm}" />'직원 수정 화면</b>
+			</h2>
+
 		</div>
 		<div class="container">
 			<div class="row">
