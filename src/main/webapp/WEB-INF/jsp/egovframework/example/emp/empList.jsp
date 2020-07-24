@@ -96,6 +96,22 @@
 			<h2 style="text-align:center;">
 					<b>직원 관리</b>
 				</h2>
+
+			<div style="width:100%; display:inline-flex; padding-bottom:2px">
+				<div style="width: 50%; text-align:left;">
+					<button type="button" class="btn btn-primary" onclick="empRegister()">직원
+						등록</button>
+
+
+				</div>
+
+				<div id="search" style="width: 50%;">
+					<div class="input-group" style="float:right;">
+						<form:input path="searchKeyword" type="text" id="searchKeyword"
+							placeholder="이름 검색" cssClass="txt form-control" style="width:200px;" />
+						<button class="btn btn-primary" type="button" onclick="javascript:fnSelectList(1)" style="font-size: 14px;">
+							<i class="glyphicon glyphicon-search"></i>
+						</button>
 			<div class="row">
 				<div class="alert" role="alert">
 					<div class="col-sm-6">
@@ -104,7 +120,9 @@
 						<div class="col-xs-6">
 							<div id="search">
 								<div class="input-group">
-									<form:input path="searchKeyword" type="text" id="serachKeyword" placeholder="이름 검색" cssClass="txt form-control" style="width:70%"/>
+									<input path="searchKeyword" type="text" id="serachKeyword" placeholder="이름 검색" cssClass="txt form-control" style="width:70%"
+									onkeydown = "if(event.keyCode==13) fnSelectList(1)"/>
+									<input hidden="hidden" />
 									<button class="btn btn-default" type="button" style="font-size: 20px;" onclick="fnSelectList(1)">
 										<i class="glyphicon glyphicon-search"></i>
 									</button>
@@ -118,6 +136,7 @@
 					</div>
 				</div>
 			</div>
+
 
 			<div class="panel panel-default">
 				<div class="panel-body">

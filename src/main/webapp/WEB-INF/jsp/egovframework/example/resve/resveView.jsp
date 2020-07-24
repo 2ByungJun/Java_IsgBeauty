@@ -36,13 +36,13 @@
 
 <!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
-	function home() {
-		location.href = "<c:url value='/mberList.do'/>";
-	}
+
+	/***** 예약등록 *****/
 	function resveRegister() {
 		location.href = "<c:url value='/resveRegister.do'/>";
 	}
 
+	/***** Ajax 예약 데이터 *****/
 	document
 			.addEventListener(
 					'DOMContentLoaded',
@@ -103,6 +103,7 @@
 							}
 						});
 
+						/***** Full Calendar *****/
 						var calendar = new FullCalendar.Calendar(
 								calendarEl,
 								{
@@ -128,7 +129,7 @@
 											$("#resveSn")
 													.val(
 															data.event.extendedProps.resveSn);
-											view(data.event.extendedProps.resveSn);
+											resveEdit(data.event.extendedProps.resveSn);
 										} else {
 											// 취소
 										}
@@ -203,7 +204,8 @@
 						});
 					});
 
-	function view(id) {
+	/***** 예약 수정 *****/
+	function resveEdit(id) {
 		document.detailForm.selectedId.value = id;
 		document.detailForm.action = "<c:url value='/resveEdit.do'/>";
 		document.detailForm.submit();
@@ -214,6 +216,9 @@
 		// 토요일 & 일요일 색상
 		$('.fc-day-sat .fc-daygrid-day-number').css("color", "#0000FF");
 		$('.fc-day-sun .fc-daygrid-day-number').css("color", "#FF0000");
+		// 타이틀 색상
+		$('.fc-toolbar-title').css("color", "#000080");
+		$('.fc-toolbar-title').css("font-size","xx-large");
 	}
 </script>
 </head>
@@ -223,13 +228,6 @@
 		<input type="hidden" id="resveSn" name="selectedId" />
 
 		<div class="container">
-			<h2 style="text-align: center;">
-				<b>예약 캘린더</b>
-			</h2>
-
-			<button type="button" style="margin-bottom: 10px;"
-				class="btn btn-danger" onclick="home()">이전</button>
-
 			<div id="calendar"></div>
 		</div>
 	</form:form>
