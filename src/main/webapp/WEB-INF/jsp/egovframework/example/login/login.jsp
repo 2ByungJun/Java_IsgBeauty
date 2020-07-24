@@ -82,7 +82,6 @@
 		</div>
 		</header>
 	</div>
-
 	<form class="form-horizontal" style="display: grid">
 		<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
 
@@ -102,7 +101,6 @@
 
 			<!-- Center(input)(20%) -->
 			<div style="width: 20%; text-align: left;">
-
 				<div style="display: inline-flex;">
 					<input type="text" class="bjInput form-control" id="email"
 						name="email" placeholder="아이디를 입력해주세요" value=관리자>

@@ -103,94 +103,93 @@ p {
 				<b>'<c:out value="${result.mberNm}" />'고객님 상세화면
 				</b>
 			</h2>
-		</div>
 
-		<div class="container">
-			<div class="row">
-				<div class="form-inline form-group">
-					<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름:</label>
-					<div class="col-sm-3">
-						<p for="mberNm" class="control-label">
+			<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
+
+				<!-- Start(35%) -->
+				<div style="width: 35%;"></div>
+
+				<!-- Center(10%) -->
+				<div style="width: 10%; text-align: center;">
+					<label class="control-label">이름 : </label>
+					<label class="control-label">담당 직원:</label>
+					<label class="control-label">전화 번호:</label>
+					<label class="control-label">성별:</label>
+					<label class="control-label">생년월일:</label>
+					<label class="control-label">등록자:</label>
+					<label class="control-label">등록일:</label>
+					<label class="control-label">수정자:</label>
+					<label class="control-label">수정일:</label>
+				</div>
+
+				<!-- End(60%) -->
+				<div style="width: 60%; text-align: left; display: grid">
+					<!-- 이름 -->
+					<div style="display: inline-flex;">
+						<p class="control-label">
 							<c:out value="${result.mberNm}" />
 						</p>
 					</div>
 
-					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
-						직원:</label>
-					<div class="col-sm-3">
-						<p for="eEmpId" class="control-label">
+					<!-- 담당 직원 -->
+					<div style="display: inline-flex;">
+						<p class="control-label">
 							<c:out value="${result.empNm}" />
 						</p>
 					</div>
-				</div>
 
-				<div class="form-inline form-group">
-					<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
-					<div class="col-sm-3">
-						<p for="brthdy" class="control-label">
-							<c:out value="${result.brthdy}" />
-						</p>
-					</div>
-
-					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호:</label>
-					<div class="col-sm-3">
+					<!-- 전화 번호 -->
+					<div style="display: inline-flex;">
 						<p for="telno" class="control-label">
 							<c:out value="${result.telno}" />
 						</p>
 					</div>
-				</div>
 
-				<div class="form-inline form-group">
-					<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
-					<div class="col-sm-3">
+					<!-- 성별 -->
+					<div style="display: inline-flex;">
 						<p for="sexdstn" class="control-label">
 							<c:out value="${result.sexdstn}" />
 						</p>
 					</div>
 
-					<label for="sexdstn" style="opacity: 0.0;"
-						class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
-					<div class="col-sm-3" style="opacity: 0.0;">
-						<p for="sexdstn" class="control-label">틀을 맞춰주기 위함</p>
+					<!-- 생년월일 -->
+					<div style="display: inline-flex;">
+						<p for="brthdy" class="control-label">
+							<c:out value="${result.brthdy}" />
+						</p>
 					</div>
-				</div>
 
-				<div class="form-inline form-group">
-					<label for="registId"
-						class="col-sm-2 col-sm-offset-1 control-label">등록자:</label>
-					<div class="col-sm-3">
+					<!-- 등록자 -->
+					<div style="display: inline-flex;">
 						<p for="registId" class="control-label">
 							<c:out value="${result.registId}" />
 						</p>
 					</div>
 
-					<label for="registDt"
-						class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
-					<div class="col-sm-3">
+					<!-- 등록일 -->
+					<div style="display: inline-flex;">
 						<p for="registDt" class="control-label">
 							<c:out value="${result.registDt}" />
 						</p>
 					</div>
-				</div>
 
-				<div class="form-inline form-group">
-					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">수정자:</label>
-					<div class="col-sm-3">
-						<p for="updtId" class="control-label">
-							<c:out value="${result.updtId}" />
+					<!-- 수정자 -->
+					<div style="display: inline-flex;">
+						<p for="registId" class="control-label">
+							<c:out value="${result.registId}" />
 						</p>
 					</div>
 
-					<label for="updtDt" class="col-sm-2 col-sm-offset-1 control-label">수정일:</label>
-					<div class="col-sm-3">
+					<!-- 수정일 -->
+					<div style="display: inline-flex;">
 						<p for="updtDt" class="control-label">
 							<c:out value="${result.updtDt}" />
 						</p>
 					</div>
 				</div>
-
 			</div>
 		</div>
+
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="button" class="btn btn-info"
