@@ -86,11 +86,11 @@
 </script>
 <style>
 label {
-	margin-top: 30px;
+	margin-top: 20px;
 }
 
 p {
-	margin-top: 30px;
+	margin-top: 20px;
 }
 </style>
 </head>
@@ -100,17 +100,16 @@ p {
 		<input type="hidden" name="selectedId" />
 		<div class="container">
 			<h2 style="text-align: center;">
-				<b>'<c:out value="${result.mberNm}" />'고객님 상세화면
-				</b>
+				<b><span style="color:#000080;">'<c:out value="${result.mberNm}"/>'</span>님 상세화면</b>
 			</h2>
 
 			<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
 
-				<!-- Start(35%) -->
-				<div style="width: 35%;"></div>
+				<!-- Start(40%) -->
+				<div style="width: 40%;"></div>
 
 				<!-- Center(10%) -->
-				<div style="width: 10%; text-align: center;">
+				<div style="width: 10%; text-align: center; display: grid;">
 					<label class="control-label">이름 : </label>
 					<label class="control-label">담당 직원:</label>
 					<label class="control-label">전화 번호:</label>
@@ -122,8 +121,8 @@ p {
 					<label class="control-label">수정일:</label>
 				</div>
 
-				<!-- End(60%) -->
-				<div style="width: 60%; text-align: left; display: grid">
+				<!-- End(50%) -->
+				<div style="width: 50%; text-align: left; display: grid">
 					<!-- 이름 -->
 					<div style="display: inline-flex;">
 						<p class="control-label">
@@ -192,7 +191,7 @@ p {
 
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="button" class="btn btn-info"
+			<button type="button" class="btn btn-primary"
 				onclick="editMber('${result.mberSn}')">수정</button>
 			<button type="button" class="btn btn-danger"
 				onclick="deleteMber('${result.mberSn}')">삭제</button>

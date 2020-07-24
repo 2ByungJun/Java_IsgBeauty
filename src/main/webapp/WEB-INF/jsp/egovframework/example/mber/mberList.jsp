@@ -12,7 +12,6 @@
 <script type="text/javaScript" language="javascript" defer="defer">
 	<%  String str = (String) session.getAttribute("empId"); %>
 
-
 	$(document).ready(function() {
 		 fnSelectList(1);
 		 var welcomeHtml = '';
@@ -20,7 +19,6 @@
 		 welcomeHtml += '<b>고객 관리 화면입니다.</b>';
 		 $('#welcome').html(welcomeHtml);
 	});
-
 
 	function fnSelectList(pageNo){
 	  var url  =  "<c:url value='/mberList.json'/>";
@@ -68,6 +66,7 @@
 		});
 
 	}
+
 	function sexd(st) {
 		if(st === "Male"){
 			return "남성";
@@ -76,31 +75,13 @@
 		}
 	}
 
-	function home() {
-		location.href = "<c:url value='/mberList.do'/>";
-	}
-	function empManage() {
-		location.href = "<c:url value='/empList.do'/>";
-	}
 	function mberRegister() {
 		location.href = "<c:url value='/mberRegister.do'/>";
-	}
-	function resve() {
-		location.href = "<c:url value='/resveView.do'/>";
 	}
 	function view(id) {
 		document.listForm.selectedId.value = id;
 		document.listForm.action = "<c:url value='/mberView.do'/>";
 		document.listForm.submit();
-	}
-	function logout() {
-		check = confirm("로그아웃 하시겠습니까?");
-
-		if (check) {
-			location.href = "<c:url value='/logout.do'/>";
-		} else {
-			alert("취소하셨습니다.");
-		}
 	}
 </script>
 </head>
@@ -110,7 +91,7 @@
 		<input type="hidden" name="selectedId" />
 		<div class="container">
 			<h2 style="text-align: center;">
-				<b>고객 관리</b>
+				<b>고객관리</b>
 			</h2>
 
 			<div style="width:100%; display:inline-flex; padding-bottom:2px">

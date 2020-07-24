@@ -82,7 +82,7 @@
 		</div>
 		</header>
 	</div>
-	<form class="form-horizontal" style="display: grid">
+	<form class="form-horizontal" style="display: grid; margin-top:20px;">
 		<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
 
 			<!-- Start(35%) -->
