@@ -62,7 +62,9 @@
 				brthdy : {
 					required : "필수 입력 항목입니다."
 				}
-			}, onkeyup : false, onfocusout : false
+			},
+			onkeyup : false,
+			onfocusout : false
 		});
 	});
 
@@ -75,51 +77,49 @@
 
 	function inputPhoneNumber(obj) {
 
-	    var number = obj.value.replace(/[^0-9]/g, "");
-	    var phone = "";
+		var number = obj.value.replace(/[^0-9]/g, "");
+		var phone = "";
 
-	    if(number.length < 4) {
-	        return number;
-	    } else if(number.length < 7) {
-	        phone += number.substr(0, 3);
-	        phone += "-";
-	        phone += number.substr(3);
-	    } else if(number.length < 11) {
-	        phone += number.substr(0, 3);
-	        phone += "-";
-	        phone += number.substr(3, 3);
-	        phone += "-";
-	        phone += number.substr(6);
-	    } else {
-	        phone += number.substr(0, 3);
-	        phone += "-";
-	        phone += number.substr(3, 4);
-	        phone += "-";
-	        phone += number.substr(7);
-	    }
-	    obj.value = phone;
+		if (number.length < 4) {
+			return number;
+		} else if (number.length < 7) {
+			phone += number.substr(0, 3);
+			phone += "-";
+			phone += number.substr(3);
+		} else if (number.length < 11) {
+			phone += number.substr(0, 3);
+			phone += "-";
+			phone += number.substr(3, 3);
+			phone += "-";
+			phone += number.substr(6);
+		} else {
+			phone += number.substr(0, 3);
+			phone += "-";
+			phone += number.substr(3, 4);
+			phone += "-";
+			phone += number.substr(7);
+		}
+		obj.value = phone;
 	}
 </script>
 </head>
 <style>
-label {
-	margin-top: 10px;
-}
-
-input {
-	margin-top: 10px;
-}
-
-select {
-	margin-top: 10px;
-}
 
 input.error {
 	border: 1px solid red;
 }
 
+label {
+	margin: 13px;
+}
+
 label.error {
 	color: red;
+}
+
+.bjWidth {
+	width:200px;
+	margin-top:5px;
 }
 </style>
 <body>
@@ -131,73 +131,82 @@ label.error {
 
 	<form:form commandName="mberVO" id="detailForm" name="detailForm"
 		method="post">
-		<div class="container">
-			<h2 style="text-align:center;">
-					<b>고객 등록</b>
-				</h2>
-		</div>
 
 		<div class="container">
-			<div class="row">
-				<div class="form-inline form-group">
-					<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">이름*:</label>
-					<div class="col-md-3">
-						<input type="text" class="form-control" id="mberNm" name="mberNm"
-							placeholder="이름을 입력하세요" maxlength="10" required>
+			<!-- Header -->
+			<h2 style="text-align: center; margin-bottom: 40px;">
+				<b>고객 등록</b>
+			</h2>
+
+
+			<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
+
+				<!-- Start(35%) -->
+				<div style="width: 35%;"></div>
+
+				<!-- Center(10%) -->
+				<div style="width: 10%; text-align: center;">
+					<label class="control-label">이름 : </label>
+					<label class="control-label">담당 직원:</label>
+					<label class="control-label">전화 번호:</label>
+					<label class="control-label">성별:</label>
+					<label class="control-label">생년월일:</label>
+					<label class="control-label">등록자:</label>
+					<label class="control-label">등록일:</label>
+				</div>
+
+				<!-- End(60%) -->
+				<div style="width: 60%; text-align: left; display: grid">
+					<!-- 이름 -->
+					<div style="display: inline-flex;">
+						<input type="text" class="bjWidth form-control" id="mberNm" name="mberNm"
+							placeholder="이름을 입력하세요" maxlength="10"
+							required>
 					</div>
 
-					<label for="eEmpId" class="col-sm-2 col-sm-offset-1 control-label">담당
-						직원*:</label>
-					<div class="col-md-3">
-						<select type="text" class="form-control" id="eEmpId" name="eEmpId">
+					<!-- 담당 직원 -->
+					<select type="text" class="bjWidth form-control" id="eEmpId" name="eEmpId">
 						<c:forEach var="result" items="${listEmpNM}" varStatus="status">
 							<option value="${result.empId}">${result.empNm}</option>
-							</c:forEach>
-						</select>
-					</div>
-				</div>
+						</c:forEach>
+					</select>
 
-				<div class="form-inline form-group">
-					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호*:</label>
-					<div class="col-md-3">
-						<input type="text" class="form-control" id="telno" name="telno"
-							placeholder="000-0000-0000" maxlength="13" required onkeyup="inputPhoneNumber(this)">
+					<!-- 전화 번호 -->
+					<div style="display: inline-flex;">
+						<input type="text" class="bjWidth form-control" id="telno" name="telno" placeholder="000-0000-0000" maxlength="13" onkeyup="inputPhoneNumber(this)" required>
 					</div>
-					<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별*:</label>
-					<div class="col-md-3">
-						<select type="text" class="form-control" id="sexdstn"
-							name="sexdstn">
-							<option value="Male" selected="selected">Male</option>
-							<option value="Female">Female</option>
-						</select>
-					</div>
-				</div>
 
-				<div class="form-inline form-group">
-					<label for="brthdy" class="col-sm-2 col-sm-offset-1 control-label">생년월일:</label>
-					<div class="col-md-3">
-						<input type="date" class="form-control" id="brthdy" name="brthdy">
+					<!-- 성별 -->
+					<div style="display: inline-flex;">
+						<select type="text" class="bjWidth form-control" id="sexdstn"
+								name="sexdstn">
+								<option value="Male" selected="selected">남성</option>
+								<option value="Female">여성</option>
+							</select>
 					</div>
-					<label for="registId" class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" id="registId"
-							name="registId" value="${registId}" readonly>
-					</div>
-				</div>
 
-				<div class="form-inline form-group">
-					<label for="registDt" class="col-sm-2 col-sm-offset-1 control-label">등록일*:</label>
-					<div class="col-md-3">
-						<input type="date" class="form-control" id="registDt"
-							name="registDt" value="<%=today%>" readonly>
+					<!-- 생년월일 -->
+					<div style="display: inline-flex;">
+						<input type="date" class="bjWidth form-control" id="brthdy" name="brthdy">
+					</div>
+
+					<!-- 등록자 -->
+					<div style="display: inline-flex;">
+						<input type="text" class="bjWidth form-control" id="registId" name="registId" value="${registId}" readonly>
+					</div>
+
+					<!-- 등록일 -->
+					<div style="display: inline-flex;">
+						<input type="date" class="bjWidth form-control" id="registDt" name="registDt" value="<%=today%>" readonly>
 					</div>
 				</div>
 			</div>
 		</div>
 
+		<!-- Button -->
 		<div class="container" style="text-align: center; margin-top: 30px">
-			<button type="submit" class="btn btn-info" onclick="">등록</button>
-			<button type="button" class=" btn btn-danger" onclick="home()">취소</button>
+			<button type="submit" class="btn btn-primary" onclick="">등록</button>
+			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
 		</div>
 
 	</form:form>
