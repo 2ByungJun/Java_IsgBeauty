@@ -116,8 +116,9 @@
 
 				<div id="search" style="width: 50%;">
 					<div class="input-group" style="float:right;">
-						<form:input path="searchKeyword" type="text" id="searchKeyword"
-							placeholder="이름 검색" cssClass="txt form-control" style="width:200px;" />
+						<input path="searchKeyword" type="text" id="searchKeyword"
+							placeholder="이름 검색" cssClass="txt form-control" style="width:200px;" onkeydown = "if(event.keyCode==13) fnSelectList(1)" />
+						<input hidden="hidden" />
 						<button class="btn btn-primary" type="button" onclick="javascript:fnSelectList(1)" style="font-size: 14px;">
 							<i class="glyphicon glyphicon-search"></i>
 						</button>
