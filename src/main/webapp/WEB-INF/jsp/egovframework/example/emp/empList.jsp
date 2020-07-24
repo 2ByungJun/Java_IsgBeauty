@@ -22,7 +22,7 @@
 		 fnSelectList(1);
 		 var welcomeHtml = '';
 		 welcomeHtml += '<b>'+'[<%=str%>]' + '님 환영합니다.</b>';
-		 welcomeHtml += '<b>고객 관리 화면입니다.</b>';
+		 welcomeHtml += '<b>직원 관리 화면입니다.</b>';
 		 $('#welcome').html(welcomeHtml);
 	});
 
@@ -52,9 +52,9 @@
 						html += '<tr>';
 						html += '<td align="center" class="listtd"><a href="javascript:view(\''+item.empId+'\')">' + item.empId +'</td>';
 						html += '<td align="center" class="listtd">' + item.empNm + '</td>';
-						html += '<td align="center" class="listtd" >' + item.sexdstn + '</td>';
+						html += '<td align="center" class="listtd" >' + sexd(item.sexdstn) + '</td>';
 						html += '<td align="center" class="listtd" >' + item.telno + '</td>';
-						html += '<td align="center" class="listtd" >' + item.pspofc + '</td>';
+						html += '<td align="center" class="listtd" >' + pspofcd(item.pspofc) + '</td>';
 						html += '<td align="center" class="listtd" >' + item.career + '</td>';
 						html += '<td align="center" class="listtd" >' + item.registDt + '</td>';
 						html += '<td align="center" class="listtd" >' + item.updtDt + '</td>';
@@ -74,6 +74,21 @@
 
 	}
 
+	function sexd(st) {
+		if(st === "Male"){
+			return "남성";
+		}else{
+			return "여성";
+		}
+	}
+
+	function pspofcd(st) {
+		if(st === "Admin"){
+ 			return "<b>♦관리자♦</b>";
+		}else{
+			return "디자이너";
+		}
+	}
 
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
@@ -88,13 +103,14 @@
     }
 </script>
 </head>
+</style>
 <body>
 	<form:form commandName="searchVO" id="listForm" name="listForm"
 		method="post">
 		<input type="hidden" name="selectedId" />
 		<div class="container">
 			<h2 style="text-align:center;">
-					<b>직원 관리</b>
+					<b>직원관리</b>
 				</h2>
 
 			<div style="width:100%; display:inline-flex; padding-bottom:2px">

@@ -48,7 +48,7 @@ public class ResveController {
 		sampleVO.setMberSn(mberSn);
 		model.addAttribute("result", selectMber(sampleVO, searchVO));
 
-		return "resve/resveRegister";
+		return "/useLayout/resve/resveRegister";
 	}
 
 	/**

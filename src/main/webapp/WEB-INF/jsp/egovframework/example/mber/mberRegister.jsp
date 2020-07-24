@@ -104,7 +104,6 @@
 </script>
 </head>
 <style>
-
 input.error {
 	border: 1px solid red;
 }
@@ -138,9 +137,9 @@ label.error {
 				<b>고객 등록</b>
 			</h2>
 
-
+			<!-- Contents -->
 			<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
-			
+
 				<!-- Start(35%) -->
 				<div style="width: 35%;"></div>
 

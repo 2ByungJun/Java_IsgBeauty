@@ -69,17 +69,21 @@
 </script>
 </head>
 <style>
+input.error {
+	border: 1px solid red;
+}
+
 label {
-	margin-top: 30px;
+	margin: 13px;
 }
 
-input {
-	margin-top: 30px;
-	width: 200px;
+label.error {
+	color: red;
 }
 
-select {
-	margin-top: 30px;
+.bjWidth {
+	width:200px;
+	margin-top:5px;
 }
 </style>
 <body>
@@ -92,67 +96,71 @@ select {
 	<form:form commandName="mberVO" id="detailForm" name="detailForm"
 		method="post">
 		<div class="container">
+
+			<!-- Header -->
 			<h2 style="text-align: center;">
-				<b>${result.mberNm}고객님의 예약을 도와드립니다!</b>
+				<b><span style="color:#000080";>${result.mberNm}</span>님의 예약 등록</b>
 			</h2>
-		</div>
 
-		<div class="container">
-			<div class="form-inline form-group">
-				<label for="mberNm" class="col-sm-2 col-sm-offset-1 control-label">예약자*:</label>
-				<div class="col-xs-2">
-					<input type="text" class="form-control"
-						value="<c:out value="${result.mberNm}" />" readonly>
+			<!-- Contents -->
+			<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
+
+				<!-- Start(35%) -->
+				<div style="width: 35%;"></div>
+
+				<!-- Center(10%) -->
+				<div style="width: 10%; text-align: center;">
+					<label class="control-label">예약자 : </label>
+					<label class="control-label">시술:</label>
+					<label class="control-label">예약일시:</label>
+					<label class="control-label">예약시간:</label>
+					<label class="control-label">등록자:</label>
+					<label class="control-label">등록일:</label>
 				</div>
 
-				<label for="tretmentNm"
-					class="col-sm-2 col-sm-offset-1 control-label">시술*:</label>
-				<div class="col-md-2">
-					<select class="form-control" id="tretmentNm" name="tretmentNm"
-						required>
-						<option value="cut">cut</option>
-						<option value="perm">perm</option>
-						<option value="special">special</option>
+				<!-- End(60%) -->
+				<div style="width: 60%; text-align: left; display: grid">
+					<!-- 이름 -->
+					<div style="display: inline-flex;">
+						<input type="text" class="bjWidth form-control" value="<c:out value="${result.mberNm}" />" readonly>
+					</div>
+
+					<!-- 시술 -->
+					<select class="bjWidth form-control" id="tretmentNm" name="tretmentNm" required>
+							<option value="cut">cut</option>
+							<option value="perm">perm</option>
+							<option value="special">special</option>
 					</select>
+
+					<!-- 예약일시 -->
+					<div style="display: inline-flex;">
+						<input type="date" class="bjWidth form-control" id="resveDt" name="resveDt" required>
+					</div>
+
+					<!-- 예약시간 -->
+					<div style="display: inline-flex;">
+						<input type="time" class="bjWidth form-control" id="resveTime" name="resveTime" required>
+					</div>
+
+					<!-- 등록자 -->
+					<div style="display: inline-flex;">
+						<input type="text" class="bjWidth form-control" id="registId" name="registId" value="test" readonly>
+					</div>
+
+					<!-- 등록일 -->
+					<div style="display: inline-flex;">
+						<input type="date" class="bjWidth form-control" id="registDt" name="registDt" value="<%=today%>" readonly>
+					</div>
 				</div>
 			</div>
-
-			<div class="form-inline form-group">
-				<label for="resveDt" class="col-sm-2 col-sm-offset-1 control-label">예약일시*:</label>
-				<div class="col-md-2">
-					<input type="date" class="form-control" id="resveDt" name="resveDt"
-						required>
-				</div>
-
-				<label for="resveTime"
-					class="col-sm-2 col-sm-offset-1 control-label">예약시간*:</label>
-				<div class="col-md-2">
-					<input type="time" class="form-control" id="resveTime"
-						name="resveTime" required>
-				</div>
-			</div>
-
-			<div class="form-inline form-group">
-				<label for="registId" class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
-				<div class="col-md-2">
-					<input type="text" class="form-control" id="registId"
-						name="registId" value="test" readonly>
-				</div>
-
-				<label for="registDt" class="col-sm-2 col-sm-offset-1 control-label">등록일*:</label>
-				<div class="col-md-2">
-					<input type="date" class="form-control" id="registDt"
-						name="registDt" value="<%=today%>" readonly>
-				</div>
-			</div>
-
-			<input type="hidden" id="mberSn" name="mberSn"
-				value="<c:out value="${result.mberSn}" />"> <input
-				type="hidden" id="processSttus" name="processSttus" value="N">
 		</div>
+
+			<!-- hidden -->
+			<input type="hidden" id="mberSn" name="mberSn" value="<c:out value="${result.mberSn}" />">
+			<input type="hidden" id="processSttus" name="processSttus" value="N">
 
 		<div class="container" style="text-align: center; margin-top: 30px">
-			<button type="submit" class="btn btn-success" onclick="">예약등록</button>
+			<button type="submit" class="btn btn-primary" onclick="">예약등록</button>
 			<button type="button" class="btn btn-info" onclick="home()">취소</button>
 		</div>
 
