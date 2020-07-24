@@ -73,7 +73,7 @@
 			<label class="control-label col-sm-4" for="email">ID:</label>
 			<div class="col-sm-4">
 				<input type="text" class="form-control" id="email" name="email"
-					placeholder="아이디를 입력해주세요" value=직원테스트>
+					placeholder="아이디를 입력해주세요" value=관리자>
 			</div>
 		</div>
 		<div class="form-group">

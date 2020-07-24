@@ -229,7 +229,7 @@ label.error {
 						class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
 					<div class="col-md-3">
 						<input type="text" class="form-control" id="registId"
-							name="registId" value="test" readonly>
+							name="registId" value="${empId}" readonly>
 					</div>
 
 					<label for="registDt" class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
@@ -242,7 +242,7 @@ label.error {
 		</div>
 
 		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="submit" class="btn btn-success" onclick="">등록</button>
+			<button type="submit" class="btn btn-primary" onclick="">등록</button>
 			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
 		</div>
 

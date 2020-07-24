@@ -117,8 +117,10 @@ public class EmpController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/empRegister.do")
-	public String empRegister(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model) throws Exception {
+	public String empRegister(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model, HttpServletRequest request) throws Exception {
 		System.out.println("[직원/관리자 등록]");
+
+		model.addAttribute("empId", request.getAttribute("empId"));
 
 		return "/useLayout/emp/empRegister";
 	}
@@ -155,12 +157,13 @@ public class EmpController {
 	 */
 	@RequestMapping("/empEdit.do")
 	public String empEdit(@RequestParam("selectedId") String empId,
-			@ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
+			@ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model, HttpServletRequest request) throws Exception {
 		System.out.println("[직원 수정화면]");
 
 		EmpVO sampleVO = new EmpVO();
 		sampleVO.setEmpId(empId);
 		model.addAttribute("result", selectEmp(sampleVO, searchVO));
+		model.addAttribute("empId", request.getAttribute("empId"));
 
 		return "/useLayout/emp/empEdit";
 	}

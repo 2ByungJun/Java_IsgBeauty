@@ -285,7 +285,7 @@ label.error {
 					<div class="col-sm-3">
 						<p for="updtId" class="control-label">
 							<input type="text" class="form-control" id="updtId" name="updtId"
-								value="<c:out value="${result.updtId}"/>" readonly>
+								value="<c:out value="${empId}"/>" readonly>
 						</p>
 					</div>
 
