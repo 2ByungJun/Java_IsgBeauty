@@ -75,30 +75,13 @@
 
 	<div class="container">
 		<header class="page-header">
-<<<<<<< HEAD
-	<div class="container">
-		<div style="text-align: center;" alt="IsgBeauty 로고">
-			<img src="<c:url value='images/logo.jpg' />">
-		</div>
-	</div>
-</header>
-	</div>
-	<form class="form-horizontal" style="display: grid" >
-		<div class="form-group">
-			<label class="control-label col-sm-4" for="email">ID:</label>
-			<div class="col-sm-4">
-				<input type="text" class="form-control" id="email" name="email"
-					placeholder="아이디를 입력해주세요" value=관리자>
-=======
 		<div class="container">
 			<div style="text-align: center;" alt="IsgBeauty 로고">
 				<img src="<c:url value='images/logo.jpg' />">
->>>>>>> branch 'master' of https://github.com/2ByungJun/IsgBeauty.git
 			</div>
 		</div>
 		</header>
 	</div>
-
 	<form class="form-horizontal" style="display: grid">
 		<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
 
