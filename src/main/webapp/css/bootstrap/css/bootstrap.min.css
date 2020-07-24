@@ -6920,7 +6920,7 @@ button.close {
 	.navbar-header:before, .navbar:after, .navbar:before, .pager:after,
 	.pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before
 	{
-	/* display: table; */
+	display: table;
 	content: " "
 }
 

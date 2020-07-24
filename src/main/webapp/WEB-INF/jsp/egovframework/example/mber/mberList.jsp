@@ -106,38 +106,24 @@
 				<b>고객 관리</b>
 			</h2>
 
-			<div class="row">
-				<div class="alert" role="alert">
-					<div class="col-sm-6">
-						<button type="button" class="btn btn-success" onclick="empManage()">직원
-							관리</button>
-						<button type="button" class="btn btn-danger" onclick="resve()">예약
-							현황</button>
-					</div>
-					<div class="col-sm-6">
-						<div class="col-xs-6">
-							<div id="search">
-								<div class="input-group">
-									<form:input path="searchKeyword" type="text" id="searchKeyword"
-										placeholder="이름 검색" cssClass="txt form-control"
-										style="width:70%" />
-									<button class="btn btn-default" type="button"
-										onclick="javascript:fnSelectList(1)" style="font-size: 20px;">
-										<i class="glyphicon glyphicon-search"></i>
-									</button>
-								</div>
-							</div>
-						</div>
-						<div align="right">
-							<button type="button" class="btn btn-info"
-								onclick="mberRegister()">고객 등록</button>
-							<button type="button" class="btn btn-info" onclick="logout()">로그아웃</button>
-						</div>
+			<div style="width:100%; display:inline-flex; padding-bottom:2px">
+				<div style="width: 50%; text-align:left;">
+					<button type="button" class="btn btn-primary" onclick="mberRegister()">고객
+						등록</button>
+
+
+				</div>
+
+				<div id="search" style="width: 50%;">
+					<div class="input-group" style="float:right;">
+						<form:input path="searchKeyword" type="text" id="searchKeyword"
+							placeholder="이름 검색" cssClass="txt form-control" style="width:200px;" />
+						<button class="btn btn-primary" type="button" onclick="javascript:fnSelectList(1)" style="font-size: 14px;">
+							<i class="glyphicon glyphicon-search"></i>
+						</button>
 					</div>
 				</div>
 			</div>
-
-
 
 			<div class="panel panel-default">
 				<div class="panel-body">

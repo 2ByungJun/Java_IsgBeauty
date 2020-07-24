@@ -1,7 +1,7 @@
 
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<footer class="page-footer">
+<footer class="page-footer" style="margin-top:60px;">
 	<div class="container" style="text-align:center;">
 		<img src="<c:url value='images/logo.jpg' />" alt="IsgBeauty 로고" width=120; height=100;>
 	</div>
