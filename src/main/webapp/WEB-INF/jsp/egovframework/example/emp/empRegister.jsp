@@ -229,7 +229,7 @@ label.error {
 						class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
 					<div class="col-md-3">
 						<input type="text" class="form-control" id="registId"
-							name="registId" value="test" readonly>
+							name="registId" value="${empId}" readonly>
 					</div>
 
 					<label for="registDt" class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
