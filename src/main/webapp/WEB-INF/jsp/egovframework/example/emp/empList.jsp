@@ -55,7 +55,7 @@
 						html += '<td align="center" class="listtd" >' + sexd(item.sexdstn) + '</td>';
 						html += '<td align="center" class="listtd" >' + item.telno + '</td>';
 						html += '<td align="center" class="listtd" >' + pspofcd(item.pspofc) + '</td>';
-						html += '<td align="center" class="listtd" >' + item.career + '</td>';
+						html += '<td align="center" class="listtd" >' + item.career + '년' + '</td>';
 						html += '<td align="center" class="listtd" >' + item.registDt + '</td>';
 						html += '<td align="center" class="listtd" >' + item.updtDt + '</td>';
 						html += '</tr>';

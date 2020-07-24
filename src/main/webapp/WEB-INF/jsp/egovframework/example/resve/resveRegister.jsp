@@ -99,7 +99,7 @@ label.error {
 
 			<!-- Header -->
 			<h2 style="text-align: center;">
-				<b><span style="color:#000080";>${result.mberNm}</span>님의 예약 등록</b>
+				<b><span style="color:#000080;">'${result.mberNm}'</span>님의 예약 등록</b>
 			</h2>
 
 			<!-- Contents -->

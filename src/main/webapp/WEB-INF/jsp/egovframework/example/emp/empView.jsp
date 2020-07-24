@@ -14,7 +14,7 @@
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
 <script type="text/javaScript" language="javascript" defer="defer">
 	function home() {
-		location.href = "<c:url value='/empList.do'/>";
+ 		location.href = "<c:url value='/empList.do'/>";
 	}
 	function deleteEmp(id) {
 		var check;
@@ -28,20 +28,20 @@
 			alert("취소하셨습니다.");
 		}
 	}
+
 	function editEmp(id) {
 		document.detailForm.selectedId.value = id;
 		document.detailForm.action = "<c:url value='/empEdit.do'/>";
 		document.detailForm.submit();
 	}
-
 </script>
 <style>
 label {
-	margin-top: 30px;
+	margin-top: 20px;
 }
 
 p {
-	margin-top: 30px;
+	margin-top: 20px;
 }
 </style>
 </head>
@@ -50,97 +50,107 @@ p {
 		method="post">
 		<input type="hidden" name="selectedId" />
 		<div class="container">
-		<h2 style="text-align:center;">
-					<b>'<c:out value="${result.empNm}" />'직원 상세화면</b>
-				</h2>
+			<h2 style="text-align:center;">
+					<b><span style="color:#000080">'<c:out value="${result.empNm}" />'</span>직원 상세화면</b>
+			</h2>
 
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="form-inline form-group">
-					<label for="empId" class="col-sm-2 col-sm-offset-1 control-label">아이디:</label>
-					<div class="col-sm-3">
-						<p for="empId" class="control-label">
+			<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
+
+				<!-- Start(40%) -->
+				<div style="width: 40%;"></div>
+
+				<!-- Center(10%) -->
+				<div style="width: 10%; text-align: center; display: grid">
+					<label class="control-label">아이디 : </label>
+					<label class="control-label">이름:</label>
+					<label class="control-label">전화번호:</label>
+					<label class="control-label">성별:</label>
+					<label class="control-label">직책:</label>
+					<label class="control-label">급여:</label>
+					<label class="control-label">경력:</label>
+					<label class="control-label">등록자:</label>
+					<label class="control-label">등록일:</label>
+				</div>
+
+				<!-- End(50%) -->
+				<div style="width: 50%; text-align: left; display: grid">
+					<!-- 아이디 -->
+					<div style="display: inline-flex;">
+						<p class="control-label">
 							<c:out value="${result.empId}" />
 						</p>
 					</div>
-					<label for="pspofc"
-						class="col-sm-2 col-sm-offset-1 control-label">직책:</label>
-					<div class="col-sm-3">
-						<p for="pspofc" class="control-label">
-							<c:out value="${result.pspofc}" />
-						</p>
-					</div>
-				</div>
 
-				<div class="form-inline form-group">
-					<label for="empNm" class="col-sm-2 col-sm-offset-1 control-label">이름:</label>
-					<div class="col-sm-3">
-						<p for="empNm" class="control-label">
+					<!-- 이름 -->
+					<div style="display: inline-flex;">
+						<p class="control-label">
 							<c:out value="${result.empNm}" />
 						</p>
 					</div>
 
-					<label for="telno"
-						class="col-sm-2 col-sm-offset-1 control-label">전화번호:</label>
-					<div class="col-sm-3">
-						<p for="telno" class="control-label">
+					<!-- 전화번호 -->
+					<div style="display: inline-flex;">
+						<p class="control-label">
 							<c:out value="${result.telno}" />
 						</p>
 					</div>
-				</div>
 
-				<div class="form-inline form-group">
-					<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
-					<div class="col-sm-3">
-						<p for="mberSn" class="control-label">
-							<c:out value="${result.sexdstn}" />
-						</p>
+					<!-- 성별 -->
+					<div style="display: inline-flex;">
+						<c:if test="${result.sexdstn eq 'Male'}">
+							<p class="control-label">
+								남성
+							</p>
+						</c:if>
+						<c:if test="${result.sexdstn eq 'Female'}">
+							<p class="control-label">
+								여성
+							</p>
+						</c:if>
 					</div>
-					<label for="sexdstn" style="opacity:0.0;" class="col-sm-2 col-sm-offset-1 control-label">성별:</label>
-					<div class="col-sm-3" style="opacity:0.0;">
-						<p for="sexdstn" class="control-label">
-							틀을 맞춰주기 위함
-						</p>
-					</div>
-				</div>
 
-				<div class="form-inline form-group">
-					<label for="salary" class="col-sm-2 col-sm-offset-1 control-label">급여:</label>
-					<div class="col-sm-3">
-						<p for="salary" class="control-label">
-							<c:out value="${result.salary}" />
+					<!-- 직책 -->
+					<div style="display: inline-flex;">
+						<p class="control-label">
+							<c:out value="${result.pspofc}" />
 						</p>
 					</div>
 
-					<label for="career" class="col-sm-2 col-sm-offset-1 control-label">경력:</label>
-					<div class="col-sm-3">
-						<p for="career" class="control-label">
-							<c:out value="${result.career}" />
+					<!-- 급여 -->
+					<div style="display: inline-flex;">
+						<p class="control-label">
+							<c:out value="${result.salary}" />원
 						</p>
 					</div>
-				</div>
 
-				<div class="form-inline form-group">
-					<label for="registId" class="col-sm-2 col-sm-offset-1 control-label">등록자:</label>
-					<div class="col-sm-3">
-						<p for="registId" class="control-label">
+					<!-- 경력 -->
+					<div style="display: inline-flex;">
+						<p class="control-label">
+							<c:out value="${result.career}" />년
+						</p>
+					</div>
+
+					<!-- 등록자 -->
+					<div style="display: inline-flex;">
+						<p class="control-label">
 							<c:out value="${result.registId}" />
 						</p>
 					</div>
 
-					<label for="updtId" class="col-sm-2 col-sm-offset-1 control-label">수정자:</label>
-					<div class="col-sm-3">
-						<p for="updtId" class="control-label">
-							<c:out value="${result.updtId}" />
+					<!-- 등록일 -->
+					<div style="display: inline-flex;">
+						<p class="control-label">
+							<c:out value="${result.registDt}" />
 						</p>
 					</div>
 				</div>
 			</div>
+
 		</div>
 
+		<!-- Button -->
 		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="button" class="btn btn-success" onclick="editEmp('${result.empId}')">수정</button>
+			<button type="button" class="btn btn-primary" onclick="editEmp('${result.empId}')">수정</button>
 			<button type="button" class="btn btn-danger" onclick="deleteEmp('${result.empId}')">삭제</button>
 			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 		</div>

@@ -125,24 +125,21 @@
 </script>
 </head>
 <style>
-label {
-	margin-top: 10px;
-}
-
-input {
-	margin-top: 10px;
-}
-
-select {
-	margin-top: 10px;
-}
-
 input.error {
 	border: 1px solid red;
 }
 
+label {
+	margin: 13px;
+}
+
 label.error {
 	color: red;
+}
+
+.bjWidth {
+	width:200px;
+	margin-top:5px;
 }
 </style>
 <body>
@@ -156,91 +153,91 @@ label.error {
 		<div class="container">
 			<h2 style="text-align:center;">
 					<b>직원 등록</b>
-				</h2>
-		</div>
+			</h2>
 
-		<div class="container">
-			<div class="row">
-				<div class=" form-inline form-group">
-					<label for="empId" class="col-sm-2 col-sm-offset-1 control-label">아이디*:</label>
-					<div class="col-md-3">
-						<input type="text" class="form-control" id="empId" name="empId"
-							required>
-					</div>
+			<!-- Contents -->
+			<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
 
-					<label for="empPassword"
-						class="col-sm-2 col-sm-offset-1 control-label">비밀번호*:</label>
-					<div class="col-md-3">
-						<input type="password" class="form-control" id="empPassword"
-							name="empPassword" required>
-					</div>
+				<!-- Start(35%) -->
+				<div style="width: 35%;"></div>
+
+				<!-- Center(10%) -->
+				<div style="width: 10%; text-align: center; display: grid">
+					<label class="control-label">아이디 : </label>
+					<label class="control-label">비밀번호:</label>
+					<label class="control-label">이름:</label>
+					<label class="control-label">전화번호:</label>
+					<label class="control-label">성별:</label>
+					<label class="control-label">직책:</label>
+					<label class="control-label">급여:</label>
+					<label class="control-label">경력:</label>
+					<label class="control-label">등록자:</label>
+					<label class="control-label">등록일:</label>
 				</div>
 
-				<div class="form-inline form-group">
-					<label for="empNm" class="col-sm-2 col-sm-offset-1 control-label">이름*:</label>
-					<div class="col-md-3">
-						<input type="text" class="form-control" id="empNm" name="empNm"
-							required>
+				<!-- End(60%) -->
+				<div style="width: 60%; text-align: left; display: grid">
+					<!-- 아이디 -->
+					<div style="display: inline-flex;">
+						<input type="text" class="bjWidth form-control" id="empId" name="empId" required>
 					</div>
 
-					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label" >전화번호*:</label>
-					<div class="col-md-2">
-					<input type="text" class="form-control" id="telno" name="telno"
-						placeholder="000-0000-0000" maxlength="13" required onkeyup="inputPhoneNumber(this)">
-				</div>
+					<!-- 비밀번호 -->
+					<div style="display: inline-flex;">
+						<input type="password" class="bjWidth form-control" id="empPassword" name="empPassword" required>
+					</div>
 
-				</div>
+					<!-- 이름 -->
+					<div style="display: inline-flex;">
+						<input type="text" class="bjWidth form-control" id="empNm" name="empNm" required>
+					</div>
 
-				<div class="form-inline form-group">
-					<label for="sexdstn" class="col-sm-2 col-sm-offset-1 control-label">성별*:</label>
-					<div class="col-md-3">
-						<select type="text" class="form-control" id="sexdstn"
+					<!-- 전화번호 -->
+					<div style="display: inline-flex;">
+						<input type="text" class="bjWidth form-control" id="telno" name="telno" placeholder="000-0000-0000" maxlength="13" onkeyup="inputPhoneNumber(this)" required>
+					</div>
+
+					<!-- 성별 -->
+					<div style="display: inline-flex;">
+						<select type="text" class="bjWidth form-control" id="sexdstn"
 							name="sexdstn">
 							<option value="Male" selected="selected">Male</option>
 							<option value="Female">Female</option>
 						</select>
 					</div>
 
-					<label for="pspofc" class="col-sm-2 col-sm-offset-1 control-label">직책:</label>
-					<div class="col-md-3">
-						<select type="text" class="form-control" id="pspofc" name="pspofc">
+					<!-- 직책 -->
+					<div style="display: inline-flex;">
+						<select type="text" class="bjWidth form-control" id="pspofc" name="pspofc">
 							<option value="Admin" selected="selected">Admin</option>
 							<option value="Designer">Designer</option>
 						</select>
 					</div>
-				</div>
 
-				<div class="form-inline form-group">
-					<label for="salary" class="col-sm-2 col-sm-offset-1 control-label">급여:</label>
-					<div class="col-md-3">
-						<input type="text" class="form-control" id="salary" name="salary"
-							value="" required>
+					<!-- 급여 -->
+					<div style="display: inline-flex;">
+						<input type="text" class="bjWidth form-control" id="salary" name="salary" required>
 					</div>
 
-					<label for="career" class="col-sm-2 col-sm-offset-1 control-label">경력:</label>
-					<div class="col-md-3">
-						<input type="text" class="form-control" id="career" name="career"
-							value="" required>
-					</div>
-				</div>
-
-				<div class="form-inline form-group">
-					<label for="registId"
-						class="col-sm-2 col-sm-offset-1 control-label">등록자*:</label>
-					<div class="col-md-3">
-						<input type="text" class="form-control" id="registId"
-							name="registId" value="${empId}" readonly>
+					<!-- 경력 -->
+					<div style="display: inline-flex;">
+						<input type="text" class="bjWidth form-control" id="career" name="career" required>
 					</div>
 
-					<label for="registDt" class="col-sm-2 col-sm-offset-1 control-label">등록일:</label>
-					<div class="col-md-3">
-						<input type="date" class="form-control" id="registDt"
-							name="registDt" value="<%=today%>" readonly>
+					<!-- 등록자 -->
+					<div style="display: inline-flex;">
+						<input type="text" class="bjWidth form-control" id="registId" name="registId" value="${empId}" readonly>
+					</div>
+
+					<!-- 등록일 -->
+					<div style="display: inline-flex;">
+						<input type="date" class="bjWidth form-control" id="registDt" name="registDt" value="<%=today%>" readonly>
 					</div>
 				</div>
 			</div>
 		</div>
 
+		<!-- Button -->
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="submit" class="btn btn-primary" onclick="">등록</button>
 			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
