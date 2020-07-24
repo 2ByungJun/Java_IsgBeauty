@@ -5,19 +5,30 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>IsgBeauty 프로젝트</title>
-<link rel="stylesheet"
-	href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
-<script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
-<script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+<%@ include file="/common/layouts/userLayout/commonInclude.jsp"%>
+
+<style>
+label {
+	margin-top: 10px;
+}
+
+input {
+	margin-top: 10px;
+}
+
+select {
+	margin-top: 10px;
+}
+
+input.error {
+	border: 1px solid red;
+}
+
+label.error {
+	color: red;
+}
+</style>
+
 <script type="text/javaScript" language="javascript" defer="defer">
 	function home() {
 		location.href = "<c:url value='/login.do'/>";
@@ -42,7 +53,9 @@
 			},
 			rules: {
 				empId: {
-					required : true
+					required : true,
+					minlength : 3,
+					idchk: true
 				},
 				empPassword: {
 					required : true,
@@ -60,6 +73,8 @@
 			messages: {
 				empId: {
 					required : "필수 입력 항목입니다.",
+					minlength : "아이디는 최소 3글자 이상입니다.",
+					idchk: "이미 존재하는 ID입니다."
 				},
 				empPassword: {
 					required : "필수 입력 항목입니다.",
@@ -73,7 +88,7 @@
 					minlength : "휴대폰 번호를 완전히 입력해주세요.",
 					regex : "휴대폰 번호 양식을 제대로 입력해주세요."
 				}
-			}, onkeyup : false, onfocusout : false
+			}
 		});
 	});
 
@@ -166,10 +181,8 @@
 
 					if(data.result=="true") {
 						 $("#idCheck").val("true");
-						 alert("사용 가능한 ID입니다.");
 					} else {
 						$("#idCheck").val("false");
-						alert("이미 존재하는 ID입니다.");
 					}
 
 				}
@@ -180,29 +193,17 @@
 			});
 	}
 
+	$.validator.addMethod("idchk", function(value, element) {
+		empIdCheck();
+		if($("#idCheck").val() == "true") {
+			return true;
+		} else {
+			return false;
+		}
+	})
+
 </script>
-</head>
-<style>
-label {
-	margin-top: 10px;
-}
 
-input {
-	margin-top: 10px;
-}
-
-select {
-	margin-top: 10px;
-}
-
-input.error {
-	border: 1px solid red;
-}
-
-label.error {
-	color: red;
-}
-</style>
 <body>
 	<%
 		Date now = new Date();
@@ -295,7 +296,6 @@ label.error {
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="submit" class="btn btn-success" onclick="" >등록</button>
 			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
-			<button type="button" class=" btn btn-info" onclick="empIdCheck()">ID 중복 확인</button>
 		</div>
 	</form:form>
 	<jsp:include page="/common/layouts/userLayout/footer.jsp"></jsp:include>
