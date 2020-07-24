@@ -36,14 +36,9 @@ public class LoginController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/login.do")
-	public String login(@ModelAttribute("searchVO") SampleDefaultVO searchVO, HttpServletRequest request, HttpServletResponse response){
+	public String login(){
 		System.out.println("[로그인]");
 
-		HttpSession session = request.getSession();
-
-		if(session.getAttribute("empId") != null) {
-			return "/useLayout/mber/mberList";
-		}
 
 		return "login/login";
 	}

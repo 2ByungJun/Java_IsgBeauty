@@ -15,6 +15,15 @@
 </head>
 <script type="text/javaScript" language="javascript" defer="defer">
 
+<% if(session.getAttribute("empId")!=null) { %>
+			alert("이미 로그인 중입니다..");
+			location.href="<c:url value='/mberList.do'/>";
+<% } %>
+
+
+	window.history.forward();
+	function noBack(){window.history.forward();}
+
 	function login() {
 		var url  =  "<c:url value='/loginCheck.json'/>";
 		var jsonData = {"empId": $("#email").val(), "empPassword": $("#pwd").val()};
@@ -49,20 +58,17 @@
 		location.href = "<c:url value='/loginEmpRegister.do'/>";
 	}
 </script>
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" >
 	<div class="container">
-		<div class="jumbotron text-center alert-info" style="margin-top: 30px"
-			role="alert">
-			<h2>
-				<b>ISG Beauty</b>
-			</h2>
-			<p>
-				<b>로그인/직원 등록</b>
-			</p>
+		<header class="page-header">
+	<div class="container">
+		<div style="text-align: center;" alt="IsgBeauty 로고">
+			<img src="<c:url value='images/logo.jpg' />">
 		</div>
 	</div>
-
-		<form class="form-horizontal" style="align: center" >
+</header>
+	</div>
+	<form class="form-horizontal" style="display: grid" >
 		<div class="form-group">
 			<label class="control-label col-sm-4" for="email">ID:</label>
 			<div class="col-sm-4">
@@ -78,15 +84,11 @@
 			</div>
 		</div>
 	</form>
-
+	<div class="container" style="text-align: center;">
+		<button type="button" class="btn btn-info" onclick="login()">로그인</button>
+		<button type="button" class=" btn btn-success" onclick="empRegister()">회원가입</button>
+	</div>
+	<jsp:include page="/common/layouts/userLayout/footer.jsp"></jsp:include>
 </body>
-
-
-<div class="container" style="text-align: center;">
-	<button type="button" class="btn btn-info" onclick="login()">로그인</button>
-	<button type="button" class=" btn btn-success" onclick="empRegister()">회원가입</button>
-</div>
-
-
 </body>
 </html>
