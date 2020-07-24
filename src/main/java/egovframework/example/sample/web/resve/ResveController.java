@@ -159,4 +159,12 @@ public class ResveController {
 
 		return "redirect:/resveView.do";
 	}
+
+	@RequestMapping(value = "/resveChart.do")
+	public String chartResve() throws Exception {
+		System.out.println("[예약 차트 기능]");
+
+
+		return "/useLayout/resve/resveChart";
+	}
 }
