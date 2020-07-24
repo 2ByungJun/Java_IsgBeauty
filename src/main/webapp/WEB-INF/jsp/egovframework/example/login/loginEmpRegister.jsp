@@ -53,7 +53,8 @@
 				},
 				telno: {
 					required : true,
-					digits : true
+					minlength : 12,
+					regex : "^(010)[-\\s]?\\d{3,4}[-\\s]?\\d{4}$"
 				}
 			},
 			messages: {
@@ -69,11 +70,46 @@
 				},
 				telno : {
 					required : "필수 입력 항목입니다.",
-					digits : "숫자만 입력할 수 있습니다."
+					minlength : "휴대폰 번호를 완전히 입력해주세요.",
+					regex : "휴대폰 번호 양식을 제대로 입력해주세요."
 				}
-			}
+			}, onkeyup : false, onfocusout : false
 		});
 	});
+
+	$.validator.addMethod("regex", function(value, element, regexp) {
+		let re = new RegExp(regexp);
+		let res = re.test(value);
+		console.log(res, value, regexp, re)
+		return res;
+	})
+
+	function inputPhoneNumber(obj) {
+
+	    var number = obj.value.replace(/[^0-9]/g, "");
+	    var phone = "";
+
+	    if(number.length < 4) {
+	        return number;
+	    } else if(number.length < 7) {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3);
+	    } else if(number.length < 11) {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3, 3);
+	        phone += "-";
+	        phone += number.substr(6);
+	    } else {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3, 4);
+	        phone += "-";
+	        phone += number.substr(7);
+	    }
+	    obj.value = phone;
+	}
 
 	function snKeyCehck() {
 		 var url  =  "<c:url value='/addAdminCheck.json'/>";
@@ -107,20 +143,64 @@
 		});
 	}
 
+	function empIdCheck() {
+		 if($("#empId").val() == '') {
+			 alert("ID를 입력해주세요.");
+			 return ;
+		 }
+
+		 var url  =  "<c:url value='/IdChecking.json'/>";
+		 var jsonData = {"empId": $("#empId").val()};
+
+		 $.ajax({
+				headers: {
+					Accept: "application/json;utf-8"
+				}
+				,contentType: "application/json;utf-8"
+				,dataType: "json"
+				,type: "POST"
+				,url: url
+				,data: JSON.stringify(jsonData)
+				,success:function(data){
+					console.log(data);
+
+					if(data.result=="true") {
+						 $("#idCheck").val("true");
+						 alert("사용 가능한 ID입니다.");
+					} else {
+						$("#idCheck").val("false");
+						alert("이미 존재하는 ID입니다.");
+					}
+
+				}
+				,error:function(e){
+				   	console.log(e.status, e.statusText);
+				   	alert("서버 오류 입니다. 관리자에게 문의하세요.");
+				}
+			});
+	}
 
 </script>
 </head>
 <style>
 label {
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 input {
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 select {
-	margin-top: 30px;
+	margin-top: 10px;
+}
+
+input.error {
+	border: 1px solid red;
+}
+
+label.error {
+	color: red;
 }
 </style>
 <body>
@@ -132,15 +212,13 @@ select {
 	<form:form commandName="empVO" id="detailForm" name="detailForm"
 		method="post">
 		<div class="container">
-			<div class="jumbotron text-center alert-success" style="margin-top:30px" role="alert"
-				onclick="home()">
-				<h2>
-					<b>ISG Beauty</b>
-				</h2>
-				<p>
-					<b>관리자 회원가입 화면입니다.</b>
-				</p>
+			<header class="page-header">
+			<div class="container">
+			<div style="text-align: center;" alt="IsgBeauty 로고">
+				<img src="<c:url value='images/logo.jpg' />">
 			</div>
+		</div>
+		</header>
 		</div>
 
 		<div class="container">
@@ -167,7 +245,8 @@ select {
 
 					<label for="telno" class="col-sm-2 col-sm-offset-1 control-label">전화번호*:</label>
 					<div class="col-md-3">
-						<input type="text" class="form-control" id="telno" name="telno">
+						<input type="text" class="form-control" id="telno" name="telno"
+						 placeholder="000-0000-0000" maxlength="13" required onkeyup="inputPhoneNumber(this)">
 					</div>
 				</div>
 
@@ -206,17 +285,19 @@ select {
 				<button type="button" class=" btn btn-info" onclick="snKeyCehck()">시리얼 확인</button>
 
 
+
 			</div>
 		</div>
-				<input type="hidden" class="form-control" id="registId"
-							name="registId" value="test" readonly >
-				<input type="hidden" id="snCheck" name="snCheck" value="false" readonly >
-
+			<input type="hidden" class="form-control" id="registId"
+						name="registId" value="IsgBeauty" readonly >
+			<input type="hidden" id="snCheck" name="snCheck" value="false" readonly>
+			<input type="hidden" id="idCheck" name="idCheck" value="false" readonly>
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="submit" class="btn btn-success" onclick="" >등록</button>
 			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
+			<button type="button" class=" btn btn-info" onclick="empIdCheck()">ID 중복 확인</button>
 		</div>
-
 	</form:form>
+	<jsp:include page="/common/layouts/userLayout/footer.jsp"></jsp:include>
 </body>
 </html>

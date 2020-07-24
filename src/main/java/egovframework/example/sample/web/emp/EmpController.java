@@ -216,6 +216,27 @@ public class EmpController {
 		return map;
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/IdChecking.json")
+     public Map<String, Object> IdChecking(@RequestBody EmpVO searchVO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		System.out.println("[아이디 중복 확인]");
+
+		EmpVO empLoginVO = empService.selectEmp(searchVO);
+		System.out.println("입력된ID_____________:"+searchVO.getEmpId());
+
+		Map<String, Object> map = new HashMap<>();
+
+		if(empLoginVO != null) {
+			map.put("result", "false");
+		} else {
+			map.put("result", "true");
+		}
+
+		return map;
+	}
+
 	/**
 	 * 직원 조회
 	 *
