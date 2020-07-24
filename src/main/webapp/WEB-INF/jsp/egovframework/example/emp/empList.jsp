@@ -104,7 +104,9 @@
 						<div class="col-xs-6">
 							<div id="search">
 								<div class="input-group">
-									<form:input path="searchKeyword" type="text" id="serachKeyword" placeholder="이름 검색" cssClass="txt form-control" style="width:70%"/>
+									<input path="searchKeyword" type="text" id="serachKeyword" placeholder="이름 검색" cssClass="txt form-control" style="width:70%"
+									onkeydown = "if(event.keyCode==13) fnSelectList(1)"/>
+									<input hidden="hidden" />
 									<button class="btn btn-default" type="button" style="font-size: 20px;" onclick="fnSelectList(1)">
 										<i class="glyphicon glyphicon-search"></i>
 									</button>
