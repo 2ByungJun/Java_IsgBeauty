@@ -68,6 +68,10 @@ label.error {
 					required : true,
 					minlength : 12,
 					regex : "^(010)[-\\s]?\\d{3,4}[-\\s]?\\d{4}$"
+				},
+				snKey: {
+					required : true,
+					snchk: true
 				}
 			},
 			messages: {
@@ -87,6 +91,10 @@ label.error {
 					required : "필수 입력 항목입니다.",
 					minlength : "휴대폰 번호를 완전히 입력해주세요.",
 					regex : "휴대폰 번호 양식을 제대로 입력해주세요."
+				},
+				snKey: {
+					required : "필수 입력 항목입니다.",
+					snchk: "시리얼 키가 일치하지 않습니다."
 				}
 			}
 		});
@@ -144,10 +152,8 @@ label.error {
 
 				if(data.result=="true") {
 					 $("#snCheck").val("true");
-					 alert("사용 가능한 시리얼 키 입니다.");
 				} else {
 					$("#snCheck").val("false");
-					alert("올바르지 않은 시리얼 키입니다.");
 				}
 
 			}
@@ -196,6 +202,15 @@ label.error {
 	$.validator.addMethod("idchk", function(value, element) {
 		empIdCheck();
 		if($("#idCheck").val() == "true") {
+			return true;
+		} else {
+			return false;
+		}
+	})
+
+	$.validator.addMethod("snchk", function(value, element) {
+		snKeyCehck();
+		if($("#snCheck").val() == "true") {
 			return true;
 		} else {
 			return false;
@@ -283,7 +298,6 @@ label.error {
 							name="registDt" value="<%=today%>" readonly >
 					</div>
 				</div>
-				<button type="button" class=" btn btn-info" onclick="snKeyCehck()">시리얼 확인</button>
 
 
 
