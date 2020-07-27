@@ -61,7 +61,8 @@ p {
 
 				<!-- Center(10%) -->
 				<div style="width: 10%; text-align: center; display: grid">
-					<label class="control-label">아이디 : </label>
+					<label class="control-label">이미지:</label>
+					<label class="control-label">아이디:</label>
 					<label class="control-label">이름:</label>
 					<label class="control-label">전화번호:</label>
 					<label class="control-label">성별:</label>
@@ -74,6 +75,13 @@ p {
 
 				<!-- End(50%) -->
 				<div style="width: 50%; text-align: left; display: grid">
+					<!-- 이미지 -->
+					<div style="display: inline-flex;">
+						<p class="control-label">
+							<c:out value="${result.img}" />
+						</p>
+					</div>
+
 					<!-- 아이디 -->
 					<div style="display: inline-flex;">
 						<p class="control-label">

@@ -10,14 +10,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>IsgBeauty 프로젝트</title>
+
+<!-- Bootstrap -->
 <link rel="stylesheet"
 	href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
 <script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
+
+<!-- Validation -->
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+<!-- <!-- start : file input --> -->
+<!-- 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous"> -->
+<!-- 	<link href="/_lib/fileinput/themes/explorer/theme.css" media="all" rel="stylesheet" type="text/css"/> -->
+<!-- 	<script src="/_lib/fileinput/js/plugins/piexif.js" type="text/javascript"></script> -->
+<!-- 	<script src="/_lib/fileinput/js/plugins/sortable.js" type="text/javascript"></script> -->
+<!-- 	<script src="/_lib/fileinput/js/fileinput.js" type="text/javascript"></script> -->
+<!-- 	<script src="/_lib/fileinput/themes/explorer/theme.js" type="text/javascript"></script> -->
+
+<!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
 	function home() {
 		location.href = "<c:url value='/empList.do'/>";
@@ -139,7 +153,7 @@ label.error {
 
 .bjWidth {
 	width:200px;
-	margin-top:5px;
+	margin-top:10px;
 }
 </style>
 <body>
@@ -163,6 +177,7 @@ label.error {
 
 				<!-- Center(10%) -->
 				<div style="width: 10%; text-align: center; display: grid">
+					<label class="control-label">이미지 : </label>
 					<label class="control-label">아이디 : </label>
 					<label class="control-label">비밀번호:</label>
 					<label class="control-label">이름:</label>
@@ -177,6 +192,10 @@ label.error {
 
 				<!-- End(60%) -->
 				<div style="width: 60%; text-align: left; display: grid">
+					<!-- 이미지 -->
+						<div style="display: inline-flex;">
+							<input id="img" name="img" type="file" class="bjWidth file" data-show-preview="false">
+						</div>
 					<!-- 아이디 -->
 					<div style="display: inline-flex;">
 						<input type="text" class="bjWidth form-control" id="empId" name="empId" required>

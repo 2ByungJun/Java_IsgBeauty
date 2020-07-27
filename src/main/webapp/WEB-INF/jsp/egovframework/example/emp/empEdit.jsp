@@ -156,8 +156,9 @@ label.error {
 
 .bjInput {
 	width: 200px;
-	margin-top: 24px;
+	margin-top: 30px;
 }
+
 </style>
 </head>
 <body>
@@ -183,6 +184,7 @@ label.error {
 
 				<!-- Center(10%) -->
 				<div style="width: 10%; text-align: center; display: grid;">
+					<label class="bjLabel control-label">이미지 : </label>
 					<label class="bjLabel control-label">아이디 : </label>
 					<label class="bjLabel control-label">패스워드 : </label>
 					<label class="bjLabel control-label">이름:</label>
@@ -195,6 +197,10 @@ label.error {
 
 				<!-- End(60%) -->
 				<div style="width: 60%; text-align: left; display: grid">
+					<!-- 이미지-->
+					<div style="display: inline-flex;">
+						<input id="img" name="img" type="file" class="bjInput file" value="<c:out value="${result.img}"/>" data-show-preview="false">
+					</div>
 					<!-- 아이디 -->
 					<div style="display: inline-flex;">
 						<input type="text" class="bjInput form-control" id="empId" name="empId" value="<c:out value="${result.empId}"/>" readonly required>
@@ -258,7 +264,7 @@ label.error {
 
 		<!-- Button -->
 		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="submit" class="btn btn-info" onclick="">수정</button>
+			<button type="submit" class="btn btn-primary" onclick="">수정</button>
 			<button type="button" class="btn btn-danger"
 				onclick="deleteMber('${result.empId}')">삭제</button>
 			<button type="button" class=" btn btn-info"

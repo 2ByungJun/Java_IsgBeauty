@@ -17,10 +17,10 @@
 		<result property="registDt" column="regist_dt" />
 		<result property="updtId" column="updt_id" />
 		<result property="updtDt" column="updt_dt" />
+		<result property="img" column="img" />
 	</resultMap>
 
 	<select id="selectEmp" parameterType="empVO" resultMap="emp">
-
 		SELECT EMP_ID,
 		EMP_PASSWORD,
 		EMP_NM,
@@ -32,7 +32,8 @@
 		REGIST_ID,
 		REGIST_DT,
 		UPDT_ID,
-		UPDT_DT
+		UPDT_DT,
+		IMG
 		FROM t_emp_m
 		WHERE EMP_ID =#{empId}
 	</select>
@@ -52,7 +53,8 @@
 		a.REGIST_ID,
 		a.REGIST_DT,
 		a.UPDT_ID,
-		a.UPDT_DT
+		a.UPDT_DT,
+		a.IMG
 		from t_emp_m a
 		<if test="searchKeyword != null and searchKeyword != ''">
 			WHERE EMP_NM LIKE CONCAT('%', #{searchKeyword},'%')
@@ -90,7 +92,8 @@
 		#{registId},
 		CURDATE(),
 		#{registId},
-		CURDATE()
+		CURDATE(),
+		#{img} DEFAULT 'logo.jpg'
 		)
 	</insert>
 
@@ -110,7 +113,8 @@
 		SALARY=#{salary},
 		CAREER=#{career},
 		UPDT_ID=#{updtId},
-		UPDT_DT=CURDATE()
+		UPDT_DT=CURDATE(),
+		IMG=#{img}
 		where EMP_ID=#{empId}
 	</update>
 
