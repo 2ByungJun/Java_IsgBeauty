@@ -1,9 +1,13 @@
 package egovframework.example.sample.web.resve;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +24,7 @@ import egovframework.example.sample.service.mber.MberService;
 import egovframework.example.sample.service.mber.MberVO;
 import egovframework.example.sample.service.resve.ResveService;
 import egovframework.example.sample.service.resve.ResveVO;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 @Controller
 public class ResveController {
@@ -161,12 +166,26 @@ public class ResveController {
 	}
 
 	@RequestMapping(value = "/resveChart.do")
-	public String chartResve() throws Exception {
+	public String chartResve(@ModelAttribute("searchVO") ResveVO searchVO, Model model) throws Exception {
 		System.out.println("[예약 차트 기능]");
 
-		String res;
-
+		ArrayList<String> years = resveService.selectYears();
+		model.addAttribute("years", years);
 
 		return "/useLayout/resve/resveChart";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/resveChart.json")
+	public Map<String, Object> chartResveJson(@RequestBody HashMap<String, Object> map,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("[예약 차트 Json]");
+
+		ResveVO resveVO = new ResveVO();
+		List<?> resveList = resveService.selectResveList(resveVO);
+
+
+
+		return map;
 	}
 }

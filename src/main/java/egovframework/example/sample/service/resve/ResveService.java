@@ -1,5 +1,6 @@
 package egovframework.example.sample.service.resve;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,10 @@ public class ResveService {
 	 */
 	public void updateResve(ResveVO vo) throws Exception {
 		mapper.updateResve(vo);
+	}
+
+	public ArrayList<String> selectYears() throws Exception {
+		return mapper.selectYears();
 	}
 
 }

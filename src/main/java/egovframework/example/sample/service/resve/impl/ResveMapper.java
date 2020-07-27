@@ -1,5 +1,6 @@
 package egovframework.example.sample.service.resve.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import egovframework.example.sample.service.SampleDefaultVO;
@@ -69,6 +70,8 @@ public interface ResveMapper {
 	 */
 	void updateResve(ResveVO vo) throws Exception;
 
+
+	ArrayList<String> selectYears() throws Exception;
 
 
 }

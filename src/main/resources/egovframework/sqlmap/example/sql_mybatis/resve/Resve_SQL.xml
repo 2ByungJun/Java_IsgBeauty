@@ -91,4 +91,18 @@
 		    where RESVE_SN=${resveSn}
 	</update>
 
+	<select id="selectYears" resultType="string">
+	    select DATE_FORMAT(RESVE_DT,'%Y')
+		from t_resve_m
+		group by DATE_FORMAT(RESVE_DT,'%y')
+	</select>
+
+	<!-- <select id="selectMonthCnt">
+	    select DATE_FORMAT(RESVE_DT,'%m'), count(*)
+		from t_resve_m
+		where 1=1
+		and DATE_FORMAT(RESVE_DT,'%Y') = 2020
+		group by DATE_FORMAT(RESVE_DT,'%y %m')
+	</select> -->
+
 </mapper>
