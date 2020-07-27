@@ -164,6 +164,8 @@ public class ResveController {
 	public String chartResve() throws Exception {
 		System.out.println("[예약 차트 기능]");
 
+		String res;
+
 
 		return "/useLayout/resve/resveChart";
 	}
