@@ -13,6 +13,23 @@
 <script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
 <script src="<c:url value='js/paging.js' />"></script>
+
+<!-- CSS -->
+<style>
+.box {
+    width: 50px;
+    height: 50px;
+    border-radius: 70%;
+    overflow: hidden;
+}
+.profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+</style>
+
+<!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
 
 	<%  String str = (String) session.getAttribute("empId"); %>
@@ -43,26 +60,34 @@
 				console.log(data);
 
 		    	var html = '';
+		    	var imgHref = '';
 				if(data.dataList.length==0){
 					html += '<tr>';
 					html += '	<td colspan="7" style="text-align:center">표시할 데이터가 없습니다.</td>';
 					html += '</tr>';
 				}else{
 					$.each(data.dataList, function(index, item) {
+						imgHref = "images/"+ item.img;
+						console.log(item.img);
 						html += '<tr>';
-						html += '<td align="center" class="listtd"><a href="javascript:view(\''+item.empId+'\')">' + item.empId +'</td>';
-						html += '<td align="center" class="listtd">' + item.empNm + '</td>';
-						html += '<td align="center" class="listtd" >' + sexd(item.sexdstn) + '</td>';
-						html += '<td align="center" class="listtd" >' + item.telno + '</td>';
-						html += '<td align="center" class="listtd" >' + pspofcd(item.pspofc) + '</td>';
-						html += '<td align="center" class="listtd" >' + item.career + '년' + '</td>';
-						html += '<td align="center" class="listtd" >' + item.registDt + '</td>';
-						html += '<td align="center" class="listtd" >' + item.updtDt + '</td>';
+						html += '<td align="center" class="listtd">' +
+									'<div class="box" style="background: #BDBDBD;">' +
+										'<img class="profile" src=images/' + item.img + ">" +
+									'</div>' +
+								'</td>';
+						html += '<td align="center" class="bjMiddle listtd"><a href="javascript:view(\''+item.empId+'\')">' + item.empId + '</td>';
+						html += '<td align="center" class="bjMiddle listtd">' + item.empNm + '</td>';
+						html += '<td align="center" class="bjMiddle listtd" >' + sexd(item.sexdstn) + '</td>';
+						html += '<td align="center" class="bjMiddle listtd" >' + item.telno + '</td>';
+						html += '<td align="center" class="bjMiddle listtd" >' + pspofcd(item.pspofc) + '</td>';
+						html += '<td align="center" class="bjMiddle listtd" >' + item.career + '년' + '</td>';
+						html += '<td align="center" class="bjMiddle listtd" >' + item.registDt + '</td>';
+						html += '<td align="center" class="bjMiddle listtd" >' + item.updtDt + '</td>';
 						html += '</tr>';
-
 					});
 				}
 				$('#tableList').html(html);
+				$('.bjMiddle').css("vertical-align","middle");
 
 				fn_createPaging(data.pages,"paging");
 			}
@@ -103,7 +128,6 @@
     }
 </script>
 </head>
-</style>
 <body>
 	<form:form commandName="searchVO" id="listForm" name="listForm"
 		method="post">
@@ -140,7 +164,8 @@
 						<table id="table" class="table table-hover">
 							<thead>
 								<tr>
-									<td style="width: 15%" align="center"><b>ID</b></td>
+									<td style="width: 5%" align="center"><b>사진</b></td>
+									<td style="width: 10%" align="center"><b>ID</b></td>
 									<td style="width: 10%" align="center"><b>이름</b></td>
 									<td style="width: 10%" align="center"><b>성별</b></td>
 									<td style="width: 15%" align="center"><b>전화번호</b></td>

@@ -38,7 +38,8 @@ public class EmpVO extends SampleDefaultVO {
 	private String registDt;
 	private String updtId;
 	private String updtDt;
-	
+	private String img;
+
 	public String getEmpId() {
 		return empId;
 	}
@@ -114,7 +115,13 @@ public class EmpVO extends SampleDefaultVO {
 	public void setCareer(String career) {
 		this.career = career;
 	}
-	
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+
 
 }
 
