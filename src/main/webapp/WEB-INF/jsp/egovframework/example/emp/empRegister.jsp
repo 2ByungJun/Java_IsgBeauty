@@ -23,13 +23,13 @@
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 
-<!-- <!-- start : file input --> -->
-<!-- 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous"> -->
-<!-- 	<link href="/_lib/fileinput/themes/explorer/theme.css" media="all" rel="stylesheet" type="text/css"/> -->
-<!-- 	<script src="/_lib/fileinput/js/plugins/piexif.js" type="text/javascript"></script> -->
-<!-- 	<script src="/_lib/fileinput/js/plugins/sortable.js" type="text/javascript"></script> -->
-<!-- 	<script src="/_lib/fileinput/js/fileinput.js" type="text/javascript"></script> -->
-<!-- 	<script src="/_lib/fileinput/themes/explorer/theme.js" type="text/javascript"></script> -->
+<!-- fileInput -->
+	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput-rtl.css'/>">
+	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput-rtl.min.css'/>">
+	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.css'/>">
+	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.min.css'/>">
+	<script src="<c:url value='fileinput/js/fileinput.js' />"></script>
+	<script src="<c:url value='fileinput/js/fileinput.min.js' />"></script>
 
 <!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
@@ -236,7 +236,6 @@ label.error {
 
 				<!-- Center(10%) -->
 				<div style="width: 10%; text-align: center; display: grid">
-					<label class="control-label">이미지 : </label>
 					<label class="control-label">아이디 : </label>
 					<label class="control-label">비밀번호:</label>
 					<label class="control-label">이름:</label>
@@ -251,10 +250,6 @@ label.error {
 
 				<!-- End(60%) -->
 				<div style="width: 60%; text-align: left; display: grid">
-					<!-- 이미지 -->
-						<div style="display: inline-flex;">
-							<input id="img" name="img" type="file" class="bjWidth file" data-show-preview="false">
-						</div>
 					<!-- 아이디 -->
 					<div style="display: inline-flex;">
 						<input type="text" class="bjWidth form-control" id="empId" name="empId" required>
@@ -313,6 +308,12 @@ label.error {
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<!-- 이미지 -->
+		<div class="container" style="width:30%; text-align:center; font-stretch:semi-condensed;">
+			<label class="control-label">프로필 사진</label>
+			<input id="img" name="img" type="file" class="bjWidth file" data-browse-on-zone-click="true">
 		</div>
 
 		<!-- Button -->

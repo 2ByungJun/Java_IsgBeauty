@@ -10,14 +10,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>IsgBeauty 프로젝트</title>
+
+<!-- bootstrap -->
 <link rel="stylesheet"
 	href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
 <script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
+
+<!-- fileInput -->
+	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput-rtl.css'/>">
+	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput-rtl.min.css'/>">
+	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.css'/>">
+	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.min.css'/>">
+	<script src="<c:url value='fileinput/js/fileinput.js' />"></script>
+	<script src="<c:url value='fileinput/js/fileinput.min.js' />"></script>
+
+<!-- Validation -->
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+<!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
 	function home() {
 		location.href = "<c:url value='/empList.do'/>";
@@ -159,6 +173,18 @@ label.error {
 	margin-top: 30px;
 }
 
+/***** img  *****/
+.box {
+    width: 200px;
+    height: 200px;
+    border-radius: 70%;
+    overflow: hidden;
+}
+.profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 </style>
 </head>
 <body>
@@ -184,7 +210,6 @@ label.error {
 
 				<!-- Center(10%) -->
 				<div style="width: 10%; text-align: center; display: grid;">
-					<label class="bjLabel control-label">이미지 : </label>
 					<label class="bjLabel control-label">아이디 : </label>
 					<label class="bjLabel control-label">패스워드 : </label>
 					<label class="bjLabel control-label">이름:</label>
@@ -197,10 +222,6 @@ label.error {
 
 				<!-- End(60%) -->
 				<div style="width: 60%; text-align: left; display: grid">
-					<!-- 이미지-->
-					<div style="display: inline-flex;">
-						<input id="img" name="img" type="file" class="bjInput file" value="<c:out value="${result.img}"/>" data-show-preview="false">
-					</div>
 					<!-- 아이디 -->
 					<div style="display: inline-flex;">
 						<input type="text" class="bjInput form-control" id="empId" name="empId" value="<c:out value="${result.empId}"/>" readonly required>
@@ -254,6 +275,32 @@ label.error {
 
 				</div>
 			</div>
+		</div>
+
+		<!-- 이미지 -->
+		<div class="container" style="width:100%; display:grid; justify-items:center; font-stretch:semi-condensed;">
+			<div style="width: 20%; text-align: center; display: inline-flex;">
+			</div>
+
+			<!-- 기존 이미지 -->
+			<div style="width: 60%; justify-content:center; align-items:center; display: inline-flex;">
+				<div style="width: 30%; display: grid; justify-content:center;">
+					<label class="control-label" style="text-align:center; margin-top:10px">기존 프로필 사진</label>
+					<div class="box" style="background: #BDBDBD;">
+						<img class="profile" src=images/<c:out value="${result.img}"/>>
+					</div>
+				</div>
+
+			<!-- 변경할 이미지 업로드 -->
+			<div style="width: 30%; display: grid; justify-content:center;">
+					<label class="control-label" style="text-align:center; margin-top:10px">변경될 프로필 사진</label>
+					<input id="img" name="img" type="file" class="bjWidth file" data-browse-on-zone-click="true">
+				</div>
+			</div>
+
+			<div style="width: 20%; text-align: center; display: inline-flex;">
+			</div>
+
 		</div>
 
 		<!-- hidden -->

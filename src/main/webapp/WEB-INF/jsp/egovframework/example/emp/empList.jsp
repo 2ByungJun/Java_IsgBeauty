@@ -72,7 +72,7 @@
 						html += '<tr>';
 						html += '<td align="center" class="listtd">' +
 									'<div class="box" style="background: #BDBDBD;">' +
-										'<img class="profile" src=images/' + item.img + ">" +
+										'<img class="profile" src=images/' + item.img + '>' +
 									'</div>' +
 								'</td>';
 						html += '<td align="center" class="bjMiddle listtd"><a href="javascript:view(\''+item.empId+'\')">' + item.empId + '</td>';
