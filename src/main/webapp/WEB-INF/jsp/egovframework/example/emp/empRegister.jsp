@@ -23,13 +23,13 @@
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 
-<!-- <!-- start : file input --> -->
-<!-- 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous"> -->
-<!-- 	<link href="/_lib/fileinput/themes/explorer/theme.css" media="all" rel="stylesheet" type="text/css"/> -->
-<!-- 	<script src="/_lib/fileinput/js/plugins/piexif.js" type="text/javascript"></script> -->
-<!-- 	<script src="/_lib/fileinput/js/plugins/sortable.js" type="text/javascript"></script> -->
-<!-- 	<script src="/_lib/fileinput/js/fileinput.js" type="text/javascript"></script> -->
-<!-- 	<script src="/_lib/fileinput/themes/explorer/theme.js" type="text/javascript"></script> -->
+<!-- fileInput -->
+	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput-rtl.css'/>">
+	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput-rtl.min.css'/>">
+	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.css'/>">
+	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.min.css'/>">
+	<script src="<c:url value='fileinput/js/fileinput.js' />"></script>
+	<script src="<c:url value='fileinput/js/fileinput.min.js' />"></script>
 
 <!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
@@ -53,7 +53,9 @@
 			},
 			rules: {
 				empId: {
-					required : true
+					required : true,
+					minlength : 3,
+					idchk : true
 				},
 				empPassword: {
 					required : true,
@@ -78,6 +80,8 @@
 			messages: {
 				empId: {
 					required : "필수 입력 항목입니다.",
+					minlength : "아이디는 최소 3글자 이상입니다.",
+					idchk : "이미 존재하는 ID입니다."
 				},
 				empPassword: {
 					required : "필수 입력 항목입니다.",
@@ -98,7 +102,7 @@
 				career : {
 					required : "필수 입력 항목입니다."
 				}
-			}, onkeyup : false, onfocusout : false
+			}
 		});
 	});
 
@@ -135,6 +139,61 @@
 	    }
 	    obj.value = phone;
 	}
+
+	function empIdCheck() {
+		if ($("#empId").val() == '') {
+			alert("ID를 입력해주세요.");
+			return;
+		}
+
+		var url = "<c:url value='/IdChecking.json'/>";
+		var jsonData = {
+			"empId" : $("#empId").val()
+		};
+
+		$.ajax({
+			headers : {
+				Accept : "application/json;utf-8"
+			},
+			contentType : "application/json;utf-8",
+			dataType : "json",
+			type : "POST",
+			url : url,
+			data : JSON.stringify(jsonData),
+			success : function(data) {
+				console.log(data);
+
+				if (data.result == "true") {
+					$("#idCheck").val("true");
+				} else {
+					$("#idCheck").val("false");
+				}
+
+			},
+			error : function(e) {
+				console.log(e.status, e.statusText);
+				alert("서버 오류 입니다. 관리자에게 문의하세요.");
+			}
+		});
+	}
+
+	$.validator.addMethod("idchk", function(value, element) {
+		empIdCheck();
+		if ($("#idCheck").val() == "true") {
+			return true;
+		} else {
+			return false;
+		}
+	})
+
+	function numkeyCheck(e) {
+		var keyValue = event.keyCode;
+		if( ((keyValue < 48) || (keyValue > 57)) )
+			return false;
+		else {
+			return true;
+			}
+		}
 
 </script>
 </head>
@@ -177,7 +236,6 @@ label.error {
 
 				<!-- Center(10%) -->
 				<div style="width: 10%; text-align: center; display: grid">
-					<label class="control-label">이미지 : </label>
 					<label class="control-label">아이디 : </label>
 					<label class="control-label">비밀번호:</label>
 					<label class="control-label">이름:</label>
@@ -192,10 +250,6 @@ label.error {
 
 				<!-- End(60%) -->
 				<div style="width: 60%; text-align: left; display: grid">
-					<!-- 이미지 -->
-						<div style="display: inline-flex;">
-							<input id="img" name="img" type="file" class="bjWidth file" data-show-preview="false">
-						</div>
 					<!-- 아이디 -->
 					<div style="display: inline-flex;">
 						<input type="text" class="bjWidth form-control" id="empId" name="empId" required>
@@ -235,7 +289,7 @@ label.error {
 
 					<!-- 급여 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="salary" name="salary" required>
+						<input type="text" class="bjWidth form-control" id="salary" name="salary" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" required>
 					</div>
 
 					<!-- 경력 -->
@@ -256,11 +310,19 @@ label.error {
 			</div>
 		</div>
 
+		<!-- 이미지 -->
+		<div class="container" style="width:30%; text-align:center; font-stretch:semi-condensed;">
+			<label class="control-label">프로필 사진</label>
+			<input id="img" name="img" type="file" class="bjWidth file" data-browse-on-zone-click="true">
+		</div>
+
 		<!-- Button -->
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="submit" class="btn btn-primary" onclick="">등록</button>
 			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
 		</div>
+		<!-- ID Check input -->
+		<input type="hidden" id="idCheck" name="idCheck" value="false" readonly>
 
 	</form:form>
 </body>

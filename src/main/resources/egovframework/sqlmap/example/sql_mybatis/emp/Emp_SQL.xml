@@ -93,7 +93,7 @@
 		CURDATE(),
 		#{registId},
 		CURDATE(),
-		#{img} DEFAULT 'logo.jpg'
+		#{img}
 		)
 	</insert>
 

@@ -43,6 +43,19 @@ label {
 p {
 	margin-top: 20px;
 }
+
+/***** img  *****/
+.box {
+    width: 200px;
+    height: 200px;
+    border-radius: 70%;
+    overflow: hidden;
+}
+.profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 </style>
 </head>
 <body>
@@ -57,11 +70,14 @@ p {
 			<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
 
 				<!-- Start(40%) -->
-				<div style="width: 40%;"></div>
+				<div style="width: 40%; display: grid; justify-content:right;">
+					<div class="box" style="background: #BDBDBD;">
+						<img class="profile" src=images/<c:out value="${result.img}"/>>
+					</div>
+				</div>
 
 				<!-- Center(10%) -->
 				<div style="width: 10%; text-align: center; display: grid">
-					<label class="control-label">이미지:</label>
 					<label class="control-label">아이디:</label>
 					<label class="control-label">이름:</label>
 					<label class="control-label">전화번호:</label>
@@ -75,13 +91,6 @@ p {
 
 				<!-- End(50%) -->
 				<div style="width: 50%; text-align: left; display: grid">
-					<!-- 이미지 -->
-					<div style="display: inline-flex;">
-						<p class="control-label">
-							<c:out value="${result.img}" />
-						</p>
-					</div>
-
 					<!-- 아이디 -->
 					<div style="display: inline-flex;">
 						<p class="control-label">
