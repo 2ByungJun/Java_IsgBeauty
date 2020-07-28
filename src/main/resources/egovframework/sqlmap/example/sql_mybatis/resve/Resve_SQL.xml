@@ -13,6 +13,13 @@
 		<result property="registId" column="regist_id"/>
 		<result property="registDt" column="regist_dt"/>
 	</resultMap>
+	<resultMap id="chart" type="chartVO">
+		<result property="year" column="year"/>
+		<result property="month" column="month"/>
+		<result property="cnt" column="cnt"/>
+		<result property="sexdstn" column="sexdstn"/>
+		<result property="tretmentNm" column="tretment_nm"/>
+	</resultMap>
 
 
 
@@ -95,14 +102,25 @@
 	    select DATE_FORMAT(RESVE_DT,'%Y')
 		from t_resve_m
 		group by DATE_FORMAT(RESVE_DT,'%y')
+		order by DATE_FORMAT(RESVE_DT,'%y') desc
 	</select>
 
-	<!-- <select id="selectMonthCnt">
-	    select DATE_FORMAT(RESVE_DT,'%m'), count(*)
-		from t_resve_m
-		where 1=1
-		and DATE_FORMAT(RESVE_DT,'%Y') = 2020
-		group by DATE_FORMAT(RESVE_DT,'%y %m')
-	</select> -->
+	<select id="selectBarData" parameterType="chartVO" resultMap="chart">
+		select DATE_FORMAT(RESVE_DT,"%c") as month, count(*) cnt
+		from t_resve_m a
+		inner join t_mber_m b
+		on a.MBER_SN = b.MBER_SN
+		and DATE_FORMAT(RESVE_DT, "%Y") = ${year}
+		and b.sexdstn = #{sexdstn}
+		group by month
+	</select>
 
+	<select id="selectPieData" parameterType="chartVO" resultMap="chart">
+		select a.TRETMENT_NM, count(*) cnt
+		from t_resve_m a
+		inner join t_mber_m b
+		on a.MBER_SN = b.MBER_SN
+		and DATE_FORMAT(RESVE_DT, "%Y") = ${year}
+		group by a.TRETMENT_NM
+	</select>
 </mapper>

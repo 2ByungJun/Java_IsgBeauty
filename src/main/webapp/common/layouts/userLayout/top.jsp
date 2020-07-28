@@ -16,6 +16,9 @@
 	function resveView() {
 		location.href = "<c:url value='/resveView.do'/>";
 	}
+	function resveChart() {
+		location.href = "<c:url value='/resveChart.do'/>";
+	}
 	function logout() {
 		location.href = "<c:url value='/logout.do'/>";
 	}
@@ -34,6 +37,7 @@
 				<a href="javascript:mberList()"><b>고객관리 </b></a><span class="text-gray">|</span>
 				<a href="javascript:empList()"><b>직원관리 </b></a><span class="text-gray">|</span>
 				<a href="javascript:resveView()"><b>예약관리 </b></a><span class="text-gray">|</span>
+				<a href="javascript:resveChart()"><b>통계보기 </b></a><span class="text-gray">|</span>
 				<a href="javascript:logout()" onclick=""><b>로그아웃 </b></a>
 			</div>
 			<div style="text-align:right; width: 50%;">

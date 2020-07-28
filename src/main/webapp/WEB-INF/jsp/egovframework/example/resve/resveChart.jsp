@@ -10,31 +10,130 @@
 
 	<div class="container">
 
-		<select type="text" class="bjWidth form-control" id="year" name="year">
+		<select type="text" class="form-control" id="year" name="year" onchange="createBarChart()">
 			<c:forEach var="result" items="${years}" varStatus="status">
 				<option value="${years.get(status.index)}">${years.get(status.index)}</option>
 			</c:forEach>
 		</select>
 
-	<canvas id="myChart" style="width:80vw; height:50vh"></canvas>
-		<script type="text/javaScript" language="javascript" defer="defer">
+	<canvas id="myBarChart" style="width:80vw; height:50vh"></canvas>
+	<script type="text/javaScript" language="javascript" defer="defer">
+	var ctx = document.getElementById('myBarChart').getContext('2d');
+	var barChart = new Chart(ctx, {
+  	  	type: 'bar',
+	    data: {},
+	    options: {}
+	});
 
-			var ctx = document.getElementById('myChart').getContext('2d');
-			var chart = new Chart(ctx, {
-			    type: 'bar',
-			    data: {
-			        labels: ['1', '2', '3', '4', '5', '6', '7','8','9','10','11','12'],
-			        datasets: [{
-			            label: '2020년',
-			            backgroundColor: 'rgb(255, 99, 132)',
-			            borderColor: 'rgb(255, 99, 132)',
-			            data: [5, 10, 5, 2, 20, 30, 45],
-			         	fill: false,
-			         	lineTension: 0
-			        }]
-			    },
-			    options: {}
-			});
-		</script>
+	$(document).ready(function() {
+		createBarChart(barChart);
+	});
+
+
+	function createBarChart(){
+
+	  var url  =  "<c:url value='/resveChart.json'/>";
+	  var jsonData = {"year": $("#year").val()};
+
+	  $.ajax({
+			headers: {
+				Accept: "application/json;utf-8"
+			}
+			,contentType: "application/json;utf-8"
+			,dataType: "json"
+			,type: "POST"
+			,url: url
+			,data: JSON.stringify(jsonData)
+			,success:function(data){
+				console.log(data);
+
+				var maleData = {
+					    label: "남성",
+					    data: data.maledatas,
+					    lineTension: 0,
+					    fill: false,
+					    backgroundColor: 'rgb(111, 183, 214)'
+					  };
+
+				var femaleData = {
+					    label: "여성",
+					    data: data.femaledatas,
+					    lineTension: 0,
+					    fill: false,
+					    backgroundColor: 'rgb(255, 99, 132)'
+					  };
+				var sexdstnData = {
+						  labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL','AUG','SEP','OCT','NOV','DEC'],
+						  datasets: [maleData, femaleData]
+						};
+				barChart.data = sexdstnData;
+				barChart.update();
+			}
+			,error:function(e){
+			   	console.log(e.status, e.statusText);
+			   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
+			}
+		});
+	}
+	</script>
+
+	<canvas id="myPieChart" style="width:80vw; height:50vh"></canvas>
+	<script type="text/javaScript" language="javascript" defer="defer">
+	var config = {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [10,30,50],
+					backgroundColor: ['orange', 'rgb(111, 183, 214)','rgba(240, 99, 132, 0.6)'],
+					label: '시술별 기록'
+				}],
+				labels: [
+					'Cut',
+					'Perm',
+					'Special']
+			},
+			options: {
+				responsive: true
+			}
+		};
+
+
+
+	var pieCtx = document.getElementById('myPieChart').getContext('2d');
+	var pieChart = new Chart(pieCtx, config);
+
+
+
+
+
+	/* $(document).ready(function() {
+		createBarChart(pieChart);
+	}); */
+
+
+	function createPieChart(chart){
+
+	  var url  =  "<c:url value='/resveChart.json'/>";
+	  var jsonData = {"year": $("#year").val()};
+
+	  $.ajax({
+			headers: {
+				Accept: "application/json;utf-8"
+			}
+			,contentType: "application/json;utf-8"
+			,dataType: "json"
+			,type: "POST"
+			,url: url
+			,data: JSON.stringify(jsonData)
+			,success:function(data){
+				console.log(data);
+			}
+			,error:function(e){
+			   	console.log(e.status, e.statusText);
+			   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
+			}
+		});
+	}
+	</script>
 
 	</div>

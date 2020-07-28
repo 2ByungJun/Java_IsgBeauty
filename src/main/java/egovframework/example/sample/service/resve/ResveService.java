@@ -77,4 +77,11 @@ public class ResveService {
 		return mapper.selectYears();
 	}
 
+	public List<ChartVO> selectBarData(ChartVO vo) throws Exception {
+		return mapper.selectBarData(vo);
+	}
+
+	public List<ChartVO> selectPieData(ChartVO vo) throws Exception {
+		return mapper.selectPieData(vo);
+	}
 }

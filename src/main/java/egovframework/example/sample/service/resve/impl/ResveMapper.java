@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import egovframework.example.sample.service.SampleDefaultVO;
+import egovframework.example.sample.service.resve.ChartVO;
 import egovframework.example.sample.service.resve.ResveVO;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
@@ -73,5 +74,8 @@ public interface ResveMapper {
 
 	ArrayList<String> selectYears() throws Exception;
 
+	List<ChartVO> selectBarData(ChartVO vo) throws Exception;
+
+	List<ChartVO> selectPieData(ChartVO vo) throws Exception;
 
 }

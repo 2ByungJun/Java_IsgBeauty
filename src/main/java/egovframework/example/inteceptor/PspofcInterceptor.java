@@ -38,7 +38,7 @@ public class PspofcInterceptor extends HandlerInterceptorAdapter {
 
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('관리자 권한이 필요합니다.'); location.href='mberList.do';</script>");
+			out.println("<script>alert('관리자 권한이 필요합니다.'); history.back();</script>");
 			out.flush();
 
 			return false;

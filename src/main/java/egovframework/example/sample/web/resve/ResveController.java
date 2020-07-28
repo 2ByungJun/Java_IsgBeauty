@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.example.sample.service.SampleDefaultVO;
-import egovframework.example.sample.service.emp.EmpVO;
 import egovframework.example.sample.service.mber.MberService;
 import egovframework.example.sample.service.mber.MberVO;
+import egovframework.example.sample.service.resve.ChartVO;
 import egovframework.example.sample.service.resve.ResveService;
 import egovframework.example.sample.service.resve.ResveVO;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
@@ -181,10 +181,41 @@ public class ResveController {
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("[예약 차트 Json]");
 
-		ResveVO resveVO = new ResveVO();
-		List<?> resveList = resveService.selectResveList(resveVO);
+		/*
+		 *  Bar 차트 부분
+		 */
+		ChartVO maleChartVO = new ChartVO();
+		ChartVO femaleChartVO = new ChartVO();
+		maleChartVO.setYear(map.get("year").toString());
+		maleChartVO.setSexdstn("Male");
+		femaleChartVO.setYear(map.get("year").toString());
+		femaleChartVO.setSexdstn("Female");
+
+		int[] maledatas = {0,0,0,0,0,0,0,0,0,0,0,0};
+		int[] femaledatas = {0,0,0,0,0,0,0,0,0,0,0,0};
+		List<ChartVO> maleChartList = resveService.selectBarData(maleChartVO);
+		List<ChartVO> femaleChartList = resveService.selectBarData(femaleChartVO);
 
 
+		for(ChartVO c : maleChartList) {
+			maledatas[Integer.parseInt(c.getMonth())-1] = c.getCnt();
+		}
+		for(ChartVO c : femaleChartList) {
+			femaledatas[Integer.parseInt(c.getMonth())-1] = c.getCnt();
+		}
+
+
+		map.put("maledatas", maledatas);
+		map.put("femaledatas", femaledatas);
+
+		/*
+		 *  Pie 차트 부분
+		 */
+		ChartVO pieChart = new ChartVO();
+		pieChart.setYear(map.get("year").toString());
+		List<ChartVO> pieChartList = resveService.selectPieData(pieChart);
+
+		map.put("piedatas", pieChartList);
 
 		return map;
 	}
