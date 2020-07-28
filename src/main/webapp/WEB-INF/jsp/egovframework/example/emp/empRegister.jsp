@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -311,9 +312,10 @@ label.error {
 		</div>
 
 		<!-- 이미지 -->
-		<div class="container" style="width:30%; text-align:center; font-stretch:semi-condensed;">
+		<div class="container" style="width:50%; text-align:center; font-stretch:semi-condensed;">
 			<label class="control-label">프로필 사진</label>
-			<input id="img" name="img" type="file" class="bjWidth file" data-browse-on-zone-click="true">
+			<input id="img" name="img" type="file" class="bjWidth file" multiple
+    data-show-upload="false" data-show-caption="true" data-browse-on-zone-click="true">
 		</div>
 
 		<!-- Button -->

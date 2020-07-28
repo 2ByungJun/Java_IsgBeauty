@@ -97,6 +97,8 @@
         </property>
     </bean>
 
+    <!-- JFile -->
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0"/>
 
 
 	<!-- /For Pagination Tag -->
