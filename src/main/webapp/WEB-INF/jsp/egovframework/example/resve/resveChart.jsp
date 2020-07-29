@@ -10,27 +10,55 @@
 
 	<div class="container">
 		 <div class="btn-group" role="group">
-		     <button type="button" class="btn btn-primary button-class1">바르셀로나</button>
-		     <button type="button" class="btn btn-default button-class2">레알마드리드</button>
+		     <button type="button" class="btn btn-primary button-class1" id="yearBtn" onclick="createBarChart()">연간</button>
+		     <button type="button" class="btn btn-default button-class2" id="monthBtn">월간</button>
 	     </div>
 
-		<select type="text" class="form-control" id="year" name="year" onchange="createBarChart()" style = "width:100px;">
+		<select type="text" class="form-control" id="year" name="year" onchange="createBarChart()" style = "width:100px; display: inline-flex;">
 			<c:forEach var="result" items="${years}" varStatus="status">
 				<option value="${years.get(status.index)}">${years.get(status.index)}</option>
 			</c:forEach>
 		</select>
-		<select type="text" class="form-control" id="year" name="year" onchange="createBarChart()" style = "width:100px;">
-			<c:forEach var="result" items="${years}" varStatus="status">
-				<option value="${years.get(status.index)}">${years.get(status.index)}</option>
-			</c:forEach>
+		<select type="text" class="form-control" id="month" name="month" onchange="createBarChart()" style = "width:100px; display: inline-flex;">
+			<% for(int i=1; i<13; i++) {%>
+			<option value="<%=i%>"><%=i+"월"%></option>
+			<%}%>
 		</select>
-
-
-		<canvas id="myBarChart" style="width:80vw; height:50vh"></canvas>
-		<canvas id="myPieChart" style="width:80vw; height:50vh"></canvas>
 	</div>
 
-	<script type="text/javaScript" language="javascript" defer="defer">
+	<div class="container">
+		<div style="width:100%; display:flex;">
+
+			<div style="width:70%; display:inline-flex;">
+				<canvas id="myBarChart" style="width:80vw; height:50vh"></canvas>
+			</div>
+			<div style="width:30%; display:inline-flex; align-self: center; justify-content: center;">
+				<canvas id="myPieChart" style="width:80vw; height:50vh;"></canvas>
+			</div>
+			<input type="hidden" id="dateType" value='y'/>
+		</div>
+	</div>
+
+<script type="text/javaScript" language="javascript" defer="defer">
+    $('.button-class1').click(function(){
+        if( $(this).hasClass('btn-default') ) {
+        	$(this).removeClass('btn-default');
+        	$(this).addClass('btn-primary');
+        	$("#monthBtn").removeClass('btn-primary');
+        	$("#monthBtn").addClass('btn-default');
+        	$("#dateType").val("y");
+        }
+    });
+    $('.button-class2').click(function(){
+    	if( $(this).hasClass('btn-default') ) {
+        	$(this).removeClass('btn-default');
+        	$(this).addClass('btn-primary');
+        	$("#yearBtn").removeClass('btn-primary');
+        	$("#yearBtn").addClass('btn-default');
+        	$("#dateType").val("m");
+        }
+    });
+
 	var barConfig = {
 			type: 'bar',
 			data:  {} ,
@@ -47,7 +75,7 @@
 	function createBarChart(){
 
 	  var url  =  "<c:url value='/resveBarChart.json'/>";
-	  var jsonData = {"year": $("#year").val()};
+	  var jsonData = {"year": $("#year").val(), "dateType": $("#dateType").val(), "month": $("#month").val()};
 
 	  $.ajax({
 			headers: {
@@ -60,6 +88,14 @@
 			,data: JSON.stringify(jsonData)
 			,success:function(data){
 				console.log(data);
+				var dataLabel = new Array();
+				if($("#dateType").val() == "y") {
+					dataLabel = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL','AUG','SEP','OCT','NOV','DEC'];
+				} else {
+					for(var i=0; i<31; i++) {
+						dataLabel[i]=i+1;
+					}
+				}
 
 				var maleData = {
 					    label: "남성",
@@ -76,7 +112,7 @@
 					    backgroundColor: 'rgb(255, 99, 132)'
 					  };
 				var sexdstnData = {
-						  labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL','AUG','SEP','OCT','NOV','DEC'],
+						  labels: dataLabel,
 						  datasets: [maleData, femaleData]
 						};
 
@@ -173,8 +209,6 @@
 		var activePoints = barChart.getElementsAtEvent(evt);
 		createPieChart(activePoints[1]._index+1);
 	});
-
-
 
 	</script>
 

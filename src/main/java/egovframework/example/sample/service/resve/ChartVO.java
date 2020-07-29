@@ -10,9 +10,11 @@ public class ChartVO {
 
 	private String year;
 	private String month;
+	private String day;
 	private int cnt=0;
 	private String sexdstn;
 	private String tretmentNm;
+	private String dateType="y";
 
 
 	public String getYear() {
@@ -44,6 +46,18 @@ public class ChartVO {
 	}
 	public void setTretmentNm(String tretmentNm) {
 		this.tretmentNm = tretmentNm;
+	}
+	public String getDateType() {
+		return dateType;
+	}
+	public void setDateType(String dateType) {
+		this.dateType = dateType;
+	}
+	public String getDay() {
+		return day;
+	}
+	public void setDay(String day) {
+		this.day = day;
 	}
 }
 

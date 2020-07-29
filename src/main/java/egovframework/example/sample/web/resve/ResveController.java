@@ -187,22 +187,47 @@ public class ResveController {
 		ChartVO maleChartVO = new ChartVO();
 		ChartVO femaleChartVO = new ChartVO();
 		maleChartVO.setYear(map.get("year").toString());
+		maleChartVO.setMonth(map.get("month").toString());
 		maleChartVO.setSexdstn("Male");
+		maleChartVO.setDateType(map.get("dateType").toString());
 		femaleChartVO.setYear(map.get("year").toString());
+		femaleChartVO.setMonth(map.get("month").toString());
 		femaleChartVO.setSexdstn("Female");
+		femaleChartVO.setDateType(map.get("dateType").toString());
 
-		int[] maledatas = {0,0,0,0,0,0,0,0,0,0,0,0};
-		int[] femaledatas = {0,0,0,0,0,0,0,0,0,0,0,0};
 		List<ChartVO> maleChartList = resveService.selectBarData(maleChartVO);
 		List<ChartVO> femaleChartList = resveService.selectBarData(femaleChartVO);
 
+		int[] maledatas;
+		int[] femaledatas;
 
-		for(ChartVO c : maleChartList) {
-			maledatas[Integer.parseInt(c.getMonth())-1] = c.getCnt();
+		if(map.get("dateType").equals("y")) {
+			maledatas = new int[12];
+			femaledatas = new int[12];
+
+			for(ChartVO c : maleChartList) {
+				maledatas[Integer.parseInt(c.getMonth())-1] = c.getCnt();
+			}
+			for(ChartVO c : femaleChartList) {
+				femaledatas[Integer.parseInt(c.getMonth())-1] = c.getCnt();
+			}
+
+		} else {
+			maledatas = new int[31];
+			femaledatas = new int[31];
+
+			for(ChartVO c : maleChartList) {
+				maledatas[Integer.parseInt(c.getDay())-1] = c.getCnt();
+			}
+			for(ChartVO c : femaleChartList) {
+				femaledatas[Integer.parseInt(c.getDay())-1] = c.getCnt();
+			}
 		}
-		for(ChartVO c : femaleChartList) {
-			femaledatas[Integer.parseInt(c.getMonth())-1] = c.getCnt();
-		}
+
+
+
+
+
 
 		map.put("maledatas", maledatas);
 		map.put("femaledatas", femaledatas);
