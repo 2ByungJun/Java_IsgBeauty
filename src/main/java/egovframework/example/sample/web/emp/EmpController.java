@@ -147,7 +147,7 @@ public class EmpController {
 	}
 
 	/**
-	 * 고객 수정 View
+	 * 직원 수정 View
 	 *
 	 * @param empId
 	 * @param searchVO

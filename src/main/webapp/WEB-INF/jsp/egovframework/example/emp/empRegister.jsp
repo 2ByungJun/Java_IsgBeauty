@@ -314,8 +314,7 @@ label.error {
 		<!-- 이미지 -->
 		<div class="container" style="width:50%; text-align:center; font-stretch:semi-condensed;">
 			<label class="control-label">프로필 사진</label>
-			<input id="img" name="img" type="file" class="bjWidth file" multiple
-    data-show-upload="false" data-show-caption="true" data-browse-on-zone-click="true">
+			<input id="img" name="img" type="file" class="bjWidth file" multiple data-show-upload="false" data-show-caption="true" data-browse-on-zone-click="true">
 		</div>
 
 		<!-- Button -->
