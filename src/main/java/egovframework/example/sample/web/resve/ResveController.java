@@ -176,10 +176,10 @@ public class ResveController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/resveChart.json")
-	public Map<String, Object> chartResveJson(@RequestBody HashMap<String, Object> map,
+	@RequestMapping(value = "/resveBarChart.json")
+	public Map<String, Object> resveBarChartJson(@RequestBody HashMap<String, Object> map,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("[예약 차트 Json]");
+		System.out.println("[예약 Bar 차트 Json]");
 
 		/*
 		 *  Bar 차트 부분
@@ -204,15 +204,25 @@ public class ResveController {
 			femaledatas[Integer.parseInt(c.getMonth())-1] = c.getCnt();
 		}
 
-
 		map.put("maledatas", maledatas);
 		map.put("femaledatas", femaledatas);
+
+		return map;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/resvePieChart.json")
+	public Map<String, Object> resvePieChartJson(@RequestBody HashMap<String, Object> map,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("[예약 Pie 차트 Json]");
 
 		/*
 		 *  Pie 차트 부분
 		 */
+
 		ChartVO pieChart = new ChartVO();
 		pieChart.setYear(map.get("year").toString());
+		pieChart.setMonth(map.get("month").toString());
 		List<ChartVO> pieChartList = resveService.selectPieData(pieChart);
 
 		map.put("piedatas", pieChartList);
