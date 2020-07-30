@@ -8,18 +8,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
-	<div class="container">
+	<div class="container" style="display: flex;">
 		 <div class="btn-group" role="group">
-		     <button type="button" class="btn btn-primary button-class1" id="yearBtn" onclick="createBarChart()">연간</button>
+		     <button type="button" class="btn btn-primary button-class1" id="yearBtn">연간</button>
 		     <button type="button" class="btn btn-default button-class2" id="monthBtn">월간</button>
 	     </div>
 
-		<select type="text" class="form-control" id="year" name="year" onchange="createBarChart()" style = "width:100px; display: inline-flex;">
+		<select type="text" class="form-control" id="year" name="year" onchange="createBarChart()" style = "width:100px; display: inline-flex; margin-left:15px;">
 			<c:forEach var="result" items="${years}" varStatus="status">
 				<option value="${years.get(status.index)}">${years.get(status.index)}</option>
 			</c:forEach>
 		</select>
-		<select type="text" class="form-control" id="month" name="month" onchange="createBarChart()" style = "width:100px; display: inline-flex;">
+		<select type="text" class="form-control" id="month" name="month" onchange="createBarChart()" style = "width:100px; margin-left:2px; ">
 			<% for(int i=1; i<13; i++) {%>
 			<option value="<%=i%>"><%=i+"월"%></option>
 			<%}%>
@@ -29,17 +29,18 @@
 	<div class="container">
 		<div style="width:100%; display:flex;">
 
-			<div style="width:70%; display:inline-flex;">
-				<canvas id="myBarChart" style="width:80vw; height:50vh"></canvas>
+			<div style="width:65%; display:inline-flex; float:left;">
+				<canvas id="myBarChart"></canvas>
 			</div>
-			<div style="width:30%; display:inline-flex; align-self: center; justify-content: center;">
-				<canvas id="myPieChart" style="width:80vw; height:50vh;"></canvas>
+			<div style="width:35%; display:inline-flex; align-self: center; justify-content: center; float:right;">
+				<canvas id="myPieChart" style="">></canvas>
 			</div>
 			<input type="hidden" id="dateType" value='y'/>
 		</div>
 	</div>
 
 <script type="text/javaScript" language="javascript" defer="defer">
+	$("#month").hide();
     $('.button-class1').click(function(){
         if( $(this).hasClass('btn-default') ) {
         	$(this).removeClass('btn-default');
@@ -47,6 +48,8 @@
         	$("#monthBtn").removeClass('btn-primary');
         	$("#monthBtn").addClass('btn-default');
         	$("#dateType").val("y");
+        	$("#month").hide();
+       	    createBarChart(barChart);
         }
     });
     $('.button-class2').click(function(){
@@ -56,6 +59,8 @@
         	$("#yearBtn").removeClass('btn-primary');
         	$("#yearBtn").addClass('btn-default');
         	$("#dateType").val("m");
+        	$("#month").show();
+        	createBarChart(barChart);
         }
     });
 
@@ -159,7 +164,11 @@
 	function createPieChart(index){
 
 	  var url  =  "<c:url value='/resvePieChart.json'/>";
-	  var jsonData = {"year": $("#year").val(), "month": index};
+	  if($("#dateType").val() == 'y') {
+		  var jsonData = {"year": $("#year").val(),"month": index, "index": index, "dateType": $("#dateType").val()};
+	  } else {
+		  var jsonData = {"year": $("#year").val(),"month": $("#month").val(), "index": index, "dateType": $("#dateType").val()};
+	  }
 
 	  $.ajax({
 			headers: {
@@ -207,7 +216,7 @@
 
 	$("#myBarChart").click(function(evt) {
 		var activePoints = barChart.getElementsAtEvent(evt);
-		createPieChart(activePoints[1]._index+1);
+		createPieChart(activePoints[0]._index+1);
 	});
 
 	</script>

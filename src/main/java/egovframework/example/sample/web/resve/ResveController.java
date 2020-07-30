@@ -211,8 +211,9 @@ public class ResveController {
 			for(ChartVO c : femaleChartList) {
 				femaledatas[Integer.parseInt(c.getMonth())-1] = c.getCnt();
 			}
-
-		} else {
+			map.put("maledatas", maledatas);
+			map.put("femaledatas", femaledatas);
+		} else if(map.get("dateType").equals("m")) {
 			maledatas = new int[31];
 			femaledatas = new int[31];
 
@@ -222,15 +223,11 @@ public class ResveController {
 			for(ChartVO c : femaleChartList) {
 				femaledatas[Integer.parseInt(c.getDay())-1] = c.getCnt();
 			}
+			map.put("maledatas", maledatas);
+			map.put("femaledatas", femaledatas);
 		}
 
 
-
-
-
-
-		map.put("maledatas", maledatas);
-		map.put("femaledatas", femaledatas);
 
 		return map;
 	}
@@ -248,6 +245,8 @@ public class ResveController {
 		ChartVO pieChart = new ChartVO();
 		pieChart.setYear(map.get("year").toString());
 		pieChart.setMonth(map.get("month").toString());
+		pieChart.setIndex(map.get("index").toString());
+		pieChart.setDateType(map.get("dateType").toString());
 		List<ChartVO> pieChartList = resveService.selectPieData(pieChart);
 
 		map.put("piedatas", pieChartList);

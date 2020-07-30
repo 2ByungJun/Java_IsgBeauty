@@ -11,6 +11,7 @@ public class ChartVO {
 	private String year;
 	private String month;
 	private String day;
+	private String index;
 	private int cnt=0;
 	private String sexdstn;
 	private String tretmentNm;
@@ -58,6 +59,12 @@ public class ChartVO {
 	}
 	public void setDay(String day) {
 		this.day = day;
+	}
+	public String getIndex() {
+		return index;
+	}
+	public void setIndex(String index) {
+		this.index = index;
 	}
 }
 

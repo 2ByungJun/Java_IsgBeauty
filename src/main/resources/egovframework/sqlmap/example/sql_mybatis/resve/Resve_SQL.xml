@@ -133,8 +133,9 @@
 		inner join t_mber_m b
 		on a.MBER_SN = b.MBER_SN
 		and DATE_FORMAT(RESVE_DT, "%Y") = ${year}
-		<if test="month != null and month != ''">
-			and DATE_FORMAT(RESVE_DT, "%c") = ${month}
+		and DATE_FORMAT(RESVE_DT, "%c") = ${month}
+		<if test='dateType.equals("m")'>
+			and DATE_FORMAT(RESVE_DT, "%e") = ${index}
 		</if>
 		group by a.TRETMENT_NM
 	</select>
