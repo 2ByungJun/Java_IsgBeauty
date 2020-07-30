@@ -144,7 +144,7 @@ label.error {
 
 					<!-- 등록자 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="registId" name="registId" value="test" readonly>
+						<input type="text" class="bjWidth form-control" id="registId" name="registId" value="${empId}" readonly>
 					</div>
 
 					<!-- 등록일 -->

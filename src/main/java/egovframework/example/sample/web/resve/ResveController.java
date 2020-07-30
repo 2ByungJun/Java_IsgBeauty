@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,12 +47,16 @@ public class ResveController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/resveRegister.do")
-	public String resveRegister(@RequestParam("selectedId") String mberSn, @ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
+	public String resveRegister(@RequestParam("selectedId") String mberSn, @ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("[예약 등록 페이지]");
 
 		MberVO sampleVO = new MberVO();
 		sampleVO.setMberSn(mberSn);
 		model.addAttribute("result", selectMber(sampleVO, searchVO));
+
+		HttpSession session = request.getSession();
+		model.addAttribute("empId", session.getAttribute("empId"));
 
 		return "/useLayout/resve/resveRegister";
 	}
@@ -177,8 +182,7 @@ public class ResveController {
 
 	@ResponseBody
 	@RequestMapping(value = "/resveBarChart.json")
-	public Map<String, Object> resveBarChartJson(@RequestBody HashMap<String, Object> map,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Map<String, Object> resveBarChartJson(@RequestBody HashMap<String, Object> map) throws Exception {
 		System.out.println("[예약 Bar 차트 Json]");
 
 		/*
