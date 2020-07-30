@@ -50,6 +50,7 @@
         	$("#dateType").val("y");
         	$("#month").hide();
        	    createBarChart(barChart);
+       	    pieChart.clear();
         }
     });
     $('.button-class2').click(function(){
@@ -61,21 +62,38 @@
         	$("#dateType").val("m");
         	$("#month").show();
         	createBarChart(barChart);
+        	pieChart.clear();
         }
     });
 
+    $(document).ready(function() {
+		createBarChart(barChart);
+	});
+
+	$("#myBarChart").click(function(evt) {
+		var activePoints = barChart.getElementsAtEvent(evt);
+		createPieChart(activePoints[0]._index+1);
+	});
+
+
 	var barConfig = {
 			type: 'bar',
-			data:  {} ,
-			options: {}
+			data: {},
+			options: {
+				scales: {
+			        yAxes: [{
+			        	ticks: {
+			        		suggestedMin: 0,
+			                suggestedMax: 5,
+							stepSize:1
+			        	}
+			        }]
+			    }
+			}
 		};
 
 	var ctx = document.getElementById('myBarChart').getContext('2d');
 	var barChart = new Chart(ctx, barConfig);
-
-	$(document).ready(function() {
-		createBarChart(barChart);
-	});
 
 	function createBarChart(){
 
@@ -123,10 +141,7 @@
 
 				var updateBarConfig = {
 						type: 'bar',
-						data:  sexdstnData,
-						options: {
-							//responsive: true
-						}
+						data:  sexdstnData
 					};
 
 				barChart.config = updateBarConfig;
@@ -142,20 +157,8 @@
 
 	var pieConfig = {
 			type: 'pie',
-			data:  {/*
-				datasets: [{
-					data: [10,30,50],
-					backgroundColor: ['orange', 'rgb(111, 183, 214)','rgba(240, 99, 132, 0.6)'],
-					label: '시술별 기록'
-				}],
-				labels: [
-					'Cut',
-					'Perm',
-					'Special']
-				*/} ,
-			options: {
-				//responsive: true
-			}
+			data:  {} ,
+			options: {}
 		};
 
 	var pieCtx = document.getElementById('myPieChart').getContext('2d');
@@ -213,11 +216,5 @@
 			}
 		});
 	}
-
-	$("#myBarChart").click(function(evt) {
-		var activePoints = barChart.getElementsAtEvent(evt);
-		createPieChart(activePoints[0]._index+1);
-	});
-
 	</script>
 
