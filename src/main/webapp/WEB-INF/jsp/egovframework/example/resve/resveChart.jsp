@@ -81,11 +81,25 @@
 			data: {},
 			options: {
 				scales: {
+					xAxes: [{
+			        	    scaleLabel:{
+			        		display:true,
+			        		labelString:"월",
+			        		fondSize:30,
+			        		fontStyle:'bold'
+			        	}
+			        }],
 			        yAxes: [{
 			        	ticks: {
 			        		suggestedMin: 0,
 			                suggestedMax: 5,
 							stepSize:1
+			        	},
+			        	scaleLabel:{
+			        		display:true,
+			        		labelString:"예약 건수",
+			        		fondSize:30,
+			        		fontStyle:'bold'
 			        	}
 			        }]
 			    }
@@ -125,7 +139,7 @@
 					    data: data.maledatas,
 					    lineTension: 0,
 					    fill: false,
-					    backgroundColor: 'rgb(111, 183, 214)'
+					    backgroundColor: 'rgb(111, 183, 214)',
 					  };
 				var femaleData = {
 					    label: "여성",

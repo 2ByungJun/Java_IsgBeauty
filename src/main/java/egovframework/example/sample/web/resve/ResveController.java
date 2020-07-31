@@ -238,8 +238,7 @@ public class ResveController {
 
 	@ResponseBody
 	@RequestMapping(value = "/resvePieChart.json")
-	public Map<String, Object> resvePieChartJson(@RequestBody HashMap<String, Object> map,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Map<String, Object> resvePieChartJson(@RequestBody HashMap<String, Object> map) throws Exception {
 		System.out.println("[예약 Pie 차트 Json]");
 
 		/*

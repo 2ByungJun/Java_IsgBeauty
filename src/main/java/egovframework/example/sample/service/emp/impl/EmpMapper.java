@@ -7,19 +7,10 @@ import egovframework.example.sample.service.emp.EmpVO;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 /**
- * sample에 관한 데이터처리 매퍼 클래스
+ * 직원(emp)에 관한 데이터처리 매퍼 클래스
  *
- * @author  표준프레임워크센터
- * @since 2014.01.24
- * @version 1.0
- * @see <pre>
- *  == 개정이력(Modification Information) ==
- *
- *          수정일          수정자           수정내용
- *  ----------------    ------------    ---------------------------
- *   2014.01.24        표준프레임워크센터          최초 생성
- *
- * </pre>
+ * @author  BS실 이병준, 이수호
+ * @since 2020.06
  */
 public interface EmpMapper {
 
@@ -78,20 +69,10 @@ public interface EmpMapper {
 	List<?> selectListEmpNM(EmpVO vo) throws Exception;
 
 
+	/**
+	 * 시리얼 키 확인(관리자 회원가입용)
+	 * @param snKey
+	 * @throws Exception
+	 */
 	String snKeyCheck(String snKey) throws Exception;
-
-/*	*//**
-	 * 로그인 체크
-	 * @param vo
-	 * @param session
-	 * @return
-	 *//*
-	public boolean loginCheck(EmpVO vo,HttpSession session);
-
-	*//**
-	 * 로그아웃
-	 * @param session
-	 *//*
-	public void logout(HttpSession session);*/
-
 }

@@ -9,8 +9,6 @@
 			   var pagingStart = (pagingIndex*pageSize)+1;
 			   var pagingEnd  = (pagingIndex+1)*pageSize;
 
-
-			   //alert(totalPages);
 			   if (pagingEnd > totalPages){
 				   pagingEnd = totalPages;
 			   }
@@ -23,10 +21,8 @@
 
 			   }
 
-			  // pagingHtml += '<span>';
 			   for (var i = pagingStart; i <= pagingEnd; i++) {
 			    if(i == pagingStart){
-				     //pagingHtml += '<a href="#" class="first-num">'+ i +'</a>';
 				     if (page == i) {
 				      pagingHtml += '<li data-lp="'+ i +'" class="disabled"><a href="#" class="on" style="color: blue; font-weight: bolder;">'+ i +'</a></li>';
 				     }else {

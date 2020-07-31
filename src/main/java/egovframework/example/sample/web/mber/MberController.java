@@ -56,7 +56,6 @@ public class MberController {
 	public String mberList(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[고객 리스트]");
 
-
 		return "/useLayout/mber/mberList";
 	}
 

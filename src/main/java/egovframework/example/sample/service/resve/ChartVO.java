@@ -2,8 +2,8 @@ package egovframework.example.sample.service.resve;
 
 
 /**
- * ResveVO
- * @author 이병준
+ * ChartVO
+ * @author 이수호
  *
  */
 public class ChartVO {
