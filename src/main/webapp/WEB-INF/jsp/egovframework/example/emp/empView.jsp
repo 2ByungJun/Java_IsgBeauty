@@ -72,7 +72,7 @@ p {
 				<!-- Start(40%) -->
 				<div style="width: 40%; display: grid; justify-content:right;">
 					<div class="box" style="background: #BDBDBD;">
-						<img class="profile" src=images/<c:out value="${result.img}"/>>
+						<img class="profile" src=images/<c:out value="${result.fileId}"/>>
 					</div>
 				</div>
 
