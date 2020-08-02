@@ -85,7 +85,7 @@
 			        	    scaleLabel:{
 			        		display:true,
 			        		labelString:"월",
-			        		fondSize:30,
+			        		fontSize:20,
 			        		fontStyle:'bold'
 			        	}
 			        }],
@@ -98,7 +98,7 @@
 			        	scaleLabel:{
 			        		display:true,
 			        		labelString:"예약 건수",
-			        		fondSize:30,
+			        		fontSize:20,
 			        		fontStyle:'bold'
 			        	}
 			        }]
@@ -127,7 +127,7 @@
 				console.log(data);
 				var dataLabel = new Array();
 				if($("#dateType").val() == "y") {
-					dataLabel = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL','AUG','SEP','OCT','NOV','DEC'];
+					dataLabel = ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'];
 				} else {
 					for(var i=0; i<31; i++) {
 						dataLabel[i]=i+1;
