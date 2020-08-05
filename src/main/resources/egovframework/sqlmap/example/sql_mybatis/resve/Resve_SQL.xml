@@ -16,6 +16,7 @@
 	<resultMap id="chart" type="chartVO">
 		<result property="year" column="year"/>
 		<result property="month" column="month"/>
+		<result property="day" column="day"/>
 		<result property="cnt" column="cnt"/>
 		<result property="sexdstn" column="sexdstn"/>
 		<result property="tretmentNm" column="tretment_nm"/>
@@ -106,24 +107,36 @@
 	</select>
 
 	<select id="selectBarData" parameterType="chartVO" resultMap="chart">
-		select DATE_FORMAT(RESVE_DT,"%c") as month, count(*) cnt
+
+        select DATE_FORMAT(RESVE_DT,"%c") as month, DATE_FORMAT(RESVE_DT,"%e") as day, count(*) cnt
 		from t_resve_m a
 		inner join t_mber_m b
 		on a.MBER_SN = b.MBER_SN
 		and DATE_FORMAT(RESVE_DT, "%Y") = ${year}
 		and b.sexdstn = #{sexdstn}
-		group by month
+		<if test='dateType.equals("m")'>
+			and DATE_FORMAT(RESVE_DT, "%c") = ${month}
+		</if>
+		<choose>
+		    <when test='dateType.equals("y")'>
+		        group by month
+		    </when>
+		    <when test='dateType.equals("m")'>
+		        group by day
+		    </when>
+		</choose>
 	</select>
 
 	<select id="selectPieData" parameterType="chartVO" resultMap="chart">
-		select a.TRETMENT_NM, count(*) cnt
+	    select a.TRETMENT_NM, count(*) cnt
 		from t_resve_m a
 		inner join t_mber_m b
 		on a.MBER_SN = b.MBER_SN
 		and DATE_FORMAT(RESVE_DT, "%Y") = ${year}
-		<if test="month != null and month != ''">
-				and DATE_FORMAT(RESVE_DT, "%c") = ${month}
-			</if>
+		and DATE_FORMAT(RESVE_DT, "%c") = ${month}
+		<if test='dateType.equals("m")'>
+			and DATE_FORMAT(RESVE_DT, "%e") = ${index}
+		</if>
 		group by a.TRETMENT_NM
 	</select>
 </mapper>
