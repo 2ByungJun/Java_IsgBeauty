@@ -24,7 +24,6 @@ import egovframework.example.sample.service.emp.EmpVO;
 import egovframework.example.sample.service.paging.Paging;
 import egovframework.rte.fdl.property.EgovPropertyService;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
-import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
 public class EmpController {
@@ -48,29 +47,6 @@ public class EmpController {
 	@RequestMapping(value = "/empList.do")
 	public String empList(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[직원 리스트]");
-
-	/*	*//** EgovPropertyService.sample *//*
-		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
-		searchVO.setPageSize(propertiesService.getInt("pageSize"));
-
-		*//** pageing setting *//*
-		PaginationInfo paginationInfo = new PaginationInfo();
-		paginationInfo.setCurrentPageNo(searchVO.getPageIndex());
-		paginationInfo.setRecordCountPerPage(searchVO.getPageUnit());
-		paginationInfo.setPageSize(searchVO.getPageSize());
-
-		searchVO.setFirstIndex(paginationInfo.getFirstRecordIndex());
-		searchVO.setLastIndex(paginationInfo.getLastRecordIndex());
-		searchVO.setRecordCountPerPage(paginationInfo.getRecordCountPerPage());
-
-		List<?> sampleList = empService.selectEmpList(searchVO);
-		model.addAttribute("resultList", sampleList);
-
-		int totCnt = empService.selectEmpListTotCnt(searchVO);
-		paginationInfo.setTotalRecordCount(totCnt);
-		model.addAttribute("paginationInfo", paginationInfo);
-
-		System.out.println("_----------" + totCnt);*/
 
 		return "/useLayout/emp/empList";
 	}
@@ -185,6 +161,13 @@ public class EmpController {
 		return "forward:/empList.do";
 	}
 
+	/**
+	 * 관리자 회원가입
+	 * @param searchVO
+	 * @param snKey
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/addAdmin.do", method = RequestMethod.POST)
 	public String addAdmin(@ModelAttribute("searchVO") EmpVO searchVO, @RequestParam("snKey") String snKey) throws Exception {
 		System.out.println("[관리자 등록 기능]");
@@ -197,6 +180,14 @@ public class EmpController {
 		return "login/login";
 	}
 
+	/**
+	 * 시리얼 키 확인 (관리자 회원가입용)
+	 * @param map
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/addAdminCheck.json")
      public HashMap<String, Object> snKeyCheck(@RequestBody HashMap<String, Object> map,
@@ -216,6 +207,14 @@ public class EmpController {
 		return map;
 	}
 
+	/**
+	 * 아이디 중복 확인
+	 * @param searchVO
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/IdChecking.json")
      public Map<String, Object> IdChecking(@RequestBody EmpVO searchVO,

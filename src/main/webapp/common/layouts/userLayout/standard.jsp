@@ -11,6 +11,21 @@
 <title>IsgBeauty 프로젝트</title>
 <link rel="shortcut icon" href="<c:url value='/resources/dist/favicons/favicon.ico'/>">
 </head>
+<style>
+
+.contents-wrap {
+	min-height: 80vh;
+	position: relative;
+}
+
+.footer {
+	width: 100%;
+	height: 100px;
+	position: absolute;
+	bottom: 0;
+}
+
+</style>
 
 <script type="text/javaScript" language="javascript">
  $(document).ready(function() {
@@ -22,7 +37,7 @@
 		<!--========== HEADER ==========-->
         <tiles:insertAttribute name="top"/>
 	    <!--========== END HEADER ==========-->
-	     <main class="page-content" id="content">
+	     <main class="page-content contents-wrap" id="content">
 	    <!--========== CONTENTS ==========-->
 	    	<!-- 본문 -->
         		<tiles:insertAttribute name="content"/>

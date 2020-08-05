@@ -1,34 +1,20 @@
 package egovframework.example.sample.service.paging;
 
 public class Paging {
-	private int pageNo;
-	private int pageCount;
-
-
-	public int getPageNo() {
-		return pageNo;
-	}
-	public void setPageNo(int pageNo) {
-		this.pageNo = pageNo;
-	}
-	public int getPageCount() {
-		return pageCount;
-	}
-	public void setPageCount(int pageCount) {
-		this.pageCount = pageCount;
-	}
-
-
 	/**
 	 * Required Fields
 	 * - 이 필드들은 페이징 계산을 위해 반드시 입력되어야 하는 필드 값들이다.
 	 *
+	 * pageNo :
+	 * pageCount : 전체 페이지 번호
 	 * currentPageNo : 현재 페이지 번호
 	 * recordCountPerPage : 한 페이지당 게시되는 게시물 건 수
 	 * pageSize : 페이지 리스트에 게시되는 페이지 건수,
 	 * totalRecordCount : 전체 게시물 건 수.
 	 */
 
+	private int pageNo;
+	private int pageCount;
 	private int currentPageNo;
 	private int recordCountPerPage;
 	private int pageSize = 10;
@@ -64,6 +50,19 @@ public class Paging {
 
 	public int getTotalRecordCount() {
 		return totalRecordCount;
+	}
+
+	public int getPageNo() {
+		return pageNo;
+	}
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+	public int getPageCount() {
+		return pageCount;
+	}
+	public void setPageCount(int pageCount) {
+		this.pageCount = pageCount;
 	}
 
 	/**

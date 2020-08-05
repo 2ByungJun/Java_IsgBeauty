@@ -17,44 +17,44 @@
 		<result property="registDt" column="regist_dt" />
 		<result property="updtId" column="updt_id" />
 		<result property="updtDt" column="updt_dt" />
-		<result property="img" column="img" />
+		<result property="fileId" column="file_id" />
 	</resultMap>
 
 	<select id="selectEmp" parameterType="empVO" resultMap="emp">
-		SELECT EMP_ID,
-		EMP_PASSWORD,
-		EMP_NM,
-		TELNO,
-		SEXDSTN,
-		PSPOFC,
-		SALARY,
-		CAREER,
-		REGIST_ID,
-		REGIST_DT,
-		UPDT_ID,
-		UPDT_DT,
-		IMG
-		FROM t_emp_m
+		SELECT  EMP_ID,
+				EMP_PASSWORD,
+				EMP_NM,
+				TELNO,
+				SEXDSTN,
+				PSPOFC,
+				SALARY,
+				CAREER,
+				REGIST_ID,
+				REGIST_DT,
+				UPDT_ID,
+				UPDT_DT,
+				FILE_ID
+		 FROM t_emp_m
 		WHERE EMP_ID =#{empId}
 	</select>
 
 	<select id="selectEmpList" parameterType="empVO"
 		resultType="egovMap">
 
-		select a.EMP_ID,
-		a.EMP_PASSWORD,
-		a.EMP_NM,
-		a.EMP_PASSWORD,
-		a.TELNO,
-		a.SEXDSTN,
-		a.PSPOFC,
-		a.SALARY,
-		a.CAREER,
-		a.REGIST_ID,
-		a.REGIST_DT,
-		a.UPDT_ID,
-		a.UPDT_DT,
-		a.IMG
+		select  a.EMP_ID,
+				a.EMP_PASSWORD,
+				a.EMP_NM,
+				a.EMP_PASSWORD,
+				a.TELNO,
+				a.SEXDSTN,
+				a.PSPOFC,
+				a.SALARY,
+				a.CAREER,
+				a.REGIST_ID,
+				a.REGIST_DT,
+				a.UPDT_ID,
+				a.UPDT_DT,
+				a.FILE_ID
 		from t_emp_m a
 		<if test="searchKeyword != null and searchKeyword != ''">
 			WHERE EMP_NM LIKE CONCAT('%', #{searchKeyword},'%')
@@ -79,21 +79,34 @@
 	</select>
 
 	<insert id="insertEmp" parameterType="empVO">
-
-		insert into t_emp_m values (
-		#{empId},
-		#{empPassword},
-		#{empNm},
-		#{telno},
-		#{sexdstn},
-		#{pspofc},
-		#{salary},
-		#{career},
-		#{registId},
-		CURDATE(),
-		#{registId},
-		CURDATE(),
-		#{img}
+		insert into t_emp_m(
+			emp_id,
+			emp_password,
+			emp_nm,
+			telno,
+			sexdstn,
+			pspofc,
+			salary,
+			career,
+			regist_id,
+			regist_dt,
+			updt_id,
+			updt_dt
+			<if test="fileId != null and fileId != ''">,file_id</if>
+		) values (
+			#{empId},
+			#{empPassword},
+			#{empNm},
+			#{telno},
+			#{sexdstn},
+			#{pspofc},
+			#{salary},
+			#{career},
+			#{registId},
+			CURDATE(),
+			#{registId},
+			CURDATE()
+			<if test="fileId != null and fileId != ''">,#{fileId}</if>
 		)
 	</insert>
 
@@ -113,8 +126,10 @@
 		SALARY=#{salary},
 		CAREER=#{career},
 		UPDT_ID=#{updtId},
-		UPDT_DT=CURDATE(),
-		IMG=#{img}
+		UPDT_DT=CURDATE()
+		<if test="fileId != null and fileId != ''">
+		    ,FILE_ID=#{fileId}
+		</if>
 		where EMP_ID=#{empId}
 	</update>
 

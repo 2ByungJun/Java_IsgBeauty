@@ -16,7 +16,6 @@
 <script type="text/javaScript" language="javascript" defer="defer">
 
 <%if (session.getAttribute("empId") != null) {%>
-	alert("이미 로그인 중입니다..");
 	location.href = "<c:url value='/mberList.do'/>";
 <%}%>
 	window.history.forward();
@@ -103,7 +102,8 @@
 			<div style="width: 20%; text-align: left;">
 				<div style="display: inline-flex;">
 					<input type="text" class="bjInput form-control" id="email"
-						name="email" placeholder="아이디를 입력해주세요" value=관리자>
+						name="email" placeholder="아이디를 입력해주세요" value=관리자
+						onkeydown="if(event.keyCode==13) login()">
 				</div>
 
 				<div style="display: inline-flex;">

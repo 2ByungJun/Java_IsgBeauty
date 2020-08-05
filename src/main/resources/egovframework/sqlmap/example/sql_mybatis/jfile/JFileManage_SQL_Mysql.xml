@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.example.sample.service.jfile.impl.JFileMapper">
+
+		 <!-- JFile -->
+	    <resultMap id="jfile" type="jfileVO">
+			<result property="fileId" column="file_id"/>
+			<result property="fileSeq" column="file_seq"/>
+			<result property="fileName" column="file_name"/>
+			<result property="fileSize" column="file_size"/>
+			<result property="fileMask" column="file_mask"/>
+			<result property="downloadCount" column="download_count"/>
+			<result property="downloadExpireDate" column="download_expire_date"/>
+			<result property="downloadLimitCount" column="download_limit_count"/>
+			<result property="regDate" column="reg_date"/>
+			<result property="deleteYn" column="delete_yn"/>
+		</resultMap>
+
+	    <!-- Insert -->
+		<insert id="addAttachFile" parameterType="jfileVO">
+			<selectKey resultType="string" keyProperty="fileSeq">
+					SELECT IFNULL(MAX(FILE_SEQ),0)+1 FROM J_ATTACHFILE WHERE FILE_ID = #{fileId}
+		    </selectKey>
+			INSERT
+			  INTO J_ATTACHFILE
+			      (
+				   FILE_ID,
+				   FILE_SEQ,
+				   FILE_NAME,
+				   FILE_SIZE,
+				   FILE_MASK,
+				   DOWNLOAD_COUNT,
+				   DOWNLOAD_EXPIRE_DATE,
+				   DOWNLOAD_LIMIT_COUNT,
+				   REG_DATE
+				  )
+				   VALUES
+				  (
+				   #{fileId},
+				   #{fileSeq},
+				   #{fileName},
+				   #{fileSize},
+				   #{fileMask},
+				    0,
+				   #{downloadExpireDate},
+				   #{downloadLimitCount},
+				   SYSDATE()
+				  )
+		</insert>
+
+		<update id="updateAttachFileDeleteYnByFileId" parameterType="map">
+			UPDATE J_ATTACHFILE
+			   SET DELETE_YN = #{deleteYn}
+			 WHERE FILE_ID   = #{fileId}
+		</update>
+
+		<update id="updateAttachFileDeleteYn" parameterType="map">
+			UPDATE J_ATTACHFILE
+			   SET DELETE_YN = #{deleteYn}
+			 WHERE FILE_ID  = #{fileId}
+			<where>
+			    <foreach item="fileSeqs" collection="list" open="FILE_SEQ in(" close=")" separator=",">
+			            #{item}
+			    </foreach>
+			</where>
+		</update>
+
+		<update id="updateAttachFileDownloadCount" parameterType="map">
+			UPDATE J_ATTACHFILE
+               SET DOWNLOAD_COUNT = DOWNLOAD_COUNT + 1
+	        <where>
+	            <if test='fileId != null'>
+	                FILE_ID  = #{fileId}
+	            </if>
+	            <if test='fileSeq != null'>
+	                FILE_SEQ = #{fileSeq}
+	            </if>
+	        </where>
+		</update>
+
+		<update id="updateAttachFileDownloadCountBySequence" parameterType="map">
+			UPDATE J_ATTACHFILE
+	           SET DOWNLOAD_COUNT = DOWNLOAD_COUNT + 1
+	         WHERE FILE_ID   = #{fileId}
+	           AND FILE_SEQ  = #{fileSeq}
+		</update>
+
+		<update id="updateAttachFileDownloadCountByFileId" parameterType="string">
+			UPDATE J_ATTACHFILE
+          	   SET DOWNLOAD_COUNT = DOWNLOAD_COUNT + 1
+             WHERE FILE_ID = #{value}
+		</update>
+
+		<delete id="removeAttachFile" parameterType="map">
+			DELETE
+	          FROM J_ATTACHFILE
+	         WHERE FILE_ID  = #{fileId}
+	         <where>
+	             <foreach item="fileSeqs" collection="list" open="FILE_SEQ in(" close=")" separator=",">
+			            #{item}
+			    </foreach>
+	         </where>
+		</delete>
+
+<!-- 		<select id="getAttachFileToMap" parameterType="map" resultType="jfileVO"> -->
+<!-- 			SELECT -->
+<!-- 				   FILE_ID               as fileId, -->
+<!-- 				   FILE_SEQ              as fileSeq, -->
+<!-- 				   FILE_NAME             as fileName, -->
+<!-- 			       FILE_SIZE             as fileSize, -->
+<!-- 			       FILE_MASK             as fileMask, -->
+<!-- 			       DOWNLOAD_COUNT        as downloadCount, -->
+<!-- 			       DOWNLOAD_EXPIRE_DATE  as downloadExpireDate, -->
+<!-- 			       DOWNLOAD_LIMIT_COUNT  as downloadLimitCount, -->
+<!-- 			       REG_DATE              as regDate -->
+<!-- 			  FROM J_ATTACHFILE -->
+<!-- 			  <where> -->
+<!-- 			     <if test='fileId != null'> -->
+<!-- 		                FILE_ID  = #{fileId} -->
+<!-- 		            </if> -->
+<!-- 		         <if test='fileSeq != null'> -->
+<!-- 		                FILE_SEQ = #{fileSeq} -->
+<!-- 		         </if> -->
+<!-- 			  </where> -->
+<!-- 		</select> -->
+
+		<select id="getAttachFileSeqs" parameterType="string" resultType="string">
+			SELECT FILE_SEQ
+			  FROM J_ATTACHFILE
+			 WHERE FILE_ID = #{value}
+			   AND DELETE_YN = 'Y'
+		</select>
+
+		<select id="isExistingAttachFileInfo" parameterType="map" resultType="string">
+			SELECT FILE_ID
+			  FROM J_ATTACHFILE
+			 WHERE FILE_ID  = #{fileId}
+			 <where>
+		            <foreach item="fileSeqs" collection="list" open="FILE_SEQ in(" close=")" separator=",">
+				       #{item}
+				    </foreach>
+		     </where>
+		</select>
+
+</mapper>

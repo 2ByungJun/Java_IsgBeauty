@@ -73,14 +73,28 @@ public class ResveService {
 		mapper.updateResve(vo);
 	}
 
+	/**
+	 * 예약 존재하는 연도 조회
+	 * @throws Exception
+	 */
 	public ArrayList<String> selectYears() throws Exception {
 		return mapper.selectYears();
 	}
 
+	/**
+	 * Bar Chart 데이터 조회
+	 * @param vo
+	 * @throws Exception
+	 */
 	public List<ChartVO> selectBarData(ChartVO vo) throws Exception {
 		return mapper.selectBarData(vo);
 	}
 
+	/**
+	 * Pie Chart 데이터 조회
+	 * @param vo
+	 * @throws Exception
+	 */
 	public List<ChartVO> selectPieData(ChartVO vo) throws Exception {
 		return mapper.selectPieData(vo);
 	}

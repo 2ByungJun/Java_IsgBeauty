@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,12 +47,16 @@ public class ResveController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/resveRegister.do")
-	public String resveRegister(@RequestParam("selectedId") String mberSn, @ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
+	public String resveRegister(@RequestParam("selectedId") String mberSn, @ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("[예약 등록 페이지]");
 
 		MberVO sampleVO = new MberVO();
 		sampleVO.setMberSn(mberSn);
 		model.addAttribute("result", selectMber(sampleVO, searchVO));
+
+		HttpSession session = request.getSession();
+		model.addAttribute("empId", session.getAttribute("empId"));
 
 		return "/useLayout/resve/resveRegister";
 	}
@@ -177,8 +182,7 @@ public class ResveController {
 
 	@ResponseBody
 	@RequestMapping(value = "/resveBarChart.json")
-	public Map<String, Object> resveBarChartJson(@RequestBody HashMap<String, Object> map,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Map<String, Object> resveBarChartJson(@RequestBody HashMap<String, Object> map) throws Exception {
 		System.out.println("[예약 Bar 차트 Json]");
 
 		/*
@@ -187,33 +191,54 @@ public class ResveController {
 		ChartVO maleChartVO = new ChartVO();
 		ChartVO femaleChartVO = new ChartVO();
 		maleChartVO.setYear(map.get("year").toString());
+		maleChartVO.setMonth(map.get("month").toString());
 		maleChartVO.setSexdstn("Male");
+		maleChartVO.setDateType(map.get("dateType").toString());
 		femaleChartVO.setYear(map.get("year").toString());
+		femaleChartVO.setMonth(map.get("month").toString());
 		femaleChartVO.setSexdstn("Female");
+		femaleChartVO.setDateType(map.get("dateType").toString());
 
-		int[] maledatas = {0,0,0,0,0,0,0,0,0,0,0,0};
-		int[] femaledatas = {0,0,0,0,0,0,0,0,0,0,0,0};
 		List<ChartVO> maleChartList = resveService.selectBarData(maleChartVO);
 		List<ChartVO> femaleChartList = resveService.selectBarData(femaleChartVO);
 
+		int[] maledatas;
+		int[] femaledatas;
 
-		for(ChartVO c : maleChartList) {
-			maledatas[Integer.parseInt(c.getMonth())-1] = c.getCnt();
-		}
-		for(ChartVO c : femaleChartList) {
-			femaledatas[Integer.parseInt(c.getMonth())-1] = c.getCnt();
+		if(map.get("dateType").equals("y")) {
+			maledatas = new int[12];
+			femaledatas = new int[12];
+
+			for(ChartVO c : maleChartList) {
+				maledatas[Integer.parseInt(c.getMonth())-1] = c.getCnt();
+			}
+			for(ChartVO c : femaleChartList) {
+				femaledatas[Integer.parseInt(c.getMonth())-1] = c.getCnt();
+			}
+			map.put("maledatas", maledatas);
+			map.put("femaledatas", femaledatas);
+		} else if(map.get("dateType").equals("m")) {
+			maledatas = new int[31];
+			femaledatas = new int[31];
+
+			for(ChartVO c : maleChartList) {
+				maledatas[Integer.parseInt(c.getDay())-1] = c.getCnt();
+			}
+			for(ChartVO c : femaleChartList) {
+				femaledatas[Integer.parseInt(c.getDay())-1] = c.getCnt();
+			}
+			map.put("maledatas", maledatas);
+			map.put("femaledatas", femaledatas);
 		}
 
-		map.put("maledatas", maledatas);
-		map.put("femaledatas", femaledatas);
+
 
 		return map;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/resvePieChart.json")
-	public Map<String, Object> resvePieChartJson(@RequestBody HashMap<String, Object> map,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Map<String, Object> resvePieChartJson(@RequestBody HashMap<String, Object> map) throws Exception {
 		System.out.println("[예약 Pie 차트 Json]");
 
 		/*
@@ -223,6 +248,8 @@ public class ResveController {
 		ChartVO pieChart = new ChartVO();
 		pieChart.setYear(map.get("year").toString());
 		pieChart.setMonth(map.get("month").toString());
+		pieChart.setIndex(map.get("index").toString());
+		pieChart.setDateType(map.get("dateType").toString());
 		List<ChartVO> pieChartList = resveService.selectPieData(pieChart);
 
 		map.put("piedatas", pieChartList);

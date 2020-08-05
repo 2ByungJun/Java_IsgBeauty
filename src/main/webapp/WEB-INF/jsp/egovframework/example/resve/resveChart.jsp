@@ -8,46 +8,111 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
-	<div class="container">
+	<div class="container" style="display: flex;">
 		 <div class="btn-group" role="group">
-		     <button type="button" class="btn btn-primary button-class1">바르셀로나</button>
-		     <button type="button" class="btn btn-default button-class2">레알마드리드</button>
+		     <button type="button" class="btn btn-primary button-class1" id="yearBtn">연간</button>
+		     <button type="button" class="btn btn-default button-class2" id="monthBtn">월간</button>
 	     </div>
 
-		<select type="text" class="form-control" id="year" name="year" onchange="createBarChart()" style = "width:100px;">
+		<select type="text" class="form-control" id="year" name="year" onchange="createBarChart()" style = "width:100px; display: inline-flex; margin-left:15px;">
 			<c:forEach var="result" items="${years}" varStatus="status">
 				<option value="${years.get(status.index)}">${years.get(status.index)}</option>
 			</c:forEach>
 		</select>
-		<select type="text" class="form-control" id="year" name="year" onchange="createBarChart()" style = "width:100px;">
-			<c:forEach var="result" items="${years}" varStatus="status">
-				<option value="${years.get(status.index)}">${years.get(status.index)}</option>
-			</c:forEach>
+		<select type="text" class="form-control" id="month" name="month" onchange="createBarChart()" style = "width:100px; margin-left:2px; ">
+			<% for(int i=1; i<13; i++) {%>
+			<option value="<%=i%>"><%=i+"월"%></option>
+			<%}%>
 		</select>
-
-
-		<canvas id="myBarChart" style="width:80vw; height:50vh"></canvas>
-		<canvas id="myPieChart" style="width:80vw; height:50vh"></canvas>
 	</div>
 
-	<script type="text/javaScript" language="javascript" defer="defer">
+	<div class="container">
+		<div style="width:100%; display:flex;">
+
+			<div style="width:65%; display:inline-flex; float:left;">
+				<canvas id="myBarChart"></canvas>
+			</div>
+			<div style="width:35%; display:inline-flex; align-self: center; justify-content: center; float:right;">
+				<canvas id="myPieChart" style="">></canvas>
+			</div>
+			<input type="hidden" id="dateType" value='y'/>
+		</div>
+	</div>
+
+<script type="text/javaScript" language="javascript" defer="defer">
+	$("#month").hide();
+    $('.button-class1').click(function(){
+        if( $(this).hasClass('btn-default') ) {
+        	$(this).removeClass('btn-default');
+        	$(this).addClass('btn-primary');
+        	$("#monthBtn").removeClass('btn-primary');
+        	$("#monthBtn").addClass('btn-default');
+        	$("#dateType").val("y");
+        	$("#month").hide();
+       	    createBarChart(barChart);
+       	    pieChart.clear();
+        }
+    });
+    $('.button-class2').click(function(){
+    	if( $(this).hasClass('btn-default') ) {
+        	$(this).removeClass('btn-default');
+        	$(this).addClass('btn-primary');
+        	$("#yearBtn").removeClass('btn-primary');
+        	$("#yearBtn").addClass('btn-default');
+        	$("#dateType").val("m");
+        	$("#month").show();
+        	createBarChart(barChart);
+        	pieChart.clear();
+        }
+    });
+
+    $(document).ready(function() {
+		createBarChart(barChart);
+	});
+
+	$("#myBarChart").click(function(evt) {
+		var activePoints = barChart.getElementsAtEvent(evt);
+		createPieChart(activePoints[0]._index+1);
+	});
+
+
 	var barConfig = {
 			type: 'bar',
-			data:  {} ,
-			options: {}
+			data: {},
+			options: {
+				scales: {
+					xAxes: [{
+			        	    scaleLabel:{
+			        		display:true,
+			        		labelString:"월",
+			        		fontSize:20,
+			        		fontStyle:'bold'
+			        	}
+			        }],
+			        yAxes: [{
+			        	ticks: {
+			        		suggestedMin: 0,
+			                suggestedMax: 5,
+							stepSize:1
+			        	},
+			        	scaleLabel:{
+			        		display:true,
+			        		labelString:"예약 건수",
+			        		fontSize:20,
+			        		fontStyle:'bold'
+			        	}
+			        }]
+			    }
+			}
 		};
 
 	var ctx = document.getElementById('myBarChart').getContext('2d');
 	var barChart = new Chart(ctx, barConfig);
 
-	$(document).ready(function() {
-		createBarChart(barChart);
-	});
-
 	function createBarChart(){
 
 	  var url  =  "<c:url value='/resveBarChart.json'/>";
-	  var jsonData = {"year": $("#year").val()};
+	  var jsonData = {"year": $("#year").val(), "dateType": $("#dateType").val(), "month": $("#month").val()};
 
 	  $.ajax({
 			headers: {
@@ -60,13 +125,21 @@
 			,data: JSON.stringify(jsonData)
 			,success:function(data){
 				console.log(data);
+				var dataLabel = new Array();
+				if($("#dateType").val() == "y") {
+					dataLabel = ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'];
+				} else {
+					for(var i=0; i<31; i++) {
+						dataLabel[i]=i+1;
+					}
+				}
 
 				var maleData = {
 					    label: "남성",
 					    data: data.maledatas,
 					    lineTension: 0,
 					    fill: false,
-					    backgroundColor: 'rgb(111, 183, 214)'
+					    backgroundColor: 'rgb(111, 183, 214)',
 					  };
 				var femaleData = {
 					    label: "여성",
@@ -76,16 +149,13 @@
 					    backgroundColor: 'rgb(255, 99, 132)'
 					  };
 				var sexdstnData = {
-						  labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL','AUG','SEP','OCT','NOV','DEC'],
+						  labels: dataLabel,
 						  datasets: [maleData, femaleData]
 						};
 
 				var updateBarConfig = {
 						type: 'bar',
-						data:  sexdstnData,
-						options: {
-							//responsive: true
-						}
+						data:  sexdstnData
 					};
 
 				barChart.config = updateBarConfig;
@@ -101,20 +171,8 @@
 
 	var pieConfig = {
 			type: 'pie',
-			data:  {/*
-				datasets: [{
-					data: [10,30,50],
-					backgroundColor: ['orange', 'rgb(111, 183, 214)','rgba(240, 99, 132, 0.6)'],
-					label: '시술별 기록'
-				}],
-				labels: [
-					'Cut',
-					'Perm',
-					'Special']
-				*/} ,
-			options: {
-				//responsive: true
-			}
+			data:  {} ,
+			options: {}
 		};
 
 	var pieCtx = document.getElementById('myPieChart').getContext('2d');
@@ -123,7 +181,11 @@
 	function createPieChart(index){
 
 	  var url  =  "<c:url value='/resvePieChart.json'/>";
-	  var jsonData = {"year": $("#year").val(), "month": index};
+	  if($("#dateType").val() == 'y') {
+		  var jsonData = {"year": $("#year").val(),"month": index, "index": index, "dateType": $("#dateType").val()};
+	  } else {
+		  var jsonData = {"year": $("#year").val(),"month": $("#month").val(), "index": index, "dateType": $("#dateType").val()};
+	  }
 
 	  $.ajax({
 			headers: {
@@ -168,13 +230,5 @@
 			}
 		});
 	}
-
-	$("#myBarChart").click(function(evt) {
-		var activePoints = barChart.getElementsAtEvent(evt);
-		createPieChart(activePoints[1]._index+1);
-	});
-
-
-
 	</script>
 

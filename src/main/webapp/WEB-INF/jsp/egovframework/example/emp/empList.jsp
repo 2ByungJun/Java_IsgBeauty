@@ -67,12 +67,12 @@
 					html += '</tr>';
 				}else{
 					$.each(data.dataList, function(index, item) {
-						imgHref = "images/"+ item.img;
-						console.log(item.img);
+						imgHref = "images/"+ item.fileId;
+						console.log(item.fileId);
 						html += '<tr>';
 						html += '<td align="center" class="listtd">' +
 									'<div class="box" style="background: #BDBDBD;">' +
-										'<img class="profile" src=images/' + item.img + '>' +
+										'<img class="profile" src=images/' + item.fileId + '>' +
 									'</div>' +
 								'</td>';
 						html += '<td align="center" class="bjMiddle listtd"><a href="javascript:view(\''+item.empId+'\')">' + item.empId + '</td>';

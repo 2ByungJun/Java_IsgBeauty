@@ -72,10 +72,24 @@ public interface ResveMapper {
 	void updateResve(ResveVO vo) throws Exception;
 
 
+	/**
+	 * 예약 존재하는 연도 조회
+	 * @throws Exception
+	 */
 	ArrayList<String> selectYears() throws Exception;
 
+	/**
+	 * Bar Chart 데이터 조회
+	 * @param vo
+	 * @throws Exception
+	 */
 	List<ChartVO> selectBarData(ChartVO vo) throws Exception;
 
+	/**
+	 * Pie Chart 데이터 조회
+	 * @param vo
+	 * @throws Exception
+	 */
 	List<ChartVO> selectPieData(ChartVO vo) throws Exception;
 
 }

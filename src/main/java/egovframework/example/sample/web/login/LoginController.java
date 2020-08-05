@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.hsqldb.lib.StringComparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.example.sample.service.emp.EmpService;
 import egovframework.example.sample.service.emp.EmpVO;
 
@@ -58,6 +56,14 @@ public class LoginController {
 		return "login/loginEmpRegister";
 	}
 
+	/**
+	 * 로그인 정보 체크
+	 * @param searchVO
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
 	@ResponseBody
 	@RequestMapping(value= "/loginCheck.json")
 	public Map<String, Object> loginCheckJson(@RequestBody EmpVO searchVO,
@@ -85,6 +91,11 @@ public class LoginController {
 		return arrayMap;
 	}
 
+	/**
+	 * 로그아웃
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/logout.do")
 	public String mberList() throws Exception {
 		System.out.println("[로그아웃]");
