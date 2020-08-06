@@ -1,3 +1,5 @@
+package egovframework.example.sample.service.jfile.view;
+
 /*
  * eGovFrame JFile
  * Copyright The eGovFrame Open Community (http://open.egovframe.go.kr)).
@@ -16,7 +18,6 @@
  *
  * @author 정호열 커미터(표준프레임워크 오픈커뮤니티 리더)
  */
-package egovframework.example.sample.service.jfile.view;
 
 import java.io.PrintWriter;
 import java.util.Map;
@@ -27,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.view.AbstractView;
 
 import egovframework.example.sample.service.jfile.org.json.JSONObject;
+
 
 /**
  *  클래스

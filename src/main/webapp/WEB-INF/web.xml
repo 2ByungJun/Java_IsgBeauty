@@ -83,4 +83,14 @@
 	<session-config>
 	    <session-timeout>30</session-timeout>
 	</session-config>
+	<jsp-config>
+		<taglib>
+			<taglib-uri>
+				http://www.egovframe.go.kr/tags/ext/jfile/jsp
+			</taglib-uri>
+			<taglib-location>
+				/WEB-INF/META-INF/jfile-jsp.tld
+			</taglib-location>
+		</taglib>
+	</jsp-config>
 </web-app>

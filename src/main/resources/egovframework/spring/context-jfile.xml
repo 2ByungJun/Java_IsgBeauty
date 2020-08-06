@@ -12,10 +12,12 @@
 
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
-<!-- 	<bean id="cipherService" class="egovframework.com.ext.jfile.security.service.CipherServiceImpl"> -->
-<!-- 		<property name="jcrypto"> -->
-<!-- 			<bean class="egovframework.com.ext.jfile.security.GenericJCrypto"/> -->
-<!-- 		</property> -->
-<!-- 	</bean> -->
+
+	<bean id="cipherService" class="egovframework.example.sample.service.jfile.security.service.CipherServiceImpl">
+		<property name="jcrypto">
+			<bean class="egovframework.example.sample.service.jfile.security.GenericJCrypto"/>
+		</property>
+	</bean>
 
 </beans>
+
