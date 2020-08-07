@@ -33,7 +33,7 @@
 	</Appenders>
 
 	<Loggers>
-		<Logger name="jdbc.resultset" level="ERROR" additivity="false">
+		<Logger name="jdbc.resultset" level="DEBUG" additivity="false">
 			<AppenderRef ref="console" />
 		</Logger>
 		<Logger name="jdbc.audit" level="DEBUG" additivity="false">
@@ -52,7 +52,7 @@
  		<Logger name="org.springframework" level="INFO" additivity="false">
  			<AppenderRef ref="console" />
  		</Logger> -->
-		<Root level="INFO">
+		<Root level="DEBUG">
 			<AppenderRef ref="console" />
 		</Root>
 

@@ -25,7 +25,7 @@ public class JFileVO implements JFileDetails {
 
 	private String fileId = null;
 
-	private String fileSeq = null;
+	private String fileSeq = "1";
 
 	private String fileName = null;
 
@@ -202,6 +202,16 @@ public class JFileVO implements JFileDetails {
 	public void setDeleteYn(String deleteYn) {
 		this.deleteYn = deleteYn;
 	}
+
+	@Override
+	public String toString() {
+		return "JFileVO [fileId=" + fileId + ", fileSeq=" + fileSeq + ", fileName=" + fileName + ", fileSize="
+				+ fileSize + ", fileMask=" + fileMask + ", downloadCount=" + downloadCount + ", downloadExpireDate="
+				+ downloadExpireDate + ", downloadLimitCount=" + downloadLimitCount + ", deleteYn=" + deleteYn
+				+ ", regDate=" + regDate + ", useSecurity=" + useSecurity + ", uploadMode=" + uploadMode + "]";
+	}
+
+
 
 
 }

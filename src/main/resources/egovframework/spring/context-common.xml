@@ -36,12 +36,6 @@
         <property name="maxInMemorySize" value="100000000" />
     </bean>
 
-    <!-- custom multi file resolver -->
-    <bean id="local.MultiCommonsMultipartResolver" class="egovframework.example.sample.service.jfile.web.EgovMultipartResolver">
-        <property name="maxUploadSize" value="100000000" />
-        <property name="maxInMemorySize" value="100000000" />
-    </bean>
-
 	<alias name="spring.RegularCommonsMultipartResolver" alias="multipartResolver" />
 
 	<bean id="traceHandlerService" class="egovframework.rte.fdl.cmmn.trace.manager.DefaultTraceHandleManager">
