@@ -101,6 +101,7 @@
 
         },
         getFileId: function (file, generateFileId) {
+        	console.log(generateFileId)
             var relativePath = $h.getFileRelativePath(file);
             if (typeof generateFileId === 'function') {
                 return generateFileId(file);
@@ -1574,7 +1575,7 @@
                         chunkSize: chunkSize,
                         chunkSizeStart: chunkSize * index,
                         fileBlob: [blob, rm.fileName],
-                        fileId: id,
+                        fileId: "",
                         fileName: rm.fileName,
                         fileRelativePath: f.relativePath,
                         fileSize: file.size,
@@ -5908,7 +5909,7 @@
             chunkSizeStart: 'chunkSizeStart',
             chunksUploaded: 'chunksUploaded',
             fileBlob: 'fileBlob',
-            fileId: 'fileId',
+//            fileId: 'fileId',
             fileName: 'fileName',
             fileRelativePath: 'fileRelativePath',
             fileSize: 'fileSize',
