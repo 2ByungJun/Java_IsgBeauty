@@ -84,6 +84,28 @@ public class EmpController {
 	}
 
 
+	@ResponseBody
+	@RequestMapping(value = "/empRegister.json")
+     public Map<String, Object> empRegisterJson(@RequestBody EmpVO searchVO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		System.out.println("empRegister.json 실행>>>>");
+
+		searchVO.setFileId("파일아이디!!!");
+		empService.insertEmp(searchVO);
+		System.out.println("empRegister 등록 실행 (insertEmp)>>>>");
+
+		Map<String, Object> arrayMap = new HashMap<>();
+		arrayMap.put("fileId", searchVO.getFileId());
+		System.out.println("arrayMap put 실행>>>>");
+
+		return arrayMap;
+	}
+
+
+
+
+
 	/**
 	 * 직원 등록 View
 	 *
@@ -156,6 +178,8 @@ public class EmpController {
 	public String addEmp(@ModelAttribute("searchVO") EmpVO searchVO, EmpVO sampleVO) throws Exception {
 		System.out.println("[직원 등록 기능]");
 
+
+		sampleVO.setFileId("File" + searchVO.getEmpId());
 		empService.insertEmp(sampleVO);
 
 		return "forward:/empList.do";
