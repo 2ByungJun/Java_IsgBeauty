@@ -91,8 +91,8 @@
 			regist_id,
 			regist_dt,
 			updt_id,
-			updt_dt
-			<if test="fileId != null and fileId != ''">,file_id</if>
+			updt_dt,
+			file_id
 		) values (
 			#{empId},
 			#{empPassword},
@@ -105,8 +105,8 @@
 			#{registId},
 			CURDATE(),
 			#{registId},
-			CURDATE()
-			<if test="fileId != null and fileId != ''">,#{fileId}</if>
+			CURDATE(),
+			#{fileId}
 		)
 	</insert>
 

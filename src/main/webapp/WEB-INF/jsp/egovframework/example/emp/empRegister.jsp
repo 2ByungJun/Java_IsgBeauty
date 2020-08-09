@@ -1,97 +1,55 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page isELIgnored="false" %>
+<%@ page isELIgnored="false"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.egovframe.go.kr/tags/ext/jfile/jsp" prefix="jwork"%>
-
-<html>
-<head>
-
-	<!-- fileInput -->
-	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.min.css'/>">
-	<script src="<c:url value='fileinput/js/fileinput.min.js' />"></script>
-
-
-	<script type="text/javascript">
-
-	$(document).ready(function() {
-	    $("#input-res-1").fileinput({
-	        uploadUrl: "/IsgBeauty/jfile/processUpload.do",
-	        enableResumableUpload: true,
-	        initialPreviewAsData: true,
-	        validataInitialCount: false,
-	        uploadExtraData: {
-	        	Upload : "Submit Query",
-	        	uploadMode : "db",
-	        	beanId : null
-	        },
-	        maxFileCount: 5,
-	        theme: 'explorer',
-	        deleteUrl: '/site/file-delete',
-	        fileActionSettings: {
-	            showZoom: function(config) {
-	                if (config.type === 'pdf' || config.type === 'image') {
-	                    return true;
-	                }
-	                return false;
-	            }
-	        }
-	    });
-	});
-
-	</script>
-
-</head>
-<body>
-
-	<div class="file-loading">
-    	<input id="input-res-1" name="input-res-1[]" type="file" multiple>
-	</div>
-
-</body>
-</html>
-
-
-
-
-<%--
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://egovframework.gov/ctl/ui" prefix="ui"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
+<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.min.css'/>">
+<script src="<c:url value='fileinput/js/fileinput.min.js' />"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>IsgBeauty 프로젝트</title>
-
-<!-- Bootstrap -->
-<link rel="stylesheet"
-	href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
-<script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
-<script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
-
-<!-- Validation -->
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-
 <!-- fileInput -->
-	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput-rtl.css'/>">
-	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput-rtl.min.css'/>">
-	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.css'/>">
-	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.min.css'/>">
-	<script src="<c:url value='fileinput/js/fileinput.js' />"></script>
-	<script src="<c:url value='fileinput/js/fileinput.min.js' />"></script>
+
+
+
 
 <!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
+	$(document).ready(function() {
+		$("#input-res-1").fileinput({
+			uploadUrl : "/IsgBeauty/jfile/processUpload.do",
+			uploadAsync: true,
+			enableResumableUpload : true,
+			initialPreviewAsData : true,
+			validataInitialCount : false,
+			/* uploadExtraData : {
+				Upload : "Submit Query",
+				uploadMode : "db",
+				beanId : null,
+				fileId : 'File' + $('#empId').val()
+			}, */
+			maxFileCount : 1,
+			theme : 'explorer',
+			deleteUrl : '/site/file-delete',
+			fileActionSettings : {
+				showZoom : function(config) {
+					if (config.type === 'pdf' || config.type === 'image') {
+						return true;
+					}
+					return false;
+				}
+			}
+		});
+	});
+
+
 	function home() {
 		location.href = "<c:url value='/empList.do'/>";
 	}
@@ -100,49 +58,75 @@
 	$(function() {
 		$("#detailForm").validate({
 			submitHandler : function() {
+
+				var jsonData = {empId:$("#empId").val(), empPassword:$("#empPassword").val(), empNm:$("#empNm").val(), telno:$("#telno").val(), sexdstn:$("#sexdstn").val(), pspofc:$("#pspofc").val(),
+						salary:$("#salary").val(), career:$("#career").val(), registId:$("#registId").val(), registDt:$("#registDt").val()}
+
 				var check = confirm("해당 직원을 등록하시겠습니까?");
 				if (check) {
-					alert("등록되었습니다.");
-					frm = document.detailForm;
+					 $.ajax({
+							headers: {
+								Accept: "application/json;utf-8"
+							}
+							,contentType: "application/json;utf-8"
+							,dataType: "json"
+							,type: "POST"
+							,url: "<c:url value= '/empRegister.json'/>"
+							,data: JSON.stringify(jsonData)
+							,success:function(data){
+								console.log(data.fileId);
+
+
+								alert("등록되었습니다.");
+							/* 	$("#input-res-1").fileinput("upload"); */
+							}
+							,error:function(e){
+							   	console.log(e.status, e.statusText);
+							   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
+							}
+						});
+
+
+					/* frm = document.detailForm;
 					frm.action = "<c:url value= '/addEmp.do'/>";
-					frm.submit();
+					frm.submit(); */
 				} else {
 					alert("취소하셨습니다.");
 				}
 			},
-			rules: {
-				empId: {
+			rules : {
+				empId : {
 					required : true,
 					minlength : 3,
 					idchk : true
 				},
-				empPassword: {
+				empPassword : {
 					required : true,
 					minlength : 4
 				},
-				empNm: {
+				empNm : {
 					required : true
 				},
-				telno: {
+				telno : {
 					required : true,
 					minlength : 12,
 					regex : "^(010)[-\\s]?\\d{3,4}[-\\s]?\\d{4}$"
 				},
-				salary: {
+				salary : {
 					required : true,
 					digits : true
 				},
-				career: {
+				career : {
 					required : true
 				}
 			},
-			messages: {
-				empId: {
+			messages : {
+				empId : {
 					required : "필수 입력 항목입니다.",
 					minlength : "아이디는 최소 3글자 이상입니다.",
 					idchk : "이미 존재하는 ID입니다."
 				},
-				empPassword: {
+				empPassword : {
 					required : "필수 입력 항목입니다.",
 					minlength : "비밀번호는 최소 4자리 이상입니다."
 				},
@@ -174,29 +158,29 @@
 
 	function inputPhoneNumber(obj) {
 
-	    var number = obj.value.replace(/[^0-9]/g, "");
-	    var phone = "";
+		var number = obj.value.replace(/[^0-9]/g, "");
+		var phone = "";
 
-	    if(number.length < 4) {
-	        return number;
-	    } else if(number.length < 7) {
-	        phone += number.substr(0, 3);
-	        phone += "-";
-	        phone += number.substr(3);
-	    } else if(number.length < 11) {
-	        phone += number.substr(0, 3);
-	        phone += "-";
-	        phone += number.substr(3, 3);
-	        phone += "-";
-	        phone += number.substr(6);
-	    } else {
-	        phone += number.substr(0, 3);
-	        phone += "-";
-	        phone += number.substr(3, 4);
-	        phone += "-";
-	        phone += number.substr(7);
-	    }
-	    obj.value = phone;
+		if (number.length < 4) {
+			return number;
+		} else if (number.length < 7) {
+			phone += number.substr(0, 3);
+			phone += "-";
+			phone += number.substr(3);
+		} else if (number.length < 11) {
+			phone += number.substr(0, 3);
+			phone += "-";
+			phone += number.substr(3, 3);
+			phone += "-";
+			phone += number.substr(6);
+		} else {
+			phone += number.substr(0, 3);
+			phone += "-";
+			phone += number.substr(3, 4);
+			phone += "-";
+			phone += number.substr(7);
+		}
+		obj.value = phone;
 	}
 
 	function empIdCheck() {
@@ -247,38 +231,12 @@
 
 	function numkeyCheck(e) {
 		var keyValue = event.keyCode;
-		if( ((keyValue < 48) || (keyValue > 57)) )
+		if (((keyValue < 48) || (keyValue > 57)))
 			return false;
 		else {
 			return true;
-			}
 		}
-
-	$(document).ready(function() {
-	    $("#input-res-1").fileinput({
-	        uploadUrl:  "<c:url value='/jfile/processUpload.do'/>",
-	        enableResumableUpload: true,
-	        initialPreviewAsData: true,
-	        validataInitialCount: false,
-	        uploadExtraData: {
-	        	Upload : "Submit Query",
-	        	uploadMode : "db",
-	        	beanId : null
-	        },
-	        maxFileCount: 5,
-	        theme: 'explorer',
-	        deleteUrl: '/site/file-delete',
-	        fileActionSettings: {
-	            showZoom: function(config) {
-	                if (config.type === 'pdf' || config.type === 'image') {
-	                    return true;
-	                }
-	                return false;
-	            }
-	        }
-	    });
-	});
-
+	}
 </script>
 </head>
 <style>
@@ -295,8 +253,8 @@ label.error {
 }
 
 .bjWidth {
-	width:200px;
-	margin-top:10px;
+	width: 200px;
+	margin-top: 10px;
 }
 </style>
 <body>
@@ -308,8 +266,8 @@ label.error {
 	<form:form commandName="empVO" id="detailForm" name="detailForm"
 		method="post">
 		<div class="container">
-			<h2 style="text-align:center;">
-					<b>직원 등록</b>
+			<h2 style="text-align: center;">
+				<b>직원 등록</b>
 			</h2>
 
 			<!-- Contents -->
@@ -320,15 +278,12 @@ label.error {
 
 				<!-- Center(10%) -->
 				<div style="width: 10%; text-align: center; display: grid">
-					<label class="control-label">아이디 : </label>
-					<label class="control-label">비밀번호:</label>
-					<label class="control-label">이름:</label>
-					<label class="control-label">전화번호:</label>
-					<label class="control-label">성별:</label>
-					<label class="control-label">직책:</label>
-					<label class="control-label">급여:</label>
-					<label class="control-label">경력:</label>
-					<label class="control-label">등록자:</label>
+					<label class="control-label">아이디 : </label> <label
+						class="control-label">비밀번호:</label> <label class="control-label">이름:</label>
+					<label class="control-label">전화번호:</label> <label
+						class="control-label">성별:</label> <label class="control-label">직책:</label>
+					<label class="control-label">급여:</label> <label
+						class="control-label">경력:</label> <label class="control-label">등록자:</label>
 					<label class="control-label">등록일:</label>
 				</div>
 
@@ -336,22 +291,27 @@ label.error {
 				<div style="width: 60%; text-align: left; display: grid">
 					<!-- 아이디 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="empId" name="empId" required>
+						<input type="text" class="bjWidth form-control" id="empId"
+							name="empId" required>
 					</div>
 
 					<!-- 비밀번호 -->
 					<div style="display: inline-flex;">
-						<input type="password" class="bjWidth form-control" id="empPassword" name="empPassword" required>
+						<input type="password" class="bjWidth form-control"
+							id="empPassword" name="empPassword" required>
 					</div>
 
 					<!-- 이름 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="empNm" name="empNm" required>
+						<input type="text" class="bjWidth form-control" id="empNm"
+							name="empNm" required>
 					</div>
 
 					<!-- 전화번호 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="telno" name="telno" placeholder="000-0000-0000" maxlength="13" onkeyup="inputPhoneNumber(this)" required>
+						<input type="text" class="bjWidth form-control" id="telno"
+							name="telno" placeholder="000-0000-0000" maxlength="13"
+							onkeyup="inputPhoneNumber(this)" required>
 					</div>
 
 					<!-- 성별 -->
@@ -365,7 +325,8 @@ label.error {
 
 					<!-- 직책 -->
 					<div style="display: inline-flex;">
-						<select type="text" class="bjWidth form-control" id="pspofc" name="pspofc">
+						<select type="text" class="bjWidth form-control" id="pspofc"
+							name="pspofc">
 							<option value="Admin" selected="selected">Admin</option>
 							<option value="Designer">Designer</option>
 						</select>
@@ -373,45 +334,61 @@ label.error {
 
 					<!-- 급여 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="salary" name="salary" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" required>
+						<input type="text" class="bjWidth form-control" id="salary"
+							name="salary"
+							onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" required>
 					</div>
 
 					<!-- 경력 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="career" name="career" required>
+						<input type="text" class="bjWidth form-control" id="career"
+							name="career" required>
 					</div>
 
 					<!-- 등록자 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="registId" name="registId" value="${empId}" readonly>
+						<input type="text" class="bjWidth form-control" id="registId"
+							name="registId" value="${empId}" readonly>
 					</div>
 
 					<!-- 등록일 -->
 					<div style="display: inline-flex;">
-						<input type="date" class="bjWidth form-control" id="registDt" name="registDt" value="<%=today%>" readonly>
+						<input type="date" class="bjWidth form-control" id="registDt"
+							name="registDt" value="<%=today%>" readonly>
 					</div>
 				</div>
 			</div>
 		</div>
+		<!-- ID Check input -->
+		<input type="hidden" id="idCheck" name="idCheck" value="false"
+			readonly>
+
+
+
+
+		<!-- <!-- 이미지
+		<div class="container"
+			style="width: 50%; text-align: center; font-stretch: semi-condensed;">
+			<label class="control-label">프로필 사진</label> <input id="fileId"
+				name="fileId" type="file" class="bjWidth file" multiple
+				data-show-upload="true" data-show-caption="true"
+				data-browse-on-zone-click="true">
+		</div> --> -->
 
 		<!-- 이미지 -->
-		<!-- <div class="container" style="width:50%; text-align:center; font-stretch:semi-condensed;">
-			<label class="control-label">프로필 사진</label>
-			<input id="fileId" name="fileId" type="file" class="bjWidth file" multiple data-show-upload="false" data-show-caption="true" data-browse-on-zone-click="true">
-		</div>
- -->
 		<div class="file-loading">
-	    	<input id="input-res-1" name="input-res-1[]" type="file" multiple>
+    		<input id="input-res-1" name="input-res-1[]" type="file" multiple>
 		</div>
+
 
 		<!-- Button -->
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="submit" class="btn btn-primary" onclick="">등록</button>
 			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
 		</div>
-		<!-- ID Check input -->
-		<input type="hidden" id="idCheck" name="idCheck" value="false" readonly>
+</form:form>
 
-	</form:form>
+
+
+
 </body>
-</html> --%>
