@@ -224,8 +224,10 @@ public class EmpController {
 
 		if(result != null) {
 			map.put("result", "true");
+			System.out.println("return : true >>> !!!!!");
 		} else {
 			map.put("result", "false");
+			System.out.println("return : false!!!!!");
 		}
 
 		return map;
@@ -253,8 +255,10 @@ public class EmpController {
 
 		if(empLoginVO != null) {
 			map.put("result", "false");
+			System.out.println("return : false!!!!!");
 		} else {
 			map.put("result", "true");
+			System.out.println("return : true >>> !!!!!");
 		}
 
 		return map;

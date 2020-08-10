@@ -138,6 +138,7 @@ label.error {
 		var jsonData = {
 			"snKey" : $("#snKey").val()
 		};
+		var snchk;
 		$.ajax({
 
 			headers : {
@@ -147,30 +148,24 @@ label.error {
 			dataType : "json",
 			type : "POST",
 			url : url,
+			async : false,
 			data : JSON.stringify(jsonData),
 			success : function(data) {
-				console.log(data);
-
 				if (data.result == "true") {
-					$("#snCheck").val("true");
+					snchk=true;
 				} else {
-					$("#snCheck").val("false");
+					snchk=false;
 				}
-
 			},
 			error : function(e) {
 				console.log(e.status, e.statusText);
 				alert("서버 오류 입니다. 관리자에게 문의하세요.");
 			}
 		});
+		return snchk;
 	}
 
 	function empIdCheck() {
-		if ($("#empId").val() == '') {
-			alert("ID를 입력해주세요.");
-			return;
-		}
-
 		var url = "<c:url value='/IdChecking.json'/>";
 		var jsonData = {
 			"empId" : $("#empId").val()
@@ -184,14 +179,13 @@ label.error {
 			dataType : "json",
 			type : "POST",
 			url : url,
+			async : false,
 			data : JSON.stringify(jsonData),
 			success : function(data) {
-				console.log(data);
-
 				if (data.result == "true") {
-					$("#idCheck").val("true");
+					idchk = true;
 				} else {
-					$("#idCheck").val("false");
+					idchk = false;
 				}
 
 			},
@@ -200,11 +194,11 @@ label.error {
 				alert("서버 오류 입니다. 관리자에게 문의하세요.");
 			}
 		});
+		return idchk;
 	}
 
 	$.validator.addMethod("idchk", function(value, element) {
-		empIdCheck();
-		if ($("#idCheck").val() == "true") {
+		if (empIdCheck()) {
 			return true;
 		} else {
 			return false;
@@ -212,8 +206,7 @@ label.error {
 	})
 
 	$.validator.addMethod("snchk", function(value, element) {
-		snKeyCehck();
-		if ($("#snCheck").val() == "true") {
+		if (snKeyCehck()) {
 			return true;
 		} else {
 			return false;

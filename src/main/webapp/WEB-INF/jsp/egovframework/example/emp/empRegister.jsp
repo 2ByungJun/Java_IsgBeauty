@@ -73,25 +73,11 @@
 							,url: "<c:url value= '/empRegister.json'/>"
 							,data: JSON.stringify(jsonData)
 							,success:function(data){
-<<<<<<< HEAD
-								$("#input-res-1").fileinput('refresh', {
-									uploadExtraData : {
-										Upload : "Submit Query",
-										uploadMode : "db",
-										beanId : null,
-										fileId : data.fileId
-									}
-								});
-
-								console.log(data.fileId);
-							 	alert("등록되었습니다.");
-=======
 								$("#fileId").val(data.fileId); // fileId 값을 받아오고
 								alert("등록되었습니다.");
->>>>>>> branch 'master' of https://github.com/2ByungJun/IsgBeauty.git
 
 							 	$("#input-res-1").fileinput("upload");
-
+							 	alert("등록되었습니다.");
 							 	setTimeout(function(){
 							 		home();
 							 	}, 2000);
@@ -197,15 +183,11 @@
 	}
 
 	function empIdCheck() {
-		if ($("#empId").val() == '') {
-			alert("ID를 입력해주세요.");
-			return;
-		}
-
 		var url = "<c:url value='/IdChecking.json'/>";
 		var jsonData = {
 			"empId" : $("#empId").val()
 		};
+		var idchk;
 
 		$.ajax({
 			headers : {
@@ -215,14 +197,13 @@
 			dataType : "json",
 			type : "POST",
 			url : url,
+			async : false,
 			data : JSON.stringify(jsonData),
 			success : function(data) {
-				console.log(data);
-
 				if (data.result == "true") {
-					$("#idCheck").val("true");
+					idchk = true;
 				} else {
-					$("#idCheck").val("false");
+					idchk = false;
 				}
 
 			},
@@ -231,11 +212,11 @@
 				alert("서버 오류 입니다. 관리자에게 문의하세요.");
 			}
 		});
+		return idchk;
 	}
 
 	$.validator.addMethod("idchk", function(value, element) {
-		empIdCheck();
-		if ($("#idCheck").val() == "true") {
+		if (empIdCheck()) {
 			return true;
 		} else {
 			return false;
@@ -373,7 +354,7 @@ label.error {
 			</div>
 		</div>
 		<!-- ID Check input -->
-		<input type="hidden" id="idCheck" name="idCheck" value="false"
+		<input type="hidden" id="idCheck" name="idCheck" value="true"
 			readonly>
 
 		<!-- 이미지 -->
