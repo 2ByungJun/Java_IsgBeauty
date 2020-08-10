@@ -73,8 +73,22 @@
 							,url: "<c:url value= '/empRegister.json'/>"
 							,data: JSON.stringify(jsonData)
 							,success:function(data){
+<<<<<<< HEAD
+								$("#input-res-1").fileinput('refresh', {
+									uploadExtraData : {
+										Upload : "Submit Query",
+										uploadMode : "db",
+										beanId : null,
+										fileId : data.fileId
+									}
+								});
+
+								console.log(data.fileId);
+							 	alert("등록되었습니다.");
+=======
 								$("#fileId").val(data.fileId); // fileId 값을 받아오고
 								alert("등록되었습니다.");
+>>>>>>> branch 'master' of https://github.com/2ByungJun/IsgBeauty.git
 
 							 	$("#input-res-1").fileinput("upload").on('fileuploaded', function() {
 							 		home();
@@ -92,6 +106,8 @@
 				} else {
 					alert("취소하셨습니다.");
 				}
+
+				$("#input-res-1").fileinput('upload');
 			},
 			rules : {
 				empId : {
