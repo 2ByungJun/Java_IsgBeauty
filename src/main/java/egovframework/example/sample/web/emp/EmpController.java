@@ -91,7 +91,7 @@ public class EmpController {
 
 		System.out.println("empRegister.json 실행>>>>");
 
-		searchVO.setFileId("파일아이디!!!");
+		searchVO.setFileId("File"+searchVO.getEmpId());
 		empService.insertEmp(searchVO);
 		System.out.println("empRegister 등록 실행 (insertEmp)>>>>");
 
