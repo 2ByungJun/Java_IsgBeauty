@@ -103,9 +103,6 @@ public class EmpController {
 	}
 
 
-
-
-
 	/**
 	 * 직원 등록 View
 	 *
@@ -166,24 +163,25 @@ public class EmpController {
 		return "/useLayout/emp/empEdit";
 	}
 
-	/**
-	 * 직원 등록
-	 *
-	 * @param searchVO
-	 * @param sampleVO
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/addEmp.do", method = RequestMethod.POST)
-	public String addEmp(@ModelAttribute("searchVO") EmpVO searchVO, EmpVO sampleVO) throws Exception {
-		System.out.println("[직원 등록 기능]");
 
+	@ResponseBody
+	@RequestMapping(value = "/empEdit.json")
+     public Map<String, Object> empEditJson(@RequestBody EmpVO searchVO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		sampleVO.setFileId("File" + searchVO.getEmpId());
-		empService.insertEmp(sampleVO);
+		System.out.println("empEdit.json 실행>>>>");
+		searchVO.setFileId("File"+searchVO.getEmpId());
 
-		return "forward:/empList.do";
+		empService.updateEmp(searchVO);
+		System.out.println("empEdit 수정 실행 >>>>");
+
+		Map<String, Object> arrayMap = new HashMap<>();
+		arrayMap.put("fileId", searchVO.getFileId());
+		System.out.println("arrayMap put 실행>>>>");
+
+		return arrayMap;
 	}
+
 
 	/**
 	 * 관리자 회원가입

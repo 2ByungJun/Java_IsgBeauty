@@ -17,8 +17,6 @@
 <link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.min.css'/>">
 <script src="<c:url value='fileinput/js/fileinput.js' />"></script>
 
-
-
 <!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
 
@@ -76,11 +74,16 @@
 								$("#fileId").val(data.fileId); // fileId 값을 받아오고
 								alert("등록되었습니다.");
 
+<<<<<<< HEAD
 							 	$("#input-res-1").fileinput("upload");
 							 	alert("등록되었습니다.");
 							 	setTimeout(function(){
+=======
+							 	$("#input-res-1").fileinput("upload").on('fileuploaded', function() {
+>>>>>>> branch 'master' of https://github.com/2ByungJun/IsgBeauty.git
 							 		home();
-							 	}, 2000);
+							    });
+
 							}
 							,error:function(e){
 							   	console.log(e.status, e.statusText);
