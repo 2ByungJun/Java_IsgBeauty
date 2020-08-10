@@ -22,19 +22,20 @@
 
 <!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
-		$(document).ready(function() {
+
+	function home() {
+		location.href = "<c:url value='/empList.do'/>";
+	}
+
+
+	/* FileUpload */
+	$(document).ready(function() {
 		$("#input-res-1").fileinput({
 			uploadUrl : "/IsgBeauty/jfile/processUpload.do",
 			uploadAsync: true,
 			enableResumableUpload : true,
 			initialPreviewAsData : true,
-			validataInitialCount : false,
-			uploadExtraData : {
-				Upload : "Submit Query",
-				uploadMode : "db",
-				beanId : null,
-				fileId : 'FileTest5'
-			},
+			validataInitialCount : true,
 			maxFileCount : 1,
 			theme : 'explorer',
 			deleteUrl : '/site/file-delete',
@@ -48,11 +49,6 @@
 			}
 		});
 	});
-
-
-	function home() {
-		location.href = "<c:url value='/empList.do'/>";
-	}
 
 	/* 글 등록 function */
 	$(function() {
@@ -71,29 +67,38 @@
 							,contentType: "application/json;utf-8"
 							,dataType: "json"
 							,type: "POST"
+							,async:false
 							,url: "<c:url value= '/empRegister.json'/>"
 							,data: JSON.stringify(jsonData)
 							,success:function(data){
+								$("#input-res-1").fileinput('refresh', {
+									uploadExtraData : {
+										Upload : "Submit Query",
+										uploadMode : "db",
+										beanId : null,
+										fileId : data.fileId
+									}
+								});
+
 								console.log(data.fileId);
-
-
+							 	alert("등록되었습니다.");
 
 							 	$("#input-res-1").fileinput("upload");
-							 	alert("등록되었습니다.");
+
+							 	setTimeout(function(){
+							 		home();
+							 	}, 2000);
 							}
 							,error:function(e){
 							   	console.log(e.status, e.statusText);
 							   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
 							}
 						});
-
-
-					/* frm = document.detailForm;
-					frm.action = "<c:url value= '/addEmp.do'/>";
-					frm.submit(); */
 				} else {
 					alert("취소하셨습니다.");
 				}
+
+				$("#input-res-1").fileinput('upload');
 			},
 			rules : {
 				empId : {
