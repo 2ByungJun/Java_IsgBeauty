@@ -76,11 +76,13 @@
 								$("#fileId").val(data.fileId); // fileId 값을 받아오고
 								alert("등록되었습니다.");
 
-							 	$("#input-res-1").fileinput("upload");
-
-							 	setTimeout(function(){
+							 	$("#input-res-1").fileinput("upload").on('fileuploaded', function() {
 							 		home();
-							 	}, 2000);
+							    });
+
+							 	/* setTimeout(function(){
+							 		home();
+							 	}, 2000); */
 							}
 							,error:function(e){
 							   	console.log(e.status, e.statusText);
