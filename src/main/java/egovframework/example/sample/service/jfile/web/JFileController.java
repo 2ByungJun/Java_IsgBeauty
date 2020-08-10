@@ -169,73 +169,28 @@ public class JFileController {
 		return modelAndView;
 	}
 
-//	/**
-//	 * 파일을 다운로드 받는다.
-//	 * @param fileVO
-//	 * @return
-//	 */
-//	@RequestMapping("/jfile/readDownloadFile.do")
-//	public ModelAndView readDownloadFile(JFileVO fileVO) {
-//		System.out.println("============================");
-//		System.out.println("Controller-6.파일 다운로드 /readDownloadFile.do");
-//		System.out.println("============================");
-//		JFile downloadFile = service.getFile(fileVO.getFileId(), fileVO.getFileSeq(), fileVO.getUseSecurity());
-//		// 다운로드 카운트를 증가 시킨다.
-//		service.updateAttachFileDownloadCountBySequence(fileVO.getFileId(), fileVO.getFileSeq());
-//        return new ModelAndView(JfileDownloadView.NAME, JfileDownloadView.MODELNAME, downloadFile);
-//	}
-//
-//	/**
-//	 * 멀티 업로드된 모든 파일을 zip로 압축하여 다운로드 받는다.
-//	 * @param fileVO
-//	 * @return
-//	 */
-//	@RequestMapping("/jfile/downloadAll.do")
-//	public ModelAndView downloadAll(JFileVO fileVO) {
-//		System.out.println("============================");
-//		System.out.println("Controller-7. zip파일 다운로드 /downloadAll.do");
-//		System.out.println("============================");
-//		JFile[] downloadZipFile = service.getFiles(fileVO.getFileId(), fileVO.getUseSecurity());
-//		service.updateAttachFileDownloadCountByFileId(fileVO.getFileId());
-//		return new ModelAndView(JfileDownloadView.NAME, JfileDownloadView.MODELNAME, downloadZipFile);
-//	}
-//
-//	/**
-//	 * 이미지 파일일 경우 미리보기를 한다.
-//	 * @param fileVO
-//	 * @return
-//	 */
-//	@RequestMapping("/jfile/preview.do")
-//	public ModelAndView preview(JFileVO fileVO) {
-//		System.out.println("============================");
-//		System.out.println("Controller-8. 이미지 미리보기 /preview.do");
-//		System.out.println("============================");
-//		JFileDetails prevFileVO = null;
-//		prevFileVO = service.getAttachFile(fileVO.getFileId(), fileVO.getFileSeq());
-//
-//		JFile previewFile = prevFileVO.isImage() ?
-//				service.getFileBySequence(fileVO.getFileId(), fileVO.getFileSeq(), fileVO.getUseSecurity()) : new JFile(getNoImagePath());
-//		return new ModelAndView(JfileDownloadView.NAME, JfileDownloadView.MODELNAME, previewFile);
-//	}
-
-
-/*	*//**
+	/**
 	 * 이미지 파일일 경우 미리보기를 한다.
 	 * @param fileVO
 	 * @return
-	 *//*
+	 */
 	@RequestMapping("/jfile/preview.do")
 	public ModelAndView preview(JFileVO fileVO) {
 		System.out.println("============================");
-		System.out.println("Controller-8. 이미지 미리보기 /preview.do");
+		System.out.println("Controller-8. 이미지 미리보기 /preview.do!!!!");
 		System.out.println("============================");
 		JFileDetails prevFileVO = null;
-		prevFileVO = service.getAttachFile(fileVO.getFileId(), fileVO.getFileSeq());
+		prevFileVO= service.getAttachFile(fileVO.getFileId(), fileVO.getFileSeq());
+		System.out.println("prevFileVO service.getAttachFile");
 
 		JFile previewFile = prevFileVO.isImage() ?
 				service.getFileBySequence(fileVO.getFileId(), fileVO.getFileSeq(), fileVO.getUseSecurity()) : new JFile(getNoImagePath());
+
+
+
+		System.out.println("prevFileVO service.getFileBySequence");
 		return new ModelAndView(JfileDownloadView.NAME, JfileDownloadView.MODELNAME, previewFile);
-	}*/
+	}
 
 	/**
 	 * 이미지 경로를 읽어온다.

@@ -102,6 +102,7 @@ public abstract class JFileUploadModeTemplate extends EgovAbstractServiceImpl {
 	public abstract String getFileDownloadPullPath(String fileMask, String dbMode, String string);
 
 	public JFile getJFile(JFileDetails fileVo, String useSecurity, String uploadPath) {
+		System.out.println("getJFile 실행!!!!!");
 		if (fileVo == null) {
 			throw new JFileException(" 첨부파일 이력 정보가 존재하지 않습니다. ");
 		}

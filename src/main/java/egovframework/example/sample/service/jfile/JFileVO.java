@@ -183,6 +183,7 @@ public class JFileVO implements JFileDetails {
 	}
 
 	public boolean isImage() {
+		System.out.println("isImage 메소드 실행!!!>>>");
 		return 	("bmp". equals(getExtension()) ||
 			     "gif". equals(getExtension()) ||
 		         "jpg". equals(getExtension()) ||

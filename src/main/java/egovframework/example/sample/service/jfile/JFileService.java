@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import egovframework.example.sample.service.jfile.impl.JFileMapper;
 import egovframework.example.sample.service.jfile.template.JFileUploadModeFactory;
+import egovframework.example.sample.service.jfile.template.JFileUploadModeTemplate;
 
 
 @Service
@@ -76,7 +77,15 @@ public class JFileService {
 	 * @return Map<String, Object> 첨부파일 정보.
 	 */
 	public JFileDetails getAttachFile(String fileId, String fileSeq) {
-		return mapper.getAttachFile(fileId, fileSeq);
+		System.out.println("getAttachFile 실행");
+		System.out.println("fileId : " + fileId);
+		System.out.println("fileSeq : " + fileSeq);
+
+		JFileVO jfileVO = new JFileVO();
+		jfileVO.setFileId(fileId);
+		jfileVO.setFileSeq(fileSeq);
+
+		return mapper.getAttachFileToMap(jfileVO);
 	};
 
 	/**
@@ -186,6 +195,18 @@ public class JFileService {
 	 */
 	public void executeAfterUploadCompleted(String fileId) {
 		mapper.executeAfterUploadCompleted(fileId);
+	};
+
+	/**
+	 * 파일아이디와 파일 시퀀스 암호화 여부를 검색 조건으로 파일을 찾는다.
+	 * @param fileId 파일아이디
+	 * @param fileSeq 파일 시퀀스
+	 * @param useSecurity 암호화 여부
+	 * @return File 파일 객체
+	 */
+	public JFile getFileBySequence(String fileId, String fileSeq, String useSecurity) {
+		JFileUploadModeTemplate upload = JFileUploadModeFactory.INSTANCE.getUploadType(JFileService.DB_MODE).getHandler();
+		return upload.getJFile(getAttachFile(fileId, fileSeq), useSecurity, JProperties.getString(GlobalVariables.DEFAULT_FILE_UPLOAD_PATH_KEY));
 	};
 
 

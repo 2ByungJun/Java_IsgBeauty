@@ -102,27 +102,26 @@
 	         </where>
 		</delete>
 
-<!-- 		<select id="getAttachFileToMap" parameterType="map" resultType="jfileVO"> -->
-<!-- 			SELECT -->
-<!-- 				   FILE_ID               as fileId, -->
-<!-- 				   FILE_SEQ              as fileSeq, -->
-<!-- 				   FILE_NAME             as fileName, -->
-<!-- 			       FILE_SIZE             as fileSize, -->
-<!-- 			       FILE_MASK             as fileMask, -->
-<!-- 			       DOWNLOAD_COUNT        as downloadCount, -->
-<!-- 			       DOWNLOAD_EXPIRE_DATE  as downloadExpireDate, -->
-<!-- 			       DOWNLOAD_LIMIT_COUNT  as downloadLimitCount, -->
-<!-- 			       REG_DATE              as regDate -->
-<!-- 			  FROM J_ATTACHFILE -->
-<!-- 			  <where> -->
-<!-- 			     <if test='fileId != null'> -->
-<!-- 		                FILE_ID  = #{fileId} -->
-<!-- 		            </if> -->
-<!-- 		         <if test='fileSeq != null'> -->
-<!-- 		                FILE_SEQ = #{fileSeq} -->
-<!-- 		         </if> -->
-<!-- 			  </where> -->
-<!-- 		</select> -->
+		<select id="getAttachFileToMap" parameterType="map" resultType="jfileVO">
+			SELECT
+				   FILE_ID               as fileId,
+				   FILE_SEQ              as fileSeq,
+				   FILE_NAME             as fileName,
+			       FILE_SIZE             as fileSize,
+			       FILE_MASK             as fileMask,
+			       DOWNLOAD_COUNT        as downloadCount,
+			       DOWNLOAD_EXPIRE_DATE  as downloadExpireDate,
+			       DOWNLOAD_LIMIT_COUNT  as downloadLimitCount,
+			       REG_DATE              as regDate
+			  FROM J_ATTACHFILE
+			  where 1=1
+			     <if test='fileId != null'>
+		              and  FILE_ID  = #{fileId}
+		            </if>
+		         <if test='fileSeq != null'>
+		              and   FILE_SEQ = #{fileSeq}
+		         </if>
+		</select>
 
 		<select id="getAttachFileSeqs" parameterType="string" resultType="string">
 			SELECT FILE_SEQ

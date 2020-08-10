@@ -43,7 +43,7 @@ public interface JFileMapper {
 	 * @param fileSeq 파일 시퀀스.
 	 * @return Map<String, Object> 첨부파일 정보.
 	 */
-	public JFileDetails getAttachFile(String fileId, String fileSeq);
+/*	public JFileDetails getAttachFile(String fileId, String fileSeq);*/
 
 	/**
 	 * 파일 아이디로 파일 시퀀스 목록을 조회한다.
@@ -125,4 +125,13 @@ public interface JFileMapper {
 	 * @return JFile[] 암호화 정보 및 마스킹 파일명을 포함하고 있는 파일 객체.
 	 */
 	public JFile[] getFiles(String fileId, String useSecurity);
+
+	/**
+	 * 파일아이디와 파일 시퀀스로 첨부 파일 정보를 조회한다.
+	 * @param fileId 파일 아이디.
+	 * @param fileSeq 파일 시퀀스.
+	 * @return JFileVO 첨부파일 정보.
+	 */
+	public JFileVO getAttachFileToMap(JFileVO jfileVO);
+
 }

@@ -72,18 +72,10 @@
 							,data: JSON.stringify(jsonData)
 							,success:function(data){
 								$("#fileId").val(data.fileId); // fileId 값을 받아오고
-								alert("등록되었습니다.");
-
-<<<<<<< HEAD
-							 	$("#input-res-1").fileinput("upload");
-							 	alert("등록되었습니다.");
-							 	setTimeout(function(){
-=======
 							 	$("#input-res-1").fileinput("upload").on('fileuploaded', function() {
->>>>>>> branch 'master' of https://github.com/2ByungJun/IsgBeauty.git
+							 		alert("등록되었습니다.");
 							 		home();
 							    });
-
 							}
 							,error:function(e){
 							   	console.log(e.status, e.statusText);
