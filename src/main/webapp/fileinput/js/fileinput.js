@@ -1575,7 +1575,7 @@
                         chunkSize: chunkSize,
                         chunkSizeStart: chunkSize * index,
                         fileBlob: [blob, rm.fileName],
-                        fileId: "",
+//                        fileId: "",
                         fileName: rm.fileName,
                         fileRelativePath: f.relativePath,
                         fileSize: file.size,
