@@ -67,14 +67,13 @@
 					html += '</tr>';
 				}else{
 					$.each(data.dataList, function(index, item) {
-						imgHref = "images/"+ item.fileId;
 						console.log(item.fileId);
 						html += '<tr>';
 						html += '<td align="center" class="listtd">' +
-									'<div class="box" style="background: #BDBDBD;">' +
-										'<img class="profile" src=images/' + 'logo.jpg' + '>' +
-									'</div>' +
-								'</td>';
+								'<div class="box" style="background: #BDBDBD;">' +
+									'<img class="profile" src=<c:url value="/jfile/preview.do?fileId=' + item.fileId  + '"/>' + '>'
+								'</div>' +
+							'</td>';
 						html += '<td align="center" class="bjMiddle listtd"><a href="javascript:view(\''+item.empId+'\')">' + item.empId + '</td>';
 						html += '<td align="center" class="bjMiddle listtd">' + item.empNm + '</td>';
 						html += '<td align="center" class="bjMiddle listtd" >' + sexd(item.sexdstn) + '</td>';
@@ -136,7 +135,6 @@
 			<h2 style="text-align:center;">
 					<b>직원관리</b>
 				</h2>
-			<%-- <img class="profile" src="<c:url value='/upload/202008/10/20200810173d62322a4730'/>"> --%>
 			<div style="width:100%; display:inline-flex; padding-bottom:2px">
 				<div style="width: 50%; text-align:left;">
 					<button type="button" class="btn btn-primary" onclick="empRegister()">직원

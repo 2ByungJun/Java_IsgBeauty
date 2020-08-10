@@ -1,6 +1,7 @@
 package egovframework.example.sample.service.jfile.impl;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;

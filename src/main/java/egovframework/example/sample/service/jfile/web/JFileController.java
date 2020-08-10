@@ -183,6 +183,11 @@ public class JFileController {
 		prevFileVO= service.getAttachFile(fileVO.getFileId(), fileVO.getFileSeq());
 		System.out.println("prevFileVO service.getAttachFile");
 
+		System.out.println("-------------------------");
+		System.out.println("fileVO.getFileId() : " + fileVO.getFileId());
+		System.out.println("fileVO.getFileSeq() : " + fileVO.getFileSeq());
+		System.out.println("-------------------------");
+
 		JFile previewFile = prevFileVO.isImage() ?
 				service.getFileBySequence(fileVO.getFileId(), fileVO.getFileSeq(), fileVO.getUseSecurity()) : new JFile(getNoImagePath());
 
@@ -194,17 +199,14 @@ public class JFileController {
 
 	/**
 	 * 이미지 경로를 읽어온다.
-	 *
 	 * @return
 	 */
 	private String getNoImagePath() {
 		System.out.println("============================");
 		System.out.println("Controller-8-a. 이미지 경로확인");
 		System.out.println("============================");
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
-				.getRequest();
-		return request.getSession().getServletContext().getRealPath("/")
-				+ JProperties.getString(GlobalVariables.DEFAULT_NO_IMAGE_APP_PATH_KEY);
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		return request.getSession().getServletContext().getRealPath("/") + JProperties.getString(GlobalVariables.DEFAULT_NO_IMAGE_APP_PATH_KEY);
 	}
 
 }
