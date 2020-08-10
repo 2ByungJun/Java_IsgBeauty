@@ -11,7 +11,7 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.min.css'/>">
-<script src="<c:url value='fileinput/js/fileinput.min.js' />"></script>
+<script src="<c:url value='fileinput/js/fileinput.js' />"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>IsgBeauty 프로젝트</title>
@@ -22,19 +22,19 @@
 
 <!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
-	$(document).ready(function() {
+		$(document).ready(function() {
 		$("#input-res-1").fileinput({
 			uploadUrl : "/IsgBeauty/jfile/processUpload.do",
 			uploadAsync: true,
 			enableResumableUpload : true,
 			initialPreviewAsData : true,
 			validataInitialCount : false,
-			/* uploadExtraData : {
+			uploadExtraData : {
 				Upload : "Submit Query",
 				uploadMode : "db",
 				beanId : null,
-				fileId : 'File' + $('#empId').val()
-			}, */
+				fileId : 'FileTest5'
+			},
 			maxFileCount : 1,
 			theme : 'explorer',
 			deleteUrl : '/site/file-delete',
@@ -77,8 +77,9 @@
 								console.log(data.fileId);
 
 
-								alert("등록되었습니다.");
-							/* 	$("#input-res-1").fileinput("upload"); */
+
+							 	$("#input-res-1").fileinput("upload");
+							 	alert("등록되었습니다.");
 							}
 							,error:function(e){
 							   	console.log(e.status, e.statusText);
@@ -373,7 +374,7 @@ label.error {
 				name="fileId" type="file" class="bjWidth file" multiple
 				data-show-upload="true" data-show-caption="true"
 				data-browse-on-zone-click="true">
-		</div> --> -->
+		</div> -->
 
 		<!-- 이미지 -->
 		<div class="file-loading">
