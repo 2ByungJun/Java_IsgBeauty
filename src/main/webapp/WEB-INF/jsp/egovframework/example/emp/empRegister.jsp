@@ -10,32 +10,35 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.min.css'/>">
-<script src="<c:url value='fileinput/js/fileinput.js' />"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>IsgBeauty 프로젝트</title>
 <!-- fileInput -->
-
+<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.min.css'/>">
+<script src="<c:url value='fileinput/js/fileinput.js' />"></script>
 
 
 
 <!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
-		$(document).ready(function() {
+
+	function home() {
+		location.href = "<c:url value='/empList.do'/>";
+	}
+
+
+	/* FileUpload */
+	$(document).ready(function() {
 		$("#input-res-1").fileinput({
 			uploadUrl : "/IsgBeauty/jfile/processUpload.do",
-			uploadAsync: true,
 			enableResumableUpload : true,
 			initialPreviewAsData : true,
-			validataInitialCount : false,
-			uploadExtraData : {
-				Upload : "Submit Query",
-				uploadMode : "db",
-				beanId : null,
-				fileId : 'FileTest5'
-			},
+			validataInitialCount : true,
 			maxFileCount : 1,
+			uploadExtraData:
+				function(){ return {
+					fileId : $("#fileId").val()} // fileId 동적으로 변경되면 처리
+				},
 			theme : 'explorer',
 			deleteUrl : '/site/file-delete',
 			fileActionSettings : {
@@ -48,11 +51,6 @@
 			}
 		});
 	});
-
-
-	function home() {
-		location.href = "<c:url value='/empList.do'/>";
-	}
 
 	/* 글 등록 function */
 	$(function() {
@@ -71,26 +69,24 @@
 							,contentType: "application/json;utf-8"
 							,dataType: "json"
 							,type: "POST"
+							,async:false
 							,url: "<c:url value= '/empRegister.json'/>"
 							,data: JSON.stringify(jsonData)
 							,success:function(data){
-								console.log(data.fileId);
-
-
+								$("#fileId").val(data.fileId); // fileId 값을 받아오고
+								alert("등록되었습니다.");
 
 							 	$("#input-res-1").fileinput("upload");
-							 	alert("등록되었습니다.");
+
+							 	setTimeout(function(){
+							 		home();
+							 	}, 2000);
 							}
 							,error:function(e){
 							   	console.log(e.status, e.statusText);
 							   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
 							}
 						});
-
-
-					/* frm = document.detailForm;
-					frm.action = "<c:url value= '/addEmp.do'/>";
-					frm.submit(); */
 				} else {
 					alert("취소하셨습니다.");
 				}
@@ -264,8 +260,8 @@ label.error {
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 		String today = sf.format(now);
 	%>
-	<form:form commandName="empVO" id="detailForm" name="detailForm"
-		method="post">
+	<form:form commandName="empVO" id="detailForm" name="detailForm" method="post">
+		<input type="hidden" name="fileId" id="fileId" />
 		<div class="container">
 			<h2 style="text-align: center;">
 				<b>직원 등록</b>
@@ -364,21 +360,12 @@ label.error {
 		<input type="hidden" id="idCheck" name="idCheck" value="false"
 			readonly>
 
-
-
-
-		<!-- <!-- 이미지
-		<div class="container"
-			style="width: 50%; text-align: center; font-stretch: semi-condensed;">
-			<label class="control-label">프로필 사진</label> <input id="fileId"
-				name="fileId" type="file" class="bjWidth file" multiple
-				data-show-upload="true" data-show-caption="true"
-				data-browse-on-zone-click="true">
-		</div> -->
-
 		<!-- 이미지 -->
-		<div class="file-loading">
-    		<input id="input-res-1" name="input-res-1[]" type="file" multiple>
+		<div class="container" style="width: 22%; text-align: center; font-stretch: semi-condensed;">
+			<label class="control-label">프로필 사진</label>
+			<div class="file-loading">
+	    		<input id="input-res-1" name="input-res-1" type="file"  data-show-upload="false">
+			</div>
 		</div>
 
 
