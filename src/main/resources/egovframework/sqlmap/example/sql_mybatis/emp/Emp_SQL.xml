@@ -127,9 +127,6 @@
 		CAREER=#{career},
 		UPDT_ID=#{updtId},
 		UPDT_DT=CURDATE()
-		<if test="fileId != null and fileId != ''">
-		    ,FILE_ID=#{fileId}
-		</if>
 		where EMP_ID=#{empId}
 	</update>
 

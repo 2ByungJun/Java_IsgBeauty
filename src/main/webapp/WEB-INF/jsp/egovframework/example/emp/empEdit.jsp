@@ -11,28 +11,37 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>IsgBeauty 프로젝트</title>
 
-<%-- bootstrap --%>
-<link rel="stylesheet"
-	href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
-<script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
-<script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
-
 <!-- fileInput -->
-	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput-rtl.css'/>">
-	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput-rtl.min.css'/>">
-	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.css'/>">
-	<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.min.css'/>">
-	<script src="<c:url value='fileinput/js/fileinput.js' />"></script>
-	<script src="<c:url value='fileinput/js/fileinput.min.js' />"></script>
-
-<!-- Validation -->
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.min.css'/>">
+<script src="<c:url value='fileinput/js/fileinput.js' />"></script>
 
 <!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
+
+	/* FileUpload */
+	$(document).ready(function() {
+		$("#input-res-1").fileinput({
+			uploadUrl : "/IsgBeauty/jfile/processUpload.do",
+			enableResumableUpload : true,
+			initialPreviewAsData : true,
+			validataInitialCount : true,
+			maxFileCount : 1,
+			uploadExtraData: { fileId : "${result.fileId}"
+			},
+			theme : 'explorer',
+			deleteUrl : '/site/file-delete',
+			fileActionSettings : {
+				showZoom : function(config) {
+					if (config.type === 'pdf' || config.type === 'image') {
+						return true;
+					}
+					return false;
+				}
+			}
+		});
+	});
+
+
 	function home() {
 		location.href = "<c:url value='/empList.do'/>";
 	}
@@ -58,15 +67,39 @@
 	$(function() {
 		$("#detailForm").validate({
 			submitHandler : function() {
-				var check = confirm("수정된 정보를 저장하시겠습니까?");
+				var jsonData = {empId:$("#empId").val(), empPassword:$("#empPassword").val(), empNm:$("#empNm").val(), telno:$("#telno").val(), sexdstn:$("#sexdstn").val(), pspofc:$("#pspofc").val(),
+						salary:$("#salary").val(), career:$("#career").val(), updtId:$("#updtId").val(), updtDt:$("#updtDt").val()}
+
+				var check = confirm("해당 직원 정보를 수정하시겠습니까?");
 				if (check) {
-					alert("저장되었습니다.");
-					frm = document.detailForm;
-					frm.action = "<c:url value= '/updateEmp.do'/>";
-					frm.submit();
+					 $.ajax({
+							headers: {
+								Accept: "application/json;utf-8"
+							}
+							,contentType: "application/json;utf-8"
+							,dataType: "json"
+							,type: "POST"
+							,async:false
+							,url: "<c:url value= '/empEdit.json'/>"
+							,data: JSON.stringify(jsonData)
+							,success:function(data){
+								console.log(data);
+								/* $("#fileId").val(data.fileId); // fileId 값을 받아오고
+							 	$("#input-res-1").fileinput("upload").on('fileuploaded', function() {
+							 		alert("수정되었습니다.");
+							 		home();
+							    }); */
+							}
+							,error:function(e){
+							   	console.log(e.status, e.statusText);
+							   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
+							}
+						});
 				} else {
 					alert("취소하셨습니다.");
 				}
+
+				$("#input-res-1").fileinput('upload');
 			},
 			rules: {
 				empId: {
