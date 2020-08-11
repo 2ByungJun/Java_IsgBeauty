@@ -32,11 +32,8 @@
 			enableResumableUpload : true,
 			initialPreviewAsData : true,
 			validataInitialCount : true,
-			maxFileCount : 1,
-			uploadExtraData:
-				function(){ return {
-					fileId : $("#fileId").val()} // fileId 동적으로 변경되면 처리
-				},
+			overwriteInitial: true,
+			uploadExtraData:function(){ return {fileId : $("#fileId").val()} },
 			theme : 'explorer',
 			deleteUrl : '/site/file-delete',
 			fileActionSettings : {

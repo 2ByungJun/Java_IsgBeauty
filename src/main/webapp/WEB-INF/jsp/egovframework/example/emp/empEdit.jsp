@@ -63,14 +63,13 @@ label.error {
 			uploadUrl : "/IsgBeauty/jfile/processUpdate.do",
 			enableResumableUpload : true,
 			initialPreviewAsData : true,
-			initialPreviewFileType: 'image',
 			validataInitialCount : true,
+			uploadAsync: false,
+			overwriteInitial: true,
 			uploadExtraData: {
 				fileId : "${result.fileId}"
 			},
-			uploadAsync: false,
-			overwriteInitial: true,
-			overwriteFile: true,
+			initialPreviewFileType: 'image',
 		    initialPreview: [
 		        '<c:url value="/jfile/preview.do?fileId=${result.fileId}"/>" class="profile" name="myImg" id="myImg"',
 		    ],

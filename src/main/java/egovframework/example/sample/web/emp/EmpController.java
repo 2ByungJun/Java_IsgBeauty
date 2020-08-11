@@ -196,7 +196,7 @@ public class EmpController {
 
 		searchVO.setCareer("0");
 		searchVO.setSalary("0");
-
+		searchVO.setFileId("File"+searchVO.getEmpId());
 		empService.insertEmp(searchVO);
 
 		return "login/login";
