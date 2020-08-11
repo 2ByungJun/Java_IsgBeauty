@@ -69,13 +69,6 @@ label.error {
 			uploadExtraData: {
 				fileId : "${result.fileId}"
 			},
-			initialPreview:
-				['<img class="kv-preview-data file-preview-image" src="http://localhost:8080/IsgBeauty/jfile/preview.do?fileId=Filelsuh0429pro&fileSeq=1">']
-			,
-			initialPreviewConfig: [
-		        {type: "image", caption: "Image-1.jpg", size: 847000, url: "/site/file-delete", key: 1}],
-			 overwriteInitial: false,
-			 uploadAsync: false,
 			uploadAsync: false,
 			overwriteInitial: false,
 		    initialPreview: [
@@ -93,8 +86,6 @@ label.error {
 			}
 		});
 	});
-
-
 
 	function home() {
 		location.href = "<c:url value='/empList.do'/>";
@@ -117,9 +108,6 @@ label.error {
 		document.detailForm.action = "<c:url value='/empView.do'/>";
 		document.detailForm.submit();
 	}
-=======
-/* 	'<img class="profile" name="myImg" id="myImg" src=<c:url value="/jfile/preview.do?fileId=' + ${result.fileId} + '"/>', */
->>>>>>> branch 'master' of https://github.com/2ByungJun/IsgBeauty.git
 
 	$(function() {
 		$("#detailForm").validate({
@@ -371,35 +359,6 @@ label.error {
 			</div>
 		</div>
 
-<<<<<<< HEAD
-		<!-- 이미지 -->
-		<div class="container" style="width:100%; display:grid; justify-items:center; font-stretch:semi-condensed;">
-			<div style="width: 20%; text-align: center; display: inline-flex;">
-			</div>
-
-			<!-- 기존 이미지 -->
-			<div style="width: 60%; justify-content:center; align-items:center; display: inline-flex;">
-				<div style="width: 30%; display: grid; justify-content:center;">
-					<label class="control-label" style="text-align:center; margin-top:10px">기존 프로필 사진</label>
-					<div class="box" style="background: #BDBDBD;">
-						<img class="profile" src=<c:url value="/jfile/preview.do?fileId=${result.fileId}"/>>
-					</div>
-				</div>
-
-			<!-- 변경할 이미지 업로드 -->
-			<div style="width: 30%; display: grid; justify-content:center;">
-					<label class="control-label" style="text-align:center; margin-top:10px">변경될 프로필 사진</label>
-					<input id="input-res-1" name="input-res-1" type="file"  data-show-upload="false">
-				</div>
-			</div>
-
-			<div style="width: 20%; text-align: center; display: inline-flex;">
-			</div>
-
-		</div>
-
-=======
->>>>>>> branch 'master' of https://github.com/2ByungJun/IsgBeauty.git
 		<!-- hidden -->
 		<input type="hidden" id="registId" name="registId" value="${result.registId}"/>
 		<input type="hidden" id="registDt" name="registDt" value="${result.registDt}"/>
