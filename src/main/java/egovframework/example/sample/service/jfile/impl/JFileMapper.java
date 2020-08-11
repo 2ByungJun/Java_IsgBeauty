@@ -105,7 +105,7 @@ public interface JFileMapper {
 	 * @param fileId 파일 아이디.
 	 * @param fileSeqs 파일 시퀀스 목록.
 	 */
-	public void removeAttachFile(String fileId, List<Object> arrayToList);
+	public void removeAttachFile(String fileId);
 
 	/**
 	 * 업로드를 수행한다.

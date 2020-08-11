@@ -1,6 +1,7 @@
 package egovframework.example.sample.service.jfile.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.List;
@@ -148,11 +149,25 @@ public class JFileController {
 
 		ModelAndView modelAndView = new ModelAndView(JSonView.NAME);
 		System.out.println("============================");
-		System.out.println("Controller-10. 이미지 업데이트");
+		System.out.println("Controller-10. 이미지 수정");
 		System.out.println("============================");
 
-		
-		
+		// 삭제 수행
+		System.out.println("---------- 삭제 -------------------");
+		service.removeAttachFile(fileVo.getFileId());
+
+		if (multipartResolver.isMultipart(request)) {
+			final MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+			Collection<MultipartFile> values = multiRequest.getFileMap().values();
+
+			// 업로드 수행
+			System.out.println("---------- 업로드될 fileVo ------------------");
+			System.out.println("fileVo : " + fileVo.toString());
+			System.out.println("----------------------------");
+			service.upload(values, fileVo);
+
+		}
+
 		return modelAndView;
 	}
 
