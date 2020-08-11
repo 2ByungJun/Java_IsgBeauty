@@ -57,12 +57,13 @@ label.error {
 <!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
 
-	/* FileUpload */
+	/*  FileUpload */
 	$(document).ready(function() {
 		$("#input-res-1").fileinput({
 			uploadUrl : "/IsgBeauty/jfile/processUpdate.do",
 			enableResumableUpload : true,
-			initialPreviewAsData : true,
+			initialPreviewAsData : false,
+			initialPreviewFileType: 'image',
 			validataInitialCount : true,
 			maxFileCount : 1,
 			uploadExtraData: {
@@ -88,6 +89,28 @@ label.error {
 			}
 		});
 	});
+
+	function home() {
+		location.href = "<c:url value='/empList.do'/>";
+	}
+	function deleteMber(id) {
+		var check;
+		check = confirm("정말로 해당 직원을 삭제하시겠습니까?");
+
+		if (check) {
+			alert("삭제되었습니다.");
+			document.detailForm.selectedId.value = id;
+			document.detailForm.action = "<c:url value='/deleteEmp.do'/>";
+			document.detailForm.submit();
+		} else {
+			alert("취소하셨습니다.");
+		}
+	}
+	function view(id) {
+		document.detailForm.selectedId.value = id;
+		document.detailForm.action = "<c:url value='/empView.do'/>";
+		document.detailForm.submit();
+	}
 
 	$(function() {
 		$("#detailForm").validate({
