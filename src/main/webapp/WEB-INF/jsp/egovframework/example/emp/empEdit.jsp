@@ -18,16 +18,24 @@
 <!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
 
-	/* FileUpload */
+	/*  FileUpload */
 	$(document).ready(function() {
 		$("#input-res-1").fileinput({
 			uploadUrl : "/IsgBeauty/jfile/processUpload.do",
 			enableResumableUpload : true,
-			initialPreviewAsData : true,
+			initialPreviewAsData : false,
+			initialPreviewFileType: 'image',
 			validataInitialCount : true,
 			maxFileCount : 1,
 			uploadExtraData: { fileId : "${result.fileId}"
 			},
+			initialPreview:
+				['<img class="kv-preview-data file-preview-image" src="http://localhost:8080/IsgBeauty/jfile/preview.do?fileId=Filelsuh0429pro&fileSeq=1">']
+			,
+			initialPreviewConfig: [
+		        {type: "image", caption: "Image-1.jpg", size: 847000, url: "/site/file-delete", key: 1}],
+			 overwriteInitial: false,
+			 uploadAsync: false,
 			theme : 'explorer',
 			deleteUrl : '/site/file-delete',
 			fileActionSettings : {
@@ -40,6 +48,7 @@
 			}
 		});
 	});
+
 
 
 	function home() {
@@ -320,14 +329,14 @@ label.error {
 				<div style="width: 30%; display: grid; justify-content:center;">
 					<label class="control-label" style="text-align:center; margin-top:10px">기존 프로필 사진</label>
 					<div class="box" style="background: #BDBDBD;">
-						<img class="profile" src=images/<c:out value="${result.fileId}"/>>
+						<img class="profile" src=<c:url value="/jfile/preview.do?fileId=${result.fileId}"/>>
 					</div>
 				</div>
 
 			<!-- 변경할 이미지 업로드 -->
 			<div style="width: 30%; display: grid; justify-content:center;">
 					<label class="control-label" style="text-align:center; margin-top:10px">변경될 프로필 사진</label>
-					<input id="fileId" name="fileId" type="file" class="bjWidth file" data-browse-on-zone-click="true">
+					<input id="input-res-1" name="input-res-1" type="file"  data-show-upload="false">
 				</div>
 			</div>
 
