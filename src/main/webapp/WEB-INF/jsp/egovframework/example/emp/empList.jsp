@@ -70,10 +70,10 @@
 						console.log(item.fileId);
 						html += '<tr>';
 						html += '<td align="center" class="listtd">' +
-								'<div class="box" style="background: #BDBDBD;">' +
-									'<img class="profile" src=<c:url value="/jfile/preview.do?fileId=' + item.fileId  + '"/>' + '>'
-								'</div>' +
-							'</td>';
+									'<div class="box" style="background: #BDBDBD;">' +
+										'<img class="profile" src=<c:url value="/jfile/preview.do?fileId=' + item.fileId  + '"/>' + '>'
+									'</div>' +
+								'</td>';
 						html += '<td align="center" class="bjMiddle listtd"><a href="javascript:view(\''+item.empId+'\')">' + item.empId + '</td>';
 						html += '<td align="center" class="bjMiddle listtd">' + item.empNm + '</td>';
 						html += '<td align="center" class="bjMiddle listtd" >' + sexd(item.sexdstn) + '</td>';

@@ -193,6 +193,7 @@ public class JFileVO implements JFileDetails {
 	}
 
 	public String getExtension() {
+		System.out.println("fileName : " + fileName);
 		if(fileName == null)
 			return null;
 		return  fileName.lastIndexOf(".") > -1 ? fileName.substring(fileName.lastIndexOf(".")+1) : null;

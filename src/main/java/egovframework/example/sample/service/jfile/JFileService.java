@@ -76,11 +76,10 @@ public class JFileService {
 	 * @param fileSeq 파일 시퀀스.
 	 * @return Map<String, Object> 첨부파일 정보.
 	 */
-	public JFileDetails getAttachFile(String fileId, String fileSeq) {
+	public JFileVO getAttachFile(String fileId, String fileSeq) {
 		System.out.println("getAttachFile 실행");
 		System.out.println("fileId : " + fileId);
 		System.out.println("fileSeq : " + fileSeq);
-
 		JFileVO jfileVO = new JFileVO();
 		jfileVO.setFileId(fileId);
 		jfileVO.setFileSeq(fileSeq);
