@@ -89,27 +89,6 @@ label.error {
 		});
 	});
 
-	function home() {
-		location.href = "<c:url value='/empList.do'/>";
-	}
-	function deleteMber(id) {
-		var check;
-		check = confirm("정말로 해당 직원을 삭제하시겠습니까?");
-
-		if (check) {
-			alert("삭제되었습니다.");
-			document.detailForm.selectedId.value = id;
-			document.detailForm.action = "<c:url value='/deleteEmp.do'/>";
-			document.detailForm.submit();
-		} else {
-			alert("취소하셨습니다.");
-		}
-	}
-	function view(id) {
-		document.detailForm.selectedId.value = id;
-		document.detailForm.action = "<c:url value='/empView.do'/>";
-		document.detailForm.submit();
-	}
 
 	$(function() {
 		$("#detailForm").validate({
@@ -132,6 +111,7 @@ label.error {
 							,success:function(data){
 								console.log(data);
 								if( $("#input-res-1").fileinput("getFilesCount") == 0 ){
+									console.log($("#input-res-1").fileinput("getFilesCount"));
 									alert("수정되었습니다.");
 							 		home();
 					 			}else {
@@ -150,8 +130,6 @@ label.error {
 				} else {
 					alert("취소하셨습니다.");
 				}
-
-				$("#input-res-1").fileinput('upload');
 			},
 			rules: {
 				empId: {
@@ -274,7 +252,7 @@ label.error {
 		<input type="hidden" name="selectedId" />
 		<div class="container">
 			<h2 style="text-align:center;">
-					<b>'<c:out value="${result.empNm}" />'직원 수정 화면</b>
+					<b><span style="color:#000080">'<c:out value="${result.empNm}" />'</span>직원 수정 화면</b>
 			</h2>
 
 			<!-- Contents -->
@@ -291,6 +269,7 @@ label.error {
 						<div class="file-loading">
 				    		<input id="input-res-1" name="input-res-1" type="file"  data-show-upload="false">
 						</div>
+						<span style="color:#000080; font-size:smaller;">상단 이미지의 휴지통을 클릭 시 <br> 등록된 이미지가 삭제됩니다.</span>
 				</div>
 
 				<!-- 3(10%) -->
@@ -346,8 +325,8 @@ label.error {
 					<!-- 직책 -->
 					<div id="divInline">
 						<select type="text" class="bjInput form-control" id="pspofc" name="pspofc">
-							<option value="${result.pspofc}" selected="selected"> <c:out value="${result.pspofc}" /></option>
-							<option value="Admin">Admin</option>
+							 <option value="${result.pspofc}" selected="selected"> <c:out value="${result.pspofc}" /></option>
+							<option value="Admin"  >Admin</option>
 							<option value="Designer">Designer</option>
 						</select>
 					</div>

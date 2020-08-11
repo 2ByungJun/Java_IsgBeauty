@@ -96,7 +96,7 @@
 	    	RESVE_TIME=#{resveTime},
 	    	TRETMENT_NM=#{tretmentNm},
 	    	PROCESS_STTUS=#{processSttus}
-		    where RESVE_SN=${resveSn}
+	    where RESVE_SN=${resveSn}
 	</update>
 
 	<select id="selectYears" resultType="string">
@@ -114,14 +114,12 @@
 		on a.MBER_SN = b.MBER_SN
 		and DATE_FORMAT(RESVE_DT, "%Y") = ${year}
 		and b.sexdstn = #{sexdstn}
-		<if test='dateType.equals("m")'>
-			and DATE_FORMAT(RESVE_DT, "%c") = ${month}
-		</if>
 		<choose>
 		    <when test='dateType.equals("y")'>
 		        group by month
 		    </when>
 		    <when test='dateType.equals("m")'>
+		        and DATE_FORMAT(RESVE_DT, "%c") = ${month}
 		        group by day
 		    </when>
 		</choose>

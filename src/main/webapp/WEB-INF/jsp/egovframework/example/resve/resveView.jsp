@@ -229,8 +229,6 @@
 	}
 
 </script>
-</head>
-<body>
 	<form:form commandName="resveVO" id="detailForm" name="detailForm"
 		method="post">
 		<input type="hidden" id="resveSn" name="selectedId" />
@@ -240,5 +238,3 @@
 			<div id="calendar"></div>
 		</div>
 	</form:form>
-</body>
-</html>

@@ -297,33 +297,27 @@ label.error {
 				<div style="width: 45%; text-align: left; display: grid">
 					<!-- 아이디 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="empId"
-							name="empId" placeholder="아이디를 입력하세요" required>
+						<input type="text" class="bjWidth form-control" id="empId" name="empId" placeholder="아이디를 입력하세요" required>
 					</div>
 
 					<!-- 비밀번호 -->
 					<div style="display: inline-flex;">
-						<input type="password" class="bjWidth form-control"
-							id="empPassword" name="empPassword" placeholder="비밀번호를 입력하세요" required>
+						<input type="password" class="bjWidth form-control" id="empPassword" name="empPassword" placeholder="비밀번호를 입력하세요" required>
 					</div>
 
 					<!-- 이름 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="empNm"
-							name="empNm" placeholder="이름을 입력하세요" required>
+						<input type="text" class="bjWidth form-control" id="empNm" name="empNm" placeholder="이름을 입력하세요" required>
 					</div>
 
 					<!-- 전화번호 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="telno"
-							name="telno" placeholder="000-0000-0000" maxlength="13"
-							onkeyup="inputPhoneNumber(this)" required>
+						<input type="text" class="bjWidth form-control" id="telno" name="telno" placeholder="000-0000-0000" maxlength="13" onkeyup="inputPhoneNumber(this)" required>
 					</div>
 
 					<!-- 성별 -->
 					<div style="display: inline-flex;">
-						<select type="text" class="bjWidth form-control" id="sexdstn"
-							name="sexdstn">
+						<select type="text" class="bjWidth form-control" id="sexdstn" name="sexdstn">
 							<option value="Male" selected="selected">Male</option>
 							<option value="Female">Female</option>
 						</select>
@@ -331,8 +325,7 @@ label.error {
 
 					<!-- 직책 -->
 					<div style="display: inline-flex;">
-						<select type="text" class="bjWidth form-control" id="pspofc"
-							name="pspofc">
+						<select type="text" class="bjWidth form-control" id="pspofc" name="pspofc">
 							<option value="Admin" selected="selected">Admin</option>
 							<option value="Designer">Designer</option>
 						</select>
@@ -340,34 +333,28 @@ label.error {
 
 					<!-- 급여 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="salary"
-							name="salary"
-							onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="급여를 입력하세요" required>
+						<input type="text" class="bjWidth form-control" id="salary" name="salary" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="급여를 입력하세요" required>
 					</div>
 
 					<!-- 경력 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="career"
-							name="career" placeholder="경력을 입력하세요" required>
+						<input type="text" class="bjWidth form-control" id="career" name="career" placeholder="경력을 입력하세요" required>
 					</div>
 
 					<!-- 등록자 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="registId"
-							name="registId" value="${empId}" readonly>
+						<input type="text" class="bjWidth form-control" id="registId" name="registId" value="${empId}" readonly>
 					</div>
 
 					<!-- 등록일 -->
 					<div style="display: inline-flex;">
-						<input type="date" class="bjWidth form-control" id="registDt"
-							name="registDt" value="<%=today%>" readonly>
+						<input type="date" class="bjWidth form-control" id="registDt" name="registDt" value="<%=today%>" readonly>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- ID Check input -->
-		<input type="hidden" id="idCheck" name="idCheck" value="true"
-			readonly>
+		<input type="hidden" id="idCheck" name="idCheck" value="true" readonly>
 
 		<!-- Button -->
 		<div class="container" style="text-align: center; margin-top: 30px;">

@@ -57,8 +57,6 @@
 			,url: url
 			,data: JSON.stringify(jsonData)
 			,success:function(data){
-				console.log(data);
-
 		    	var html = '';
 		    	var imgHref = '';
 				if(data.dataList.length==0){
@@ -67,7 +65,6 @@
 					html += '</tr>';
 				}else{
 					$.each(data.dataList, function(index, item) {
-						console.log(item.fileId);
 						html += '<tr>';
 						html += '<td align="center" class="listtd">' +
 									'<div class="box" style="background: #BDBDBD;">' +
@@ -128,8 +125,7 @@
 </script>
 </head>
 <body>
-	<form:form commandName="searchVO" id="listForm" name="listForm"
-		method="post">
+	<form:form commandName="searchVO" id="listForm" name="listForm" method="post">
 		<input type="hidden" name="selectedId" />
 		<div class="container">
 			<h2 style="text-align:center;">
@@ -147,7 +143,6 @@
 					<div class="input-group" style="float:right;">
 						<form:input path="searchKeyword" type="text" id="serachKeyword" placeholder="이름 검색" style="width:200px" cssClass="txt form-control"
 									onkeydown="if(event.keyCode==13) fnSelectList(1)" />
-						<input hidden/>
 						<button class="btn btn-primary" type="button" onclick="javascript:fnSelectList(1)" style="font-size: 14px;">
 							<i class="glyphicon glyphicon-search"></i>
 						</button>

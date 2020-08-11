@@ -307,6 +307,7 @@ public class EmpController {
 		sampleVO.setEmpId(empId);
 		empService.deleteEmp(sampleVO);
 
+
 		return "forward:/empList.do";
 	}
 }
