@@ -60,7 +60,7 @@ label.error {
 	/*  FileUpload */
 	$(document).ready(function() {
 		$("#input-res-1").fileinput({
-			uploadUrl : "/IsgBeauty/jfile/processUpload.do",
+			uploadUrl : "/IsgBeauty/jfile/processUpdate.do",
 			enableResumableUpload : true,
 			initialPreviewAsData : false,
 			initialPreviewFileType: 'image',
@@ -70,12 +70,15 @@ label.error {
 				fileId : "${result.fileId}"
 			},
 			uploadAsync: false,
-			overwriteInitial: false,
+			overwriteInitial: true,
 		    initialPreview: [
 		        '<c:url value="/jfile/preview.do?fileId=${result.fileId}"/>" class="profile" name="myImg" id="myImg"',
 		    ],
 			theme : 'explorer',
-			deleteUrl : '/site/file-delete',
+			deleteUrl : '/IsgBeauty/jfile/imgDelete.do',
+			deleteExtraData: {
+				fileId : "${result.fileId}"
+			},
 			fileActionSettings : {
 				showZoom : function(config) {
 					if (config.type === 'pdf' || config.type === 'image') {
