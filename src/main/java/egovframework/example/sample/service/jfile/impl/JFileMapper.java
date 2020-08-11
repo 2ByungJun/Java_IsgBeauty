@@ -44,7 +44,7 @@ public interface JFileMapper {
 	 * @param fileSeq 파일 시퀀스.
 	 * @return Map<String, Object> 첨부파일 정보.
 	 */
-/*	public JFileDetails getAttachFile(String fileId, String fileSeq);*/
+	public JFileDetails getAttachFile(String fileId, String fileSeq);
 
 	/**
 	 * 파일 아이디로 파일 시퀀스 목록을 조회한다.

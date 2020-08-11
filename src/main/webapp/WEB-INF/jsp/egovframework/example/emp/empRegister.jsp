@@ -266,12 +266,26 @@ label.error {
 			</h2>
 
 			<!-- Contents -->
-			<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
+			<div style="width: 100%; display: inline-flex; padding-bottom: 2px; margin-top:px;">
 
-				<!-- Start(35%) -->
-				<div style="width: 35%;"></div>
+				<!-- Start(10%) -->
+				<div style="width: 15%">
+				</div>
 
-				<!-- Center(10%) -->
+				<!-- 2(35%) -->
+				<div style="width: 35%; text-align: center; font-stretch: semi-condensed; padding: 40px">
+					<!-- 이미지 -->
+						<label class="control-label">프로필 사진 등록</label>
+						<div class="file-loading">
+				    		<input id="input-res-1" name="input-res-1" type="file"  data-show-upload="false">
+						</div>
+				</div>
+
+				<!-- 3(10%) -->
+				<div style="width: 10%">
+				</div>
+
+				<!-- 4(10%) -->
 				<div style="width: 10%; text-align: center; display: grid">
 					<label class="control-label">아이디 : </label> <label
 						class="control-label">비밀번호:</label> <label class="control-label">이름:</label>
@@ -283,7 +297,7 @@ label.error {
 				</div>
 
 				<!-- End(60%) -->
-				<div style="width: 60%; text-align: left; display: grid">
+				<div style="width: 45%; text-align: left; display: grid">
 					<!-- 아이디 -->
 					<div style="display: inline-flex;">
 						<input type="text" class="bjWidth form-control" id="empId"
@@ -357,15 +371,6 @@ label.error {
 		<!-- ID Check input -->
 		<input type="hidden" id="idCheck" name="idCheck" value="true"
 			readonly>
-
-		<!-- 이미지 -->
-		<div class="container" style="width: 22%; text-align: center; font-stretch: semi-condensed;">
-			<label class="control-label">프로필 사진</label>
-			<div class="file-loading">
-	    		<input id="input-res-1" name="input-res-1" type="file"  data-show-upload="false">
-			</div>
-		</div>
-
 
 		<!-- Button -->
 		<div class="container" style="text-align: center; margin-top: 30px;">
