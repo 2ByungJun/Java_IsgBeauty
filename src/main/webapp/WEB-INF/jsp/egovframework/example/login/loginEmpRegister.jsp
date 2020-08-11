@@ -13,7 +13,7 @@ input.error {
 }
 
 label {
-	margin: 13px;
+	margin: 10px;
 }
 
 label.error {
@@ -22,7 +22,8 @@ label.error {
 
 .bjWidth {
 	width:200px;
-	margin-top:5px;
+	margin-top: 3px;
+	margin-bottom: 2px;
 }
 </style>
 
@@ -246,30 +247,32 @@ label.error {
 
 				<!-- Center(10%) -->
 				<div style="width: 10%; text-align: center; display: grid">
-					<label class="control-label">아이디 : </label> <label
-						class="control-label">비밀번호:</label> <label class="control-label">이름:</label>
-					<label class="control-label">전화번호:</label> <label
-						class="control-label">성별:</label> <label class="control-label">직책:</label>
-					<label class="control-label">시리얼키:</label> <label
-						class="control-label">등록일:</label>
+					<label class="control-label">아이디 : </label>
+					<label class="control-label">비밀번호:</label>
+					<label class="control-label">이름:</label>
+					<label class="control-label">전화번호:</label>
+					<label class="control-label">성별:</label>
+					<label class="control-label">직책:</label>
+					<label class="control-label">시리얼키:</label>
+					<label class="control-label">등록일:</label>
 				</div>
 
 				<!-- End(60%) -->
 				<div style="width: 60%; text-align: left; display: grid">
 					<!-- 아이디 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="empId" name="empId">
+						<input type="text" class="bjWidth form-control id="empId" name="empId" placeholder="아이디를 입력하세요">
 					</div>
 
 					<!-- 비밀번호 -->
 					<div style="display: inline-flex;">
 						<input type="password" class="bjWidth form-control" id="empPassword"
-							name="empPassword">
+							name="empPassword" placeholder="비밀번호를 입력하세요">
 					</div>
 
 					<!-- 이름 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="empNm" name="empNm">
+						<input type="text" class="bjWidth form-control" id="empNm" name="empNm" placeholder="이름을 입력하세요">
 					</div>
 
 					<!-- 전화번호 -->
@@ -293,7 +296,6 @@ label.error {
 						<select type="text" class="bjWidth form-control" id="pspofc" name="pspofc"
 							readonly>
 							<option value="Admin" selected="selected">Admin</option>
-							<option value="Designer">Designer</option>
 						</select>
 					</div>
 

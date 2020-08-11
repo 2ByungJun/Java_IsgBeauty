@@ -19,6 +19,7 @@ import java.util.List;
 
 import egovframework.example.sample.service.mber.MberVO;
 import egovframework.example.sample.service.SampleDefaultVO;
+import egovframework.example.sample.service.emp.EmpVO;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
 /**
@@ -85,6 +86,13 @@ public interface MberMapper {
 	 * @throws Exception
 	 */
 	void updateMber(MberVO vo) throws Exception;
+
+	/**
+	 * 고객 이름리스트
+	 * @param vo
+	 * @throws Exception
+	 */
+	List<?> selectListMberNM(MberVO vo) throws Exception;
 
 
 }
