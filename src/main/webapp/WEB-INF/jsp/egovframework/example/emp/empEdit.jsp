@@ -62,15 +62,15 @@ label.error {
 		$("#input-res-1").fileinput({
 			uploadUrl : "/IsgBeauty/jfile/processUpdate.do",
 			enableResumableUpload : true,
-			initialPreviewAsData : false,
+			initialPreviewAsData : true,
 			initialPreviewFileType: 'image',
 			validataInitialCount : true,
-			maxFileCount : 1,
 			uploadExtraData: {
 				fileId : "${result.fileId}"
 			},
 			uploadAsync: false,
 			overwriteInitial: true,
+			overwriteFile: true,
 		    initialPreview: [
 		        '<c:url value="/jfile/preview.do?fileId=${result.fileId}"/>" class="profile" name="myImg" id="myImg"',
 		    ],
@@ -132,11 +132,16 @@ label.error {
 							,data: JSON.stringify(jsonData)
 							,success:function(data){
 								console.log(data);
-								/* $("#fileId").val(data.fileId); // fileId 값을 받아오고
-							 	$("#input-res-1").fileinput("upload").on('fileuploaded', function() {
-							 		alert("수정되었습니다.");
+								if( $("#input-res-1").fileinput("getFilesCount") == 0 ){
+									alert("수정되었습니다.");
 							 		home();
-							    }); */
+					 			}else {
+									$("#fileId").val(data.fileId); // fileId 값을 받아오고
+								 	$("#input-res-1").fileinput("upload").on('fileuploaded', function() {
+								 		alert("수정되었습니다.");
+								 		home();
+								    });
+					 			}
 							}
 							,error:function(e){
 							   	console.log(e.status, e.statusText);
