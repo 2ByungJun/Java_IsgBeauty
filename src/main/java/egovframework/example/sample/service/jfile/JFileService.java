@@ -162,8 +162,8 @@ public class JFileService {
 	 * @param fileId 파일 아이디.
 	 * @param fileSeqs 파일 시퀀스 목록.
 	 */
-	public void removeAttachFile(String fileId, List<Object> arrayToList) {
-		mapper.removeAttachFile(fileId, arrayToList);
+	public void removeAttachFile(String fileId) {
+		mapper.removeAttachFile(fileId);
 	};
 
 	/**

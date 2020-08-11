@@ -95,11 +95,6 @@
 			DELETE
 	          FROM J_ATTACHFILE
 	         WHERE FILE_ID  = #{fileId}
-	         <where>
-	             <foreach item="fileSeqs" collection="list" open="FILE_SEQ in(" close=")" separator=",">
-			            #{item}
-			    </foreach>
-	         </where>
 		</delete>
 
 		<select id="getAttachFileToMap" parameterType="map" resultType="jfileVO">
