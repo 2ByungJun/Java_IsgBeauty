@@ -73,7 +73,6 @@ p {
 
 			<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
 
-
 				<!-- Start(40%) -->
 				<div style="width: 40%; display: grid; justify-content:right;">
 					<div class="box" style="background: #BDBDBD;">
