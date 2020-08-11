@@ -98,78 +98,6 @@ public class JFileController {
 	}
 
 	/**
-	 * 파일업로드가 완료된 후 처리 작업을 수행한다.
-	 *
-	 * @param fileVO
-	 * @return
-	 */
-	@RequestMapping("/jfile/afterProcessUploadCompleted.do")
-	public ModelAndView afterProcessUploadCompleted(JFileVO fileVO, HttpServletRequest request,
-			HttpServletResponse response) {
-		System.out.println("============================");
-		System.out.println("Controller-3.업로드 완료 /afterProcessUploadCompleted.do");
-		System.out.println("============================");
-
-		ModelAndView modelAndView = new ModelAndView(JSonView.NAME);
-		try {
-			service.executeAfterUploadCompleted(fileVO.getFileId());
-			SessionUploadChecker.unCheck(request, fileVO.getFileId());
-		} catch (RuntimeException e) {
-			try {
-				response.sendError(GlobalVariables.Error.SYSTEM_ERROR, "");
-			} catch (IOException e1) {
-				EgovBasicLogger.debug("Reponse send error", e1);
-			}
-		}
-		return modelAndView;
-	}
-
-	/**
-	 * 파일 아이디로 첨부파일 목록을 읽어온다.
-	 *
-	 * @param fileVO
-	 * @return
-	 */
-	@RequestMapping("/jfile/readFiles.do")
-	public ModelAndView readFiles(JFileVO fileVO) {
-		System.out.println("============================");
-		System.out.println("Controller-4.첨부파일 읽기 /readFiles.do");
-		System.out.println("============================");
-
-		ModelAndView modelAndView = new ModelAndView(JSonView.NAME);
-		List<JFileDetails> fileList = service.getAttachFiles(fileVO.getFileId());
-		modelAndView.addObject("fileList", fileList);
-		return modelAndView;
-	}
-
-	/**
-	 *
-	 */
-	@RequestMapping("/jfile/jfiledownloadForm.do")
-	public String jfiledownloadForm() {
-		System.out.println("============================");
-		System.out.println("Controller-b.다운로드 폼 /jfiledownloadForm.do");
-		System.out.println("============================");
-		return "egovframework/com/ext/jfile/jfiledownloadForm";
-	}
-
-	/**
-	 * 파일 아이디로 첨부파일 목록을 읽어온다.
-	 *
-	 * @param fileVO
-	 * @return
-	 */
-	@RequestMapping("/jfile/readDownloadFiles.do")
-	public ModelAndView readDownloadFiles(JFileVO fileVO) {
-		System.out.println("============================");
-		System.out.println("Controller-5.파일 ID로 첨부파일 목록 읽기/readDownloadFiles.do");
-		System.out.println("============================");
-		ModelAndView modelAndView = new ModelAndView(JSonView.NAME);
-		modelAndView.addObject("fileList", service.getAttachFiles(fileVO.getFileId()));
-		return modelAndView;
-	}
-
-	/**
 	 * 이미지 파일일 경우 미리보기를 한다.
 	 * @param fileVO
 	 * @return
@@ -202,6 +130,30 @@ public class JFileController {
 		System.out.println("============================");
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 		return request.getSession().getServletContext().getRealPath("/") + JProperties.getString(GlobalVariables.DEFAULT_NO_IMAGE_APP_PATH_KEY);
+	}
+
+	@RequestMapping("/jfile/imgDelete.do")
+	public ModelAndView imgDelete(@ModelAttribute JFileVO fileVo, HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView modelAndView = new ModelAndView(JSonView.NAME);
+		System.out.println("============================");
+		System.out.println("Controller-9. imgDelete");
+		System.out.println("============================");
+
+		return modelAndView;
+	}
+
+	@RequestMapping("/jfile/processUpdate.do")
+	public ModelAndView processUpdate(@ModelAttribute JFileVO fileVo, HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView modelAndView = new ModelAndView(JSonView.NAME);
+		System.out.println("============================");
+		System.out.println("Controller-10. 이미지 업데이트");
+		System.out.println("============================");
+
+		
+		
+		return modelAndView;
 	}
 
 }
