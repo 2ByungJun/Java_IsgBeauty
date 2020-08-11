@@ -38,7 +38,6 @@ label.error {
 				.validate(
 						{
 							submitHandler : function() {
-								if ($("#snCheck").val() == "true") {
 									var check = confirm("관리자를 등록하시겠습니까?");
 									if (check) {
 										document.detailForm.action = "<c:url value= '/addAdmin.do'/>";
@@ -47,9 +46,7 @@ label.error {
 									} else {
 										alert("취소하셨습니다.");
 									}
-								} else {
-									alert("시리얼 키를 확인해주세요.");
-								}
+
 							},
 							rules : {
 								empId : {
@@ -261,7 +258,7 @@ label.error {
 				<div style="width: 60%; text-align: left; display: grid">
 					<!-- 아이디 -->
 					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control id="empId" name="empId" placeholder="아이디를 입력하세요">
+						<input type="text" class="bjWidth form-control" id="empId" name="empId" placeholder="아이디를 입력하세요">
 					</div>
 
 					<!-- 비밀번호 -->
