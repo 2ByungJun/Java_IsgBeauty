@@ -71,11 +71,17 @@
 							,url: "<c:url value= '/empRegister.json'/>"
 							,data: JSON.stringify(jsonData)
 							,success:function(data){
-								$("#fileId").val(data.fileId); // fileId 값을 받아오고
-							 	$("#input-res-1").fileinput("upload").on('fileuploaded', function() {
-							 		alert("등록되었습니다.");
+								if( $("#input-res-1").fileinput("getFilesCount") == 0 ){
+									alert("등록되었습니다.");
 							 		home();
-							    });
+					 			}else {
+									$("#fileId").val(data.fileId); // fileId 값을 받아오고
+								 	$("#input-res-1").fileinput("upload").on('fileuploaded', function() {
+								 		alert("등록되었습니다.");
+								 		home();
+								    });
+					 			}
+
 							}
 							,error:function(e){
 							   	console.log(e.status, e.statusText);

@@ -34,6 +34,10 @@
 		document.detailForm.action = "<c:url value='/empEdit.do'/>";
 		document.detailForm.submit();
 	}
+
+	$("#myImg").error = function() {
+		$(this).hide();
+	}
 </script>
 <style>
 label {
@@ -73,7 +77,7 @@ p {
 				<!-- Start(40%) -->
 				<div style="width: 40%; display: grid; justify-content:right;">
 					<div class="box" style="background: #BDBDBD;">
-						<img class="profile" src=<c:url value="/jfile/preview.do?fileId=${result.fileId}"/> >
+						<img class="profile" name="myImg" id="myImg" src=<c:url value="/jfile/preview.do?fileId=${result.fileId}"/> >
 					</div>
 				</div>
 

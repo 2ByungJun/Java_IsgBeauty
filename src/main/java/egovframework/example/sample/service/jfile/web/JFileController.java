@@ -179,21 +179,16 @@ public class JFileController {
 		System.out.println("============================");
 		System.out.println("Controller-8. 이미지 미리보기 /preview.do!!!!");
 		System.out.println("============================");
-		JFileDetails prevFileVO = null;
-		prevFileVO= service.getAttachFile(fileVO.getFileId(), fileVO.getFileSeq());
-		System.out.println("prevFileVO service.getAttachFile");
+		JFileDetails prevFileVO = service.getAttachFile(fileVO.getFileId(), fileVO.getFileSeq());
 
-		System.out.println("-------------------------");
-		System.out.println("fileVO.getFileId() : " + fileVO.getFileId());
-		System.out.println("fileVO.getFileSeq() : " + fileVO.getFileSeq());
-		System.out.println("-------------------------");
-
-		JFile previewFile = prevFileVO.isImage() ?
-				service.getFileBySequence(fileVO.getFileId(), fileVO.getFileSeq(), fileVO.getUseSecurity()) : new JFile(getNoImagePath());
+		JFile previewFile;
+		if(prevFileVO == null) {
+			previewFile = new JFile(getNoImagePath());
+		} else {
+			previewFile = prevFileVO.isImage() ? service.getFileBySequence(fileVO.getFileId(), fileVO.getFileSeq(), fileVO.getUseSecurity()) : new JFile(getNoImagePath());
+		}
 
 
-
-		System.out.println("prevFileVO service.getFileBySequence");
 		return new ModelAndView(JfileDownloadView.NAME, JfileDownloadView.MODELNAME, previewFile);
 	}
 
