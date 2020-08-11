@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import egovframework.example.sample.service.SampleDefaultVO;
+import egovframework.example.sample.service.emp.EmpVO;
 import egovframework.example.sample.service.mber.impl.MberMapper;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 
@@ -72,4 +73,7 @@ public class MberService {
 		mapper.updateMber(vo);
 	}
 
+	public List<?> selectListMberNM(MberVO vo) throws Exception {
+		 return mapper.selectListMberNM(vo);
+	}
 }

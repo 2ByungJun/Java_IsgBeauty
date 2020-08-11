@@ -109,6 +109,7 @@ public class ResveController {
 		return map;
 	}
 
+
 	/**
 	 * 고객 조회
 	 * @param sampleVO
@@ -255,5 +256,31 @@ public class ResveController {
 		map.put("piedatas", pieChartList);
 
 		return map;
+	}
+
+	/**
+	 * 예약 캘린더 등록 View
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/resveViewRegister.do")
+	public String resveViewRegister(MberVO searchVO, Model model) throws Exception{
+		System.out.println("[예약 View 등록화면]");
+
+		List<?> listMberNM = mberService.selectListMberNM(searchVO);
+		model.addAttribute("listMberNM", listMberNM);
+
+		return "/useLayout/resve/resveViewRegister";
+	}
+
+
+	@RequestMapping(value = "/addResveViewRegister.do", method = RequestMethod.POST)
+	public String addResveViewRegister(@ModelAttribute("searchVO") ResveVO searchVO) throws Exception {
+		System.out.println("[예약 View 등록]");
+
+		resveService.insertResve(searchVO);
+
+		return "redirect:/resveView.do";
 	}
 }

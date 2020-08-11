@@ -20,12 +20,8 @@
 <script src="<c:url value='js/locales-all.min.js'/>"></script>
 <script src="<c:url value='js/fullcalendar-5.1.0/lib/locales/ko.js'/>"></script>
 
-
-<!-- bootstrap -->
-<link rel="stylesheet"
-	href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
-<script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
-<script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
+<!-- moment 2.24.0 -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 <!-- Today -->
 <%
@@ -193,6 +189,10 @@
 											}
 										}
 									},
+									 navLinks: true,
+									 navLinkDayClick: function(date, jsEvent) {
+									    dateClick(moment(date.toISOString()).format('YYYY-MM-DD'));
+									 }
 								});
 
 						// 렌더링
@@ -220,12 +220,21 @@
 		$('.fc-toolbar-title').css("color", "#000080");
 		$('.fc-toolbar-title').css("font-size","xx-large");
 	}
+
+	/***** 예약 View 등록 *****/
+	function dateClick(date) {
+		document.detailForm.selectedDate.value = date;
+		document.detailForm.action = "<c:url value='/resveViewRegister.do'/>";
+		document.detailForm.submit();
+	}
+
 </script>
 </head>
 <body>
 	<form:form commandName="resveVO" id="detailForm" name="detailForm"
 		method="post">
 		<input type="hidden" id="resveSn" name="selectedId" />
+		<input type="hidden" id="resveDt" name="selectedDate" />
 
 		<div class="container">
 			<div id="calendar"></div>

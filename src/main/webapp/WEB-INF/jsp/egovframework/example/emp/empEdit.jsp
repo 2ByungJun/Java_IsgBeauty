@@ -15,6 +15,45 @@
 <link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.min.css'/>">
 <script src="<c:url value='fileinput/js/fileinput.js' />"></script>
 
+<!-- CSS -->
+<style>
+input.error {
+	border: 1px solid red;
+}
+
+label.error {
+	color: red;
+	margin-top: 33px;
+	margin-left: 10px;
+}
+.bjLabel {
+	margin-top: 30px;
+	align-self: center;
+}
+
+.bjInput {
+	width: 200px;
+	margin-top: 25px;
+}
+
+#divInline {
+	align-items: center;
+	display: inline-flex;
+}
+
+/***** img  *****/
+.box {
+    width: 200px;
+    height: 200px;
+    border-radius: 70%;
+    overflow: hidden;
+}
+.profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+</style>
 <!-- JS -->
 <script type="text/javaScript" language="javascript" defer="defer">
 
@@ -27,7 +66,8 @@
 			initialPreviewFileType: 'image',
 			validataInitialCount : true,
 			maxFileCount : 1,
-			uploadExtraData: { fileId : "${result.fileId}"
+			uploadExtraData: {
+				fileId : "${result.fileId}"
 			},
 			initialPreview:
 				['<img class="kv-preview-data file-preview-image" src="http://localhost:8080/IsgBeauty/jfile/preview.do?fileId=Filelsuh0429pro&fileSeq=1">']
@@ -36,6 +76,11 @@
 		        {type: "image", caption: "Image-1.jpg", size: 847000, url: "/site/file-delete", key: 1}],
 			 overwriteInitial: false,
 			 uploadAsync: false,
+			uploadAsync: false,
+			overwriteInitial: false,
+		    initialPreview: [
+		        '<c:url value="/jfile/preview.do?fileId=${result.fileId}"/>" class="profile" name="myImg" id="myImg"',
+		    ],
 			theme : 'explorer',
 			deleteUrl : '/site/file-delete',
 			fileActionSettings : {
@@ -72,6 +117,9 @@
 		document.detailForm.action = "<c:url value='/empView.do'/>";
 		document.detailForm.submit();
 	}
+=======
+/* 	'<img class="profile" name="myImg" id="myImg" src=<c:url value="/jfile/preview.do?fileId=' + ${result.fileId} + '"/>', */
+>>>>>>> branch 'master' of https://github.com/2ByungJun/IsgBeauty.git
 
 	$(function() {
 		$("#detailForm").validate({
@@ -161,6 +209,28 @@
 		});
 	});
 
+	function home() {
+		location.href = "<c:url value='/empList.do'/>";
+	}
+	function deleteMber(id) {
+		var check;
+		check = confirm("정말로 해당 직원을 삭제하시겠습니까?");
+
+		if (check) {
+			alert("삭제되었습니다.");
+			document.detailForm.selectedId.value = id;
+			document.detailForm.action = "<c:url value='/deleteEmp.do'/>";
+			document.detailForm.submit();
+		} else {
+			alert("취소하셨습니다.");
+		}
+	}
+	function view(id) {
+		document.detailForm.selectedId.value = id;
+		document.detailForm.action = "<c:url value='/empView.do'/>";
+		document.detailForm.submit();
+	}
+
 	$.validator.addMethod("regex", function(value, element, regexp) {
 		let re = new RegExp(regexp);
 		let res = re.test(value);
@@ -195,39 +265,7 @@
 	    obj.value = phone;
 	}
 </script>
-<!-- CSS -->
-<style>
-input.error {
-	border: 1px solid red;
-}
 
-label.error {
-	color: red;
-	margin-top: 33px;
-	margin-left: 10px;
-}
-.bjLabel {
-	margin-top: 30px;
-}
-
-.bjInput {
-	width: 200px;
-	margin-top: 30px;
-}
-
-/***** img  *****/
-.box {
-    width: 200px;
-    height: 200px;
-    border-radius: 70%;
-    overflow: hidden;
-}
-.profile {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-</style>
 </head>
 <body>
 	<%
@@ -247,8 +285,22 @@ label.error {
 			<!-- Contents -->
 			<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
 
-				<!-- Start(35%) -->
-				<div style="width: 35%;"></div>
+				<!-- Start(10%) -->
+				<div style="width: 15%">
+				</div>
+
+				<!-- 2(35%) -->
+				<div style="width: 35%; text-align: center; font-stretch: semi-condensed; padding: 40px">
+					<!-- 이미지 -->
+						<label class="control-label">프로필 사진 등록</label>
+						<div class="file-loading">
+				    		<input id="input-res-1" name="input-res-1" type="file"  data-show-upload="false">
+						</div>
+				</div>
+
+				<!-- 3(10%) -->
+				<div style="width: 10%">
+				</div>
 
 				<!-- Center(10%) -->
 				<div style="width: 10%; text-align: center; display: grid;">
@@ -265,29 +317,29 @@ label.error {
 				<!-- End(60%) -->
 				<div style="width: 60%; text-align: left; display: grid">
 					<!-- 아이디 -->
-					<div style="display: inline-flex;">
+					<div id="divInline">
 						<input type="text" class="bjInput form-control" id="empId" name="empId" value="<c:out value="${result.empId}"/>" readonly required>
 					</div>
 
 					<!-- 패스워드 -->
-					<div style="display: inline-flex;">
+					<div id="divInline">
 						<input type="password" class="bjInput form-control" id="empPassword" name="empPassword" value="<c:out value="${result.empPassword}"/>" required>
 					</div>
 
 					<!-- 이름 -->
-					<div style="display: inline-flex;">
+					<div id="divInline">
 						<input type="text" class="bjInput form-control" id="empNm" name="empNm"
 								value="<c:out value="${result.empNm}" />" required>
 					</div>
 
 					<!-- 전화번호 -->
-					<div style="display: inline-flex;">
+					<div id="divInline">
 						<input type="text" class="bjInput form-control" id="telno" name="telno" value="${result.telno}"
 								placeholder="000-0000-0000" maxlength="13" onkeyup="inputPhoneNumber(this)" required>
 					</div>
 
 					<!-- 성별 -->
-					<div style="display: inline-flex;">
+					<div id="divInline">
 						<select type="text" class="bjInput form-control" id="sexdstn" name="sexdstn">
 							<option value="${result.sexdstn}" selected="selected">
 							<c:out value="${result.sexdstn}" /></option>
@@ -297,7 +349,7 @@ label.error {
 					</div>
 
 					<!-- 직책 -->
-					<div style="display: inline-flex;">
+					<div id="divInline">
 						<select type="text" class="bjInput form-control" id="pspofc" name="pspofc">
 							<option value="${result.pspofc}" selected="selected"> <c:out value="${result.pspofc}" /></option>
 							<option value="Admin">Admin</option>
@@ -306,12 +358,12 @@ label.error {
 					</div>
 
 					<!-- 급여 -->
-					<div style="display: inline-flex;">
+					<div id="divInline">
 						<input type="text" class="bjInput form-control" id="salary" name="salary" value="<c:out value="${result.salary}"/>" required>
 					</div>
 
 					<!-- 경력 -->
-					<div style="display: inline-flex;">
+					<div id="divInline">
 						<input type="career" class="bjInput form-control" id="career" name="career" value="<c:out value="${result.career}"/>" required>
 					</div>
 
@@ -319,6 +371,7 @@ label.error {
 			</div>
 		</div>
 
+<<<<<<< HEAD
 		<!-- 이미지 -->
 		<div class="container" style="width:100%; display:grid; justify-items:center; font-stretch:semi-condensed;">
 			<div style="width: 20%; text-align: center; display: inline-flex;">
@@ -345,6 +398,8 @@ label.error {
 
 		</div>
 
+=======
+>>>>>>> branch 'master' of https://github.com/2ByungJun/IsgBeauty.git
 		<!-- hidden -->
 		<input type="hidden" id="registId" name="registId" value="${result.registId}"/>
 		<input type="hidden" id="registDt" name="registDt" value="${result.registDt}"/>

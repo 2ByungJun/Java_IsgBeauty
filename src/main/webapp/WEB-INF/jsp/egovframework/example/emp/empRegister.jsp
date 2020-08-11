@@ -301,19 +301,19 @@ label.error {
 					<!-- 아이디 -->
 					<div style="display: inline-flex;">
 						<input type="text" class="bjWidth form-control" id="empId"
-							name="empId" required>
+							name="empId" placeholder="아이디를 입력하세요" required>
 					</div>
 
 					<!-- 비밀번호 -->
 					<div style="display: inline-flex;">
 						<input type="password" class="bjWidth form-control"
-							id="empPassword" name="empPassword" required>
+							id="empPassword" name="empPassword" placeholder="비밀번호를 입력하세요" required>
 					</div>
 
 					<!-- 이름 -->
 					<div style="display: inline-flex;">
 						<input type="text" class="bjWidth form-control" id="empNm"
-							name="empNm" required>
+							name="empNm" placeholder="이름을 입력하세요" required>
 					</div>
 
 					<!-- 전화번호 -->
@@ -345,13 +345,13 @@ label.error {
 					<div style="display: inline-flex;">
 						<input type="text" class="bjWidth form-control" id="salary"
 							name="salary"
-							onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" required>
+							onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="급여를 입력하세요" required>
 					</div>
 
 					<!-- 경력 -->
 					<div style="display: inline-flex;">
 						<input type="text" class="bjWidth form-control" id="career"
-							name="career" required>
+							name="career" placeholder="경력을 입력하세요" required>
 					</div>
 
 					<!-- 등록자 -->
