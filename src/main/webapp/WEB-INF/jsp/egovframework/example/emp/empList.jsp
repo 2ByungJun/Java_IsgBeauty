@@ -19,7 +19,7 @@
 }
 </style>
 
-<form:form commandName="searchVO" id="listForm" name="listForm" method="post">
+<form:form commandName="empVO" id="listForm" name="listForm" method="post">
 		<!-- hidden -->
 		<input type="hidden" name="selectedId" />
 
@@ -31,11 +31,10 @@
 
 			<!-- top -->
 			<div style="width:100%; display:inline-flex; padding-bottom:2px">
-				<div style="width: 50%; text-align:left;">
-					<button type="button" class="btn btn-primary" onclick="empRegister()">직원 등록</button>
+				<!-- button -->
+				<div style="width: 50%; text-align:left;"><button type="button" class="btn btn-primary" onclick="empRegister()">직원 등록</button></div>
 
-				</div>
-
+				<!-- search -->
 				<div id="search" style="width: 50%;">
 					<div class="input-group" style="float:right;">
 						<form:input path="searchKeyword" type="text" id="serachKeyword" placeholder="이름 검색" style="width:200px" cssClass="txt form-control" onkeydown="if(event.keyCode==13) fnSelectList(1)" />
@@ -44,9 +43,10 @@
 				</div>
 			</div>
 
-			<!-- contents -->
+			<!-- body -->
 			<div class="panel panel-default">
 
+				<!-- table -->
 				<div class="panel-body">
 					<div class="table table-striped">
 						<table id="table" class="table table-hover">
@@ -69,13 +69,13 @@
 					</div>
 				</div>
 
+				<!-- paging -->
 				<div class="text-center">
 					<div id="paging">
 					</div>
 				</div>
 
 			</div>
-
 		</div>
 </form:form>
 
@@ -110,7 +110,7 @@
 		    	var imgHref = '';
 				if(data.dataList.length==0){
 					html += '<tr>';
-					html += '	<td colspan="7" style="text-align:center">표시할 데이터가 없습니다.</td>';
+					html += '	<td colspan="9" style="text-align:center">표시할 데이터가 없습니다.</td>';
 					html += '</tr>';
 				}else{
 					$.each(data.dataList, function(index, item) {

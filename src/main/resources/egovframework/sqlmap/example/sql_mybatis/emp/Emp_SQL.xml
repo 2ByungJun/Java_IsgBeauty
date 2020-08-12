@@ -100,8 +100,16 @@
 			#{telno},
 			#{sexdstn},
 			#{pspofc},
-			#{salary},
-			#{career},
+			<choose>
+			    <when test="salary == null or career == null">
+			        '0',
+			        '0',
+			    </when>
+			    <otherwise>
+					#{salary},
+					#{career},
+			    </otherwise>
+			</choose>
 			#{registId},
 			CURDATE(),
 			#{registId},

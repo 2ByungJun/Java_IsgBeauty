@@ -27,10 +27,11 @@ p {
 }
 </style>
 
-
+<!-- JSP -->
 <form:form commandName="empVO" id="detailForm" name="detailForm" method="post">
 		<!-- hidden -->
 		<input type="hidden" name="selectedId" />
+		<input type="hidden" name="empId" value="${result.empId}" />
 
 		<!-- body -->
 		<div class="container">
@@ -124,7 +125,6 @@ p {
 
 		if (check) {
 			document.detailForm.action = "<c:url value='/deleteEmp.do'/>";
-			document.detailForm.selectedId.value = id;
 			document.detailForm.submit();
 		} else {
 			alert("취소하셨습니다.");

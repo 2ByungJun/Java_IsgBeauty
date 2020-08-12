@@ -5,6 +5,11 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.text.SimpleDateFormat"%>
+<%
+	Date now = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+	String today = sf.format(now);
+%>
 
 <!-- CSS -->
 <style>
@@ -46,12 +51,7 @@ label.error {
 }
 </style>
 
-<%
-	Date now = new Date();
-	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-	String today = sf.format(now);
-%>
-
+<!-- JSP -->
 <form:form commandName="empVO" id="detailForm" name="detailForm" method="post">
 		<!-- hidden -->
 		<input type="hidden" id="registId" name="registId" value="${result.registId}"/>
@@ -161,6 +161,7 @@ label.error {
 			validataInitialCount : true,
 			uploadAsync: false,
 			overwriteInitial: true,
+			showRemove: false,
 			uploadExtraData: {
 				fileId : "${result.fileId}"
 			},
@@ -318,7 +319,6 @@ label.error {
 		check = confirm("정말로 해당 직원을 삭제하시겠습니까?");
 		if (check) {
 			alert("삭제되었습니다.");
-			document.detailForm.selectedId.value = id;
 			document.detailForm.action = "<c:url value='/deleteEmp.do'/>";
 			document.detailForm.submit();
 		} else {
