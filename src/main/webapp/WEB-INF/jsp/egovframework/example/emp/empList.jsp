@@ -20,7 +20,7 @@
 </style>
 
 <!-- JSP -->
-<form:form commandName="searchVO" id="listForm" name="listForm" method="post">
+<form:form commandName="empVO" id="listForm" name="listForm" method="post">
 		<!-- hidden -->
 		<input type="hidden" name="selectedId" />
 
