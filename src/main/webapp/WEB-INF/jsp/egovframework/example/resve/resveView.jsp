@@ -3,35 +3,24 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>IsgBeauty 프로젝트</title>
 
-<!-- fullcalendar-5.1.0 -->
-<link rel="stylesheet" href="<c:url  value='js/main.css'/>">
-<link rel="stylesheet" href="<c:url  value='js/main.min.css'/>">
-<script src="<c:url value='js/main.js' />"></script>
-<script src="<c:url value='js/main.min.js'/>"></script>
-<script src="<c:url value='js/locales-all.js'/>"></script>
-<script src="<c:url value='js/locales-all.min.js'/>"></script>
-<script src="<c:url value='js/fullcalendar-5.1.0/lib/locales/ko.js'/>"></script>
+<!-- JSP -->
+<form:form commandName="resveVO" id="detailForm" name="detailForm" method="post">
+	<!-- hidden -->
+	<input type="hidden" id="resveSn" name="selectedId" />
+	<input type="hidden" id="resveDt" name="selectedDate" />
 
-<!-- moment 2.24.0 -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+	<!-- calendar -->
+	<div class="container"><div id="calendar"></div></div>
 
-<!-- Today -->
-<%
-	Date now = new Date();
-	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-	String today = sf.format(now);
-%>
+</form:form>
 
 <!-- JS -->
-<script type="text/javaScript" language="javascript" defer="defer">
+<link rel="stylesheet" href="<c:url value='js/main.min.css'/>">
+<script src="<c:url value='js/main.min.js'/>"></script>
+<script src="<c:url value='js/locales-all.min.js'/>"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script type="text/javaScript" defer="defer">
 
 	/***** 예약등록 *****/
 	function resveRegister() {
@@ -39,10 +28,7 @@
 	}
 
 	/***** Ajax 예약 데이터 *****/
-	document
-			.addEventListener(
-					'DOMContentLoaded',
-					function() {
+	document.addEventListener('DOMContentLoaded',function() {
 						var calendarEl = document.getElementById('calendar');
 						var obj = {};
 						$.ajax({
@@ -100,8 +86,7 @@
 						});
 
 						/***** Full Calendar *****/
-						var calendar = new FullCalendar.Calendar(
-								calendarEl,
+						var calendar = new FullCalendar.Calendar(calendarEl,
 								{
 									initialView : 'dayGridMonth', // 월 달력
 									// 달력 툴
@@ -197,7 +182,6 @@
 
 						// 렌더링
 						calendar.render();
-
 						dayColor();
 						$(".fc-button").click(function() {
 							dayColor();
@@ -229,12 +213,3 @@
 	}
 
 </script>
-	<form:form commandName="resveVO" id="detailForm" name="detailForm"
-		method="post">
-		<input type="hidden" id="resveSn" name="selectedId" />
-		<input type="hidden" id="resveDt" name="selectedDate" />
-
-		<div class="container">
-			<div id="calendar"></div>
-		</div>
-	</form:form>

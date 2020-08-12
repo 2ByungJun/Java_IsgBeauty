@@ -9,6 +9,11 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
+<%
+	Date now = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+	String today = sf.format(now);
+%>
 
 <!-- CSS -->
 <style>
@@ -30,13 +35,7 @@ label.error {
 }
 </style>
 
-
-<%
-	Date now = new Date();
-	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-	String today = sf.format(now);
-%>
-
+<!-- JSP -->
 <form:form commandName="empVO" id="detailForm" name="detailForm" method="post">
 		<!-- hidden -->
 		<input type="hidden" name="fileId" id="fileId" />
@@ -152,6 +151,7 @@ label.error {
 			initialPreviewAsData : true,
 			validataInitialCount : true,
 			overwriteInitial: true,
+			showRemove: false,
 			uploadExtraData:function(){ return {fileId : $("#fileId").val()} },
 			theme : 'explorer',
 			deleteUrl : '/site/file-delete',

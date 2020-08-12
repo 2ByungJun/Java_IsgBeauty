@@ -19,7 +19,8 @@
 }
 </style>
 
-<form:form commandName="empVO" id="listForm" name="listForm" method="post">
+<!-- JSP -->
+<form:form commandName="searchVO" id="listForm" name="listForm" method="post">
 		<!-- hidden -->
 		<input type="hidden" name="selectedId" />
 
