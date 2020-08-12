@@ -3,16 +3,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>IsgBeauty 프로젝트</title>
-<link rel="stylesheet"
-	href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
-<script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
-<script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
-<script src="<c:url value='js/paging.js' />"></script>
 
 <!-- CSS -->
 <style>
@@ -29,16 +19,75 @@
 }
 </style>
 
+<form:form commandName="searchVO" id="listForm" name="listForm" method="post">
+		<!-- hidden -->
+		<input type="hidden" name="selectedId" />
+
+		<!-- body -->
+		<div class="container">
+
+			<!-- title -->
+			<h2 style="text-align:center;"><b>직원관리</b></h2>
+
+			<!-- top -->
+			<div style="width:100%; display:inline-flex; padding-bottom:2px">
+				<div style="width: 50%; text-align:left;">
+					<button type="button" class="btn btn-primary" onclick="empRegister()">직원 등록</button>
+
+				</div>
+
+				<div id="search" style="width: 50%;">
+					<div class="input-group" style="float:right;">
+						<form:input path="searchKeyword" type="text" id="serachKeyword" placeholder="이름 검색" style="width:200px" cssClass="txt form-control" onkeydown="if(event.keyCode==13) fnSelectList(1)" />
+						<button class="btn btn-primary" type="button" onclick="javascript:fnSelectList(1)" style="font-size: 14px;"><i class="glyphicon glyphicon-search"></i></button>
+					</div>
+				</div>
+			</div>
+
+			<!-- contents -->
+			<div class="panel panel-default">
+
+				<div class="panel-body">
+					<div class="table table-striped">
+						<table id="table" class="table table-hover">
+							<thead>
+								<tr>
+									<td style="width: 5%" align="center"><b>사진</b></td>
+									<td style="width: 10%" align="center"><b>ID</b></td>
+									<td style="width: 10%" align="center"><b>이름</b></td>
+									<td style="width: 10%" align="center"><b>성별</b></td>
+									<td style="width: 15%" align="center"><b>전화번호</b></td>
+									<td style="width: 10%" align="center"><b>직책</b></td>
+									<td style="width: 10%" align="center"><b>경력</b></td>
+									<td style="width: 15%" align="center"><b>등록일</b></td>
+									<td style="width: 15%" align="center"><b>수정일</b></td>
+								</tr>
+							</thead>
+							<tbody id=tableList>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="text-center">
+					<div id="paging">
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+</form:form>
+
 <!-- JS -->
-<script type="text/javaScript" language="javascript" defer="defer">
+<script src="<c:url value='js/paging.js' />"></script>
+<script type="text/javaScript" defer="defer">
 
 	<%  String str = (String) session.getAttribute("empId"); %>
-
-
 	$(document).ready(function() {
 		 fnSelectList(1);
 		 var welcomeHtml = '';
-		 welcomeHtml += '<b>'+'[<%=str%>]' + '님 환영합니다.</b>';
+		 welcomeHtml += '<b>'+'[<%=str%>]' + '님 qwewe.</b>';
 		 welcomeHtml += '<b>직원 관리 화면입니다.</b>';
 		 $('#welcome').html(welcomeHtml);
 	});
@@ -114,72 +163,14 @@
 	function home() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
+
 	function empRegister() {
 		location.href = "<c:url value='/empRegister.do'/>";
 	}
+
     function view(id) {
     	document.listForm.selectedId.value = id;
        	document.listForm.action = "<c:url value='/empView.do'/>";
        	document.listForm.submit();
     }
 </script>
-</head>
-<body>
-	<form:form commandName="searchVO" id="listForm" name="listForm" method="post">
-		<input type="hidden" name="selectedId" />
-		<div class="container">
-			<h2 style="text-align:center;">
-					<b>직원관리</b>
-				</h2>
-			<div style="width:100%; display:inline-flex; padding-bottom:2px">
-				<div style="width: 50%; text-align:left;">
-					<button type="button" class="btn btn-primary" onclick="empRegister()">직원
-						등록</button>
-
-
-				</div>
-
-				<div id="search" style="width: 50%;">
-					<div class="input-group" style="float:right;">
-						<form:input path="searchKeyword" type="text" id="serachKeyword" placeholder="이름 검색" style="width:200px" cssClass="txt form-control"
-									onkeydown="if(event.keyCode==13) fnSelectList(1)" />
-						<button class="btn btn-primary" type="button" onclick="javascript:fnSelectList(1)" style="font-size: 14px;">
-							<i class="glyphicon glyphicon-search"></i>
-						</button>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="table table-striped">
-						<table id="table" class="table table-hover">
-							<thead>
-								<tr>
-									<td style="width: 5%" align="center"><b>사진</b></td>
-									<td style="width: 10%" align="center"><b>ID</b></td>
-									<td style="width: 10%" align="center"><b>이름</b></td>
-									<td style="width: 10%" align="center"><b>성별</b></td>
-									<td style="width: 15%" align="center"><b>전화번호</b></td>
-									<td style="width: 10%" align="center"><b>직책</b></td>
-									<td style="width: 10%" align="center"><b>경력</b></td>
-									<td style="width: 15%" align="center"><b>등록일</b></td>
-									<td style="width: 15%" align="center"><b>수정일</b></td>
-								</tr>
-							</thead>
-							<tbody id=tableList>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="text-center">
-					<div id="paging">
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</form:form>
-</body>
-</html>

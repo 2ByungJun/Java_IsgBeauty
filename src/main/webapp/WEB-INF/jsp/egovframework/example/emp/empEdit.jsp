@@ -182,28 +182,6 @@ label.error {
 		});
 	});
 
-	function home() {
-		location.href = "<c:url value='/empList.do'/>";
-	}
-	function deleteMber(id) {
-		var check;
-		check = confirm("정말로 해당 직원을 삭제하시겠습니까?");
-
-		if (check) {
-			alert("삭제되었습니다.");
-			document.detailForm.selectedId.value = id;
-			document.detailForm.action = "<c:url value='/deleteEmp.do'/>";
-			document.detailForm.submit();
-		} else {
-			alert("취소하셨습니다.");
-		}
-	}
-	function view(id) {
-		document.detailForm.selectedId.value = id;
-		document.detailForm.action = "<c:url value='/empView.do'/>";
-		document.detailForm.submit();
-	}
-
 	$.validator.addMethod("regex", function(value, element, regexp) {
 		let re = new RegExp(regexp);
 		let res = re.test(value);
@@ -250,6 +228,7 @@ label.error {
 	<form:form commandName="empVO" id="detailForm" name="detailForm"
 		method="post">
 		<input type="hidden" name="selectedId" />
+		<input type="hidden" name="fileId" val ="${result.fileId}" />
 		<div class="container">
 			<h2 style="text-align:center;">
 					<b><span style="color:#000080">'<c:out value="${result.empNm}" />'</span>직원 수정 화면</b>
@@ -355,7 +334,7 @@ label.error {
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="submit" class="btn btn-primary" onclick="">수정</button>
 			<button type="button" class="btn btn-danger"
-				onclick="deleteMber('${result.empId}')">삭제</button>
+				onclick="deleteMber()">삭제</button>
 			<button type="button" class=" btn btn-info"
 				onclick="view('${result.empId}')">이전</button>
 		</div>

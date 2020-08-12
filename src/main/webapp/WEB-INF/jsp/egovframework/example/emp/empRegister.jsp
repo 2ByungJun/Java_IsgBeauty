@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -11,14 +10,134 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>IsgBeauty 프로젝트</title>
-<!-- fileInput -->
-<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.min.css'/>">
-<script src="<c:url value='fileinput/js/fileinput.js' />"></script>
+<!-- CSS -->
+<style>
+input.error {
+	border: 1px solid red;
+}
+
+label {
+	margin: 13px;
+}
+
+label.error {
+	color: red;
+}
+
+.bjWidth {
+	width: 200px;
+	margin-top: 10px;
+}
+</style>
+
+
+<%
+	Date now = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+	String today = sf.format(now);
+%>
+
+<form:form commandName="empVO" id="detailForm" name="detailForm" method="post">
+		<!-- hidden -->
+		<input type="hidden" name="fileId" id="fileId" />
+		<input type="hidden" id="idCheck" name="idCheck" value="true" readonly>
+
+		<!-- body -->
+		<div class="container">
+
+			<!-- title -->
+			<h2 style="text-align: center;"><b>직원 등록</b></h2>
+
+			<!-- contents -->
+			<div style="width: 100%; display: inline-flex; padding-bottom: 2px; margin-top:px;">
+
+				<!-- (15%) -->
+				<div style="width: 15%"></div>
+
+				<!-- file (35%) -->
+				<div style="width: 35%; text-align: center; font-stretch: semi-condensed; padding: 40px">
+						<label class="control-label">프로필 사진 등록</label>
+						<div class="file-loading">
+				    		<input id="input-res-1" name="input-res-1" type="file"  data-show-upload="false">
+						</div>
+				</div>
+
+				<!-- (10%) -->
+				<div style="width: 10%">
+				</div>
+
+				<!-- label (10%) -->
+				<div style="width: 10%; text-align: center; display: grid">
+					<label class="control-label">아이디 : </label>
+					<label class="control-label">비밀번호:</label>
+					<label class="control-label">이름:</label>
+					<label class="control-label">전화번호:</label>
+					<label class="control-label">성별:</label>
+					<label class="control-label">직책:</label>
+					<label class="control-label">급여:</label>
+					<label class="control-label">경력:</label>
+					<label class="control-label">등록자:</label>
+					<label class="control-label">등록일:</label>
+				</div>
+
+				<!-- input (45%) -->
+				<div style="width: 45%; text-align: left; display: grid">
+					<!-- 아이디 -->
+					<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="empId" name="empId" placeholder="아이디를 입력하세요" required></div>
+
+					<!-- 비밀번호 -->
+					<div style="display: inline-flex;"><input type="password" class="bjWidth form-control" id="empPassword" name="empPassword" placeholder="비밀번호를 입력하세요" required></div>
+
+					<!-- 이름 -->
+					<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="empNm" name="empNm" placeholder="이름을 입력하세요" required></div>
+
+					<!-- 전화번호 -->
+					<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="telno" name="telno" placeholder="000-0000-0000" maxlength="13" onkeyup="inputPhoneNumber(this)" required></div>
+
+					<!-- 성별 -->
+					<div style="display: inline-flex;">
+						<select class="bjWidth form-control" id="sexdstn" name="sexdstn">
+							<option value="Male" selected="selected">Male</option>
+							<option value="Female">Female</option>
+						</select>
+					</div>
+
+					<!-- 직책 -->
+					<div style="display: inline-flex;">
+						<select class="bjWidth form-control" id="pspofc" name="pspofc">
+							<option value="Admin" selected="selected">Admin</option>
+							<option value="Designer">Designer</option>
+						</select>
+					</div>
+
+					<!-- 급여 -->
+					<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="salary" name="salary" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="급여를 입력하세요" required></div>
+
+					<!-- 경력 -->
+					<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="career" name="career" placeholder="경력을 입력하세요" required></div>
+
+					<!-- 등록자 -->
+					<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="registId" name="registId" value="${empId}" readonly></div>
+
+					<!-- 등록일 -->
+					<div style="display: inline-flex;"><input type="date" class="bjWidth form-control" id="registDt" name="registDt" value="<%=today%>" readonly></div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- button -->
+		<div class="container" style="text-align: center; margin-top: 30px;">
+			<button type="submit" class="btn btn-primary" onclick="">등록</button>
+			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
+		</div>
+
+</form:form>
 
 <!-- JS -->
-<script type="text/javaScript" language="javascript" defer="defer">
+<link rel="stylesheet" href="<c:url  value='fileinput/css/fileinput.min.css'/>">
+<script src="<c:url value='fileinput/js/fileinput.js' />"></script>
+<script type="text/javaScript" defer="defer">
 
 	function home() {
 		location.href = "<c:url value='/empList.do'/>";
@@ -230,140 +349,3 @@
 		}
 	}
 </script>
-</head>
-<style>
-input.error {
-	border: 1px solid red;
-}
-
-label {
-	margin: 13px;
-}
-
-label.error {
-	color: red;
-}
-
-.bjWidth {
-	width: 200px;
-	margin-top: 10px;
-}
-</style>
-<body>
-	<%
-		Date now = new Date();
-		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-		String today = sf.format(now);
-	%>
-	<form:form commandName="empVO" id="detailForm" name="detailForm" method="post">
-		<input type="hidden" name="fileId" id="fileId" />
-		<div class="container">
-			<h2 style="text-align: center;">
-				<b>직원 등록</b>
-			</h2>
-
-			<!-- Contents -->
-			<div style="width: 100%; display: inline-flex; padding-bottom: 2px; margin-top:px;">
-
-				<!-- Start(10%) -->
-				<div style="width: 15%">
-				</div>
-
-				<!-- 2(35%) -->
-				<div style="width: 35%; text-align: center; font-stretch: semi-condensed; padding: 40px">
-					<!-- 이미지 -->
-						<label class="control-label">프로필 사진 등록</label>
-						<div class="file-loading">
-				    		<input id="input-res-1" name="input-res-1" type="file"  data-show-upload="false">
-						</div>
-				</div>
-
-				<!-- 3(10%) -->
-				<div style="width: 10%">
-				</div>
-
-				<!-- 4(10%) -->
-				<div style="width: 10%; text-align: center; display: grid">
-					<label class="control-label">아이디 : </label> <label
-						class="control-label">비밀번호:</label> <label class="control-label">이름:</label>
-					<label class="control-label">전화번호:</label> <label
-						class="control-label">성별:</label> <label class="control-label">직책:</label>
-					<label class="control-label">급여:</label> <label
-						class="control-label">경력:</label> <label class="control-label">등록자:</label>
-					<label class="control-label">등록일:</label>
-				</div>
-
-				<!-- End(60%) -->
-				<div style="width: 45%; text-align: left; display: grid">
-					<!-- 아이디 -->
-					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="empId" name="empId" placeholder="아이디를 입력하세요" required>
-					</div>
-
-					<!-- 비밀번호 -->
-					<div style="display: inline-flex;">
-						<input type="password" class="bjWidth form-control" id="empPassword" name="empPassword" placeholder="비밀번호를 입력하세요" required>
-					</div>
-
-					<!-- 이름 -->
-					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="empNm" name="empNm" placeholder="이름을 입력하세요" required>
-					</div>
-
-					<!-- 전화번호 -->
-					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="telno" name="telno" placeholder="000-0000-0000" maxlength="13" onkeyup="inputPhoneNumber(this)" required>
-					</div>
-
-					<!-- 성별 -->
-					<div style="display: inline-flex;">
-						<select type="text" class="bjWidth form-control" id="sexdstn" name="sexdstn">
-							<option value="Male" selected="selected">Male</option>
-							<option value="Female">Female</option>
-						</select>
-					</div>
-
-					<!-- 직책 -->
-					<div style="display: inline-flex;">
-						<select type="text" class="bjWidth form-control" id="pspofc" name="pspofc">
-							<option value="Admin" selected="selected">Admin</option>
-							<option value="Designer">Designer</option>
-						</select>
-					</div>
-
-					<!-- 급여 -->
-					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="salary" name="salary" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="급여를 입력하세요" required>
-					</div>
-
-					<!-- 경력 -->
-					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="career" name="career" placeholder="경력을 입력하세요" required>
-					</div>
-
-					<!-- 등록자 -->
-					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="registId" name="registId" value="${empId}" readonly>
-					</div>
-
-					<!-- 등록일 -->
-					<div style="display: inline-flex;">
-						<input type="date" class="bjWidth form-control" id="registDt" name="registDt" value="<%=today%>" readonly>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- ID Check input -->
-		<input type="hidden" id="idCheck" name="idCheck" value="true" readonly>
-
-		<!-- Button -->
-		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="submit" class="btn btn-primary" onclick="">등록</button>
-			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
-		</div>
-</form:form>
-
-
-
-
-</body>
