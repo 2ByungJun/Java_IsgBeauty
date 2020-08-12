@@ -6,7 +6,13 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ include file="/common/layouts/userLayout/commonInclude.jsp"%>
+<%
+	Date now = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+	String today = sf.format(now);
+%>
 
+<!-- CSS -->
 <style>
 input.error {
 	border: 1px solid red;
@@ -27,7 +33,97 @@ label.error {
 }
 </style>
 
-<script type="text/javaScript" language="javascript" defer="defer">
+<!-- JSP -->
+<form:form commandName="empVO" id="detailForm" name="detailForm" method="post">
+	<!-- hidden -->
+	<input type="hidden" class="form-control" id="registId" name="registId" value="IsgBeauty" readonly>
+	<input type="hidden" id="snCheck" name="snCheck" value="false" readonly>
+	<input type="hidden" id="idCheck" name="idCheck" value="false" readonly>
+
+	<!-- header -->
+	<div class="container">
+		<header class="page-header">
+			<div class="container">
+				<div style="text-align: center;"><img src="<c:url value='images/logo.jpg' />"></div>
+			</div>
+		</header>
+	</div>
+
+	<!-- body -->
+	<div class="container">
+
+		<!-- title -->
+		<h2 style="text-align: center;"><b>직원 등록</b></h2>
+
+		<!-- contents -->
+		<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
+
+			<!-- (35%) -->
+			<div style="width: 35%;"></div>
+
+			<!-- label (10%) -->
+			<div style="width: 10%; text-align: center; display: grid">
+				<label class="control-label">아이디 : </label>
+				<label class="control-label">비밀번호:</label>
+				<label class="control-label">이름:</label>
+				<label class="control-label">전화번호:</label>
+				<label class="control-label">성별:</label>
+				<label class="control-label">직책:</label>
+				<label class="control-label">시리얼키:</label>
+				<label class="control-label">등록일:</label>
+			</div>
+
+			<!-- input (60%) -->
+			<div style="width: 60%; text-align: left; display: grid">
+				<!-- 아이디 -->
+				<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="empId" name="empId" placeholder="아이디를 입력하세요"></div>
+
+				<!-- 비밀번호 -->
+				<div style="display: inline-flex;"><input type="password" class="bjWidth form-control" id="empPassword"name="empPassword" placeholder="비밀번호를 입력하세요"></div>
+
+				<!-- 이름 -->
+				<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="empNm" name="empNm" placeholder="이름을 입력하세요"></div>
+
+				<!-- 전화번호 -->
+				<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="telno" name="telno" placeholder="000-0000-0000" maxlength="13" onkeyup="inputPhoneNumber(this)" required></div>
+
+				<!-- 성별 -->
+				<div style="display: inline-flex;">
+					<select class="bjWidth form-control" id="sexdstn" name="sexdstn">
+						<option value="Male" selected="selected">Male</option>
+						<option value="Female">Female</option>
+					</select>
+				</div>
+
+				<!-- 직책 -->
+				<div style="display: inline-flex;">
+					<select class="bjWidth form-control" id="pspofc" name="pspofc" readonly>
+						<option value="Admin" selected="selected">Admin</option>
+					</select>
+				</div>
+
+				<!-- 시리얼 키 -->
+				<div style="display: inline-flex;"><input type="password" class="bjWidth form-control" id="snKey" name="snKey" value="123456"></div>
+
+				<!-- 등록일 -->
+				<div style="display: inline-flex;"><input type="date" class="bjWidth form-control" id="registDt" name="registDt" value="<%=today%>" readonly></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- button -->
+	<div class="container" style="text-align: center; margin-top: 30px;">
+		<button type="submit" class="btn btn-primary" onclick="">등록</button>
+		<button type="button" class=" btn btn-info" onclick="home()">취소</button>
+	</div>
+
+</form:form>
+
+<!-- Footer -->
+<jsp:include page="/common/layouts/userLayout/footer.jsp"></jsp:include>
+
+<!-- JS -->
+<script type="text/javaScript" defer="defer">
 	function home() {
 		location.href = "<c:url value='/login.do'/>";
 	}
@@ -211,117 +307,3 @@ label.error {
 		}
 	})
 </script>
-
-<body>
-	<%
-		Date now = new Date();
-		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-		String today = sf.format(now);
-	%>
-	<form:form commandName="empVO" id="detailForm" name="detailForm"
-		method="post">
-		<div class="container">
-			<header class="page-header">
-				<div class="container">
-					<div style="text-align: center;" alt="IsgBeauty 로고">
-						<img src="<c:url value='images/logo.jpg' />">
-					</div>
-				</div>
-			</header>
-		</div>
-
-		<div class="container">
-
-			<h2 style="text-align: center;">
-				<b>직원 등록</b>
-			</h2>
-
-			<!-- Contents -->
-			<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
-
-				<!-- Start(35%) -->
-				<div style="width: 35%;"></div>
-
-				<!-- Center(10%) -->
-				<div style="width: 10%; text-align: center; display: grid">
-					<label class="control-label">아이디 : </label>
-					<label class="control-label">비밀번호:</label>
-					<label class="control-label">이름:</label>
-					<label class="control-label">전화번호:</label>
-					<label class="control-label">성별:</label>
-					<label class="control-label">직책:</label>
-					<label class="control-label">시리얼키:</label>
-					<label class="control-label">등록일:</label>
-				</div>
-
-				<!-- End(60%) -->
-				<div style="width: 60%; text-align: left; display: grid">
-					<!-- 아이디 -->
-					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="empId" name="empId" placeholder="아이디를 입력하세요">
-					</div>
-
-					<!-- 비밀번호 -->
-					<div style="display: inline-flex;">
-						<input type="password" class="bjWidth form-control" id="empPassword"
-							name="empPassword" placeholder="비밀번호를 입력하세요">
-					</div>
-
-					<!-- 이름 -->
-					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="empNm" name="empNm" placeholder="이름을 입력하세요">
-					</div>
-
-					<!-- 전화번호 -->
-					<div style="display: inline-flex;">
-						<input type="text" class="bjWidth form-control" id="telno" name="telno"
-							placeholder="000-0000-0000" maxlength="13" required
-							onkeyup="inputPhoneNumber(this)">
-					</div>
-
-					<!-- 성별 -->
-					<div style="display: inline-flex;">
-						<select type="text" class="bjWidth form-control" id="sexdstn"
-							name="sexdstn">
-							<option value="Male" selected="selected">Male</option>
-							<option value="Female">Female</option>
-						</select>
-					</div>
-
-					<!-- 직책 -->
-					<div style="display: inline-flex;">
-						<select type="text" class="bjWidth form-control" id="pspofc" name="pspofc"
-							readonly>
-							<option value="Admin" selected="selected">Admin</option>
-						</select>
-					</div>
-
-					<!-- 시리얼 키 -->
-					<div style="display: inline-flex;">
-						<input type="password" class="bjWidth form-control" id="snKey"
-							name="snKey" value="123456">
-					</div>
-
-					<!-- 등록일 -->
-					<div style="display: inline-flex;">
-						<input type="date" class="bjWidth form-control" id="registDt"
-							name="registDt" value="<%=today%>" readonly>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Hidden -->
-		<input type="hidden" class="form-control" id="registId" name="registId" value="IsgBeauty" readonly>
-		<input type="hidden" id="snCheck" name="snCheck" value="false" readonly>
-		<input type="hidden" id="idCheck" name="idCheck" value="false" readonly>
-
-		<!-- Button -->
-		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="submit" class="btn btn-primary" onclick="">등록</button>
-			<button type="button" class=" btn btn-info" onclick="home()">취소</button>
-		</div>
-	</form:form>
-	<jsp:include page="/common/layouts/userLayout/footer.jsp"></jsp:include>
-</body>
-</html>

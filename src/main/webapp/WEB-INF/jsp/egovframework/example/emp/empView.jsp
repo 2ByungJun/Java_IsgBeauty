@@ -27,7 +27,7 @@ p {
 }
 </style>
 
-
+<!-- JSP -->
 <form:form commandName="empVO" id="detailForm" name="detailForm" method="post">
 		<!-- hidden -->
 		<input type="hidden" name="selectedId" />
