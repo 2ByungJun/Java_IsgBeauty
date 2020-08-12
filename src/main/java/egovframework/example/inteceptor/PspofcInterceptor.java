@@ -24,17 +24,7 @@ public class PspofcInterceptor extends HandlerInterceptorAdapter {
 		request.setAttribute("contextPath", request.getContextPath());
 		HttpSession session = request.getSession();
 
-
-		System.out.println(session.getAttribute("pspofc")+"@@@@@@@@@@@@@@@@@@@");
-		System.out.println(session.getAttribute("empId")+"@@@@@@@@@@@@@@@@@@@");
-
-
-
-
 		if(!session.getAttribute("pspofc").equals("Admin")) {
-
-			System.out.println(session.getAttribute("pspofc")+"_____________________________");
-			System.out.println(session.getAttribute(request.getRequestURL() + ""));
 
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();

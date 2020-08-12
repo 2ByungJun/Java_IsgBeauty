@@ -53,25 +53,25 @@ public class EmpController {
 
 	@ResponseBody
 	@RequestMapping(value = "/empList.json")
-     public Map<String, Object> empListJson(@RequestBody EmpVO searchVO,
+     public Map<String, Object> empListJson(@RequestBody EmpVO empVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		int totCnt = empService.selectEmpListTotCnt(searchVO);
+		int totCnt = empService.selectEmpListTotCnt(empVO);
 
-		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
-		searchVO.setPageSize(propertiesService.getInt("pageSize"));
+		empVO.setPageUnit(propertiesService.getInt("pageUnit"));
+		empVO.setPageSize(propertiesService.getInt("pageSize"));
 
 		Paging paging = new Paging();
-		paging.setCurrentPageNo(searchVO.getPageIndex());
-		paging.setRecordCountPerPage(searchVO.getPageUnit());
-		paging.setPageSize(searchVO.getPageSize());
+		paging.setCurrentPageNo(empVO.getPageIndex());
+		paging.setRecordCountPerPage(empVO.getPageUnit());
+		paging.setPageSize(empVO.getPageSize());
 		paging.setPageCount((int)Math.ceil(totCnt/10.0));
 
-		searchVO.setFirstIndex(paging.getFirstRecordIndex());
-		searchVO.setLastIndex(paging.getLastRecordIndex());
-		searchVO.setRecordCountPerPage(paging.getRecordCountPerPage());
+		empVO.setFirstIndex(paging.getFirstRecordIndex());
+		empVO.setLastIndex(paging.getLastRecordIndex());
+		empVO.setRecordCountPerPage(paging.getRecordCountPerPage());
 
-		List<EgovMap> empList = empService.selectEmpList(searchVO);
+		List<EgovMap> empList = empService.selectEmpList(empVO);
 
 		Map<String, Object> arrayMap = new HashMap<>();
 		arrayMap.put("pages", paging);
@@ -86,17 +86,17 @@ public class EmpController {
 
 	@ResponseBody
 	@RequestMapping(value = "/empRegister.json")
-     public Map<String, Object> empRegisterJson(@RequestBody EmpVO searchVO,
+     public Map<String, Object> empRegisterJson(@RequestBody EmpVO empVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		System.out.println("empRegister.json 실행>>>>");
 
-		searchVO.setFileId("File"+searchVO.getEmpId());
-		empService.insertEmp(searchVO);
+		empVO.setFileId("File"+empVO.getEmpId());
+		empService.insertEmp(empVO);
 		System.out.println("empRegister 등록 실행 (insertEmp)>>>>");
 
 		Map<String, Object> arrayMap = new HashMap<>();
-		arrayMap.put("fileId", searchVO.getFileId());
+		arrayMap.put("fileId", empVO.getFileId());
 		System.out.println("arrayMap put 실행>>>>");
 
 		return arrayMap;
@@ -112,7 +112,7 @@ public class EmpController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/empRegister.do")
-	public String empRegister(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model, HttpServletRequest request) throws Exception {
+	public String empRegister(@ModelAttribute("searchVO") EmpVO empVO, ModelMap model, HttpServletRequest request) throws Exception {
 		System.out.println("[직원/관리자 등록]");
 
 		model.addAttribute("empId", request.getAttribute("empId"));
@@ -131,12 +131,11 @@ public class EmpController {
 	 */
 	@RequestMapping("/empView.do")
 	public String empView(@RequestParam("selectedId") String empId,
-			@ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
+			@ModelAttribute("searchVO") EmpVO empVO, Model model) throws Exception {
 		System.out.println("[직원 상세화면 페이지]");
 
-		EmpVO sampleVO = new EmpVO();
-		sampleVO.setEmpId(empId);
-		model.addAttribute("result", selectEmp(sampleVO, searchVO));
+		empVO.setEmpId(empId);
+		model.addAttribute("result", empService.selectEmp(empVO));
 
 		return "/useLayout/emp/empView";
 	}
@@ -152,15 +151,28 @@ public class EmpController {
 	 */
 	@RequestMapping("/empEdit.do")
 	public String empEdit(@RequestParam("selectedId") String empId,
-			@ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model, HttpServletRequest request) throws Exception {
+			@ModelAttribute("searchVO") EmpVO empVO, Model model, HttpServletRequest request) throws Exception {
 		System.out.println("[직원 수정화면]");
 
-		EmpVO sampleVO = new EmpVO();
-		sampleVO.setEmpId(empId);
-		model.addAttribute("result", selectEmp(sampleVO, searchVO));
+		empVO.setEmpId(empId);
+		model.addAttribute("result", empService.selectEmp(empVO));
 		model.addAttribute("empId", request.getAttribute("empId"));
 
 		return "/useLayout/emp/empEdit";
+	}
+
+	/**
+	 * 직원 조회
+	 *
+	 * @param sampleVO
+	 * @param searchVO
+	 * @return
+	 * @throws Exception
+	 */
+	public EmpVO selectEmp(EmpVO sampleVO, SampleDefaultVO searchVO) throws Exception {
+		System.out.println("[직원 조회 기능]");
+
+		return empService.selectEmp(sampleVO);
 	}
 
 
@@ -253,28 +265,13 @@ public class EmpController {
 
 		if(empLoginVO != null) {
 			map.put("result", "false");
-			System.out.println("return : false!!!!!");
 		} else {
 			map.put("result", "true");
-			System.out.println("return : true >>> !!!!!");
 		}
-
 		return map;
 	}
 
-	/**
-	 * 직원 조회
-	 *
-	 * @param sampleVO
-	 * @param searchVO
-	 * @return
-	 * @throws Exception
-	 */
-	public EmpVO selectEmp(EmpVO sampleVO, @ModelAttribute("searchVO") SampleDefaultVO searchVO) throws Exception {
-		System.out.println("[직원 조회 기능]");
 
-		return empService.selectEmp(sampleVO);
-	}
 
 	/**
 	 * 직원 수정
@@ -300,12 +297,11 @@ public class EmpController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/deleteEmp.do")
-	public String deleteEmp(@RequestParam("selectedId") String empId) throws Exception {
-		System.out.println("[직원 삭제 기능]");
+	public String deleteEmp(@ModelAttribute(value="empVO") EmpVO sampleVO) throws Exception {
 
-		EmpVO sampleVO = new EmpVO();
-		sampleVO.setEmpId(empId);
+		System.out.println("[직원 삭제 기능]");
 		empService.deleteEmp(sampleVO);
+
 
 
 		return "forward:/empList.do";
