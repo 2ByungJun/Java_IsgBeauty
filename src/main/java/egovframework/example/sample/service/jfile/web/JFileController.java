@@ -141,6 +141,10 @@ public class JFileController {
 		System.out.println("Controller-9. imgDelete");
 		System.out.println("============================");
 
+		// 삭제 수행
+		System.out.println("---------- 삭제 -------------------");
+		service.removeAttachFile(fileVo.getFileId());
+
 		return modelAndView;
 	}
 

@@ -111,28 +111,28 @@
 
 	function createBarChart(){
 
-	  var url  =  "<c:url value='/resveBarChart.json'/>";
-	  var jsonData = {"year": $("#year").val(), "dateType": $("#dateType").val(), "month": $("#month").val()};
+				  var url  =  "<c:url value='/resveBarChart.json'/>";
+				  var jsonData = {"year": $("#year").val(), "dateType": $("#dateType").val(), "month": $("#month").val()};
 
-	  $.ajax({
-			headers: {
-				Accept: "application/json;utf-8"
-			}
-			,contentType: "application/json;utf-8"
-			,dataType: "json"
-			,type: "POST"
-			,url: url
-			,data: JSON.stringify(jsonData)
-			,success:function(data){
-				console.log(data);
-				var dataLabel = new Array();
-				if($("#dateType").val() == "y") {
-					dataLabel = ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'];
-				} else {
-					for(var i=0; i<31; i++) {
-						dataLabel[i]=i+1;
-					}
-				}
+				  $.ajax({
+						headers: {
+							Accept: "application/json;utf-8"
+						}
+						,contentType: "application/json;utf-8"
+						,dataType: "json"
+						,type: "POST"
+						,url: url
+						,data: JSON.stringify(jsonData)
+						,success:function(data){
+							console.log(data);
+							var dataLabel = new Array();
+							if($("#dateType").val() == "y") {
+								dataLabel = ['1월', '2월', '3월', '4월', '5월', '6월', '7월','8월','9월','10월','11월','12월'];
+							} else {
+								for(var i=0; i<31; i++) {
+									dataLabel[i]=i+1;
+								}
+							}
 
 				var maleData = {
 					    label: "남성",
