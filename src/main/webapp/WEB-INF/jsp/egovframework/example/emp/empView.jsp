@@ -16,13 +16,12 @@
 	function home() {
  		location.href = "<c:url value='/empList.do'/>";
 	}
-	function deleteEmp(id) {
+	function deleteEmp() {
 		var check;
 		check = confirm("정말로 해당 직원을 삭제하시겠습니까?");
 
 		if (check) {
 			document.detailForm.action = "<c:url value='/deleteEmp.do'/>";
-			document.detailForm.selectedId.value = id;
 			document.detailForm.submit();
 		} else {
 			alert("취소하셨습니다.");
@@ -66,6 +65,7 @@ p {
 	<form:form commandName="empVO" id="detailForm" name="detailForm"
 		method="post">
 		<input type="hidden" name="selectedId" />
+		<input type="hidden" name="empId" value="${result.empId}" />
 		<div class="container">
 			<h2 style="text-align:center;">
 					<b><span style="color:#000080">'<c:out value="${result.empNm}" />'</span>직원 상세화면</b>
@@ -172,7 +172,7 @@ p {
 		<!-- Button -->
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="button" class="btn btn-primary" onclick="editEmp('${result.empId}')">수정</button>
-			<button type="button" class="btn btn-danger" onclick="deleteEmp('${result.empId}')">삭제</button>
+			<button type="button" class="btn btn-danger" onclick="deleteEmp()">삭제</button>
 			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 		</div>
 
