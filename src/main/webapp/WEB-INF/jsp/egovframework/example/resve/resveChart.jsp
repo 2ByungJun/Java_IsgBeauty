@@ -7,44 +7,46 @@
 <%@page import="java.text.SimpleDateFormat"%>
 
 <!-- JSP -->
-<!-- hidden -->
-<input type="hidden" id="dateType" value='y'/>
-<input type="hidden" id="day"/>
-<!-- header -->
-<div class="container" style="display: flex;">
-	<!-- button -->
-	 <div class="btn-group" role="group">
-	     <button type="button" class="btn btn-primary button-class1" id="yearBtn">연간</button>
-	     <button type="button" class="btn btn-default button-class2" id="monthBtn">월간</button>
-     </div>
+<form:form commandName="chartVO" id="chartForm" name="chartForm" method="post">
+	<!-- hidden -->
+	<input type="hidden" id="dateType" value='y'/>
+	<input type="hidden" id="day"/>
+	<!-- header -->
+	<div class="container" style="display: flex;">
+		<!-- button -->
+		 <div class="btn-group" role="group">
+		     <button type="button" class="btn btn-primary button-class1" id="yearBtn">연간</button>
+		     <button type="button" class="btn btn-default button-class2" id="monthBtn">월간</button>
+	     </div>
 
-	<!-- yearSelector -->
-	<select class="form-control" id="year" name="year" onchange="createBarChart()" style = "width:100px; display: inline-flex; margin-left:15px;">
-		<c:forEach var="result" items="${years}" varStatus="status">
-			<option value="${years.get(status.index)}">${years.get(status.index)}</option>
-		</c:forEach>
-	</select>
+		<!-- yearSelector -->
+		<select class="form-control" id="year" name="year" onchange="createBarChart()" style = "width:100px; display: inline-flex; margin-left:15px;">
+			<c:forEach var="result" items="${years}" varStatus="status">
+				<option value="${years.get(status.index)}">${years.get(status.index)}</option>
+			</c:forEach>
+		</select>
 
-	<!-- monthSelector -->
-	<select class="form-control" id="month" name="month" onchange="createBarChart()" style = "width:100px; margin-left:2px; ">
-		<% for(int i=1; i<13; i++) {%>
-			<option value="<%=i%>"><%=i+"월"%></option>
-		<%}%>
-	</select>
-</div>
-
-<!-- body -->
-<div class="container">
-	<div style="width:100%; display:flex;">
-
-		<!-- barChart -->
-		<div style="width:65%; display:inline-flex; float:left;"><canvas id="myBarChart"></canvas></div>
-
-		<!-- pieChart -->
-		<div style="width:35%; display:inline-flex; align-self: center; justify-content: center; float:right;"><canvas id="myPieChart" style="">></canvas></div>
-
+		<!-- monthSelector -->
+		<select class="form-control" id="month" name="month" onchange="createBarChart()" style = "width:100px; margin-left:2px; ">
+			<% for(int i=1; i<13; i++) {%>
+				<option value="<%=i%>"><%=i+"월"%></option>
+			<%}%>
+		</select>
 	</div>
-</div>
+
+	<!-- body -->
+	<div class="container">
+		<div style="width:100%; display:flex;">
+
+			<!-- barChart -->
+			<div style="width:65%; display:inline-flex; float:left;"><canvas id="myBarChart"></canvas></div>
+
+			<!-- pieChart -->
+			<div style="width:35%; display:inline-flex; align-self: center; justify-content: center; float:right;"><canvas id="myPieChart" style="">></canvas></div>
+
+		</div>
+	</div>
+</form:form>
 
 <!-- JS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -81,7 +83,12 @@
 
 	$("#myBarChart").click(function(evt) {
 		var activePoints = barChart.getElementsAtEvent(evt);
-		$('#day').val(activePoints[0]._index+1);
+
+		 if($("#dateType").val() == 'y') {
+			 $('#month').val(activePoints[0]._index+1);
+		  } else {
+			 $('#day').val(activePoints[0]._index+1);
+		  }
 		createPieChart();
 	});
 
@@ -191,11 +198,6 @@ var pieChart = new Chart(pieCtx, pieConfig);
 function createPieChart(){
 
   var url  =  "<c:url value='/resvePieChart.json'/>";
-  if($("#dateType").val() == 'y') {
-	  var jsonData = {"year": $("#year").val(),"month": index, "day": index, $("#day").val(): $("#dateType").val()};
-  } else {
-	  var jsonData = {"year": $("#year").val(),"month": $("#month").val(), "index": index, "dateType": $("#dateType").val()};
-  }
 
   $.ajax({
 		headers: {
