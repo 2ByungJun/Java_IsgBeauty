@@ -1,15 +1,12 @@
 package egovframework.example.sample.service.resve;
 
-import egovframework.example.sample.service.SampleDefaultVO;
 
 /**
  * ResveVO
  * @author 이병준
  *
  */
-public class ResveVO extends SampleDefaultVO {
-
-	private static final long serialVersionUID = 1L;
+public class ResveVO{
 
 	private String resveSn;
 	private String mberSn;
@@ -20,8 +17,8 @@ public class ResveVO extends SampleDefaultVO {
 	private String registId;
 	private String registDt;
 	private String mberNm;
-	
-	
+
+
 	public String getResveSn() {
 		return resveSn;
 	}
@@ -76,9 +73,9 @@ public class ResveVO extends SampleDefaultVO {
 	public void setMberNm(String mberNm) {
 		this.mberNm = mberNm;
 	}
-	
-	
-	
+
+
+
 }
 
 

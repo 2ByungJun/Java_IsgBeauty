@@ -111,7 +111,7 @@ label.error {
 
 					<!-- 성별 -->
 					<div id="divInline">
-						<select type="text" class="bjInput form-control" id="sexdstn" name="sexdstn">
+						<select class="bjInput form-control" id="sexdstn" name="sexdstn">
 							<option value="${result.sexdstn}" selected="selected"><c:out value="${result.sexdstn}" /></option>
 							<option value="Male">남성</option>
 							<option value="Female">여성</option>
@@ -120,7 +120,7 @@ label.error {
 
 					<!-- 직책 -->
 					<div id="divInline">
-						<select type="text" class="bjInput form-control" id="pspofc" name="pspofc">
+						<select class="bjInput form-control" id="pspofc" name="pspofc">
 							<option value="${result.pspofc}" selected="selected"> <c:out value="${result.pspofc}" /></option>
 							<option value="Admin"  >Admin</option>
 							<option value="Designer">Designer</option>
@@ -131,7 +131,7 @@ label.error {
 					<div id="divInline"><input type="text" class="bjInput form-control" id="salary" name="salary" value="<c:out value="${result.salary}"/>" required></div>
 
 					<!-- 경력 -->
-					<div id="divInline"><input type="career" class="bjInput form-control" id="career" name="career" value="<c:out value="${result.career}"/>" required></div>
+					<div id="divInline"><input type="text" class="bjInput form-control" id="career" name="career" value="<c:out value="${result.career}"/>" required></div>
 
 				</div>
 			</div>
@@ -140,7 +140,7 @@ label.error {
 		<!-- button -->
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="submit" class="btn btn-primary" onclick="">수정</button>
-			<button type="button" class="btn btn-danger" onclick="deleteEmp('${result.empId}')">삭제</button>
+			<button type="button" class="btn btn-danger" onclick="deleteEmp()">삭제</button>
 			<button type="button" class=" btn btn-info" onclick="view('${result.empId}')">이전</button>
 		</div>
 
@@ -314,7 +314,7 @@ label.error {
 	function home() {
 		location.href = "<c:url value='/empList.do'/>";
 	}
-	function deleteEmp(id) {
+	function deleteEmp() {
 		var check;
 		check = confirm("정말로 해당 직원을 삭제하시겠습니까?");
 		if (check) {

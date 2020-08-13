@@ -78,8 +78,6 @@ public class EmpController {
 		arrayMap.put("datacnt", totCnt);
 
 		return arrayMap;
-
-
 	}
 
 	@ResponseBody
@@ -119,8 +117,7 @@ public class EmpController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/empView.do")
-	public String empView(@RequestParam("selectedId") String empId,
-			@ModelAttribute("empVO") EmpVO empVO, Model model) throws Exception {
+	public String empView(@RequestParam("selectedId") String empId, @ModelAttribute("empVO") EmpVO empVO, Model model) throws Exception {
 		System.out.println("[직원 상세화면 페이지]");
 
 		empVO.setEmpId(empId);
@@ -139,8 +136,7 @@ public class EmpController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/empEdit.do")
-	public String empEdit(@RequestParam("selectedId") String empId,
-			@ModelAttribute("empVO") EmpVO empVO, Model model, HttpServletRequest request) throws Exception {
+	public String empEdit(@RequestParam("selectedId") String empId, @ModelAttribute("empVO") EmpVO empVO, Model model, HttpServletRequest request) throws Exception {
 		System.out.println("[직원 수정화면]");
 
 		model.addAttribute("result", empService.selectEmp(empVO));
@@ -150,8 +146,7 @@ public class EmpController {
 
 	@ResponseBody
 	@RequestMapping(value = "/empEdit.json")
-     public Map<String, Object> empEditJson(@RequestBody EmpVO searchVO,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+     public Map<String, Object> empEditJson(@RequestBody EmpVO searchVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		searchVO.setFileId("File"+searchVO.getEmpId());
 

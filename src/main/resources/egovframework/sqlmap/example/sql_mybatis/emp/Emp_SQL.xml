@@ -58,6 +58,7 @@
 		from t_emp_m a
 		<if test="searchKeyword != null and searchKeyword != ''">
 			WHERE EMP_NM LIKE CONCAT('%', #{searchKeyword},'%')
+				OR EMP_ID LIKE CONCAT('%', #{searchKeyword},'%')
 		</if>
 		ORDER BY REGIST_DT ASC
 		LIMIT #{recordCountPerPage} OFFSET #{firstIndex}

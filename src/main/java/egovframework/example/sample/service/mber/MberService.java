@@ -73,7 +73,7 @@ public class MberService {
 		mapper.updateMber(vo);
 	}
 
-	public List<?> selectListMberNM(MberVO vo) throws Exception {
-		 return mapper.selectListMberNM(vo);
+	public List<?> selectListMberNM() throws Exception {
+		 return mapper.selectListMberNM();
 	}
 }

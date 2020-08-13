@@ -128,7 +128,7 @@
 		    where MBER_SN=${mberSn}
 	</update>
 
-	<select id="selectListMberNM" parameterType="mberVO" resultMap="mber">
+	<select id="selectListMberNM" resultMap="mber">
 		SELECT MBER_SN, MBER_NM, TELNO
 		FROM t_mber_m
 		WHERE 1=1

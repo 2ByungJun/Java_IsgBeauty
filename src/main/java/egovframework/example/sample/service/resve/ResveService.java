@@ -22,18 +22,8 @@ public class ResveService {
 	 * @return 글 목록
 	 * @exception Exception
 	 */
-	public List<EgovMap> selectResveList(SampleDefaultVO vo) throws Exception {
-		 return mapper.selectResveList(vo);
-	}
-
-	/**
-	 * 예약 총 수를 조회한다.
-	 * @param searchVO - 조회할 정보가 담긴 VO
-	 * @return 글 총 갯수
-	 * @exception
-	 */
-	public int selectResveListTotCnt(SampleDefaultVO vo) throws Exception {
-		 return mapper.selectResveListTotCnt(vo);
+	public List<EgovMap> selectResveList() throws Exception {
+		 return mapper.selectResveList();
 	}
 
 	/**
