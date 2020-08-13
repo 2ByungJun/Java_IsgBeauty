@@ -58,7 +58,6 @@ label.error {
 		<input type="hidden" id="registDt" name="registDt" value="${result.registDt}"/>
 		<input type="hidden" id="updtId" name="updtId" value="${empId}"/>
 		<input type="hidden" id="updtDt" name="updtDt" value="<%=today%>"/>
-		<input type="hidden" name="selectedId" />
 
 		<!-- body -->
 		<div class="container">
@@ -112,18 +111,29 @@ label.error {
 					<!-- 성별 -->
 					<div id="divInline">
 						<select class="bjInput form-control" id="sexdstn" name="sexdstn">
-							<option value="${result.sexdstn}" selected="selected"><c:out value="${result.sexdstn}" /></option>
-							<option value="Male">남성</option>
-							<option value="Female">여성</option>
+							<c:if test="${result.sexdstn eq 'Male'}">
+								<option value="Male" selected="selected">남성</option>
+								<option value="Female">여성</option>
+							</c:if>
+							<c:if test="${result.sexdstn eq 'Female'}" >
+								<option value="Male">남성</option>
+								<option value="Female" selected="selected">여성</option>
+							</c:if>
 						</select>
 					</div>
 
 					<!-- 직책 -->
 					<div id="divInline">
 						<select class="bjInput form-control" id="pspofc" name="pspofc">
-							<option value="${result.pspofc}" selected="selected"> <c:out value="${result.pspofc}" /></option>
-							<option value="Admin"  >관리자</option>
-							<option value="Designer">디자이너</option>
+							<c:if test="${result.pspofc eq 'Admin'}">
+								<option value="Admin" selected="selected">관리자</option>
+								<option value="Designer">디자이너</option>
+							</c:if>
+							<c:if test="${result.pspofc eq 'Designer'}">
+								<option value="Admin">관리자</option>
+								<option value="Designer" selected="selected">디자이너</option>
+							</c:if>
+
 						</select>
 					</div>
 
@@ -203,21 +213,18 @@ label.error {
 							,url: "<c:url value= '/empEdit.json'/>"
 							,data: JSON.stringify(jsonData)
 							,success:function(data){
-								console.log(data);
 								if( $("#input-res-1").fileinput("getFilesCount") == 0 ){
-									console.log($("#input-res-1").fileinput("getFilesCount"));
 									alert("수정되었습니다.");
 							 		home();
 					 			}else {
 									$("#fileId").val(data.fileId); // fileId 값을 받아오고
 								 	$("#input-res-1").fileinput("upload").on('fileuploaded', function() {
-								 		alert("수정되었습니다.");
-								 		home();
+									 	alert("수정되었습니다.");
+									 	home();
 								    });
 					 			}
 							}
 							,error:function(e){
-							   	console.log(e.status, e.statusText);
 							   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
 							}
 						});
@@ -279,7 +286,6 @@ label.error {
 	$.validator.addMethod("regex", function(value, element, regexp) {
 		let re = new RegExp(regexp);
 		let res = re.test(value);
-		console.log(res, value, regexp, re)
 		return res;
 	})
 	function inputPhoneNumber(obj) {

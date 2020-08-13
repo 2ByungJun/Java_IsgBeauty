@@ -80,9 +80,14 @@ label.error {
 				<!-- 성별 -->
 				<div style="display: inline-flex;">
 					<select class="bjInput form-control" id="sexdstn" name="sexdstn">
-						<option value="${result.sexdstn}"><c:out value="${result.sexdstn}" /></option>
-						<option value="Male">남성</option>
-						<option value="Female">여성</option>
+						<c:if test="${result.sexdstn eq 'Male'}">
+							<option value="Male" selected="selected">남성</option>
+							<option value="Female">여성</option>
+						</c:if>
+						<c:if test="${result.sexdstn eq 'Female'}" >
+							<option value="Male">남성</option>
+							<option value="Female" selected="selected">여성</option>
+						</c:if>
 					</select>
 				</div>
 
@@ -178,7 +183,6 @@ label.error {
 	$.validator.addMethod("regex", function(value, element, regexp) {
 		let re = new RegExp(regexp);
 		let res = re.test(value);
-		console.log(res, value, regexp, re)
 		return res;
 	});
 

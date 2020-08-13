@@ -155,7 +155,6 @@ label.error {
 	$.validator.addMethod("regex", function(value, element, regexp) {
 		let re = new RegExp(regexp);
 		let res = re.test(value);
-		console.log(res, value, regexp, re)
 		return res;
 	})
 

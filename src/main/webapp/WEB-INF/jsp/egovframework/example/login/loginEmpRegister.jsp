@@ -97,7 +97,7 @@ label.error {
 
 				<!-- 직책 -->
 				<div style="display: inline-flex;">
-					<select class="bjWidth form-control" id="pspofc" name="pspofc" readonly>
+					<select class="bjWidth form-control" id="pspofc" name="pspofc">
 						<option value="Admin" selected="selected">관리자</option>
 					</select>
 				</div>
@@ -196,7 +196,6 @@ label.error {
 	$.validator.addMethod("regex", function(value, element, regexp) {
 		let re = new RegExp(regexp);
 		let res = re.test(value);
-		console.log(res, value, regexp, re)
 		return res;
 	})
 
@@ -252,7 +251,6 @@ label.error {
 				}
 			},
 			error : function(e) {
-				console.log(e.status, e.statusText);
 				alert("서버 오류 입니다. 관리자에게 문의하세요.");
 			}
 		});
@@ -284,7 +282,6 @@ label.error {
 
 			},
 			error : function(e) {
-				console.log(e.status, e.statusText);
 				alert("서버 오류 입니다. 관리자에게 문의하세요.");
 			}
 		});

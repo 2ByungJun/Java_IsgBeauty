@@ -22,8 +22,7 @@
 <!-- JSP -->
 <form:form commandName="empVO" id="listForm" name="listForm" method="post">
 		<!-- hidden -->
-		<input type="hidden" name="selectedId" />
-		<input type="hidden" name="empId" />
+		<input type="hidden" name="empId" id="empId"/>
 
 		<!-- body -->
 		<div class="container">
@@ -139,7 +138,6 @@
 				fn_createPaging(data.pages,"paging");
 			}
 			,error:function(e){
-			   	console.log(e.status, e.statusText);
 			   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
 			}
 		});
@@ -168,7 +166,6 @@
 	}
 
     function view(id) {
-    	console.log(id);
     	$("#empId").val(id);
        	document.listForm.action = "<c:url value='/empView.do'/>";
        	document.listForm.submit();

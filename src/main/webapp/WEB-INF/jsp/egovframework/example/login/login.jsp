@@ -94,7 +94,6 @@
 			url : url,
 			data : JSON.stringify(jsonData),
 			success : function(data) {
-				console.log(data);
 				if (data.result == "idError") {
 					alert("아이디 혹은 비밀번호를 확인하세요.");
 				} else if (data.result == "pwdError") {

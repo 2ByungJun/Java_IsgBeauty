@@ -86,7 +86,18 @@ p {
 					</div>
 
 					<!-- 직책 -->
-					<div style="display: inline-flex;"><p class="control-label"><c:out value="${result.pspofc}" /></p></div>
+					<div style="display: inline-flex;">
+						<c:if test="${result.pspofc eq 'Admin'}">
+							<p class="control-label">
+								관리자
+							</p>
+						</c:if>
+						<c:if test="${result.pspofc eq 'Designer'}">
+							<p class="control-label">
+								디자이너
+							</p>
+						</c:if>
+					</div>
 
 					<!-- 급여 -->
 					<div style="display: inline-flex;"><p class="control-label"><c:out value="${result.salary}" />원</p></div>

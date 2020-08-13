@@ -88,8 +88,6 @@
 			,url: url
 			,data: JSON.stringify(jsonData)
 			,success:function(data){
-				console.log(data);
-
 		    	var html = '';
 				if(data.dataList.length==0){
 					html += '<tr>';
@@ -114,7 +112,6 @@
 				fn_createPaging(data.pages,"paging");
 			}
 			,error:function(e){
-			   	console.log(e.status, e.statusText);
 			   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
 			}
 		});
