@@ -52,7 +52,7 @@ label.error {
 </style>
 
 <!-- JSP -->
-<form:form commandName="empVO" id="detailForm" name="detailForm" method="post">
+<form:form commandName="empVO" id="editForm" name="editForm" method="post">
 		<!-- hidden -->
 		<input type="hidden" id="registId" name="registId" value="${result.registId}"/>
 		<input type="hidden" id="registDt" name="registDt" value="${result.registDt}"/>
@@ -111,7 +111,7 @@ label.error {
 
 					<!-- 성별 -->
 					<div id="divInline">
-						<select type="text" class="bjInput form-control" id="sexdstn" name="sexdstn">
+						<select class="bjInput form-control" id="sexdstn" name="sexdstn">
 							<option value="${result.sexdstn}" selected="selected"><c:out value="${result.sexdstn}" /></option>
 							<option value="Male">남성</option>
 							<option value="Female">여성</option>
@@ -120,7 +120,7 @@ label.error {
 
 					<!-- 직책 -->
 					<div id="divInline">
-						<select type="text" class="bjInput form-control" id="pspofc" name="pspofc">
+						<select class="bjInput form-control" id="pspofc" name="pspofc">
 							<option value="${result.pspofc}" selected="selected"> <c:out value="${result.pspofc}" /></option>
 							<option value="Admin"  >Admin</option>
 							<option value="Designer">Designer</option>
@@ -131,7 +131,7 @@ label.error {
 					<div id="divInline"><input type="text" class="bjInput form-control" id="salary" name="salary" value="<c:out value="${result.salary}"/>" required></div>
 
 					<!-- 경력 -->
-					<div id="divInline"><input type="career" class="bjInput form-control" id="career" name="career" value="<c:out value="${result.career}"/>" required></div>
+					<div id="divInline"><input type="text" class="bjInput form-control" id="career" name="career" value="<c:out value="${result.career}"/>" required></div>
 
 				</div>
 			</div>
@@ -140,7 +140,7 @@ label.error {
 		<!-- button -->
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="submit" class="btn btn-primary" onclick="">수정</button>
-			<button type="button" class="btn btn-danger" onclick="deleteEmp('${result.empId}')">삭제</button>
+			<button type="button" class="btn btn-danger" onclick="deleteEmp()">삭제</button>
 			<button type="button" class=" btn btn-info" onclick="view('${result.empId}')">이전</button>
 		</div>
 
@@ -167,7 +167,7 @@ label.error {
 			},
 			initialPreviewFileType: 'image',
 		    initialPreview: [
-		        '<c:url value="/jfile/preview.do?fileId=${result.fileId}"/>" class="profile" name="myImg" id="myImg"',
+		        '<c:url value="/jfile/preview.do?fileId=${result.fileId}"/>" class="profile"',
 		    ],
 			theme : 'explorer',
 			deleteUrl : '/IsgBeauty/jfile/imgDelete.do',
@@ -187,11 +187,9 @@ label.error {
 
 	/*  empEdit */
 	$(function() {
-		$("#detailForm").validate({
+		$("#editForm").validate({
 			submitHandler : function() {
-				var jsonData = {empId:$("#empId").val(), empPassword:$("#empPassword").val(), empNm:$("#empNm").val(), telno:$("#telno").val(), sexdstn:$("#sexdstn").val(), pspofc:$("#pspofc").val(),
-						salary:$("#salary").val(), career:$("#career").val(), updtId:$("#updtId").val(), updtDt:$("#updtDt").val()}
-
+				var jsonData = $("#editForm").serializeJSON();
 				var check = confirm("해당 직원 정보를 수정하시겠습니까?");
 				if (check) {
 					 $.ajax({
@@ -312,23 +310,23 @@ label.error {
 	}
 
 	function home() {
-		location.href = "<c:url value='/empList.do'/>";
+		document.editForm.action = "<c:url value='/empList.do'/>";
+		document.editForm.submit();
 	}
-	function deleteEmp(id) {
+	function deleteEmp() {
 		var check;
 		check = confirm("정말로 해당 직원을 삭제하시겠습니까?");
 		if (check) {
 			alert("삭제되었습니다.");
-			document.detailForm.action = "<c:url value='/deleteEmp.do'/>";
-			document.detailForm.submit();
+			document.editForm.action = "<c:url value='/deleteEmp.do'/>";
+			document.editForm.submit();
 		} else {
 			alert("취소하셨습니다.");
 		}
 	}
-	function view(id) {
-		document.detailForm.selectedId.value = id;
-		document.detailForm.action = "<c:url value='/empView.do'/>";
-		document.detailForm.submit();
+	function view() {
+		document.editForm.action = "<c:url value='/empView.do'/>";
+		document.editForm.submit();
 	}
 
 </script>

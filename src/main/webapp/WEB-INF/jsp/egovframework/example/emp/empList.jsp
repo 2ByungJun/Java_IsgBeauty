@@ -23,6 +23,7 @@
 <form:form commandName="empVO" id="listForm" name="listForm" method="post">
 		<!-- hidden -->
 		<input type="hidden" name="selectedId" />
+		<input type="hidden" name="empId" />
 
 		<!-- body -->
 		<div class="container">
@@ -161,16 +162,14 @@
 		}
 	}
 
-	function home() {
-		location.href = "<c:url value='/mberList.do'/>";
-	}
-
 	function empRegister() {
-		location.href = "<c:url value='/empRegister.do'/>";
+		document.listForm.action = "<c:url value='/empRegister.do'/>";
+       	document.listForm.submit();
 	}
 
     function view(id) {
-    	document.listForm.selectedId.value = id;
+    	console.log(id);
+    	$("#empId").val(id);
        	document.listForm.action = "<c:url value='/empView.do'/>";
        	document.listForm.submit();
     }
