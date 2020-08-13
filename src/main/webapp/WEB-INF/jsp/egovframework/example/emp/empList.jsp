@@ -22,7 +22,6 @@
 <!-- JSP -->
 <form:form commandName="empVO" id="listForm" name="listForm" method="post">
 		<!-- hidden -->
-		<input type="hidden" name="empId" id="empId" />
 		<input type="hidden" name="empId" id="empId"/>
 
 		<!-- body -->
