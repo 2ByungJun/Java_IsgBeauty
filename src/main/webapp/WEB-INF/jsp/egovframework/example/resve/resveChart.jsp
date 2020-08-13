@@ -38,6 +38,16 @@
 	<div class="container">
 		<div style="width:100%; display:flex;">
 
+				<!-- barTitle -->
+				<div style="width:65%; display:inline-flex; justify-content:center;"><h2 style="text-align: center;"><b>예약 통계</b></h2></div>
+
+				<!-- pieTitle -->
+				<div id="pieTitle" style="width:35%; display:inline-flex; justify-content:center; "><h2 style="text-align: center;"><b>시술 종류</b></h2></div>
+
+		</div>
+
+		<div style="width:100%; display:flex;">
+
 			<!-- barChart -->
 			<div style="width:65%; display:inline-flex; float:left;"><canvas id="myBarChart"></canvas></div>
 
@@ -53,6 +63,7 @@
 <script type="text/javaScript" defer="defer">
 	$(document).ready(function() {
 		createBarChart(barChart);
+		$('#pieTitle').hide();
 	});
 
 	$("#month").hide();
@@ -66,6 +77,7 @@
 	       	$("#month").hide();
 	      	    createBarChart(barChart);
 	      	    pieChart.clear();
+	      	    $('#pieTitle').hide();
 	       }
 	   });
 	   $('.button-class2').click(function(){
@@ -78,6 +90,7 @@
 	       	$("#month").show();
 	       	createBarChart(barChart);
 	       	pieChart.clear();
+	       	$("#pieTitle").hide();
 	       }
 	   });
 
@@ -89,6 +102,7 @@
 		  } else {
 			 $('#day').val(activePoints[0]._index+1);
 		  }
+		$('#pieTitle').show();
 		createPieChart();
 	});
 
@@ -199,7 +213,7 @@ function createPieChart(){
 
   var url  =  "<c:url value='/resvePieChart.json'/>";
   var jsonData = $("#chartForm").serializeJSON();
-  
+
   $.ajax({
 		headers: {
 			Accept: "application/json;utf-8"

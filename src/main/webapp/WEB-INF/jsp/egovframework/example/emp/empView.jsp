@@ -72,30 +72,14 @@ p {
 
 					<!-- 성별 -->
 					<div style="display: inline-flex;">
-						<c:if test="${result.sexdstn eq 'Male'}">
-							<p class="control-label">
-								남성
-							</p>
-						</c:if>
-						<c:if test="${result.sexdstn eq 'Female'}">
-							<p class="control-label">
-								여성
-							</p>
-						</c:if>
+						<c:if test="${result.sexdstn eq 'Male'}"><p class="control-label">남성</p></c:if>
+						<c:if test="${result.sexdstn eq 'Female'}"><p class="control-label">여성</p></c:if>
 					</div>
 
 					<!-- 직책 -->
 					<div style="display: inline-flex;">
-						<c:if test="${result.pspofc eq 'Admin'}">
-							<p class="control-label">
-								관리자
-							</p>
-						</c:if>
-						<c:if test="${result.pspofc eq 'Designer'}">
-							<p class="control-label">
-								디자이너
-							</p>
-						</c:if>
+						<c:if test="${result.pspofc eq 'Admin'}"><p class="control-label">관리자</p></c:if>
+						<c:if test="${result.pspofc eq 'Designer'}"><p class="control-label">디자이너</p></c:if>
 					</div>
 
 					<!-- 급여 -->
@@ -137,8 +121,6 @@ p {
 		if (check) {
 			document.detailForm.action = "<c:url value='/deleteEmp.do'/>";
 			document.detailForm.submit();
-		} else {
-			alert("취소하셨습니다.");
 		}
 	}
 

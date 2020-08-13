@@ -39,7 +39,7 @@ label.error {
 <form:form commandName="empVO" id="registerForm" name="registerForm" method="post">
 		<!-- hidden -->
 		<input type="hidden" name="fileId" id="fileId" />
-		<input type="hidden" id="idCheck" name="idCheck" value="true" readonly>
+		<input type="hidden" id="idCheck" name="idCheck" value="true">
 
 		<!-- body -->
 		<div class="container">

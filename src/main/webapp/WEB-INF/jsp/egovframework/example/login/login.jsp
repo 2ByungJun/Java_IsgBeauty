@@ -23,7 +23,7 @@
 	<div class="container">
 		<header class="page-header">
 			<div class="container">
-				<div style="text-align: center;" alt="IsgBeauty 로고"><img src="<c:url value='images/logo.jpg' />"></div>
+				<div style="text-align: center;"><img src="<c:url value='images/logo.jpg' />"></div>
 			</div>
 		</header>
 	</div>
@@ -68,7 +68,7 @@
 <link rel="stylesheet" href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
 <script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
 <script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
-<script type="text/javaScript" language="javascript" defer="defer">
+<script type="text/javaScript" defer="defer">
 <%if (session.getAttribute("empId") != null) {%>
 	location.href = "<c:url value='/mberList.do'/>";
 <%}%>

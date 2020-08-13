@@ -54,7 +54,7 @@
 						<table id="table" class="table table-hover">
 							<thead>
 								<tr>
-									<td style="width: 5%" align="center"><b>사진</b></td>
+									<td style="width: 5%" align="center"><b>프로필</b></td>
 									<td style="width: 10%" align="center"><b>ID</b></td>
 									<td style="width: 10%" align="center"><b>이름</b></td>
 									<td style="width: 10%" align="center"><b>성별</b></td>
@@ -97,7 +97,6 @@
 		 var url  =  "<c:url value='/empList.json'/>";
 		 var jsonData = {"pageIndex": pageNo, "searchKeyword": $("#serachKeyword").val()};
 		 $.ajax({
-
 			headers: {
 				Accept: "application/json;utf-8"
 			}
@@ -154,7 +153,7 @@
 
 	function pspofcd(st) {
 		if(st === "Admin"){
- 			return "<b>♦관리자♦</b>";
+ 			return "<b>관리자</b>";
 		}else{
 			return "디자이너";
 		}

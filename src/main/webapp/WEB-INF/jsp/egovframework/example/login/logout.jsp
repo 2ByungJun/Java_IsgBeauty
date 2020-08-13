@@ -7,7 +7,7 @@
 
 <!-- JS -->
 <script type="text/javaScript" defer="defer">
-	alert("로그아웃 되었습니다.");
 	<% session.invalidate(); %>
+	alert("로그아웃 되었습니다.");
 	location.href = "<c:url value='/login.do'/>";
 </script>

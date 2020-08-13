@@ -73,10 +73,9 @@ label.error {
 				<!-- file (35%) -->
 				<div style="width: 35%; text-align: center; font-stretch: semi-condensed; padding: 40px">
 					<label class="control-label">프로필 사진 등록</label>
-					<div class="file-loading">
-				    	<input id="input-res-1" name="input-res-1" type="file"  data-show-upload="false">
-					</div>
-					<span style="color:#000080; font-size:smaller;">상단 이미지의 휴지통을 클릭 시 <br> 등록된 이미지가 삭제됩니다.</span>
+					<div class="file-loading"><input id="input-res-1" name="input-res-1" type="file"  data-show-upload="false"></div>
+
+					<div style="margin-top:5px;"><span style="color:#000080; font-size:smaller; margin-top:5px;">휴지통을 클릭 시, 등록된 이미지가 삭제됩니다.</span></div>
 				</div>
 
 				<!-- (10%) -->
@@ -228,8 +227,6 @@ label.error {
 							   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
 							}
 						});
-				} else {
-					alert("취소하셨습니다.");
 				}
 			},
 			rules: {
@@ -320,14 +317,11 @@ label.error {
 		document.editForm.submit();
 	}
 	function deleteEmp() {
-		var check;
-		check = confirm("정말로 해당 직원을 삭제하시겠습니까?");
+		var check = confirm("정말로 해당 직원을 삭제하시겠습니까?");
 		if (check) {
-			alert("삭제되었습니다.");
 			document.editForm.action = "<c:url value='/deleteEmp.do'/>";
 			document.editForm.submit();
-		} else {
-			alert("취소하셨습니다.");
+			alert("삭제되었습니다.");
 		}
 	}
 	function view() {
