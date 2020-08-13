@@ -47,8 +47,7 @@ public class ResveController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/resveRegister.do")
-	public String resveRegister(@RequestParam("selectedId") String mberSn, @ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String resveRegister(@RequestParam("selectedId") String mberSn, @ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("[고객-예약 등록 View]");
 
 		MberVO sampleVO = new MberVO();

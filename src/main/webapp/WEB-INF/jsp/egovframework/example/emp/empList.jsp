@@ -23,6 +23,7 @@
 <form:form commandName="empVO" id="listForm" name="listForm" method="post">
 		<!-- hidden -->
 		<input type="hidden" name="empId" id="empId" />
+		<input type="hidden" name="empId" id="empId"/>
 
 		<!-- body -->
 		<div class="container">
@@ -138,7 +139,6 @@
 				fn_createPaging(data.pages,"paging");
 			}
 			,error:function(e){
-			   	console.log(e.status, e.statusText);
 			   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
 			}
 		});

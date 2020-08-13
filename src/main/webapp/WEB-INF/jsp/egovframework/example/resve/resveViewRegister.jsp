@@ -70,9 +70,9 @@ label.error {
 
 				<!-- 시술 -->
 				<select class="bjWidth form-control" id="tretmentNm" name="tretmentNm" required>
-						<option value="cut">cut</option>
-						<option value="perm">perm</option>
-						<option value="special">special</option>
+						<option value="cut">컷팅</option>
+						<option value="perm">펌</option>
+						<option value="special">특수</option>
 				</select>
 
 				<!-- 예약일시 -->
@@ -114,9 +114,9 @@ label.error {
 			submitHandler : function() {
 				var check = confirm("예약하시겠습니까?");
 				if (check) {
-					alert("예약되었습니다.");
 					document.detailForm.action = "<c:url value= '/resveViewRegisterAdd.do'/>";
 					document.detailForm.submit();
+					alert("예약되었습니다.");
 				}
 			},
 			rules : {

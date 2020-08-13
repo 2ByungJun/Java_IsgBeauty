@@ -64,7 +64,7 @@ label.error {
 			<!-- input (60%) -->
 			<div style="width: 60%; text-align: left; display: grid">
 				<!-- 이름 -->
-				<div style="display: inline-flex;"><input type="text" class="bjInput form-control" id="mberNm" name="mberNm" value="<c:out value="${result.mberNm}" />" required></div>
+				<div style="display: inline-flex;"><input type="text" class="bjInput form-control" id="mberNm" name="mberNm" maxlength="4" value="<c:out value="${result.mberNm}" />" required></div>
 
 				<!-- 담당 직원 -->
 				<select class="bjInput form-control" id="eEmpId" name="eEmpId">
@@ -80,14 +80,19 @@ label.error {
 				<!-- 성별 -->
 				<div style="display: inline-flex;">
 					<select class="bjInput form-control" id="sexdstn" name="sexdstn">
-						<option value="${result.sexdstn}"><c:out value="${result.sexdstn}" /></option>
-						<option value="Male">Male</option>
-						<option value="Female">Female</option>
+						<c:if test="${result.sexdstn eq 'Male'}">
+							<option value="Male" selected="selected">남성</option>
+							<option value="Female">여성</option>
+						</c:if>
+						<c:if test="${result.sexdstn eq 'Female'}" >
+							<option value="Male">남성</option>
+							<option value="Female" selected="selected">여성</option>
+						</c:if>
 					</select>
 				</div>
 
 				<!-- 생년월일 -->
-				<div style="display: inline-flex;"><input type="text" class="bjInput form-control" id="brthdy" name="brthdy" value="${result.brthdy}" required></div>
+				<div style="display: inline-flex;"><input type="date" class="bjInput form-control" id="brthdy" name="brthdy" value="${result.brthdy}" required></div>
 
 				<!-- 등록자 -->
 				<div style="display: inline-flex;"><input type="text" class="bjInput form-control" id="registId" name="registId" value="<c:out value="${result.registId}" />" readonly></div>
@@ -178,7 +183,6 @@ label.error {
 	$.validator.addMethod("regex", function(value, element, regexp) {
 		let re = new RegExp(regexp);
 		let res = re.test(value);
-		console.log(res, value, regexp, re)
 		return res;
 	});
 

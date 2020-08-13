@@ -73,8 +73,8 @@ label.error {
 					<label class="control-label">전화번호:</label>
 					<label class="control-label">성별:</label>
 					<label class="control-label">직책:</label>
-					<label class="control-label">급여:</label>
-					<label class="control-label">경력:</label>
+					<label class="control-label">급여(원):</label>
+					<label class="control-label">경력(년):</label>
 					<label class="control-label">등록자:</label>
 					<label class="control-label">등록일:</label>
 				</div>
@@ -82,13 +82,13 @@ label.error {
 				<!-- input (45%) -->
 				<div style="width: 45%; text-align: left; display: grid">
 					<!-- 아이디 -->
-					<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="empId" name="empId" placeholder="아이디를 입력하세요" required></div>
+					<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" maxlength="13" id="empId" name="empId" placeholder="아이디를 입력하세요" required></div>
 
 					<!-- 비밀번호 -->
-					<div style="display: inline-flex;"><input type="password" class="bjWidth form-control" id="empPassword" name="empPassword" placeholder="비밀번호를 입력하세요" required></div>
+					<div style="display: inline-flex;"><input type="password" class="bjWidth form-control" maxlength="13" id="empPassword" name="empPassword" placeholder="비밀번호를 입력하세요" required></div>
 
 					<!-- 이름 -->
-					<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="empNm" name="empNm" placeholder="이름을 입력하세요" required></div>
+					<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" maxlength="4" id="empNm" name="empNm" placeholder="이름을 입력하세요" required></div>
 
 					<!-- 전화번호 -->
 					<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="telno" name="telno" placeholder="000-0000-0000" maxlength="13" onkeyup="inputPhoneNumber(this)" required></div>
@@ -96,24 +96,24 @@ label.error {
 					<!-- 성별 -->
 					<div style="display: inline-flex;">
 						<select class="bjWidth form-control" id="sexdstn" name="sexdstn">
-							<option value="Male" selected="selected">Male</option>
-							<option value="Female">Female</option>
+							<option value="Male" selected="selected">남성</option>
+							<option value="Female">여성</option>
 						</select>
 					</div>
 
 					<!-- 직책 -->
 					<div style="display: inline-flex;">
 						<select class="bjWidth form-control" id="pspofc" name="pspofc">
-							<option value="Admin" selected="selected">Admin</option>
-							<option value="Designer">Designer</option>
+							<option value="Admin" selected="selected">관리자</option>
+							<option value="Designer">디자이너</option>
 						</select>
 					</div>
 
 					<!-- 급여 -->
-					<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="salary" name="salary" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="급여를 입력하세요" required></div>
+					<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="salary" name="salary" maxlength="10" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="급여를 입력하세요" required></div>
 
 					<!-- 경력 -->
-					<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="career" name="career" placeholder="경력을 입력하세요" required></div>
+					<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="career" name="career" maxlength="2" placeholder="경력을 입력하세요" required></div>
 
 					<!-- 등록자 -->
 					<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="registId" name="registId" value="${empId}" readonly></div>
@@ -197,7 +197,6 @@ label.error {
 
 							}
 							,error:function(e){
-							   	console.log(e.status, e.statusText);
 							   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
 							}
 						});
@@ -234,12 +233,12 @@ label.error {
 			messages : {
 				empId : {
 					required : "필수 입력 항목입니다.",
-					minlength : "아이디는 최소 3글자 이상입니다.",
+					minlength : "아이디는 최소 3~13자입니다.",
 					idchk : "이미 존재하는 ID입니다."
 				},
 				empPassword : {
 					required : "필수 입력 항목입니다.",
-					minlength : "비밀번호는 최소 4자리 이상입니다."
+					minlength : "비밀번호는 최소 4~13자리입니다."
 				},
 				empNm : {
 					required : "필수 입력 항목입니다."
@@ -263,7 +262,6 @@ label.error {
 	$.validator.addMethod("regex", function(value, element, regexp) {
 		let re = new RegExp(regexp);
 		let res = re.test(value);
-		console.log(res, value, regexp, re)
 		return res;
 	})
 
@@ -320,7 +318,6 @@ label.error {
 
 			},
 			error : function(e) {
-				console.log(e.status, e.statusText);
 				alert("서버 오류 입니다. 관리자에게 문의하세요.");
 			}
 		});

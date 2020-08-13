@@ -54,8 +54,8 @@ p {
 					<label class="control-label">전화번호:</label>
 					<label class="control-label">성별:</label>
 					<label class="control-label">직책:</label>
-					<label class="control-label">급여:</label>
-					<label class="control-label">경력:</label>
+					<label class="control-label">급여(원):</label>
+					<label class="control-label">경력(년):</label>
 					<label class="control-label">등록자:</label>
 					<label class="control-label">등록일:</label>
 				</div>
@@ -86,7 +86,18 @@ p {
 					</div>
 
 					<!-- 직책 -->
-					<div style="display: inline-flex;"><p class="control-label"><c:out value="${result.pspofc}" /></p></div>
+					<div style="display: inline-flex;">
+						<c:if test="${result.pspofc eq 'Admin'}">
+							<p class="control-label">
+								관리자
+							</p>
+						</c:if>
+						<c:if test="${result.pspofc eq 'Designer'}">
+							<p class="control-label">
+								디자이너
+							</p>
+						</c:if>
+					</div>
 
 					<!-- 급여 -->
 					<div style="display: inline-flex;"><p class="control-label"><c:out value="${result.salary}" />원</p></div>

@@ -54,25 +54,36 @@ p {
 				<div style="display: inline-flex;"><p class="control-label"><c:out value="${result.empNm}" /></p></div>
 
 				<!-- 전화 번호 -->
-				<div style="display: inline-flex;"><p for="telno" class="control-label"><c:out value="${result.telno}" /></p></div>
+				<div style="display: inline-flex;"><p class="control-label"><c:out value="${result.telno}" /></p></div>
 
 				<!-- 성별 -->
-				<div style="display: inline-flex;"><p for="sexdstn" class="control-label"><c:out value="${result.sexdstn}" /></p></div>
+				<div style="display: inline-flex;">
+					<c:if test="${result.sexdstn eq 'Male'}">
+						<p class="control-label">
+							남성
+						</p>
+					</c:if>
+					<c:if test="${result.sexdstn eq 'Female'}">
+						<p class="control-label">
+							여성
+						</p>
+					</c:if>
+				</div>
 
 				<!-- 생년월일 -->
-				<div style="display: inline-flex;"><p for="brthdy" class="control-label"><c:out value="${result.brthdy}" /></p></div>
+				<div style="display: inline-flex;"><p class="control-label"><c:out value="${result.brthdy}" /></p></div>
 
 				<!-- 등록자 -->
-				<div style="display: inline-flex;"><p for="registId" class="control-label"><c:out value="${result.registId}" /></p></div>
+				<div style="display: inline-flex;"><p class="control-label"><c:out value="${result.registId}" /></p></div>
 
 				<!-- 등록일 -->
-				<div style="display: inline-flex;"><p for="registDt" class="control-label"><c:out value="${result.registDt}" /></p></div>
+				<div style="display: inline-flex;"><p class="control-label"><c:out value="${result.registDt}" /></p></div>
 
 				<!-- 수정자 -->
-				<div style="display: inline-flex;"><p for="registId" class="control-label"><c:out value="${result.registId}" /></p></div>
+				<div style="display: inline-flex;"><p class="control-label"><c:out value="${result.registId}" /></p></div>
 
 				<!-- 수정일 -->
-				<div style="display: inline-flex;"><p for="updtDt" class="control-label"><c:out value="${result.updtDt}" /></p></div>
+				<div style="display: inline-flex;"><p class="control-label"><c:out value="${result.updtDt}" /></p></div>
 
 			</div>
 		</div>

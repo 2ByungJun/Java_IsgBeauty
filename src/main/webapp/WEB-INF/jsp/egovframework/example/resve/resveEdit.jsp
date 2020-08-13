@@ -68,9 +68,9 @@ label.error {
 				<!-- 시술 -->
 				<select class="bjInput form-control" id="tretmentNm" name="tretmentNm" required>
 						<option value="${result.tretmentNm}" selected>${result.tretmentNm}</option>
-						<option value="cut">cut</option>
-						<option value="perm">perm</option>
-						<option value="special">special</option>
+						<option value="cut">컷팅</option>
+						<option value="perm">펌</option>
+						<option value="special">특수</option>
 				</select>
 
 				<!-- 예약일시 -->
@@ -88,8 +88,8 @@ label.error {
 				<!-- 처리상태 -->
 				<select class="bjInput form-control" id="processSttus" name="processSttus">
 						<option value="${result.processSttus}" selected>${result.processSttus}</option>
-						<option value="Y">Y</option>
-						<option value="N">N</option>
+						<option id="processSttusCheckY" value="Y">Y</option>
+						<option id="processSttusCheckN" value="N">N</option>
 				</select>
 			</div>
 		</div>
