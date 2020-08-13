@@ -272,8 +272,6 @@ public class ResveController {
 			map.put("femaledatas", femaledatas);
 		}
 
-
-
 		return map;
 	}
 
@@ -288,12 +286,7 @@ public class ResveController {
 	@RequestMapping(value = "/resvePieChart.json")
 	public Map<String, Object> resvePieChartJson(@RequestBody ChartVO pieChart) throws Exception {
 		System.out.println("[예약 Pie 차트 Json]");
-/*
-		ChartVO pieChart = new ChartVO();
-		pieChart.setYear(map.get("year").toString());
-		pieChart.setMonth(map.get("month").toString());
-		pieChart.setDay(map.get("day").toString());
-		pieChart.setDateType(map.get("dateType").toString());*/
+
 		List<ChartVO> pieChartList = resveService.selectPieData(pieChart);
 
 		Map<String, Object> arrayMap = new HashMap<>();
