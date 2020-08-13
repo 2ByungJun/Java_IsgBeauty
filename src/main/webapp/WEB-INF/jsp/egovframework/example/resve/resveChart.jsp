@@ -143,8 +143,7 @@ var barChart = new Chart(ctx, barConfig);
 function createBarChart(){
 
 			  var url  =  "<c:url value='/resveBarChart.json'/>";
-			  var jsonData = {"year": $("#year").val(), "dateType": $("#dateType").val(), "month": $("#month").val()};
-			  /* var jsonData = $("#chartForm").serializeJSON(); */
+			  var jsonData = $("#chartForm").serializeJSON();
 
 			  $.ajax({
 					headers: {

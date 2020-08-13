@@ -47,12 +47,9 @@ public class ResveController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/resveRegister.do")
-	public String resveRegister(@RequestParam("selectedId") String mberSn, @ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("[고객-예약 등록 View]");
+	public String resveRegister(MberVO mberVO, Model model, HttpServletRequest request) throws Exception {
 
-		MberVO sampleVO = new MberVO();
-		sampleVO.setMberSn(mberSn);
-		model.addAttribute("result", selectMber(sampleVO, searchVO));
+		model.addAttribute("result", mberService.selectMber(mberVO));
 
 		HttpSession session = request.getSession();
 		model.addAttribute("empId", session.getAttribute("empId"));
@@ -70,7 +67,6 @@ public class ResveController {
 	 */
 	@RequestMapping(value = "/addResve.do", method = RequestMethod.POST)
 	public String addResve(ResveVO resveVO) throws Exception {
-		System.out.println("[고객-예약 등록]");
 
 		resveService.insertResve(resveVO);
 
@@ -84,7 +80,6 @@ public class ResveController {
 	 */
 	@RequestMapping(value = "/resveView.do")
 	public String resveView(){
-		System.out.println("[예약 캘린더]");
 
 		return "/useLayout/resve/resveView";
 	}
@@ -98,13 +93,14 @@ public class ResveController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/resveView.json", method = RequestMethod.POST)
-	public HashMap<String, Object> init(@RequestBody HashMap<String, Object> map) throws Exception{
-		System.out.println("[예약 캘린더]");
+	public Map<String, Object> init() throws Exception{
 
 		List<?> resveList = resveService.selectResveList();
-		map.put("resveList", resveList);
 
-		return map;
+		Map<String, Object> arrayMap = new HashMap<>();
+		arrayMap.put("resveList", resveList);
+
+		return arrayMap;
 	}
 
     /**
@@ -115,7 +111,6 @@ public class ResveController {
 	 */
 	@RequestMapping("/resveEdit.do")
 	public String resveEdit(ResveVO resveVO, Model model) throws Exception {
-		System.out.println("[예약 수정화면]");
 
 		model.addAttribute("result", resveService.selectResve(resveVO));
 
@@ -131,7 +126,6 @@ public class ResveController {
 
 	@RequestMapping(value = "/updateResve.do", method = RequestMethod.POST)
 	public String updateResve(ResveVO resveVO) throws Exception {
-		System.out.println("[예약 수정 기능]");
 
 		resveService.updateResve(resveVO);
 
@@ -146,7 +140,6 @@ public class ResveController {
 	 */
 	@RequestMapping(value = "/deleteResve.do")
 	public String deleteResve(ResveVO resveVO) throws Exception {
-		System.out.println("[예약 삭제 기능]");
 
 		resveService.deleteResve(resveVO);
 
@@ -161,7 +154,6 @@ public class ResveController {
 	 */
 	@RequestMapping(value = "/resveViewRegister.do")
 	public String resveViewRegister(@ModelAttribute("resveVO") ResveVO resveVO, Model model) throws Exception{
-		System.out.println("[캘린더 등록 View]");
 
 		model.addAttribute("listMberNM",  mberService.selectListMberNM());
 
@@ -177,26 +169,10 @@ public class ResveController {
 	 */
 	@RequestMapping(value = "/resveViewRegisterAdd.do", method = RequestMethod.POST)
 	public String addResveViewRegister(ResveVO resveVO) throws Exception {
-		System.out.println("[캘린더 등록 View 기능]");
 
 		resveService.insertResve(resveVO);
 
 		return "redirect:/resveView.do";
-	}
-
-
-	/**
-	 * 고객 조회
-	 *
-	 * @param sampleVO
-	 * @param searchVO
-	 * @return
-	 * @throws Exception
-	 */
-	public MberVO selectMber(MberVO sampleVO, @ModelAttribute("searchVO") SampleDefaultVO searchVO) throws Exception {
-		System.out.println("[고객 조회 기능]");
-
-		return mberService.selectMber(sampleVO);
 	}
 
 	/**
@@ -208,8 +184,7 @@ public class ResveController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/resveChart.do")
-	public String chartResve(@ModelAttribute("searchVO") ResveVO searchVO, Model model) throws Exception {
-		System.out.println("[예약 차트 기능]");
+	public String chartResve(Model model) throws Exception {
 
 		ArrayList<String> years = resveService.selectYears();
 		model.addAttribute("years", years);
@@ -226,27 +201,19 @@ public class ResveController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/resveBarChart.json")
-	public Map<String, Object> resveBarChartJson(@RequestBody HashMap<String, Object> map) throws Exception {
-		System.out.println("[예약 Bar 차트 Json]");
+	public Map<String, Object> resveBarChartJson(@RequestBody ChartVO chartVO) throws Exception {
 
-		ChartVO maleChartVO = new ChartVO();
-		ChartVO femaleChartVO = new ChartVO();
-		maleChartVO.setYear(map.get("year").toString());
-		maleChartVO.setMonth(map.get("month").toString());
-		maleChartVO.setSexdstn("Male");
-		maleChartVO.setDateType(map.get("dateType").toString());
-		femaleChartVO.setYear(map.get("year").toString());
-		femaleChartVO.setMonth(map.get("month").toString());
-		femaleChartVO.setSexdstn("Female");
-		femaleChartVO.setDateType(map.get("dateType").toString());
+		chartVO.setSexdstn("Male");
+		List<ChartVO> maleChartList = resveService.selectBarData(chartVO);
 
-		List<ChartVO> maleChartList = resveService.selectBarData(maleChartVO);
-		List<ChartVO> femaleChartList = resveService.selectBarData(femaleChartVO);
+		chartVO.setSexdstn("Female");
+		List<ChartVO> femaleChartList = resveService.selectBarData(chartVO);
 
 		int[] maledatas;
 		int[] femaledatas;
+		Map<String, Object> arrayMap = new HashMap<>();
 
-		if(map.get("dateType").equals("y")) {
+		if(chartVO.getDateType().equals("y")) {
 			maledatas = new int[12];
 			femaledatas = new int[12];
 
@@ -256,9 +223,9 @@ public class ResveController {
 			for(ChartVO c : femaleChartList) {
 				femaledatas[Integer.parseInt(c.getMonth())-1] = c.getCnt();
 			}
-			map.put("maledatas", maledatas);
-			map.put("femaledatas", femaledatas);
-		} else if(map.get("dateType").equals("m")) {
+			arrayMap.put("maledatas", maledatas);
+			arrayMap.put("femaledatas", femaledatas);
+		} else if(chartVO.getDateType().equals("m")) {
 			maledatas = new int[31];
 			femaledatas = new int[31];
 
@@ -268,11 +235,11 @@ public class ResveController {
 			for(ChartVO c : femaleChartList) {
 				femaledatas[Integer.parseInt(c.getDay())-1] = c.getCnt();
 			}
-			map.put("maledatas", maledatas);
-			map.put("femaledatas", femaledatas);
+			arrayMap.put("maledatas", maledatas);
+			arrayMap.put("femaledatas", femaledatas);
 		}
 
-		return map;
+		return arrayMap;
 	}
 
 	/**
@@ -285,7 +252,6 @@ public class ResveController {
 	@ResponseBody
 	@RequestMapping(value = "/resvePieChart.json")
 	public Map<String, Object> resvePieChartJson(@RequestBody ChartVO pieChart) throws Exception {
-		System.out.println("[예약 Pie 차트 Json]");
 
 		List<ChartVO> pieChartList = resveService.selectPieData(pieChart);
 

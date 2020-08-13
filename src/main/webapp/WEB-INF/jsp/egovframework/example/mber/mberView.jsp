@@ -19,7 +19,7 @@ p {
 <!-- JSP -->
 <form:form commandName="mberVO" id="detailForm" name="detailForm" method="post">
 	<!-- hidden -->
-	<input type="hidden" name="selectedId" />
+	<input type="hidden" name="mberSn" id="mberSn" value="${result.mberSn}"/>
 
 	<!-- body -->
 	<div class="container">
@@ -91,9 +91,9 @@ p {
 
 	<!-- button -->
 	<div class="container" style="text-align: center; margin-top: 30px;">
-		<button type="button" class="btn btn-primary" onclick="editMber('${result.mberSn}')">수정</button>
-		<button type="button" class="btn btn-danger" onclick="deleteMber('${result.mberSn}')">삭제</button>
-		<button type="button" class="btn btn-success" onclick="resveRegister('${result.mberSn}')">예약등록</button>
+		<button type="button" class="btn btn-primary" onclick="editMber()">수정</button>
+		<button type="button" class="btn btn-danger" onclick="deleteMber()">삭제</button>
+		<button type="button" class="btn btn-success" onclick="resveRegister()">예약등록</button>
 		<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 	</div>
 
@@ -105,27 +105,22 @@ p {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
 
-	function deleteMber(id) {
+	function deleteMber() {
 		var check;
 		check = confirm("정말로 해당 고객님을 삭제하시겠습니까?");
 
 		if (check) {
-			document.detailForm.selectedId.value = id;
 			document.detailForm.action = "<c:url value='/deleteMber.do'/>";
 			document.detailForm.submit();
-		} else {
-			alert("취소하셨습니다.");
 		}
 	}
 
-	function editMber(id) {
-		document.detailForm.selectedId.value = id;
+	function editMber() {
 		document.detailForm.action = "<c:url value='/mberEdit.do'/>";
 		document.detailForm.submit();
 	}
 
-	function resveRegister(id) {
-		document.detailForm.selectedId.value = id;
+	function resveRegister() {
 		document.detailForm.action = "<c:url value='/resveRegister.do'/>";
 		document.detailForm.submit();
 	}
@@ -139,8 +134,6 @@ p {
 					frm = document.detailForm;
 					frm.action = "<c:url value= '/addMber.do'/>";
 					frm.submit();
-				} else {
-					alert("취소하셨습니다.");
 				}
 			},
 			rules : {

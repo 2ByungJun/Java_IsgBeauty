@@ -46,12 +46,11 @@
 	document.addEventListener('DOMContentLoaded',function() {
 			var calendarEl = document.getElementById('calendar');
 			var calendar = fullCalendar(calendarEl);
-			var obj = {};
 			$.ajax({
 				url : "<c:url value="/resveView.json"/>",
 				type : "post",
 				dataType : "json",
-				data : JSON.stringify(obj),
+				data : [],
 				contentType : "application/json",
 				success : function(data) {
 					$.each(data.resveList, function(index, item) {
