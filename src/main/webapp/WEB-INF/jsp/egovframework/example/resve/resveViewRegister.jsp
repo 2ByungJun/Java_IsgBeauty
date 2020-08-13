@@ -32,14 +32,14 @@ label.error {
 </style>
 
 <!-- JSP -->
-<form:form commandName="mberVO" id="detailForm" name="detailForm" method="post">
+<form:form commandName="resveVO" id="detailForm" name="detailForm" method="post">
 	<!-- hidden -->
 	<input type="hidden" id="processSttus" name="processSttus" value="N">
 
 	<!-- body -->
 	<div class="container">
 		<!-- title -->
-		<h2 style="text-align: center;"><b><span style="color:#000080;">'${param.selectedDate}'</span> 예약 등록</b></h2>
+		<h2 style="text-align: center;"><b><span style="color:#000080;">${resveVO.resveDt}</span> 예약 등록</b></h2>
 
 		<!-- contents -->
 		<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
@@ -76,7 +76,7 @@ label.error {
 				</select>
 
 				<!-- 예약일시 -->
-				<div style="display: inline-flex;"><input type="date" class="bjWidth form-control" id="resveDt" name="resveDt" value="${param.selectedDate}" readonly></div>
+				<div style="display: inline-flex;"><input type="date" class="bjWidth form-control" id="resveDt" name="resveDt" value="${resveVO.resveDt}" readonly></div>
 
 				<!-- 예약시간 -->
 				<div style="display: inline-flex;"><input type="time" class="bjWidth form-control" id="resveTime" name="resveTime" required>
@@ -104,7 +104,8 @@ label.error {
 <script type="text/javaScript" defer="defer">
 
 	function resveView() {
-		location.href = "<c:url value='/resveView.do'/>";
+		document.detailForm.action = "<c:url value= '/resveView.do'/>";
+		document.detailForm.submit();
 	}
 
 	/* Validation */
@@ -114,12 +115,8 @@ label.error {
 				var check = confirm("예약하시겠습니까?");
 				if (check) {
 					alert("예약되었습니다.");
-					frm = document.detailForm;
-					frm.action = "<c:url value= '/addResveViewRegister.do'/>";
-					frm.submit();
-				} else {
-					alert("취소하셨습니다.");
-					location.href = "<c:url value='/resveView.do'/>";
+					document.detailForm.action = "<c:url value= '/resveViewRegisterAdd.do'/>";
+					document.detailForm.submit();
 				}
 			},
 			rules : {

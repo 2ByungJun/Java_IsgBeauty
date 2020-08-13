@@ -35,8 +35,7 @@ label.error {
 <!-- JSP -->
 <form:form commandName="resveVO" id="detailForm" name="detailForm" method="post">
 	<!-- hidden -->
-	<input type="hidden" name="selectedId" />
-	<input type="hidden" class="form-control" id="resveSn" name="resveSn" value="<c:out value="${result.resveSn}" />" readonly>
+	<input type="hidden" name="resveSn" value="<c:out value="${result.resveSn}" />">
 
 	<!-- body -->
 	<div class="container">
@@ -100,8 +99,8 @@ label.error {
 	<!-- button -->
 	<div class="container" style="text-align: center; margin-top: 30px;">
 		<button type="submit" class="btn btn-primary" onclick="">수정</button>
-		<button type="button" class="btn btn-danger" onclick="deleteResve('${result.resveSn}')">삭제</button>
-		<button type="button" class=" btn btn-info" onclick="resveView()">이전</button>
+		<button type="button" class="btn btn-danger" onclick="deleteResve()">삭제</button>
+		<button type="button" class="btn btn-info" onclick="resveView()">이전</button>
 	</div>
 
 </form:form>
@@ -109,20 +108,16 @@ label.error {
 <!-- JS -->
 <script type="text/javaScript" defer="defer">
 	function resveView() {
-		location.href = "<c:url value='/resveView.do'/>";
+		document.detailForm.action = "<c:url value='/resveView.do'/>";
+		document.detailForm.submit();
 	}
 
-	function deleteResve(id) {
-		var check;
-		check = confirm("정말로 해당 예약을 삭제하시겠습니까?");
-
+	function deleteResve() {
+		var check = confirm("정말로 해당 예약을 삭제하시겠습니까?");
 		if (check) {
-			alert("삭제되었습니다.");
-			document.detailForm.selectedId.value = id;
 			document.detailForm.action = "<c:url value='/deleteResve.do'/>";
 			document.detailForm.submit();
-		} else {
-			alert("취소하셨습니다.");
+			alert("삭제되었습니다.");
 		}
 	}
 
@@ -131,12 +126,9 @@ label.error {
 			submitHandler : function() {
 				var check = confirm("예약을 수정하시겠습니까?");
 				if (check) {
+					document.detailForm.action = "<c:url value= '/updateResve.do'/>";
+					document.detailForm.submit();
 					alert("수정되었습니다.");
-					frm = document.detailForm;
-					frm.action = "<c:url value= '/updateResve.do'/>";
-					frm.submit();
-				} else {
-					alert("취소하셨습니다.");
 				}
 			}
 		});

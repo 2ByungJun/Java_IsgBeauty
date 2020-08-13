@@ -42,7 +42,7 @@
 			where RESVE_SN = ${resveSn}
 	</select>
 
-	<select id="selectResveList" parameterType="resveVO" resultType="egovMap">
+	<select id="selectResveList" resultType="egovMap">
 
 			select a.RESVE_SN,
 			   a.MBER_SN,
@@ -59,14 +59,6 @@
 		       ) AS mberNm
 		  from t_resve_m a
 	</select>
-
-	<select id="selectResveListTotCnt" parameterType="resveVO" resultType="int">
-
-			SELECT COUNT(*) totcnt
-			FROM t_resve_m
-			WHERE 1=1
-	</select>
-
 
 	<insert id="insertResve" parameterType="resveVO">
 	    <selectKey keyProperty="resveSn" resultType="string" order="BEFORE">

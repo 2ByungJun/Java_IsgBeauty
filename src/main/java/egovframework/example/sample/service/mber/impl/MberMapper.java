@@ -92,7 +92,7 @@ public interface MberMapper {
 	 * @param vo
 	 * @throws Exception
 	 */
-	List<?> selectListMberNM(MberVO vo) throws Exception;
+	List<?> selectListMberNM() throws Exception;
 
 
 }

@@ -39,7 +39,7 @@ public class ResveController {
 	private ResveService resveService;
 
 	/**
-	 * 예약 등록 View
+	 * 고객-예약 등록 View
 	 *
 	 * @param searchVO
 	 * @param model
@@ -49,7 +49,7 @@ public class ResveController {
 	@RequestMapping(value = "/resveRegister.do")
 	public String resveRegister(@RequestParam("selectedId") String mberSn, @ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("[예약 등록 페이지]");
+		System.out.println("[고객-예약 등록 View]");
 
 		MberVO sampleVO = new MberVO();
 		sampleVO.setMberSn(mberSn);
@@ -62,7 +62,24 @@ public class ResveController {
 	}
 
 	/**
-	 * 예약 캘린더 View
+	 * 고객-예약 등록
+	 *
+	 * @param searchVO
+	 * @param sampleVO
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/addResve.do", method = RequestMethod.POST)
+	public String addResve(ResveVO resveVO) throws Exception {
+		System.out.println("[고객-예약 등록]");
+
+		resveService.insertResve(resveVO);
+
+		return "redirect:/resveView.do";
+	}
+
+	/**
+	 * CalendarView
 	 *
 	 * @return
 	 */
@@ -73,45 +90,105 @@ public class ResveController {
 		return "/useLayout/resve/resveView";
 	}
 
-     /**
-	 * 예약 수정 View
-	 *
-	 * @return
-     * @throws Exception
-	 */
-	@RequestMapping("/resveEdit.do")
-	public String resveEdit(@RequestParam("selectedId") String resveSn, @ModelAttribute("searchVO") ResveVO searchVO, Model model) throws Exception {
-		System.out.println("[예약 수정화면]");
-
-		ResveVO sampleVO = new ResveVO();
-		sampleVO.setResveSn(resveSn);
-		model.addAttribute("result", resveService.selectResve(sampleVO));
-
-		return "/useLayout/resve/resveEdit";
-	}
-
 	/**
-	 * (Ajax) ResveVO 전달
+	 * CalendarViewData
 	 *
 	 * @param map
 	 * @return
 	 * @throws Exception
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/resveView.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/resveView.json", method = RequestMethod.POST)
 	public HashMap<String, Object> init(@RequestBody HashMap<String, Object> map) throws Exception{
 		System.out.println("[예약 캘린더]");
 
-		ResveVO resveVO = new ResveVO();
-		List<?> resveList = resveService.selectResveList(resveVO);
+		List<?> resveList = resveService.selectResveList();
 		map.put("resveList", resveList);
 
 		return map;
 	}
 
+    /**
+	 * 예약 수정 View
+	 *
+	 * @return
+     * @throws Exception
+	 */
+	@RequestMapping("/resveEdit.do")
+	public String resveEdit(ResveVO resveVO, Model model) throws Exception {
+		System.out.println("[예약 수정화면]");
+
+		model.addAttribute("result", resveService.selectResve(resveVO));
+
+		return "/useLayout/resve/resveEdit";
+	}
+
+	/**
+	 * 예약 수정
+	 *
+	 * @return "forward:/resveView.do"
+	 * @exception Exception
+	 */
+
+	@RequestMapping(value = "/updateResve.do", method = RequestMethod.POST)
+	public String updateResve(ResveVO resveVO) throws Exception {
+		System.out.println("[예약 수정 기능]");
+
+		resveService.updateResve(resveVO);
+
+		return "redirect:/resveView.do";
+	}
+
+	/**
+	 * 예약 삭제
+	 *
+	 * @return "forward:/resveView.do"
+	 * @exception Exception
+	 */
+	@RequestMapping(value = "/deleteResve.do")
+	public String deleteResve(ResveVO resveVO) throws Exception {
+		System.out.println("[예약 삭제 기능]");
+
+		resveService.deleteResve(resveVO);
+
+		return "redirect:/resveView.do";
+	}
+
+	/**
+	 * CalendarAddView
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/resveViewRegister.do")
+	public String resveViewRegister(@ModelAttribute("resveVO") ResveVO resveVO, Model model) throws Exception{
+		System.out.println("[캘린더 등록 View]");
+
+		model.addAttribute("listMberNM",  mberService.selectListMberNM());
+
+		return "/useLayout/resve/resveViewRegister";
+	}
+
+	/**
+	 * CalendarAdd
+	 *
+	 * @param resveVO
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/resveViewRegisterAdd.do", method = RequestMethod.POST)
+	public String addResveViewRegister(ResveVO resveVO) throws Exception {
+		System.out.println("[캘린더 등록 View 기능]");
+
+		resveService.insertResve(resveVO);
+
+		return "redirect:/resveView.do";
+	}
+
 
 	/**
 	 * 고객 조회
+	 *
 	 * @param sampleVO
 	 * @param searchVO
 	 * @return
@@ -124,53 +201,13 @@ public class ResveController {
 	}
 
 	/**
-	 * 예약 등록
+	 * Chart
 	 *
 	 * @param searchVO
-	 * @param sampleVO
+	 * @param model
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/addResve.do", method = RequestMethod.POST)
-	public String addResve(@ModelAttribute("searchVO") ResveVO searchVO) throws Exception {
-		System.out.println("[예약 등록]");
-
-		resveService.insertResve(searchVO);
-
-		return "redirect:/resveView.do";
-	}
-
-	/**
-	 * 예약 수정
-	 * @return "forward:/resveView.do"
-	 * @exception Exception
-	 */
-
-	@RequestMapping(value = "/updateResve.do", method = RequestMethod.POST)
-	public String updateResve(@ModelAttribute("resveVO") ResveVO sampleVO) throws Exception {
-		System.out.println("[예약 수정 기능]");
-
-		resveService.updateResve(sampleVO);
-
-		return "redirect:/resveView.do";
-	}
-
-	/**
-	 * 예약 삭제
-	 * @return "forward:/resveView.do"
-	 * @exception Exception
-	 */
-	@RequestMapping(value = "/deleteResve.do")
-	public String deleteResve(@RequestParam("selectedId") String resveSn) throws Exception {
-		System.out.println("[예약 삭제 기능]");
-
-		ResveVO sampleVO = new ResveVO();
-		sampleVO.setResveSn(resveSn);
-		resveService.deleteResve(sampleVO);
-
-		return "redirect:/resveView.do";
-	}
-
 	@RequestMapping(value = "/resveChart.do")
 	public String chartResve(@ModelAttribute("searchVO") ResveVO searchVO, Model model) throws Exception {
 		System.out.println("[예약 차트 기능]");
@@ -181,14 +218,18 @@ public class ResveController {
 		return "/useLayout/resve/resveChart";
 	}
 
+	/**
+	 * barChart
+	 *
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/resveBarChart.json")
 	public Map<String, Object> resveBarChartJson(@RequestBody HashMap<String, Object> map) throws Exception {
 		System.out.println("[예약 Bar 차트 Json]");
 
-		/*
-		 *  Bar 차트 부분
-		 */
 		ChartVO maleChartVO = new ChartVO();
 		ChartVO femaleChartVO = new ChartVO();
 		maleChartVO.setYear(map.get("year").toString());
@@ -237,14 +278,17 @@ public class ResveController {
 		return map;
 	}
 
+	/**
+	 * pieChart
+	 *
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/resvePieChart.json")
 	public Map<String, Object> resvePieChartJson(@RequestBody HashMap<String, Object> map) throws Exception {
 		System.out.println("[예약 Pie 차트 Json]");
-
-		/*
-		 *  Pie 차트 부분
-		 */
 
 		ChartVO pieChart = new ChartVO();
 		pieChart.setYear(map.get("year").toString());
@@ -258,29 +302,4 @@ public class ResveController {
 		return map;
 	}
 
-	/**
-	 * 예약 캘린더 등록 View
-	 *
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/resveViewRegister.do")
-	public String resveViewRegister(MberVO searchVO, Model model) throws Exception{
-		System.out.println("[예약 View 등록화면]");
-
-		List<?> listMberNM = mberService.selectListMberNM(searchVO);
-		model.addAttribute("listMberNM", listMberNM);
-
-		return "/useLayout/resve/resveViewRegister";
-	}
-
-
-	@RequestMapping(value = "/addResveViewRegister.do", method = RequestMethod.POST)
-	public String addResveViewRegister(@ModelAttribute("searchVO") ResveVO searchVO) throws Exception {
-		System.out.println("[예약 View 등록]");
-
-		resveService.insertResve(searchVO);
-
-		return "redirect:/resveView.do";
-	}
 }
