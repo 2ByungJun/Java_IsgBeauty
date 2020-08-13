@@ -125,7 +125,7 @@
 		and DATE_FORMAT(RESVE_DT, "%Y") = ${year}
 		and DATE_FORMAT(RESVE_DT, "%c") = ${month}
 		<if test='dateType.equals("m")'>
-			and DATE_FORMAT(RESVE_DT, "%e") = ${index}
+			and DATE_FORMAT(RESVE_DT, "%e") = ${day}
 		</if>
 		group by a.TRETMENT_NM
 	</select>

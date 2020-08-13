@@ -22,8 +22,7 @@
 <!-- JSP -->
 <form:form commandName="empVO" id="listForm" name="listForm" method="post">
 		<!-- hidden -->
-		<input type="hidden" name="selectedId" />
-		<input type="hidden" name="empId" />
+		<input type="hidden" name="empId" id="empId" />
 
 		<!-- body -->
 		<div class="container">
@@ -168,7 +167,6 @@
 	}
 
     function view(id) {
-    	console.log(id);
     	$("#empId").val(id);
        	document.listForm.action = "<c:url value='/empView.do'/>";
        	document.listForm.submit();

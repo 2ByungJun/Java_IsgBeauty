@@ -9,6 +9,7 @@
 <!-- JSP -->
 <!-- hidden -->
 <input type="hidden" id="dateType" value='y'/>
+<input type="hidden" id="day"/>
 <!-- header -->
 <div class="container" style="display: flex;">
 	<!-- button -->
@@ -48,40 +49,41 @@
 <!-- JS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script type="text/javaScript" defer="defer">
-$("#month").hide();
-   $('.button-class1').click(function(){
-       if( $(this).hasClass('btn-default') ) {
-       	$(this).removeClass('btn-default');
-       	$(this).addClass('btn-primary');
-       	$("#monthBtn").removeClass('btn-primary');
-       	$("#monthBtn").addClass('btn-default');
-       	$("#dateType").val("y");
-       	$("#month").hide();
-      	    createBarChart(barChart);
-      	    pieChart.clear();
-       }
-   });
-   $('.button-class2').click(function(){
-   	if( $(this).hasClass('btn-default') ) {
-       	$(this).removeClass('btn-default');
-       	$(this).addClass('btn-primary');
-       	$("#yearBtn").removeClass('btn-primary');
-       	$("#yearBtn").addClass('btn-default');
-       	$("#dateType").val("m");
-       	$("#month").show();
-       	createBarChart(barChart);
-       	pieChart.clear();
-       }
-   });
+	$(document).ready(function() {
+		createBarChart(barChart);
+	});
 
-   $(document).ready(function() {
-	createBarChart(barChart);
-});
+	$("#month").hide();
+	   $('.button-class1').click(function(){
+	       if( $(this).hasClass('btn-default') ) {
+	       	$(this).removeClass('btn-default');
+	       	$(this).addClass('btn-primary');
+	       	$("#monthBtn").removeClass('btn-primary');
+	       	$("#monthBtn").addClass('btn-default');
+	       	$("#dateType").val("y");
+	       	$("#month").hide();
+	      	    createBarChart(barChart);
+	      	    pieChart.clear();
+	       }
+	   });
+	   $('.button-class2').click(function(){
+	   	if( $(this).hasClass('btn-default') ) {
+	       	$(this).removeClass('btn-default');
+	       	$(this).addClass('btn-primary');
+	       	$("#yearBtn").removeClass('btn-primary');
+	       	$("#yearBtn").addClass('btn-default');
+	       	$("#dateType").val("m");
+	       	$("#month").show();
+	       	createBarChart(barChart);
+	       	pieChart.clear();
+	       }
+	   });
 
-$("#myBarChart").click(function(evt) {
-	var activePoints = barChart.getElementsAtEvent(evt);
-	createPieChart(activePoints[0]._index+1);
-});
+	$("#myBarChart").click(function(evt) {
+		var activePoints = barChart.getElementsAtEvent(evt);
+		$('#day').val(activePoints[0]._index+1);
+		createPieChart();
+	});
 
 
 var barConfig = {
@@ -186,11 +188,11 @@ var pieConfig = {
 var pieCtx = document.getElementById('myPieChart').getContext('2d');
 var pieChart = new Chart(pieCtx, pieConfig);
 
-function createPieChart(index){
+function createPieChart(){
 
   var url  =  "<c:url value='/resvePieChart.json'/>";
   if($("#dateType").val() == 'y') {
-	  var jsonData = {"year": $("#year").val(),"month": index, "index": index, "dateType": $("#dateType").val()};
+	  var jsonData = {"year": $("#year").val(),"month": index, "day": index, $("#day").val(): $("#dateType").val()};
   } else {
 	  var jsonData = {"year": $("#year").val(),"month": $("#month").val(), "index": index, "dateType": $("#dateType").val()};
   }
@@ -224,9 +226,7 @@ function createPieChart(index){
 					}],
 					labels: arrayLabel
 					} ,
-				options: {
-					//responsive: true
-				}
+				options: {}
 			};
 
 			pieChart.config = updatePieConfig;
