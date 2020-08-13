@@ -54,8 +54,8 @@ p {
 					<label class="control-label">전화번호:</label>
 					<label class="control-label">성별:</label>
 					<label class="control-label">직책:</label>
-					<label class="control-label">급여:</label>
-					<label class="control-label">경력:</label>
+					<label class="control-label">급여(원):</label>
+					<label class="control-label">경력(년):</label>
 					<label class="control-label">등록자:</label>
 					<label class="control-label">등록일:</label>
 				</div>

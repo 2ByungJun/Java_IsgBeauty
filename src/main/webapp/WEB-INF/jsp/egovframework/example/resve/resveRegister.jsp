@@ -67,9 +67,9 @@ label.error {
 
 				<!-- 시술 -->
 				<select class="bjWidth form-control" id="tretmentNm" name="tretmentNm" required>
-						<option value="cut">cut</option>
-						<option value="perm">perm</option>
-						<option value="special">special</option>
+						<option value="cut">컷팅</option>
+						<option value="perm">펌</option>
+						<option value="special">특수</option>
 				</select>
 
 				<!-- 예약일시 -->
@@ -90,19 +90,16 @@ label.error {
 	<!-- button -->
 	<div class="container" style="text-align: center; margin-top: 30px">
 		<button type="submit" class="btn btn-primary" onclick="">예약등록</button>
-		<button type="button" class="btn btn-info" onclick="home()">취소</button>
+		<button type="button" class="btn btn-info" onclick="mberList()">취소</button>
 	</div>
 
 </form:form>
 
 <!-- JS -->
 <script type="text/javaScript" defer="defer">
-	function home() {
-		location.href = "<c:url value='/mberList.do'/>";
-	}
-
-	function resveView() {
-		location.href = "<c:url value='/resveView.do'/>";
+	function mberList() {
+		document.detailForm.action = "<c:url value= '/mberList.do'/>";
+		document.detailForm.submit();
 	}
 
 	/* Validation */
@@ -111,13 +108,12 @@ label.error {
 			submitHandler : function() {
 				var check = confirm("예약하시겠습니까?");
 				if (check) {
+					document.detailForm.action = "<c:url value= '/addResve.do'/>";
+					document.detailForm.submit();
 					alert("예약되었습니다.");
-					frm = document.detailForm;
-					frm.action = "<c:url value= '/addResve.do'/>";
-					frm.submit();
 				} else {
-					alert("취소하셨습니다.");
-					location.href = "<c:url value='/mberList.do'/>";
+					document.detailForm.action = "<c:url value= '/mberList.do'/>";
+					document.detailForm.submit();
 				}
 			},
 			rules : {

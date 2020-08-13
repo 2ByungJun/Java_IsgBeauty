@@ -90,21 +90,21 @@ label.error {
 					<label class="bjLabel control-label">이름:</label>
 					<label class="bjLabel control-label">전화번호:</label>
 					<label class="bjLabel control-label">성별:</label>
-					<label class="bjLabel control-label">직책:</label>
-					<label class="bjLabel control-label">급여:</label>
+					<label class="bjLabel control-label">직책(년):</label>
+					<label class="bjLabel control-label">급여(원):</label>
 					<label class="bjLabel control-label">경력:</label>
 				</div>
 
 				<!-- input (60%) -->
 				<div style="width: 60%; text-align: left; display: grid">
 					<!-- 아이디 -->
-					<div id="divInline"><input type="text" class="bjInput form-control" id="empId" name="empId" value="<c:out value="${result.empId}"/>" readonly required></div>
+					<div id="divInline"><input type="text" class="bjInput form-control" id="empId" name="empId" maxlength="13" value="<c:out value="${result.empId}"/>" readonly required></div>
 
 					<!-- 패스워드 -->
-					<div id="divInline"><input type="password" class="bjInput form-control" id="empPassword" name="empPassword" value="<c:out value="${result.empPassword}"/>" required></div>
+					<div id="divInline"><input type="password" class="bjInput form-control" id="empPassword" name="empPassword" maxlength="13" value="<c:out value="${result.empPassword}"/>" required></div>
 
 					<!-- 이름 -->
-					<div id="divInline"><input type="text" class="bjInput form-control" id="empNm" name="empNm" value="<c:out value="${result.empNm}" />" required></div>
+					<div id="divInline"><input type="text" class="bjInput form-control" id="empNm" name="empNm" maxlength="4" value="<c:out value="${result.empNm}" />" required></div>
 
 					<!-- 전화번호 -->
 					<div id="divInline"><input type="text" class="bjInput form-control" id="telno" name="telno" value="${result.telno}" placeholder="000-0000-0000" maxlength="13" onkeyup="inputPhoneNumber(this)" required></div>
@@ -122,16 +122,16 @@ label.error {
 					<div id="divInline">
 						<select class="bjInput form-control" id="pspofc" name="pspofc">
 							<option value="${result.pspofc}" selected="selected"> <c:out value="${result.pspofc}" /></option>
-							<option value="Admin"  >Admin</option>
-							<option value="Designer">Designer</option>
+							<option value="Admin"  >관리자</option>
+							<option value="Designer">디자이너</option>
 						</select>
 					</div>
 
 					<!-- 급여 -->
-					<div id="divInline"><input type="text" class="bjInput form-control" id="salary" name="salary" value="<c:out value="${result.salary}"/>" required></div>
+					<div id="divInline"><input type="text" class="bjInput form-control" id="salary" name="salary" maxlength="10" value="<c:out value="${result.salary}"/>" required></div>
 
 					<!-- 경력 -->
-					<div id="divInline"><input type="text" class="bjInput form-control" id="career" name="career" value="<c:out value="${result.career}"/>" required></div>
+					<div id="divInline"><input type="text" class="bjInput form-control" id="career" name="career" maxlength="2" value="<c:out value="${result.career}"/>" required></div>
 
 				</div>
 			</div>

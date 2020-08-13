@@ -64,7 +64,7 @@ label.error {
 			<!-- input (60%) -->
 			<div style="width: 60%; text-align: left; display: grid">
 				<!-- 이름 -->
-				<div style="display: inline-flex;"><input type="text" class="bjInput form-control" id="mberNm" name="mberNm" value="<c:out value="${result.mberNm}" />" required></div>
+				<div style="display: inline-flex;"><input type="text" class="bjInput form-control" id="mberNm" name="mberNm" maxlength="4" value="<c:out value="${result.mberNm}" />" required></div>
 
 				<!-- 담당 직원 -->
 				<select class="bjInput form-control" id="eEmpId" name="eEmpId">
@@ -81,13 +81,13 @@ label.error {
 				<div style="display: inline-flex;">
 					<select class="bjInput form-control" id="sexdstn" name="sexdstn">
 						<option value="${result.sexdstn}"><c:out value="${result.sexdstn}" /></option>
-						<option value="Male">Male</option>
-						<option value="Female">Female</option>
+						<option value="Male">남성</option>
+						<option value="Female">여성</option>
 					</select>
 				</div>
 
 				<!-- 생년월일 -->
-				<div style="display: inline-flex;"><input type="text" class="bjInput form-control" id="brthdy" name="brthdy" value="${result.brthdy}" required></div>
+				<div style="display: inline-flex;"><input type="date" class="bjInput form-control" id="brthdy" name="brthdy" value="${result.brthdy}" required></div>
 
 				<!-- 등록자 -->
 				<div style="display: inline-flex;"><input type="text" class="bjInput form-control" id="registId" name="registId" value="<c:out value="${result.registId}" />" readonly></div>

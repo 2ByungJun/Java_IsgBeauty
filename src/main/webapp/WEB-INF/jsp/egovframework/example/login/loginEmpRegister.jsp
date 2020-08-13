@@ -90,15 +90,15 @@ label.error {
 				<!-- 성별 -->
 				<div style="display: inline-flex;">
 					<select class="bjWidth form-control" id="sexdstn" name="sexdstn">
-						<option value="Male" selected="selected">Male</option>
-						<option value="Female">Female</option>
+						<option value="Male" selected="selected">남성</option>
+						<option value="Female">여성</option>
 					</select>
 				</div>
 
 				<!-- 직책 -->
 				<div style="display: inline-flex;">
 					<select class="bjWidth form-control" id="pspofc" name="pspofc" readonly>
-						<option value="Admin" selected="selected">Admin</option>
+						<option value="Admin" selected="selected">관리자</option>
 					</select>
 				</div>
 

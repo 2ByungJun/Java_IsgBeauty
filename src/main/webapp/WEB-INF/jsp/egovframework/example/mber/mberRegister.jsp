@@ -60,7 +60,7 @@ label.error {
 			<!-- input (60%) -->
 			<div style="width: 60%; text-align: left; display: grid">
 				<!-- 이름 -->
-				<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="mberNm" name="mberNm" placeholder="이름을 입력하세요" maxlength="10" required></div>
+				<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="mberNm" name="mberNm" placeholder="이름을 입력하세요" maxlength="4" required></div>
 
 				<!-- 담당 직원 -->
 				<select class="bjWidth form-control" id="eEmpId" name="eEmpId">
@@ -81,7 +81,7 @@ label.error {
 				</div>
 
 				<!-- 생년월일 -->
-				<div style="display: inline-flex;"><input type="date" class="bjWidth form-control" id="brthdy" name="brthdy"></div>
+				<div style="display: inline-flex;"><input type="date" class="bjWidth form-control" id="brthdy" name="brthdy" ></div>
 
 				<!-- 등록자 -->
 				<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" id="registId" name="registId" value="${registId}" readonly></div>
