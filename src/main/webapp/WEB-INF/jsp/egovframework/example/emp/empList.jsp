@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%  String str = (String) session.getAttribute("empId"); %>
 
 <!-- CSS -->
 <style>
@@ -22,7 +23,6 @@
 <!-- JSP -->
 <form:form commandName="empVO" id="listForm" name="listForm" method="post">
 		<!-- hidden -->
-		<input type="hidden" name="empId" id="empId" />
 		<input type="hidden" name="empId" id="empId"/>
 
 		<!-- body -->
@@ -85,7 +85,6 @@
 <script src="<c:url value='js/paging.js' />"></script>
 <script type="text/javaScript" defer="defer">
 
-	<%  String str = (String) session.getAttribute("empId"); %>
 	$(document).ready(function() {
 		 fnSelectList(1);
 		 var welcomeHtml = '';

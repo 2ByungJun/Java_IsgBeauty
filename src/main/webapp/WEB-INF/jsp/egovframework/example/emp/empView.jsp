@@ -30,7 +30,6 @@ p {
 <!-- JSP -->
 <form:form commandName="empVO" id="detailForm" name="detailForm" method="post">
 		<!-- hidden -->
-		<input type="hidden" name="selectedId" />
 		<input type="hidden" name="empId" value="${result.empId}" />
 
 		<!-- body -->
