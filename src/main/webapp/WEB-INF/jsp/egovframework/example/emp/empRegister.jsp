@@ -36,7 +36,7 @@ label.error {
 </style>
 
 <!-- JSP -->
-<form:form commandName="empVO" id="detailForm" name="detailForm" method="post">
+<form:form commandName="empVO" id="registerForm" name="registerForm" method="post">
 		<!-- hidden -->
 		<input type="hidden" name="fileId" id="fileId" />
 		<input type="hidden" id="idCheck" name="idCheck" value="true" readonly>
@@ -168,12 +168,9 @@ label.error {
 
 	/* 글 등록 function */
 	$(function() {
-		$("#detailForm").validate({
+		$("#registerForm").validate({
 			submitHandler : function() {
-
-				var jsonData = {empId:$("#empId").val(), empPassword:$("#empPassword").val(), empNm:$("#empNm").val(), telno:$("#telno").val(), sexdstn:$("#sexdstn").val(), pspofc:$("#pspofc").val(),
-						salary:$("#salary").val(), career:$("#career").val(), registId:$("#registId").val(), registDt:$("#registDt").val()}
-
+				var jsonData = $("#registerForm").serializeJSON();
 				var check = confirm("해당 직원을 등록하시겠습니까?");
 				if (check) {
 					 $.ajax({
@@ -207,8 +204,6 @@ label.error {
 				} else {
 					alert("취소하셨습니다.");
 				}
-
-				$("#input-res-1").fileinput('upload');
 			},
 			rules : {
 				empId : {

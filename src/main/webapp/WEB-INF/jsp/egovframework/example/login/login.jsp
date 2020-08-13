@@ -29,7 +29,7 @@
 	</div>
 
 	<!-- body -->
-	<form class="form-horizontal" style="display: grid; margin-top:20px;">
+	<form class="form-horizontal" id="loginForm" name="loginForm" style="display: grid; margin-top:20px;">
 		<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
 
 			<!-- (35%) -->
@@ -106,10 +106,8 @@
 		})
 	}
 
-	function home() {
-		location.href = "<c:url value='/mberList.do'/>";
-	}
 	function empRegister() {
-		location.href = "<c:url value='/loginEmpRegister.do'/>";
+		document.loginForm.action = "<c:url value='/loginEmpRegister.do'/>";
+		document.loginForm.submit();
 	}
 </script>

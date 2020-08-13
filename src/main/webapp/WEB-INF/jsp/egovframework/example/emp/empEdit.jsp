@@ -52,7 +52,7 @@ label.error {
 </style>
 
 <!-- JSP -->
-<form:form commandName="empVO" id="detailForm" name="detailForm" method="post">
+<form:form commandName="empVO" id="editForm" name="editForm" method="post">
 		<!-- hidden -->
 		<input type="hidden" id="registId" name="registId" value="${result.registId}"/>
 		<input type="hidden" id="registDt" name="registDt" value="${result.registDt}"/>
@@ -167,7 +167,7 @@ label.error {
 			},
 			initialPreviewFileType: 'image',
 		    initialPreview: [
-		        '<c:url value="/jfile/preview.do?fileId=${result.fileId}"/>" class="profile" name="myImg" id="myImg"',
+		        '<c:url value="/jfile/preview.do?fileId=${result.fileId}"/>" class="profile"',
 		    ],
 			theme : 'explorer',
 			deleteUrl : '/IsgBeauty/jfile/imgDelete.do',
@@ -187,11 +187,9 @@ label.error {
 
 	/*  empEdit */
 	$(function() {
-		$("#detailForm").validate({
+		$("#editForm").validate({
 			submitHandler : function() {
-				var jsonData = {empId:$("#empId").val(), empPassword:$("#empPassword").val(), empNm:$("#empNm").val(), telno:$("#telno").val(), sexdstn:$("#sexdstn").val(), pspofc:$("#pspofc").val(),
-						salary:$("#salary").val(), career:$("#career").val(), updtId:$("#updtId").val(), updtDt:$("#updtDt").val()}
-
+				var jsonData = $("#editForm").serializeJSON();
 				var check = confirm("해당 직원 정보를 수정하시겠습니까?");
 				if (check) {
 					 $.ajax({
@@ -312,23 +310,23 @@ label.error {
 	}
 
 	function home() {
-		location.href = "<c:url value='/empList.do'/>";
+		document.editForm.action = "<c:url value='/empList.do'/>";
+		document.editForm.submit();
 	}
 	function deleteEmp() {
 		var check;
 		check = confirm("정말로 해당 직원을 삭제하시겠습니까?");
 		if (check) {
 			alert("삭제되었습니다.");
-			document.detailForm.action = "<c:url value='/deleteEmp.do'/>";
-			document.detailForm.submit();
+			document.editForm.action = "<c:url value='/deleteEmp.do'/>";
+			document.editForm.submit();
 		} else {
 			alert("취소하셨습니다.");
 		}
 	}
-	function view(id) {
-		document.detailForm.selectedId.value = id;
-		document.detailForm.action = "<c:url value='/empView.do'/>";
-		document.detailForm.submit();
+	function view() {
+		document.editForm.action = "<c:url value='/empView.do'/>";
+		document.editForm.submit();
 	}
 
 </script>

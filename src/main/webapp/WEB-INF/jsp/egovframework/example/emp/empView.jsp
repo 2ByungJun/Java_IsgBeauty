@@ -107,8 +107,8 @@ p {
 
 		<!-- button -->
 		<div class="container" style="text-align: center; margin-top: 30px;">
-			<button type="button" class="btn btn-primary" onclick="editEmp('${result.empId}')">수정</button>
-			<button type="button" class="btn btn-danger" onclick="deleteEmp('${result.empId}')">삭제</button>
+			<button type="button" class="btn btn-primary" onclick="editEmp()">수정</button>
+			<button type="button" class="btn btn-danger" onclick="deleteEmp()">삭제</button>
 			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 		</div>
 
@@ -117,9 +117,10 @@ p {
 <!-- JS -->
 <script type="text/javaScript" defer="defer">
 	function home() {
- 		location.href = "<c:url value='/empList.do'/>";
+		document.detailForm.action = "<c:url value='/empList.do'/>";
+		document.detailForm.submit();
 	}
-	function deleteEmp(id) {
+	function deleteEmp() {
 		var check;
 		check = confirm("정말로 해당 직원을 삭제하시겠습니까?");
 
@@ -131,13 +132,8 @@ p {
 		}
 	}
 
-	function editEmp(id) {
-		document.detailForm.selectedId.value = id;
+	function editEmp() {
 		document.detailForm.action = "<c:url value='/empEdit.do'/>";
 		document.detailForm.submit();
-	}
-
-	$("#myImg").error = function() {
-		$(this).hide();
 	}
 </script>

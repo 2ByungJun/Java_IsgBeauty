@@ -162,12 +162,9 @@
 		}
 	}
 
-	function home() {
-		location.href = "<c:url value='/mberList.do'/>";
-	}
-
 	function empRegister() {
-		location.href = "<c:url value='/empRegister.do'/>";
+		document.listForm.action = "<c:url value='/empRegister.do'/>";
+       	document.listForm.submit();
 	}
 
     function view(id) {
