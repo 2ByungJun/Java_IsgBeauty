@@ -33,16 +33,14 @@ label.error {
 </style>
 
 <!-- JSP -->
-<form:form commandName="empVO" id="detailForm" name="detailForm" method="post">
+<form id="loginForm" name="detailForm" method="post">
 	<!-- hidden -->
 	<input type="hidden" class="form-control" id="registId" name="registId" value="IsgBeauty">
-	<input type="hidden" id="snCheck" name="snCheck" value="false">
-	<input type="hidden" id="idCheck" name="idCheck" value="false">
 
 	<div class="container">
 
 		<!-- title -->
-		<h2 style="text-align: center;"><b>직원 등록</b></h2>
+		<h2 style="text-align: center;"><b>관리자 등록</b></h2>
 
 		<!-- contents -->
 		<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
@@ -106,10 +104,11 @@ label.error {
 		<button type="button" class=" btn btn-info" onclick="home()">취소</button>
 	</div>
 
-</form:form>
+</form>
 
 <!-- JS -->
 <script type="text/javaScript" defer="defer">
+
 	function home() {
 		location.href = "<c:url value='/login.do'/>";
 	}
@@ -175,38 +174,6 @@ label.error {
 			});
 	});
 
-	$.validator.addMethod("regex", function(value, element, regexp) {
-		let re = new RegExp(regexp);
-		let res = re.test(value);
-		return res;
-	})
-
-	function inputPhoneNumber(obj) {
-
-		var number = obj.value.replace(/[^0-9]/g, "");
-		var phone = "";
-
-		if (number.length < 4) {
-			return number;
-		} else if (number.length < 7) {
-			phone += number.substr(0, 3);
-			phone += "-";
-			phone += number.substr(3);
-		} else if (number.length < 11) {
-			phone += number.substr(0, 3);
-			phone += "-";
-			phone += number.substr(3, 3);
-			phone += "-";
-			phone += number.substr(6);
-		} else {
-			phone += number.substr(0, 3);
-			phone += "-";
-			phone += number.substr(3, 4);
-			phone += "-";
-			phone += number.substr(7);
-		}
-		obj.value = phone;
-	}
 
 	function snKeyCehck() {
 		var url = "<c:url value='/addAdminCheck.json'/>";
@@ -269,19 +236,4 @@ label.error {
 		return idchk;
 	}
 
-	$.validator.addMethod("idchk", function(value, element) {
-		if (empIdCheck()) {
-			return true;
-		} else {
-			return false;
-		}
-	})
-
-	$.validator.addMethod("snchk", function(value, element) {
-		if (snKeyCehck()) {
-			return true;
-		} else {
-			return false;
-		}
-	})
 </script>

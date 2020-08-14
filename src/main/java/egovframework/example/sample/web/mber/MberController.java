@@ -80,7 +80,7 @@ public class MberController {
 		paging.setCurrentPageNo(mberVO.getPageIndex());
 		paging.setRecordCountPerPage(mberVO.getPageUnit());
 		paging.setPageSize(mberVO.getPageSize());
-		paging.setPageCount((totCnt/10)+1);
+		paging.setPageCount((int)Math.ceil(totCnt/10.0));
 
 		mberVO.setFirstIndex(paging.getFirstRecordIndex());
 		mberVO.setLastIndex(paging.getLastRecordIndex());

@@ -34,7 +34,6 @@ label.error {
 	margin-top: 10px;
 }
 </style>
-
 <!-- JSP -->
 <form:form commandName="empVO" id="registerForm" name="registerForm" method="post">
 		<!-- hidden -->
@@ -243,8 +242,8 @@ label.error {
 				},
 				telno : {
 					required : "필수 입력 항목입니다.",
-					minlength : "휴대폰 번호를 완전히 입력해주세요.",
-					regex : "휴대폰 번호 양식을 제대로 입력해주세요."
+					minlength : "번호를 완전히 입력해주세요.",
+					regex : "양식을 제대로 입력해주세요."
 				},
 				salary : {
 					required : "필수 입력 항목입니다.",
@@ -256,39 +255,6 @@ label.error {
 			}
 		});
 	});
-
-	$.validator.addMethod("regex", function(value, element, regexp) {
-		let re = new RegExp(regexp);
-		let res = re.test(value);
-		return res;
-	})
-
-	function inputPhoneNumber(obj) {
-
-		var number = obj.value.replace(/[^0-9]/g, "");
-		var phone = "";
-
-		if (number.length < 4) {
-			return number;
-		} else if (number.length < 7) {
-			phone += number.substr(0, 3);
-			phone += "-";
-			phone += number.substr(3);
-		} else if (number.length < 11) {
-			phone += number.substr(0, 3);
-			phone += "-";
-			phone += number.substr(3, 3);
-			phone += "-";
-			phone += number.substr(6);
-		} else {
-			phone += number.substr(0, 3);
-			phone += "-";
-			phone += number.substr(3, 4);
-			phone += "-";
-			phone += number.substr(7);
-		}
-		obj.value = phone;
-	}
 
 	function empIdCheck() {
 		var url = "<c:url value='/IdChecking.json'/>";
@@ -320,22 +286,5 @@ label.error {
 			}
 		});
 		return idchk;
-	}
-
-	$.validator.addMethod("idchk", function(value, element) {
-		if (empIdCheck()) {
-			return true;
-		} else {
-			return false;
-		}
-	})
-
-	function numkeyCheck(e) {
-		var keyValue = event.keyCode;
-		if (((keyValue < 48) || (keyValue > 57)))
-			return false;
-		else {
-			return true;
-		}
 	}
 </script>

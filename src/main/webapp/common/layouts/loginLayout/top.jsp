@@ -22,8 +22,3 @@
 		</div>
 	</div>
 </header>
-
-<!-- JS -->
-<script type="text/javascript">
-
-</script>

@@ -54,9 +54,6 @@
 </body>
 
 <!-- JS -->
-<link rel="stylesheet" href="<c:url  value='css/bootstrap/css/bootstrap.min.css'/>">
-<script src="<c:url value='js/jquery-3.4.1.min.js' />"></script>
-<script src="<c:url value='css/bootstrap/js/bootstrap.min.js'/>"></script>
 <script type="text/javaScript" defer="defer">
 <%if (session.getAttribute("empId") != null) {%>
 	location.href = "<c:url value='/mberList.do'/>";

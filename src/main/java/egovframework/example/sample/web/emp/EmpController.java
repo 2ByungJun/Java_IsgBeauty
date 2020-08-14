@@ -171,7 +171,7 @@ public class EmpController {
 		empVO.setFileId("File"+empVO.getEmpId());
 		empService.insertEmp(empVO);
 
-		return "login/login";
+		return "/loginLayout/login/login";
 	}
 
 	/**
