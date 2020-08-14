@@ -9,9 +9,18 @@
 		<put-attribute name="footer"	value="/common/layouts/userLayout/footer.jsp" />
 	</definition>
 
+	<definition name="loginLayout"   template="/common/layouts/loginLayout/standard.jsp">
+		<put-attribute name="top"   value="/common/layouts/loginLayout/top.jsp"   />
+		<put-attribute name="content"  expression="${requestScope.body}" />
+		<put-attribute name="footer"	value="/common/layouts/loginLayout/footer.jsp" />
+	</definition>
+
 	<definition name="/useLayout/**" extends="useLayout">
 		<put-attribute name="content"	value="/WEB-INF/jsp/egovframework/example/{1}.jsp" />
 	</definition>
 
+	<definition name="/loginLayout/**" extends="loginLayout">
+		<put-attribute name="content"	value="/WEB-INF/jsp/egovframework/example/{1}.jsp" />
+	</definition>
 
 </tiles-definitions>

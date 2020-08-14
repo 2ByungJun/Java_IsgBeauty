@@ -19,14 +19,6 @@
 
 <!-- JSP -->
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();">
-	<!-- header -->
-	<div class="container">
-		<header class="page-header">
-			<div class="container">
-				<div style="text-align: center;"><img src="<c:url value='images/logo.jpg' />"></div>
-			</div>
-		</header>
-	</div>
 
 	<!-- body -->
 	<form class="form-horizontal" id="loginForm" name="loginForm" style="display: grid; margin-top:20px;">
@@ -59,9 +51,6 @@
 		<button type="button" class="btn btn-primary" onclick="login()">로그인</button>
 		<button type="button" class=" btn btn-info" onclick="empRegister()">회원가입</button>
 	</div>
-
-	<!-- footer -->
-	<jsp:include page="/common/layouts/userLayout/footer.jsp"></jsp:include>
 </body>
 
 <!-- JS -->

@@ -38,7 +38,7 @@ public class LoginController {
 		System.out.println("[로그인]");
 
 
-		return "login/login";
+		return "/loginLayout/login/login";
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class LoginController {
 	public String loginEmpRegister(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model) throws Exception {
 		System.out.println("[회원가입]");
 
-		return "login/loginEmpRegister";
+		return "/loginLayout/login/loginEmpRegister";
 	}
 
 	/**

@@ -5,7 +5,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@ include file="/common/layouts/userLayout/commonInclude.jsp"%>
 <%
 	Date now = new Date();
 	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
@@ -40,16 +39,6 @@ label.error {
 	<input type="hidden" id="snCheck" name="snCheck" value="false">
 	<input type="hidden" id="idCheck" name="idCheck" value="false">
 
-	<!-- header -->
-	<div class="container">
-		<header class="page-header">
-			<div class="container">
-				<div style="text-align: center;"><img src="<c:url value='images/logo.jpg' />"></div>
-			</div>
-		</header>
-	</div>
-
-	<!-- body -->
 	<div class="container">
 
 		<!-- title -->
@@ -118,9 +107,6 @@ label.error {
 	</div>
 
 </form:form>
-
-<!-- Footer -->
-<jsp:include page="/common/layouts/userLayout/footer.jsp"></jsp:include>
 
 <!-- JS -->
 <script type="text/javaScript" defer="defer">
