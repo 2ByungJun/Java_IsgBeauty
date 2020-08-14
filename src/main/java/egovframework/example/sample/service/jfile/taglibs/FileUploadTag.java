@@ -86,7 +86,7 @@ public class FileUploadTag extends TagSupport {
 		fileId               = null;
 		objectId             = null;
 		uploadCompletedEvent = null;
-		maxFileSize          = "10";
+		maxFileSize          = "50";
 		maxFileCount         = "10";
 		fileType             = "all";
 		usePreview           = "false";

@@ -160,7 +160,10 @@ label.error {
 					}
 					return false;
 				}
-			}
+			},
+			resumableUploadOptions: {
+	            chunkSize: 1024 * 10, // 10 MB chunk size
+	        },
 		});
 	});
 
@@ -183,14 +186,17 @@ label.error {
 							,data: JSON.stringify(jsonData)
 							,success:function(data){
 								if( $("#input-res-1").fileinput("getFilesCount") == 0 ){
+									console.log("else 11111111111111111")
 									alert("등록되었습니다.");
 							 		home();
 					 			}else {
+					 				console.log("else 222222222222")
+					 				console.log($("#input-res-1").fileinput("getFilesCount"))
 									$("#fileId").val(data.fileId); // fileId 값을 받아오고
 								 	$("#input-res-1").fileinput("upload").on('fileuploaded', function() {
 								 		alert("등록되었습니다.");
 								 		home();
-								    });
+								    })
 					 			}
 
 							}

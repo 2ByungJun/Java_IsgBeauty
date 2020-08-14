@@ -21,6 +21,7 @@
 			<selectKey resultType="string" keyProperty="fileSeq">
 					SELECT IFNULL(MAX(FILE_SEQ),0)+1 FROM J_ATTACHFILE WHERE FILE_ID = #{fileId}
 		    </selectKey>
+		    <!-- fdsa -->
 			INSERT
 			  INTO J_ATTACHFILE
 			      (
