@@ -188,7 +188,12 @@ public class JFileVO implements JFileDetails {
 			     "gif". equals(getExtension()) ||
 		         "jpg". equals(getExtension()) ||
 		         "jpeg".equals(getExtension()) ||
-		         "png". equals(getExtension())
+		         "png". equals(getExtension()) ||
+		         "BMP". equals(getExtension()) ||
+			     "GIF". equals(getExtension()) ||
+		         "JPG". equals(getExtension()) ||
+		         "JPEG".equals(getExtension()) ||
+		         "PNG". equals(getExtension())
 		) ;
 	}
 
