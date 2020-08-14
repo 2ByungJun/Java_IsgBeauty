@@ -33,11 +33,10 @@ label.error {
 </style>
 
 <!-- JSP -->
-<form:form commandName="mberVO" id="detailForm" name="detailForm" method="post">
+<form:form commandName="mberVO" id="editForm" name="editForm" method="post">
 	<!-- hidden -->
-	<input type="hidden" class="form-control" id="updtId" name="updtId" value="<c:out value="${result.updtId}"/>" readonly>
-	<input type="hidden" class="form-control" id="mberSn" name="mberSn" value="<c:out value="${result.mberSn}" />" readonly>
-	<input type="hidden" name="selectedId" />
+	<input type="hidden" id="updtId" name="updtId" value="">
+	<input type="hidden" id="mberSn" name="mberSn" value="${result.mberSn}">
 
 	<!-- body -->
 	<div class="container">
@@ -107,8 +106,8 @@ label.error {
 	<!-- button -->
 	<div class="container" style="text-align: center; margin-top: 30px;">
 		<button type="submit" class="btn btn-primary" onclick="">수정</button>
-		<button type="button" class="btn btn-danger" onclick="deleteMber('${result.mberSn}')">삭제</button>
-		<button type="button" class=" btn btn-info" onclick="view('${result.mberSn}')">이전</button>
+		<button type="button" class="btn btn-danger" onclick="deleteMber()">삭제</button>
+		<button type="button" class=" btn btn-info" onclick="view()">이전</button>
 	</div>
 
 </form:form>
@@ -116,38 +115,47 @@ label.error {
 <!-- JS -->
 <script type="text/javaScript" defer="defer">
 	/**** 고객 삭제 *****/
-	function deleteMber(id) {
+	function deleteMber() {
 		var check;
 		check = confirm("정말로 해당 고객님을 삭제하시겠습니까?");
 
 		if (check) {
-			document.detailForm.selectedId.value = id;
-			document.detailForm.action = "<c:url value='/deleteMber.do'/>";
-			document.detailForm.submit();
-		} else {
-			alert("취소하셨습니다.");
+			document.editForm.action = "<c:url value='/deleteMber.do'/>";
+			document.editForm.submit();
 		}
 	}
 
 	/**** 고객 상세보기 *****/
-	function view(id) {
-		document.detailForm.selectedId.value = id;
-		document.detailForm.action = "<c:url value='/mberView.do'/>";
-		document.detailForm.submit();
+	function view() {
+		document.editForm.action = "<c:url value='/mberView.do'/>";
+		document.editForm.submit();
 	}
 
 	/**** Validation *****/
 	$(function() {
-		$("#detailForm").validate({
+		$("#editForm").validate({
 			submitHandler : function() {
+				var jsonData = $("#editForm").serializeJSON();
 				var check = confirm("수정된 정보를 저장하시겠습니까?");
 				if (check) {
-					alert("저장되었습니다.");
-					frm = document.detailForm;
-					frm.action = "<c:url value= '/updateMber.do'/>";
-					frm.submit();
-				} else {
-					alert("취소하셨습니다.");
+					$.ajax({
+						headers: {
+							Accept: "application/json;utf-8"
+						}
+						,contentType: "application/json;utf-8"
+						,dataType: "json"
+						,type: "POST"
+						,async:false
+						,url: "<c:url value= '/mberEdit.json'/>"
+						,data: JSON.stringify(jsonData)
+						,success:function(data){
+								alert("수정되었습니다.");
+								view();
+						}
+						,error:function(e){
+						   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
+						}
+					});
 				}
 			},
 			rules: {

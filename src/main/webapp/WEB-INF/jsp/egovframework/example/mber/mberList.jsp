@@ -5,9 +5,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!-- JSP -->
-<form:form commandName="searchVO" id="listForm" name="listForm" method="post">
+<form:form commandName="mberVO" id="listForm" name="listForm" method="post">
 	<!-- hidden -->
-	<input type="hidden" name="selectedId" />
+	<input type="hidden" name="mberSn" id="mberSn" />
 
 	<!-- body -->
 	<div class="container">
@@ -24,7 +24,7 @@
 			<div id="search" style="width: 50%;">
 				<div class="input-group" style="float:right;">
 					<form:input path="searchKeyword" type="text" id="searchKeyword" placeholder="이름 검색" cssClass="txt form-control" style="width:200px;" onkeydown = "if(event.keyCode==13) fnSelectList(1)" />
-					<button class="btn btn-primary" type="button" onclick="javascript:fnSelectList(1)" style="font-size: 14px;"><i class="glyphicon glyphicon-search"></i></button>
+					<button class="btn btn-primary" type="button" onclick="javascript:fnSelectList(1)" style="font-size: 20px; "><i class="glyphicon glyphicon-search"></i></button>
 				</div>
 			</div>
 		</div>
@@ -130,7 +130,7 @@
 		location.href = "<c:url value='/mberRegister.do'/>";
 	}
 	function view(id) {
-		document.listForm.selectedId.value = id;
+		$("#mberSn").val(id);
 		document.listForm.action = "<c:url value='/mberView.do'/>";
 		document.listForm.submit();
 	}

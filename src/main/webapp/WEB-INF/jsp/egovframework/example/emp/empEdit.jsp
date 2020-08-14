@@ -150,7 +150,7 @@ label.error {
 		<div class="container" style="text-align: center; margin-top: 30px;">
 			<button type="submit" class="btn btn-primary" onclick="">수정</button>
 			<button type="button" class="btn btn-danger" onclick="deleteEmp()">삭제</button>
-			<button type="button" class=" btn btn-info" onclick="view('${result.empId}')">이전</button>
+			<button type="button" class="btn btn-info" onclick="view()">이전</button>
 		</div>
 
 	</form:form>

@@ -66,7 +66,7 @@ public interface EmpMapper {
 	 * @param vo
 	 * @throws Exception
 	 */
-	List<?> selectListEmpNM(EmpVO vo) throws Exception;
+	List<?> selectListEmpNM() throws Exception;
 
 
 	/**

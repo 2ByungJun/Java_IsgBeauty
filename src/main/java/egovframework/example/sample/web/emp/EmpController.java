@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -74,6 +73,7 @@ public class EmpController {
 
 		return arrayMap;
 	}
+
 	@RequestMapping(value = "/empRegister.do")
 	public String empRegister(EmpVO empVO) throws Exception {
 		System.out.println("[직원/관리자 등록]");
@@ -132,12 +132,12 @@ public class EmpController {
 
 	@ResponseBody
 	@RequestMapping(value = "/empEdit.json")
-     public Map<String, Object> empEditJson(@RequestBody EmpVO searchVO) throws Exception {
+     public Map<String, Object> empEditJson(@RequestBody EmpVO empVO) throws Exception {
 
-		searchVO.setFileId("File"+searchVO.getEmpId());
-		empService.updateEmp(searchVO);
+		empVO.setFileId("File"+empVO.getEmpId());
+		empService.updateEmp(empVO);
 		Map<String, Object> arrayMap = new HashMap<>();
-		arrayMap.put("fileId", searchVO.getFileId());
+		arrayMap.put("fileId", empVO.getFileId());
 
 		return arrayMap;
 	}
@@ -151,9 +151,9 @@ public class EmpController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/deleteEmp.do")
-	public String deleteEmp(EmpVO sampleVO) throws Exception {
+	public String deleteEmp(EmpVO empVO) throws Exception {
 		System.out.println("[직원 삭제 기능]");
-		empService.deleteEmp(sampleVO);
+		empService.deleteEmp(empVO);
 
 		return "forward:/empList.do";
 	}

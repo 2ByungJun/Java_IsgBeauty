@@ -52,10 +52,49 @@ public class MberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/mberList.do")
-	public String mberList(@ModelAttribute("searchVO") SampleDefaultVO searchVO, ModelMap model) throws Exception {
+	public String mberList(MberVO mberVO) throws Exception {
 		System.out.println("[고객 리스트]");
 
 		return "/useLayout/mber/mberList";
+	}
+
+	/**
+	 * 고객 listData
+	 *
+	 * @param searchVO
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/mberList.json")
+     public Map<String, Object> mberListJson(@RequestBody MberVO mberVO) throws Exception {
+
+		int totCnt = mberService.selectMberListTotCnt(mberVO);
+
+		mberVO.setPageUnit(propertiesService.getInt("pageUnit"));
+		mberVO.setPageSize(propertiesService.getInt("pageSize"));
+
+		Paging paging = new Paging();
+		paging.setCurrentPageNo(mberVO.getPageIndex());
+		paging.setRecordCountPerPage(mberVO.getPageUnit());
+		paging.setPageSize(mberVO.getPageSize());
+		paging.setPageCount((totCnt/10)+1);
+
+		mberVO.setFirstIndex(paging.getFirstRecordIndex());
+		mberVO.setLastIndex(paging.getLastRecordIndex());
+		mberVO.setRecordCountPerPage(paging.getRecordCountPerPage());
+
+		List<EgovMap> mberList = mberService.selectMberList(mberVO);
+
+		Map<String, Object> arrayMap = new HashMap<>();
+		arrayMap.put("pages", paging);
+		arrayMap.put("dataList", mberList);
+		arrayMap.put("datacnt", totCnt);
+
+		return arrayMap;
+
 	}
 
 	/**
@@ -67,17 +106,37 @@ public class MberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/mberRegister.do")
-	public String mberRegister(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model,HttpServletRequest request,HttpServletResponse response) throws Exception {
+	public String mberRegister(ModelMap model, HttpServletRequest request,HttpServletResponse response) throws Exception {
 		System.out.println("[고객 등록 페이지]");
 
-		List<?> listEmpNM = empService.selectListEmpNM(searchVO);
-		model.addAttribute("listEmpNM", listEmpNM);
+		model.addAttribute("listEmpNM",  empService.selectListEmpNM());
 
 		HttpSession session = request.getSession();
 		model.addAttribute("registId", session.getAttribute("empId"));
 
 
 		return "/useLayout/mber/mberRegister";
+	}
+
+	/**
+	 * 고객 등록
+	 *
+	 * @param searchVO
+	 * @param sampleVO
+	 * @return
+	 * @throws Exception
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/mberRegister.json", method = RequestMethod.POST)
+	public Map<String, Object> mberRegisterJson(@RequestBody MberVO mberVO) throws Exception {
+		System.out.println("[고객 등록]");
+
+		mberService.insertMber(mberVO);
+
+		Map<String, Object> arrayMap = new HashMap<>();
+		arrayMap.put("result", "success");
+
+		return arrayMap;
 	}
 
 	/**
@@ -89,14 +148,10 @@ public class MberController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/mberView.do")
-	public String mberView(@RequestParam("selectedId") String mberSn,
-			@ModelAttribute("searchVO") SampleDefaultVO searchVO, Model model) throws Exception {
+	public String mberView(MberVO mberVO, Model model) throws Exception {
 		System.out.println("[고객 상세화면]");
 
-		MberVO sampleVO = new MberVO();
-		sampleVO.setMberSn(mberSn);
-		// 변수명은 CoC 에 따라 sampleVO
-		model.addAttribute("result", selectMber(sampleVO, searchVO));
+		model.addAttribute("result", mberService.selectMber(mberVO));
 
 		return "/useLayout/mber/mberView";
 	}
@@ -110,86 +165,13 @@ public class MberController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/mberEdit.do")
-	public String mberEdit(@RequestParam("selectedId") String mberSn,
-			@ModelAttribute("searchVO") EmpVO searchVO, Model model) throws Exception {
+	public String mberEdit(MberVO mberVO, Model model) throws Exception {
 		System.out.println("[고객 수정화면]");
 
-		MberVO sampleVO = new MberVO();
-		sampleVO.setMberSn(mberSn);
-		model.addAttribute("result", selectMber(sampleVO, searchVO));
-
-		List<?> listEmpNM = empService.selectListEmpNM(searchVO);
-		model.addAttribute("listEmpNM", listEmpNM);
+		model.addAttribute("result", mberService.selectMber(mberVO));
+		model.addAttribute("listEmpNM", empService.selectListEmpNM());
 
 		return "/useLayout/mber/mberEdit";
-	}
-
-	/**
-	 * (Ajax)고객 List
-	 *
-	 * @param searchVO
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/mberList.json")
-     public Map<String, Object> mberListJson(@RequestBody MberVO searchVO,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		int totCnt = mberService.selectMberListTotCnt(searchVO);
-
-		searchVO.setPageUnit(propertiesService.getInt("pageUnit"));
-		searchVO.setPageSize(propertiesService.getInt("pageSize"));
-
-		Paging paging = new Paging();
-		paging.setCurrentPageNo(searchVO.getPageIndex());
-		paging.setRecordCountPerPage(searchVO.getPageUnit());
-		paging.setPageSize(searchVO.getPageSize());
-		paging.setPageCount((totCnt/10)+1);
-
-		searchVO.setFirstIndex(paging.getFirstRecordIndex());
-		searchVO.setLastIndex(paging.getLastRecordIndex());
-		searchVO.setRecordCountPerPage(paging.getRecordCountPerPage());
-
-		List<EgovMap> mberList = mberService.selectMberList(searchVO);
-
-		Map<String, Object> arrayMap = new HashMap<>();
-		arrayMap.put("pages", paging);
-		arrayMap.put("dataList", mberList);
-		arrayMap.put("datacnt", totCnt);
-
-		return arrayMap;
-
-	}
-
-	/**
-	 * 고객 등록
-	 *
-	 * @param searchVO
-	 * @param sampleVO
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/addMber.do", method = RequestMethod.POST)
-	public String addMber(@ModelAttribute("searchVO") MberVO searchVO, MberVO sampleVO) throws Exception {
-		System.out.println("[고객 등록]");
-
-		mberService.insertMber(sampleVO);
-		return "forward:/mberList.do";
-	}
-
-	/**
-	 * 고객 조회
-	 * @param sampleVO
-	 * @param searchVO
-	 * @return
-	 * @throws Exception
-	 */
-	public MberVO selectMber(MberVO sampleVO, @ModelAttribute("searchVO") SampleDefaultVO searchVO) throws Exception {
-		System.out.println("[고객 조회 기능]");
-		return mberService.selectMber(sampleVO);
 	}
 
 	/**
@@ -197,13 +179,17 @@ public class MberController {
 	 * @return "forward:/mberList.do"
 	 * @exception Exception
 	 */
-
-	@RequestMapping(value = "/updateMber.do", method = RequestMethod.POST)
-	public String updateMber(@ModelAttribute("mberVO") MberVO sampleVO) throws Exception {
+	@ResponseBody
+	@RequestMapping(value = "/mberEdit.json", method = RequestMethod.POST)
+	public Map<String, Object> mberEditJson(@RequestBody MberVO mberVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("[고객 수정 기능]");
 
-		mberService.updateMber(sampleVO);
-		return "forward:/mberList.do";
+		mberVO.setUpdtId((String) request.getAttribute("empId"));
+		mberService.updateMber(mberVO);
+		Map<String, Object> arrayMap = new HashMap<>();
+		arrayMap.put("result", mberVO.getMberSn() );
+
+		return arrayMap;
 	}
 
 	/**
@@ -212,12 +198,11 @@ public class MberController {
 	 * @exception Exception
 	 */
 	@RequestMapping("/deleteMber.do")
-	public String deleteMber(@RequestParam("selectedId") String mberSn) throws Exception {
+	public String deleteMber(MberVO mberVO) throws Exception {
 		System.out.println("[고객 삭제 기능]");
 
-		MberVO sampleVO = new MberVO();
-		sampleVO.setMberSn(mberSn);
-		mberService.deleteMber(sampleVO);
+		mberService.deleteMber(mberVO);
+
 		return "forward:/mberList.do";
 	}
 

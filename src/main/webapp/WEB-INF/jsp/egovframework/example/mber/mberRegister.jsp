@@ -32,7 +32,7 @@ label.error {
 </style>
 
 <!-- JSP -->
-<form:form commandName="mberVO" id="detailForm" name="detailForm" method="post">
+<form:form commandName="mberVO" id="registerForm" name="registerForm" method="post">
 
 	<!-- body -->
 	<div class="container">
@@ -96,29 +96,42 @@ label.error {
 	<!-- button -->
 	<div class="container" style="text-align: center; margin-top: 30px">
 		<button type="submit" class="btn btn-primary" onclick="">등록</button>
-		<button type="button" class=" btn btn-info" onclick="home()">취소</button>
+		<button type="button" class=" btn btn-info" onclick="mberList()">취소</button>
 	</div>
 
 </form:form>
 
 <!-- JS -->
 <script type="text/javaScript" defer="defer">
-	function home() {
+	function mberList() {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
 
 	/* 글 등록 function */
 	$(function() {
-		$("#detailForm").validate({
+		$("#registerForm").validate({
 			submitHandler : function() {
+				var jsonData = $("#registerForm").serializeJSON();
 				var check = confirm("해당 고객님을 등록하시겠습니까?");
 				if (check) {
-					alert("등록되었습니다.");
-					frm = document.detailForm;
-					frm.action = "<c:url value= '/addMber.do'/>";
-					frm.submit();
-				} else {
-					alert("취소하셨습니다.");
+					$.ajax({
+						headers: {
+							Accept: "application/json;utf-8"
+						}
+						,contentType: "application/json;utf-8"
+						,dataType: "json"
+						,type: "POST"
+						,async:false
+						,url: "<c:url value= '/mberRegister.json'/>"
+						,data: JSON.stringify(jsonData)
+						,success:function(data){
+								alert("등록되었습니다.");
+								mberList();
+						}
+						,error:function(e){
+						   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
+						}
+					});
 				}
 			},
 			rules : {

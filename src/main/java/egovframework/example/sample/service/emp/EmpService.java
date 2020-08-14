@@ -104,39 +104,9 @@ public class EmpService {
 		mapper.updateEmp(vo);
 	}
 
-	public List<?> selectListEmpNM(EmpVO vo) throws Exception {
-		 return mapper.selectListEmpNM(vo);
+	public List<?> selectListEmpNM() throws Exception {
+		 return mapper.selectListEmpNM();
 	}
-
-	/*public EmpVO loginCheck(EmpVO vo) throws Exception {
-		return mapper.loginCheck(vo);
-	}
-*/
-
-
-/*	*//**
-	 * 로그인 체크
-	 * @param vo
-	 * @param session
-	 * @return
-	 *//*
-	public boolean loginCheck(EmpVO vo,HttpSession session) {
-
-		boolean result = mapper.loginCheck(vo);
-		if( result == true) {
-			session.setAttribute("userId", vo.getEmpId());
-		}
-
-		return result;
-	};
-
-	*//**
-	 * 로그 아웃
-	 * @param session
-	 *//*
-	public void logout(HttpSession session) {
-		mapper.logout(session);
-	};*/
 
 	public String snKeyCheck(String snKey) throws Exception {
 		return mapper.snKeyCheck(snKey);
