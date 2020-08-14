@@ -35,14 +35,14 @@ label.error {
 <!-- JSP -->
 <form:form commandName="mberVO" id="detailForm" name="detailForm" method="post">
 	<!-- hidden -->
-	<input type="hidden" id="mberSn" name="mberSn" value="<c:out value="${result.mberSn}" />">
+	<form:input path="mberSn" type="hidden"/>
 	<input type="hidden" id="processSttus" name="processSttus" value="N">
 
 	<!-- body -->
 	<div class="container">
 
 		<!-- title -->
-		<h2 style="text-align: center;"><b><span style="color:#000080;">'${result.mberNm}'</span>님의 예약 등록</b></h2>
+		<h2 style="text-align: center;"><b><span style="color:#000080;">'${mberVO.mberNm}'</span>님의 예약 등록</b></h2>
 
 		<!-- contents -->
 		<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
@@ -63,7 +63,7 @@ label.error {
 			<!-- input (60%) -->
 			<div style="width: 60%; text-align: left; display: grid">
 				<!-- 이름 -->
-				<div style="display: inline-flex;"><input type="text" class="bjWidth form-control" value="<c:out value="${result.mberNm}" />" readonly></div>
+				<div style="display: inline-flex;"><form:input path="mberNm" class="bjWidth form-control" readonly="true"/></div>
 
 				<!-- 시술 -->
 				<select class="bjWidth form-control" id="tretmentNm" name="tretmentNm" required>

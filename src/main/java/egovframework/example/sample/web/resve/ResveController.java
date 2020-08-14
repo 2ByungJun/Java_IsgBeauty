@@ -49,7 +49,7 @@ public class ResveController {
 	@RequestMapping(value = "/resveRegister.do")
 	public String resveRegister(MberVO mberVO, Model model, HttpServletRequest request) throws Exception {
 
-		model.addAttribute("result", mberService.selectMber(mberVO));
+		model.addAttribute("mberVO", mberService.selectMber(mberVO));
 
 		HttpSession session = request.getSession();
 		model.addAttribute("empId", session.getAttribute("empId"));
@@ -112,7 +112,7 @@ public class ResveController {
 	@RequestMapping("/resveEdit.do")
 	public String resveEdit(ResveVO resveVO, Model model) throws Exception {
 
-		model.addAttribute("result", resveService.selectResve(resveVO));
+		model.addAttribute("resveVO", resveService.selectResve(resveVO));
 
 		return "/useLayout/resve/resveEdit";
 	}

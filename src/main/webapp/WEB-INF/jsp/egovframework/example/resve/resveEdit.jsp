@@ -35,13 +35,13 @@ label.error {
 <!-- JSP -->
 <form:form commandName="resveVO" id="detailForm" name="detailForm" method="post">
 	<!-- hidden -->
-	<input type="hidden" name="resveSn" value="<c:out value="${result.resveSn}" />">
+	<form:input path="resveSn" type="hidden" />
 
 	<!-- body -->
 	<div class="container">
 
 		<!-- title -->
-		<h2 style="text-align: center;"><b><span style="color:#000080;">'<c:out value="${result.mberNm}" />'</span>고객님 예약변경</b></h2>
+		<h2 style="text-align: center;"><b><span style="color:#000080;">'<c:out value="${resveVO.mberNm}" />'</span>고객님 예약변경</b></h2>
 
 		<!-- contents -->
 		<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
@@ -63,33 +63,49 @@ label.error {
 			<!-- input (60%) -->
 			<div style="width: 60%; text-align: left; display: grid">
 				<!-- 이름 -->
-				<div style="display: inline-flex;"><input type="text" class="bjInput form-control" value="<c:out value="${result.mberNm}" />" readonly></div>
+				<div style="display: inline-flex;"><form:input path="mberNm" class="bjInput form-control" readonly="true"/></div>
 
 				<!-- 시술 -->
 				<select class="bjInput form-control" id="tretmentNm" name="tretmentNm" required>
-						<option value="${result.tretmentNm}" selected>${result.tretmentNm}</option>
-						<option value="cut">컷팅</option>
-						<option value="perm">펌</option>
-						<option value="special">특수</option>
+						<c:if test="${resveVO.tretmentNm eq 'cut'}">
+							<option value="cut" selected="selected">컷트</option>
+							<option value="perm">펌</option>
+							<option value="special">특수</option>
+						</c:if>
+						<c:if test="${resveVO.tretmentNm eq 'perm'}">
+							<option value="cut">컷트</option>
+							<option value="perm" selected="selected">펌</option>
+							<option value="special">특수</option>
+						</c:if>
+						<c:if test="${resveVO.tretmentNm eq 'special'}">
+							<option value="cut">컷트</option>
+							<option value="perm">펌</option>
+							<option value="special" selected="selected">특수</option>
+						</c:if>
 				</select>
 
 				<!-- 예약일시 -->
-				<div style="display: inline-flex;"><input type="date" class="bjInput form-control" id="resveDt" name="resveDt" value="${result.resveDt}" required></div>
+				<div style="display: inline-flex;"><form:input path="resveDt" type="date" class="bjInput form-control" required="true"/></div>
 
 				<!-- 예약시간 -->
-				<div style="display: inline-flex;"><input type="time" class="bjInput form-control" id="resveTime" name="resveTime" value="${result.resveTime}" required></div>
+				<div style="display: inline-flex;"><form:input path="resveTime" type="time" class="bjInput form-control" required="true"/></div>
 
 				<!-- 등록자 -->
-				<div style="display: inline-flex;"><input type="text" class="bjInput form-control" id="registId" name="registId" value="${result.registId}" readonly></div>
+				<div style="display: inline-flex;"><form:input path="registId" class="bjInput form-control" readonly="true"/></div>
 
 				<!-- 등록일 -->
-				<div style="display: inline-flex;"><input type="date" class="bjInput form-control" id="registDt" name="registDt" value="${result.registDt}" readonly></div>
+				<div style="display: inline-flex;"><form:input path="registDt" type="date" class="bjInput form-control" readonly="true"/></div>
 
 				<!-- 처리상태 -->
 				<select class="bjInput form-control" id="processSttus" name="processSttus">
-						<option value="${result.processSttus}" selected>${result.processSttus}</option>
-						<option id="processSttusCheckY" value="Y">Y</option>
-						<option id="processSttusCheckN" value="N">N</option>
+						<c:if test="${resveVO.processSttus eq 'Y'}">
+							<option value="Y" selected="selected">Y</option>
+							<option value="N">N</option>
+						</c:if>
+						<c:if test="${resveVO.processSttus eq 'N'}">
+							<option value="Y">Y</option>
+							<option value="N" selected="selected">N</option>
+						</c:if>
 				</select>
 			</div>
 		</div>

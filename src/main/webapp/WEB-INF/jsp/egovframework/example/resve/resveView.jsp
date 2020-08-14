@@ -116,7 +116,7 @@
 					dayMaxEventRows : true, // 셀 크기보다 많은 이벤트가 존재할 시, 'more'로 표기함
 					views : {
 						dayGrid : {
-							dayMaxEventRows : 3
+							dayMaxEventRows : 4
 						}
 					},
 					locale : 'ko',
