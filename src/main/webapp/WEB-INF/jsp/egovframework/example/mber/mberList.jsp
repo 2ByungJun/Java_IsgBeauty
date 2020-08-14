@@ -95,12 +95,18 @@
 					html += '</tr>';
 				}else{
 					$.each(data.dataList, function(index, item) {
+						var empNm = "";
+						if(item.empNm == null){
+							empNm = "[미등록]";
+						}else{
+							empNm = item.empNm;
+						}
 						html += '<tr>';
 						html += '<td align="center" class="listtd" >'+(index+1+((pageNo-1)*10))+'</td>';
 						html += '<td align="center" class="listtd"><a href="javascript:view(\''+item.mberSn+'\')">' + item.mberNm + '</td>';
 						html += '<td align="center" class="listtd" >' + sexd(item.sexdstn) + '</td>';
 						html += '<td align="center" class="listtd" >' + item.telno + '</td>';
-						html += '<td align="center" class="listtd" >' + item.empNm + '</td>';
+						html += '<td align="center" class="listtd" >' + empNm + '</td>';
 						html += '<td align="center" class="listtd" >' + item.registDt + '</td>';
 						html += '<td align="center" class="listtd" >' + item.updtDt + '</td>';
 						html += '</tr>';
