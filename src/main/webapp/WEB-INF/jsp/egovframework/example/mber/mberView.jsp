@@ -51,7 +51,19 @@ p {
 				<div style="display: inline-flex;"><p class="control-label"><c:out value="${result.mberNm}" /></p></div>
 
 				<!-- 담당 직원 -->
-				<div style="display: inline-flex;"><p class="control-label"><c:out value="${result.empNm}" /></p></div>
+				<div style="display: inline-flex;">
+					<p class="control-label">
+						<c:choose>
+							<c:when test="${result.empNm eq null}">
+								[ 디자이너를 등록하세요! ]
+							</c:when>
+
+							<c:otherwise>
+								<c:out value="${result.empNm}" />
+							</c:otherwise>
+						</c:choose>
+					</p>
+				</div>
 
 				<!-- 전화 번호 -->
 				<div style="display: inline-flex;"><p class="control-label"><c:out value="${result.telno}" /></p></div>
