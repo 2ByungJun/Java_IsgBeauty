@@ -125,7 +125,7 @@ public class EmpController {
 	public String empEdit(EmpVO empVO, Model model) throws Exception {
 		System.out.println("[직원 수정화면]");
 
-		model.addAttribute("result", empService.selectEmp(empVO));
+		model.addAttribute("empVO", empService.selectEmp(empVO));
 
 		return "/useLayout/emp/empEdit";
 	}

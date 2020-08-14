@@ -54,16 +54,16 @@ label.error {
 <!-- JSP -->
 <form:form commandName="empVO" id="editForm" name="editForm" method="post">
 		<!-- hidden -->
-		<input type="hidden" id="registId" name="registId" value="${result.registId}"/>
-		<input type="hidden" id="registDt" name="registDt" value="${result.registDt}"/>
-		<input type="hidden" id="updtId" name="updtId" value="${empId}"/>
-		<input type="hidden" id="updtDt" name="updtDt" value="<%=today%>"/>
+		<form:input path="registId" type="hidden"/>
+		<form:input path="registDt" type="hidden"/>
+		<form:input path="updtId" type="hidden"/>
+		<form:input path="updtDt" type="hidden"/>
 
 		<!-- body -->
 		<div class="container">
 
 			<!-- title -->
-			<h2 style="text-align:center;"><b><span style="color:#000080">'<c:out value="${result.empNm}" />'</span>직원 수정 화면</b></h2>
+			<h2 style="text-align:center;"><b><span style="color:#000080">'<c:out value="${empVO.empNm}" />'</span>직원 수정 화면</b></h2>
 
 			<!-- contents -->
 			<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
@@ -88,33 +88,33 @@ label.error {
 					<label class="bjLabel control-label">*이름:</label>
 					<label class="bjLabel control-label">*전화번호:</label>
 					<label class="bjLabel control-label">*성별:</label>
-					<label class="bjLabel control-label">직책(년):</label>
+					<label class="bjLabel control-label">직책:</label>
 					<label class="bjLabel control-label">급여(원):</label>
-					<label class="bjLabel control-label">경력:</label>
+					<label class="bjLabel control-label">경력(년):</label>
 				</div>
 
 				<!-- input (60%) -->
 				<div style="width: 60%; text-align: left; display: grid">
 					<!-- 아이디 -->
-					<div id="divInline"><input type="text" class="bjInput form-control" id="empId" name="empId" maxlength="13" value="<c:out value="${result.empId}"/>" readonly required></div>
+					<div id="divInline"><form:input path="empId" class="bjInput form-control" maxlength="13" readonly="true" required="true" /></div>
 
-					<!-- 패스워드 -->\
-					<div id="divInline"><input type="password" class="bjInput form-control" id="empPassword" name="empPassword" maxlength="13" value="<c:out value="${result.empPassword}"/>" required></div>
+					<!-- 패스워드 -->
+					<div id="divInline"><form:input path="empPassword" type="password" class="bjInput form-control" maxlength="13" required="true" /></div>
 
 					<!-- 이름 -->
-					<div id="divInline"><input type="text" class="bjInput form-control" id="empNm" name="empNm" maxlength="4" value="<c:out value="${result.empNm}" />" required></div>
+					<div id="divInline"><form:input path="empNm" class="bjInput form-control" maxlength="4" required="true" /></div>
 
 					<!-- 전화번호 -->
-					<div id="divInline"><input type="text" class="bjInput form-control" id="telno" name="telno" value="${result.telno}" placeholder="000-0000-0000" maxlength="13" onkeyup="inputPhoneNumber(this)" required></div>
+					<div id="divInline"><form:input path="telno" class="bjInput form-control" placeholder="000-0000-0000" maxlength="13" onkeyup="inputPhoneNumber(this)" required="true" /></div>
 
 					<!-- 성별 -->
 					<div id="divInline">
 						<select class="bjInput form-control" id="sexdstn" name="sexdstn">
-							<c:if test="${result.sexdstn eq 'Male'}">
+							<c:if test="${empVO.sexdstn eq 'Male'}">
 								<option value="Male" selected="selected">남성</option>
 								<option value="Female">여성</option>
 							</c:if>
-							<c:if test="${result.sexdstn eq 'Female'}" >
+							<c:if test="${empVO.sexdstn eq 'Female'}" >
 								<option value="Male">남성</option>
 								<option value="Female" selected="selected">여성</option>
 							</c:if>
@@ -124,11 +124,11 @@ label.error {
 					<!-- 직책 -->
 					<div id="divInline">
 						<select class="bjInput form-control" id="pspofc" name="pspofc">
-							<c:if test="${result.pspofc eq 'Admin'}">
+							<c:if test="${empVO.pspofc eq 'Admin'}">
 								<option value="Admin" selected="selected">관리자</option>
 								<option value="Designer">디자이너</option>
 							</c:if>
-							<c:if test="${result.pspofc eq 'Designer'}">
+							<c:if test="${empVO.pspofc eq 'Designer'}">
 								<option value="Admin">관리자</option>
 								<option value="Designer" selected="selected">디자이너</option>
 							</c:if>
@@ -137,10 +137,10 @@ label.error {
 					</div>
 
 					<!-- 급여 -->
-					<div id="divInline"><input type="text" class="bjInput form-control" id="salary" name="salary" maxlength="10" value="<c:out value="${result.salary}"/>" required></div>
+					<div id="divInline"><form:input path="salary" class="bjInput form-control" maxlength="10" required="true"/></div>
 
 					<!-- 경력 -->
-					<div id="divInline"><input type="text" class="bjInput form-control" id="career" name="career" maxlength="2" value="<c:out value="${result.career}"/>" required></div>
+					<div id="divInline"><form:input path="career" class="bjInput form-control" maxlength="2" required="true"/></div>
 
 				</div>
 			</div>
@@ -276,7 +276,7 @@ label.error {
 				career : {
 					required : "필수 입력 항목입니다."
 				}
-			}, onkeyup : false, onfocusout : false
+			}
 		});
 	});
 

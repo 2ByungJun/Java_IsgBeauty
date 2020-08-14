@@ -28,7 +28,7 @@ p {
 </style>
 
 <!-- JSP -->
-<form:form commandName="empVO" id="detailForm" name="detailForm" method="post">
+<form id="detailForm" name="detailForm" method="post">
 		<!-- hidden -->
 		<input type="hidden" name="empId" value="${result.empId}" />
 
@@ -105,8 +105,7 @@ p {
 			<button type="button" class="btn btn-danger" onclick="deleteEmp()">삭제</button>
 			<button type="button" class=" btn btn-info" onclick="home()">이전</button>
 		</div>
-
-</form:form>
+</form>
 
 <!-- JS -->
 <script type="text/javaScript" defer="defer">
