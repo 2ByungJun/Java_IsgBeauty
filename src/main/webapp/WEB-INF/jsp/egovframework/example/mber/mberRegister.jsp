@@ -48,11 +48,11 @@ label.error {
 
 			<!-- label (10%) -->
 			<div style="width: 10%; text-align: center;">
-				<label class="control-label">이름 : </label>
+				<label class="control-label">*이름 : </label>
 				<label class="control-label">담당 직원:</label>
-				<label class="control-label">전화 번호:</label>
-				<label class="control-label">성별:</label>
-				<label class="control-label">생년월일:</label>
+				<label class="control-label">*전화 번호:</label>
+				<label class="control-label">*성별:</label>
+				<label class="control-label">*생년월일:</label>
 				<label class="control-label">등록자:</label>
 				<label class="control-label">등록일:</label>
 			</div>

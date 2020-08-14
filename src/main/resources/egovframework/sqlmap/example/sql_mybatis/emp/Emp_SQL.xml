@@ -73,10 +73,6 @@
 		<if test="searchKeyword != null and searchKeyword != ''">
 				AND EMP_NM LIKE CONCAT('%', #{searchKeyword},'%')
 			</if>
-		<!-- <if test="searchKeyword != null and searchKeyword != ''"> <choose>
-			<when test="searchCondition == 0"> AND ID LIKE '%' || #{searchKeyword} ||
-			'%' </when> <when test="searchCondition == 1"> AND NAME LIKE '%' || #{searchKeyword}
-			|| '%' </when> </choose> </if> -->
 	</select>
 
 	<insert id="insertEmp" parameterType="empVO">
@@ -139,7 +135,7 @@
 		where EMP_ID=#{empId}
 	</update>
 
-	<select id="selectListEmpNM" parameterType="empVO" resultMap="emp">
+	<select id="selectListEmpNM" resultMap="emp">
 		SELECT EMP_ID,EMP_NM
 		FROM t_emp_m
 		WHERE PSPOFC="Designer"

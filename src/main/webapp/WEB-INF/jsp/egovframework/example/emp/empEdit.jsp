@@ -83,11 +83,11 @@ label.error {
 
 				<!-- label (10%) -->
 				<div style="width: 10%; text-align: center; display: grid;">
-					<label class="bjLabel control-label">아이디 : </label>
-					<label class="bjLabel control-label">패스워드 : </label>
-					<label class="bjLabel control-label">이름:</label>
-					<label class="bjLabel control-label">전화번호:</label>
-					<label class="bjLabel control-label">성별:</label>
+					<label class="bjLabel control-label">*아이디 : </label>
+					<label class="bjLabel control-label">*패스워드 : </label>
+					<label class="bjLabel control-label">*이름:</label>
+					<label class="bjLabel control-label">*전화번호:</label>
+					<label class="bjLabel control-label">*성별:</label>
 					<label class="bjLabel control-label">직책(년):</label>
 					<label class="bjLabel control-label">급여(원):</label>
 					<label class="bjLabel control-label">경력:</label>

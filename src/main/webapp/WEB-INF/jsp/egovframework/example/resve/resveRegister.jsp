@@ -54,8 +54,8 @@ label.error {
 			<div style="width: 10%; text-align: center;">
 				<label class="control-label">예약자 : </label>
 				<label class="control-label">시술:</label>
-				<label class="control-label">예약일시:</label>
-				<label class="control-label">예약시간:</label>
+				<label class="control-label">*예약일시:</label>
+				<label class="control-label">*예약시간:</label>
 				<label class="control-label">등록자:</label>
 				<label class="control-label">등록일:</label>
 			</div>

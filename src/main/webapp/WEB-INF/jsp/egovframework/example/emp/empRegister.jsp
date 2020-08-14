@@ -44,7 +44,7 @@ label.error {
 		<div class="container">
 
 			<!-- title -->
-			<h2 style="text-align: center;"><b>직원 등록</b></h2>
+			<h2 style="text-align: center;"><b>디자이너 등록</b></h2>
 
 			<!-- contents -->
 			<div style="width: 100%; display: inline-flex; padding-bottom: 2px; margin-top:px;">
@@ -66,11 +66,11 @@ label.error {
 
 				<!-- label (10%) -->
 				<div style="width: 10%; text-align: center; display: grid">
-					<label class="control-label">아이디 : </label>
-					<label class="control-label">비밀번호:</label>
-					<label class="control-label">이름:</label>
-					<label class="control-label">전화번호:</label>
-					<label class="control-label">성별:</label>
+					<label class="control-label">*아이디 : </label>
+					<label class="control-label">*비밀번호:</label>
+					<label class="control-label">*이름:</label>
+					<label class="control-label">*전화번호:</label>
+					<label class="control-label">*성별:</label>
 					<label class="control-label">직책:</label>
 					<label class="control-label">급여(원):</label>
 					<label class="control-label">경력(년):</label>
@@ -103,8 +103,7 @@ label.error {
 					<!-- 직책 -->
 					<div style="display: inline-flex;">
 						<select class="bjWidth form-control" id="pspofc" name="pspofc">
-							<option value="Admin" selected="selected">관리자</option>
-							<option value="Designer">디자이너</option>
+							<option value="Designer" selected="selected">디자이너</option>
 						</select>
 					</div>
 
