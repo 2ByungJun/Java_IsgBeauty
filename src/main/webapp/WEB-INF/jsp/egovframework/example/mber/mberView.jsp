@@ -105,16 +105,6 @@ p {
 		location.href = "<c:url value='/mberList.do'/>";
 	}
 
-	function deleteMber() {
-		var check;
-		check = confirm("정말로 해당 고객님을 삭제하시겠습니까?");
-
-		if (check) {
-			document.detailForm.action = "<c:url value='/deleteMber.do'/>";
-			document.detailForm.submit();
-		}
-	}
-
 	function editMber() {
 		document.detailForm.action = "<c:url value='/mberEdit.do'/>";
 		document.detailForm.submit();
@@ -123,6 +113,31 @@ p {
 	function resveRegister() {
 		document.detailForm.action = "<c:url value='/resveRegister.do'/>";
 		document.detailForm.submit();
+	}
+
+	function deleteMber() {
+		var check = confirm("정말로 해당 고객님을 삭제하시겠습니까?");
+		var jsonData = $("#detailForm").serializeJSON();
+		if (check) {
+			$.ajax({
+				headers: {
+					Accept: "application/json;utf-8"
+				}
+				,contentType: "application/json;utf-8"
+				,dataType: "json"
+				,type: "POST"
+				,async:false
+				,url: "<c:url value= '/mberDelete.json'/>"
+				,data: JSON.stringify(jsonData)
+				,success:function(data){
+						alert("삭제되었습니다.");
+						home();
+				}
+				,error:function(e){
+				   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
+				}
+			});
+		}
 	}
 
 	$(function() {

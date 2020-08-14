@@ -197,13 +197,16 @@ public class MberController {
 	 * @return "forward:/mberList.do"
 	 * @exception Exception
 	 */
-	@RequestMapping("/deleteMber.do")
-	public String deleteMber(MberVO mberVO) throws Exception {
+	@ResponseBody
+	@RequestMapping(value = "/mberDelete.json", method = RequestMethod.POST)
+	public  Map<String, Object> mberDelete(@RequestBody MberVO mberVO) throws Exception {
 		System.out.println("[고객 삭제 기능]");
 
+		Map<String, Object> arrayMap = new HashMap<>();
+		arrayMap.put("delete", "success" );
 		mberService.deleteMber(mberVO);
 
-		return "forward:/mberList.do";
+		return arrayMap;
 	}
 
 }

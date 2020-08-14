@@ -117,11 +117,28 @@ label.error {
 	/**** 고객 삭제 *****/
 	function deleteMber() {
 		var check;
+		var jsonData = $("#editForm").serializeJSON();
 		check = confirm("정말로 해당 고객님을 삭제하시겠습니까?");
-
 		if (check) {
-			document.editForm.action = "<c:url value='/deleteMber.do'/>";
-			document.editForm.submit();
+			$.ajax({
+				headers: {
+					Accept: "application/json;utf-8"
+				}
+				,contentType: "application/json;utf-8"
+				,dataType: "json"
+				,type: "POST"
+				,async:false
+				,url: "<c:url value= '/mberDelete.json'/>"
+				,data: JSON.stringify(jsonData)
+				,success:function(data){
+						alert("삭제되었습니다.");
+						document.editForm.action = "<c:url value='/mberList.do'/>";
+						document.editForm.submit();
+				}
+				,error:function(e){
+				   	alert("서버 오류 입니다. 관리자에게 문의하세요.")
+				}
+			});
 		}
 	}
 
