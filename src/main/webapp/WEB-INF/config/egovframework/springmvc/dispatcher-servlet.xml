@@ -107,7 +107,7 @@
             <mvc:mapping path="/**" />
             <mvc:exclude-mapping path="/index.jsp"/>
             <mvc:exclude-mapping path="/log*.*"/>
-            <mvc:exclude-mapping path="/addAdmin*.do"/>
+            <mvc:exclude-mapping path="/addAdmin*.json"/>
             <mvc:exclude-mapping path="/addAdminCheck.json"/>
             <mvc:exclude-mapping path="/IdChecking.json"/>
             <bean id="logonInterceptor" class="egovframework.example.inteceptor.LogonInterceptor" />
