@@ -165,13 +165,17 @@ public class EmpController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/addAdmin.do", method = RequestMethod.POST)
-	public String addAdmin(EmpVO empVO) throws Exception {
+	@ResponseBody
+	@RequestMapping(value = "/addAdmin.json")
+	public Map<String, Object> addAdmin(@RequestBody EmpVO empVO) throws Exception {
 		System.out.println("[관리자 등록 기능]");
 		empVO.setFileId("File"+empVO.getEmpId());
 		empService.insertEmp(empVO);
 
-		return "/loginLayout/login/login";
+		Map<String, Object> arrayMap = new HashMap<>();
+		arrayMap.put("result", "success");
+
+		return arrayMap;
 	}
 
 	/**

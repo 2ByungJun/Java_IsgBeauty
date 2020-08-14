@@ -202,9 +202,10 @@ public class MberController {
 	public  Map<String, Object> mberDelete(@RequestBody MberVO mberVO) throws Exception {
 		System.out.println("[고객 삭제 기능]");
 
+		mberService.deleteMber(mberVO);
+
 		Map<String, Object> arrayMap = new HashMap<>();
 		arrayMap.put("delete", "success" );
-		mberService.deleteMber(mberVO);
 
 		return arrayMap;
 	}

@@ -33,7 +33,7 @@ label.error {
 </style>
 
 <!-- JSP -->
-<form id="loginForm" name="detailForm" method="post">
+<form id="loginForm" name="loginForm" method="post">
 	<!-- hidden -->
 	<input type="hidden" class="form-control" id="registId" name="registId" value="IsgBeauty">
 
@@ -89,9 +89,6 @@ label.error {
 					</select>
 				</div>
 
-				<!-- 시리얼 키 -->
-				<div style="display: inline-flex;"><input type="password" class="bjWidth form-control" id="snKey" name="snKey" value="123456"></div>
-
 				<!-- 등록일 -->
 				<div style="display: inline-flex;"><input type="date" class="bjWidth form-control" id="registDt" name="registDt" value="<%=today%>" readonly></div>
 			</div>
@@ -115,15 +112,31 @@ label.error {
 
 	/* 글 등록 function */
 	$(function() {
-		$("#detailForm").validate(
+		$("#loginForm").validate(
 			{
 				submitHandler : function() {
-						var check = confirm("관리자를 등록하시겠습니까?");
-						if (check) {
-							document.detailForm.action = "<c:url value= '/addAdmin.do'/>";
-							document.detailForm.submit();
-							alert("등록되었습니다.");
-						}
+					var jsonData = $("#loginForm").serializeJSON();
+					var check = confirm("관리자를 등록하시겠습니까?");
+					if (check) {
+						 $.ajax({
+								headers: {
+									Accept: "application/json;utf-8"
+								}
+								,contentType: "application/json;utf-8"
+								,dataType: "json"
+								,type: "POST"
+								,async:false
+								,url:  "<c:url value='/addAdmin.json'/>"
+								,data: JSON.stringify(jsonData)
+								,success:function(data){
+									alert("등록되었습니다. 가입한 정보로 로그인 해 주세요.");
+									home();
+								}
+								,error:function(e){
+								   	alert("서버 오류 입니다. 관리자에게 문의하세요.");
+								}
+							});
+					}
 				},
 				rules : {
 					empId : {
@@ -142,11 +155,11 @@ label.error {
 						required : true,
 						minlength : 12,
 						regex : "^(010)[-\\s]?\\d{3,4}[-\\s]?\\d{4}$"
-					},
+					}/* ,
 					snKey : {
 						required : true,
 						snchk : true
-					}
+					} */
 				},
 				messages : {
 					empId : {
@@ -165,11 +178,11 @@ label.error {
 						required : "필수 입력 항목입니다.",
 						minlength : "휴대폰 번호를 완전히 입력해주세요.",
 						regex : "휴대폰 번호 양식을 제대로 입력해주세요."
-					},
-					snKey : {
+					}
+					/* snKey : {
 						required : "필수 입력 항목입니다.",
 						snchk : "시리얼 키가 일치하지 않습니다."
-					}
+					} */
 				}
 			});
 	});

@@ -21,7 +21,7 @@
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();">
 
 	<!-- body -->
-	<form class="form-horizontal" id="loginForm" name="loginForm" style="display: grid; margin-top:20px;">
+	<form class="form-horizontal" id="loginForm" name="loginForm" style="display: grid; margin-top:20px;" method="post">
 		<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
 
 			<!-- (35%) -->

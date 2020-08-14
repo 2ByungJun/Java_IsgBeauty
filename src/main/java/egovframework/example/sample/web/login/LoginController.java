@@ -50,7 +50,7 @@ public class LoginController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/loginEmpRegister.do")
-	public String loginEmpRegister(@ModelAttribute("searchVO") EmpVO searchVO, ModelMap model) throws Exception {
+	public String loginEmpRegister() throws Exception {
 		System.out.println("[회원가입]");
 
 		return "/loginLayout/login/loginEmpRegister";
