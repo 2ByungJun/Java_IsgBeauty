@@ -172,16 +172,16 @@ label.error {
 			overwriteInitial: true,
 			showRemove: false,
 			uploadExtraData: {
-				fileId : "${result.fileId}"
+				fileId : "${empVO.fileId}"
 			},
 			initialPreviewFileType: 'image',
 		    initialPreview: [
-		        '<c:url value="/jfile/preview.do?fileId=${result.fileId}"/>" class="profile"',
+		        '<c:url value="/jfile/preview.do?fileId=${empVO.fileId}"/>" class="profile"',
 		    ],
 			theme : 'explorer',
 			deleteUrl : '/IsgBeauty/jfile/imgDelete.do',
 			deleteExtraData: {
-				fileId : "${result.fileId}"
+				fileId : "${empVO.fileId}"
 			},
 			fileActionSettings : {
 				showZoom : function(config) {

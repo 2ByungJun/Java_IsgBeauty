@@ -168,7 +168,7 @@ public class MberController {
 	public String mberEdit(MberVO mberVO, Model model) throws Exception {
 		System.out.println("[고객 수정화면]");
 
-		model.addAttribute("result", mberService.selectMber(mberVO));
+		model.addAttribute("mberVO", mberService.selectMber(mberVO));
 		model.addAttribute("listEmpNM", empService.selectListEmpNM());
 
 		return "/useLayout/mber/mberEdit";

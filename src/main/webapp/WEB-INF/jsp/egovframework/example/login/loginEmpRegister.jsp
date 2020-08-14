@@ -88,7 +88,8 @@ label.error {
 						<option value="Admin" selected="selected">관리자</option>
 					</select>
 				</div>
-
+				<!-- 시리얼키 -->
+				<div style="display: inline-flex;"><input class="bjWidth form-control" id="snKey" name="snKey"></div>
 				<!-- 등록일 -->
 				<div style="display: inline-flex;"><input type="date" class="bjWidth form-control" id="registDt" name="registDt" value="<%=today%>" readonly></div>
 			</div>
@@ -155,11 +156,11 @@ label.error {
 						required : true,
 						minlength : 12,
 						regex : "^(010)[-\\s]?\\d{3,4}[-\\s]?\\d{4}$"
-					}/* ,
+					},
 					snKey : {
 						required : true,
 						snchk : true
-					} */
+					}
 				},
 				messages : {
 					empId : {
@@ -178,11 +179,11 @@ label.error {
 						required : "필수 입력 항목입니다.",
 						minlength : "휴대폰 번호를 완전히 입력해주세요.",
 						regex : "휴대폰 번호 양식을 제대로 입력해주세요."
-					}
-					/* snKey : {
+					},
+					snKey : {
 						required : "필수 입력 항목입니다.",
 						snchk : "시리얼 키가 일치하지 않습니다."
-					} */
+					}
 				}
 			});
 	});

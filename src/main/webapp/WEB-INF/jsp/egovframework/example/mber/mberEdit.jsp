@@ -35,13 +35,13 @@ label.error {
 <!-- JSP -->
 <form:form commandName="mberVO" id="editForm" name="editForm" method="post">
 	<!-- hidden -->
-	<input type="hidden" id="updtId" name="updtId" value="">
-	<input type="hidden" id="mberSn" name="mberSn" value="${result.mberSn}">
+	<form:input path="updtId" type="hidden" />
+	<form:input path="mberSn" type="hidden" />
 
 	<!-- body -->
 	<div class="container">
 		<!-- title -->
-		<h2 style="text-align: center;"><b><span style="color:#000080;">'<c:out value="${result.mberNm}" />'</span>님 수정화면</b></h2>
+		<h2 style="text-align: center;"><b><span style="color:#000080;">'<c:out value="${mberVO.mberNm}" />'</span>님 수정화면</b></h2>
 
 		<!-- contents -->
 		<div style="width: 100%; display: inline-flex; padding-bottom: 2px">
@@ -63,27 +63,27 @@ label.error {
 			<!-- input (60%) -->
 			<div style="width: 60%; text-align: left; display: grid">
 				<!-- 이름 -->
-				<div style="display: inline-flex;"><input type="text" class="bjInput form-control" id="mberNm" name="mberNm" maxlength="4" value="<c:out value="${result.mberNm}" />" required></div>
+				<div style="display: inline-flex;"><form:input path="mberNm" class="bjInput form-control" maxlength="10" required="true"/></div>
 
 				<!-- 담당 직원 -->
 				<select class="bjInput form-control" id="eEmpId" name="eEmpId">
-					<option value="${result.eEmpId}"><c:out value="${result.empNm}" /></option>
+					<option value="${mberVO.eEmpId}"><c:out value="${mberVO.empNm}" /></option>
 					<c:forEach var="listEmpNM" items="${listEmpNM}" varStatus="status">
 						<option value="${listEmpNM.empId}">${listEmpNM.empNm}</option>
 					</c:forEach>
 				</select>
 
 				<!-- 전화 번호 -->
-				<div style="display: inline-flex;"><input type="text" class="bjInput form-control" id="telno" name="telno" value="${result.telno}" placeholder="000-0000-0000" maxlength="13" required onkeyup="inputPhoneNumber(this)"></div>
+				<div style="display: inline-flex;"><form:input path="telno" class="bjInput form-control" placeholder="000-0000-0000" maxlength="13" required="true" onkeyup="inputPhoneNumber(this)"/></div>
 
 				<!-- 성별 -->
 				<div style="display: inline-flex;">
 					<select class="bjInput form-control" id="sexdstn" name="sexdstn">
-						<c:if test="${result.sexdstn eq 'Male'}">
+						<c:if test="${mberVO.sexdstn eq 'Male'}">
 							<option value="Male" selected="selected">남성</option>
 							<option value="Female">여성</option>
 						</c:if>
-						<c:if test="${result.sexdstn eq 'Female'}" >
+						<c:if test="${mberVO.sexdstn eq 'Female'}" >
 							<option value="Male">남성</option>
 							<option value="Female" selected="selected">여성</option>
 						</c:if>
@@ -91,13 +91,13 @@ label.error {
 				</div>
 
 				<!-- 생년월일 -->
-				<div style="display: inline-flex;"><input type="date" class="bjInput form-control" id="brthdy" name="brthdy" value="${result.brthdy}" required></div>
+				<div style="display: inline-flex;"><form:input path="brthdy" class="bjInput form-control" required="true"/></div>
 
 				<!-- 등록자 -->
-				<div style="display: inline-flex;"><input type="text" class="bjInput form-control" id="registId" name="registId" value="<c:out value="${result.registId}" />" readonly></div>
+				<div style="display: inline-flex;"><form:input path="registId" class="bjInput form-control" readonly="true"/></div>
 
 				<!-- 등록일 -->
-				<div style="display: inline-flex;"><input type="date" class="bjInput form-control" id="registDt" name="registDt" value="<c:out value="${result.registDt}"/>" readonly></div>
+				<div style="display: inline-flex;"><form:input path="registDt" class="bjInput form-control" readonly="true"/></div>
 
 			</div>
 		</div>
